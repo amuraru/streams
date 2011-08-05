@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>stream-api</name>
+	<groupId>org.jwall</groupId>
+	<artifactId>stream-api</artifactId>
+	<version>1.0</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>jwall</id>
+			<name>jwall.org Maven Repository</name>
+			<url>https://secure.jwall.org/maven/repository/jwall</url>
+		</repository>
+		<snapshotRepository>
+			<id>jwall-snapshots</id>
+			<name>jwall.org Snapshot Repository</name>
+			<url>https://secure.jwall.org/maven/repository/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

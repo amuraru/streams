@@ -1,0 +1,6 @@
+.settings
+target
+syntax: regexp
+^target$
+^.settings
+target$
