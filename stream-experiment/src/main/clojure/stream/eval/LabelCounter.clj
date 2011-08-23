@@ -1,0 +1,24 @@
+(ns stream.eval.LabelCounter
+  (:import (stream.data Data DataImpl DataProcessor))
+  (:gen-class
+   :init init
+   :state state
+   :implements [stream.data.DataProcessor])
+   )
+
+;;
+;; initialize an empty map of counts
+;;
+(defn -init []
+  [[] {:counts {}}])
+
+(defn -process
+  [data]
+  (do
+    (println (str "Processing " data))
+    data))
+
+(defn hello-world []
+  (println "Hello World!"))
+
+  

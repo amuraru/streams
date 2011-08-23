@@ -9,6 +9,7 @@
   <modules>
     <module>stream-api</module>
     <module>stream-generator</module>
+    <module>stream-experiment</module>
   </modules>
 
   <build>
