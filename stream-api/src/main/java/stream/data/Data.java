@@ -32,7 +32,4 @@ public interface Data
 	 * referring to data transformation parameters (normalization,...)
 	 */
 	public final static String ANNOTATION_PREFIX = "@";
-	
-	
-	public final static String LABEL_PREFIX = ANNOTATION_PREFIX + "label";
 }

@@ -3,13 +3,13 @@
   <groupId>org.jwall</groupId>
   <artifactId>streams</artifactId>
   <name>streams</name>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
   <description>Additional learning algorithms for the PG542 stream processing framework</description>
   <modules>
     <module>stream-api</module>
     <module>stream-generator</module>
-    <module>stream-experiment</module>
+<!--    <module>stream-experiment</module>  -->
   </modules>
 
   <build>

@@ -113,12 +113,8 @@ public class DataUtils {
 	}
 	
 	
-	public static boolean isAnnotation( String name ){
-		return name != null && name.startsWith( "@" ) && ! name.startsWith( "@@" );
-	}
-	
-	public static boolean isLabel( String name ){
-		return name != null && name.startsWith( "@label" );
+	public final static boolean isAnnotation( String key ){
+		return key != null && key.startsWith( Data.ANNOTATION_PREFIX );
 	}
 	
 	
@@ -131,10 +127,5 @@ public class DataUtils {
 	
 	public final static boolean isHiddenOrSpecial( String key ){
 		return isHidden( key ) || isSpecial( key );
-	}
-	
-	
-	public static boolean isNumeric( Serializable value ){
-		return (value instanceof Double) || (value instanceof Number);
 	}
 }
