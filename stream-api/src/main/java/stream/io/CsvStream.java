@@ -5,7 +5,6 @@ package stream.io;
 
 import java.net.URL;
 import java.util.LinkedList;
-import java.util.List;
 
 import stream.data.Data;
 import stream.data.DataImpl;
@@ -58,7 +57,7 @@ public class CsvStream
 		while( line.startsWith( "#" ) )
 			line = line.substring( 1 );
 		
-		String[] tok = line.split(  "(;|,)"  );
+		String[] tok = line.split(  splitExpression  );
 		for( int i = 0; i < tok.length; i++ ){
 			tok[i] = removeQuotes(tok[i]);
 			attributes.put( tok[i], Double.class );
@@ -70,7 +69,7 @@ public class CsvStream
 		}
 		
 		buffer.add( data );
-		String dt[] = data.split(  "(;|,)"  );
+		String dt[] = data.split( splitExpression );
 		for( int i = 0; i < tok.length; i++ ){
 			if( i < dt.length ){
 				if( dt[i].matches( "\\d*\\.\\d*" ) )
@@ -92,18 +91,32 @@ public class CsvStream
 			datum.clear();
 
 		String line = readLine();
-		while( line != null && (line.trim().isEmpty() || line.startsWith( "#" ) ) )
+		while( line != null && (line.trim().isEmpty() || line.startsWith( "#" ) ) ){
+			if( line.startsWith( "#" ) ){
+				String dt[] = line.split( splitExpression );
+				for( int i = 0; i < dt.length; i++ ){
+					if( i < dt.length ){
+						if( dt[i].matches( "\\d*\\.\\d*" ) )
+							attributes.put( dt[i], Double.class );
+						else
+							attributes.put( dt[i], String.class );
+					}
+				}
+			}
+			
 			line = reader.readLine();
+		}
+		
 
 		if( line != null && ! line.trim().equals( "" ) ){
-			List<String> tok = QuotedStringTokenizer.splitRespectQuotes( line, ';'); //line.split( "(;|,)" );
+			String[] tok = line.split( splitExpression ); // QuotedStringTokenizer.splitRespectQuotes( line, ';'); //line.split( "(;|,)" );
 			int i = 0;
 			for( String name : attributes.keySet() ){
-				if( i < tok.size() ){
+				if( i < tok.length ){
 					if( Double.class.equals( attributes.get( name ) ) ){
-						datum.put( name, new Double( removeQuotes(tok.get(i)) ) );
+						datum.put( name, new Double( removeQuotes( tok[i] ) ) );
 					} else
-						datum.put( name, removeQuotes(tok.get(i)) );
+						datum.put( name, removeQuotes( tok[i] ) );
 					i++;
 				} else
 					break;

@@ -31,7 +31,7 @@ public abstract class AbstractDataStream implements DataStream {
 
 	public AbstractDataStream( URL url ) throws Exception {
 		this.url = url;
-		initReader();
+		//initReader();
 	}
 	
 	public AbstractDataStream( URL url, String username, String password ) throws Exception {

@@ -98,8 +98,9 @@ public class DataStreamWriter
 			return;
 		
 		// write the keys of the very first datum ONCE (attribute names)
+		// or if the number of keys has changed
 		//
-		if( ! headerWritten ){
+		if( ! headerWritten || datum.keySet().size() > headers.size() ){
 			p.print( "#" );
 			Iterator<String> it = datum.keySet().iterator();
 			while( it.hasNext() ){

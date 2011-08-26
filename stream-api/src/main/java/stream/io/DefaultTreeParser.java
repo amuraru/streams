@@ -5,14 +5,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import stream.data.Data;
+import stream.data.DataProcessor;
+import stream.data.DataUtils;
 import stream.data.TreeNode;
 
 public class DefaultTreeParser 
-	implements Parser<TreeNode>
+	implements Parser<TreeNode>, DataProcessor
 {
 	int pos = 0;
 	String data = "";
-
+	String sourceKey = "sql";
+	
+	
+	
+	public DefaultTreeParser(){
+		this( "sql" );
+	}
+	
+	
+	public DefaultTreeParser( String sourceKey ){
+		this.sourceKey = sourceKey;
+	}
+	
+	
 	
 	/**
 	 * @see stream.io.Parser#parse(java.lang.String)
@@ -42,6 +58,28 @@ public class DefaultTreeParser
 		return new DefaultTreeNode( node, null, children );
 	}
 	
+	
+	@Override
+	public Data process(Data data) {
+		
+		if( sourceKey != null && data.get( sourceKey ) != null ){
+			try {
+				String source = data.get( sourceKey ).toString();
+				TreeNode tree = parse( source );
+				if( tree != null ){
+					data.put( "@tree", tree );
+				}
+				
+				DataUtils.hide( sourceKey, data );
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return data;
+	}
+
 	
 	protected String readToken() throws Exception {
 		
