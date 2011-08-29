@@ -41,7 +41,10 @@ extends ArrayList<Data>
 			}
 		}
 		
-		return new LinkedHashSet<Data>( neighs.subList( 0, Math.min( 1, maxNeigh ) ) );
+		LinkedHashSet<Data> result = new LinkedHashSet<Data>();
+		for( int i = 0; i < neighs.size() && i < maxNeigh; i++ )
+			result.add( neighs.get(i) );
+		return result;
 	}
 
 
