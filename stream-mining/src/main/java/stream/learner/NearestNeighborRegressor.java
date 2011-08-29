@@ -1,8 +1,6 @@
 package stream.learner;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -25,12 +23,17 @@ public class NearestNeighborRegressor
 	Integer k = 3; //Integer.MAX_VALUE;
 	
 	public NearestNeighborRegressor(){
-		this( new EucleadianDistance() );
+		this( 3 );
+	}
+	
+	public NearestNeighborRegressor( int k ){
+		this( new EucleadianDistance(), k );
 	}
 	
 	
-	public NearestNeighborRegressor( Distance dist ){
+	public NearestNeighborRegressor( Distance dist, int k ){
 		instances = new Neighborhood( dist );
+		this.k = k;
 	}
 	
 	
@@ -43,7 +46,9 @@ public class NearestNeighborRegressor
 		this.k = k;
 	}
 
-
+	public void setDistance( Distance distance ){
+		instances = new Neighborhood( distance );
+	}
 	
 	
 	public String getLabelAttribute() {
@@ -68,23 +73,46 @@ public class NearestNeighborRegressor
 		//TreeSet<Data> neighbors = new TreeSet<Data>( new EucleadianDistance( item ) );
 		//neighbors.addAll( items );
 		Set<Data> neighbors = instances.getNeighbors( item, k );
+		log.info( "Using up to {} neighbors for prediction", k );
+		log.info( "{} Neighbors for {}", neighbors.size(), item );
+		
+		Double total = 0.0d;
+		int i = 0;
+		for( Data neigh : neighbors ){
+			Double nd = instances.distance.distance( item, neigh );
+			if( i < k )
+				total += nd;
+			log.info( "  {}   dist: {}", neigh.get( "@id" ), nd );
+		}
 		
 		Integer count = 0;
 		Double sum = 0.0d;
+		Double norm = 0.0d;
 		Iterator<Data> it = neighbors.iterator();
 		while( it.hasNext() && count < k ){
 			Data datum = it.next();
 			Double label = LearnerUtils.getDouble( labelAttribute, datum );
 			if( label != null && ! Double.isNaN( label ) ){
 				count++;
-				sum += label;
+				double weight = total - instances.distance.distance( item, datum );
+				if( Double.isNaN( weight ) )
+					weight = 1.0d / k;
+				
+				if( weight == 0.0d )
+					weight = 1.0d;
+				
+				norm += weight;
+				sum += (label * weight);
 			}
 		}
-
+		
 		if( count == 0.0d )
 			return Double.NaN;
 		
-		return sum / count.doubleValue();
+		if( norm == 0.0d )
+			return sum;
+		
+		return sum / norm; //	 / count.doubleValue();
 	}
 	
 

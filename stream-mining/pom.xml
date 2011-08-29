@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>stream-api</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jwall</groupId>
@@ -109,7 +109,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2-beta-4</version>
 				<configuration>
 					<finalName>stream</finalName>
 					<descriptorRefs>

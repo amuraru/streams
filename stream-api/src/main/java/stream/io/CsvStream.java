@@ -123,12 +123,21 @@ public class CsvStream
 			}
 		} else
 			return null;
-		return datum;
+		
+		return preprocess( datum );
 	}
 	
 	public String readLine() throws Exception {
 		if( buffer != null && ! buffer.isEmpty() )
 			return buffer.removeFirst();
 		return reader.readLine();
+	}
+	
+	
+	protected Data preprocess( Data datum ) throws Exception {
+		if( datum == null )
+			return null;
+		
+		return datum;
 	}
 }

@@ -9,3 +9,784 @@ Aug 24 2011 15:42:16 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:71): Predic
 Aug 24 2011 15:42:16 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class yes, label is: null, confidence-gap: 2.9154388738150683E-4 wop=false
 Aug 24 2011 15:42:16 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:80): item is: {outlook=overcast, temperature=hot, humidity=normal, windy=FALSE}
 Aug 24 2011 15:42:16 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:81): Prediction is: yes
+Aug 29 2011 11:11:25 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:37): 3 neighbors are: [{x=1.0}, {x=2.0}, {x=3.0}]
+Aug 29 2011 11:12:16 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:37): 3 neighbors are: [{x=1.0}, {x=2.0}, {x=3.0}]
+Aug 29 2011 11:12:16 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:39):  distance to {x=1.0} is: 1.0
+Aug 29 2011 11:12:16 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:39):  distance to {x=2.0} is: 2.0
+Aug 29 2011 11:12:16 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:39):  distance to {x=3.0} is: 3.0
+Aug 29 2011 11:26:41 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:39): 3 neighbors are: [{x=1.0, y=1.0}, {x=2.0, y=2.0}, {x=3.0, y=3.0}]
+Aug 29 2011 11:26:41 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41):  distance to {x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:26:41 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41):  distance to {x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:26:41 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41):  distance to {x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:34:34 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41): 4 neighbors are: [{x=1.0, y=1.0}, {x=2.0, y=2.0}, {x=3.0, y=3.0}, {x=4.0, y=4.0}]
+Aug 29 2011 11:34:34 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:34:34 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:34:34 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:34:34 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 11:34:44 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41): 5 neighbors are: [{x=1.0, y=1.0}, {x=2.0, y=2.0}, {x=3.0, y=3.0}, {x=4.0, y=4.0}, {x=5.0, y=5.0}]
+Aug 29 2011 11:34:44 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:34:44 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:34:44 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:34:44 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 11:34:44 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 11.313708498984761
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 11.313708498984761
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 12.727922061357855
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 12.727922061357855
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 11.313708498984761
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 5.656854249492381
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 5.656854249492381
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 14.142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 14.142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 11.313708498984761
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 14.142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 12.727922061357855
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 8.48528137423857
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 8.48528137423857
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 4.242640687119285
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 4.242640687119285
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 4.242640687119285
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 4.242640687119285
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 4.242640687119285
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:07 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 1.4142135623730951
+Aug 29 2011 11:37:07 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41): 5 neighbors are: [{x=1.0, y=1.0}, {x=2.0, y=2.0}, {x=3.0, y=3.0}, {x=4.0, y=4.0}, {x=5.0, y=5.0}]
+Aug 29 2011 11:37:07 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:37:07 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:37:07 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:37:07 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 11:37:07 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 11.313708498984761
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 11.313708498984761
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 12.727922061357855
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 12.727922061357855
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 11.313708498984761
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 5.656854249492381
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 5.656854249492381
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 14.142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 14.142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 11.313708498984761
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 14.142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 12.727922061357855
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 8.48528137423857
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 8.48528137423857
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 4.242640687119285
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 4.242640687119285
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 4.242640687119285
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 1.4142135623730951
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 4.242640687119285
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 4.242640687119285
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:61):  dist( pivot, arg0 ) = 2.8284271247461903
+Aug 29 2011 11:37:56 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:64):  dist( pivot, arg1 ) = 1.4142135623730951
+Aug 29 2011 11:37:56 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:41): 5 neighbors are: [{x=1.0, y=1.0}, {x=2.0, y=2.0}, {x=3.0, y=3.0}, {x=4.0, y=4.0}, {x=5.0, y=5.0}]
+Aug 29 2011 11:37:56 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:37:56 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:37:56 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:37:56 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 11:37:56 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:43):  distance to {x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 4
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 14.142135623730951
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 7
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 14.142135623730951
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 7
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 5
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 5
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 9
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 9
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 14.142135623730951
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 6
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 6
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 6
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 3
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 3
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 3
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 2
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 2
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 2
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 5.656854249492381
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 2
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 4.242640687119285
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 1
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 1
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 1
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 4.242640687119285
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 1
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 2.8284271247461903
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 8
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 7.0710678118654755
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 8
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 9.899494936611665
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 8
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 14.142135623730951
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, arg0 ) = 8
+Aug 29 2011 11:39:31 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, arg1 ) = 12.727922061357855
+Aug 29 2011 11:39:31 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:42): 5 neighbors are: [{@id=1, x=1.0, y=1.0}, {@id=2, x=2.0, y=2.0}, {@id=3, x=3.0, y=3.0}, {@id=4, x=4.0, y=4.0}, {@id=5, x=5.0, y=5.0}]
+Aug 29 2011 11:39:31 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=1, x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:39:31 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=2, x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:39:31 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=3, x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:39:31 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=4, x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 11:39:31 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=5, x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 4 ) = 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 4 ) = 14.142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 14.142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 14.142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 4.242640687119285
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 4.242640687119285
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 2.8284271247461903
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 7.0710678118654755
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 9.899494936611665
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 14.142135623730951
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 11:40:01 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 12.727922061357855
+Aug 29 2011 11:40:01 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:42): 5 neighbors are: [{@id=1, x=1.0, y=1.0}, {@id=2, x=2.0, y=2.0}, {@id=3, x=3.0, y=3.0}, {@id=4, x=4.0, y=4.0}, {@id=5, x=5.0, y=5.0}]
+Aug 29 2011 11:40:01 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=1, x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 11:40:01 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=2, x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 11:40:01 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=3, x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 11:40:01 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=4, x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 11:40:01 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=5, x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 11:46:01 [INFO ] EucleadianDistanceTest.testDistance(EucleadianDistanceTest:32): distance( x1, x2 ) = NaN
+Aug 29 2011 11:46:39 [INFO ] EucleadianDistanceTest.testDistance(EucleadianDistanceTest:32): distance( x1, x2 ) = 2.23606797749979
+Aug 29 2011 11:53:17 [INFO ] EucleadianDistanceTest.testDistance(EucleadianDistanceTest:32): distance( x1, x2 ) = 2.23606797749979
+Aug 29 2011 11:53:19 [INFO ] EucleadianDistanceTest.testDistance(EucleadianDistanceTest:32): distance( x1, x2 ) = 2.23606797749979
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = 1.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistanceTest.testDistance(EucleadianDistanceTest:32): distance( x1, x2 ) = 2.23606797749979
+Aug 29 2011 13:07:02 [INFO ] DataSource.resolveUrl(DataSource:165): Found classpath-url: classpath:/golf.csv.gz
+Aug 29 2011 13:07:02 [INFO ] DataSource.resolveUrl(DataSource:167):    looking for resource '/golf.csv.gz'
+Aug 29 2011 13:07:02 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class no, label is: null, confidence-gap: 0.10258760063029704 wop=false
+Aug 29 2011 13:07:02 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:61): item is: {outlook=sunny, temperature=cool, humidity=high, windy=TRUE}
+Aug 29 2011 13:07:02 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:62): Prediction is: no
+Aug 29 2011 13:07:02 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class yes, label is: null, confidence-gap: 2.9154388738150683E-4 wop=false
+Aug 29 2011 13:07:02 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:70): item is: {outlook=overcast, temperature=mild, humidity=normal, windy=FALSE}
+Aug 29 2011 13:07:02 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:71): Prediction is: yes
+Aug 29 2011 13:07:02 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class yes, label is: null, confidence-gap: 2.9154388738150683E-4 wop=false
+Aug 29 2011 13:07:02 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:80): item is: {outlook=overcast, temperature=hot, humidity=normal, windy=FALSE}
+Aug 29 2011 13:07:02 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:81): Prediction is: yes
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 4 ) = 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 4 ) = 14.142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 14.142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 14.142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 4.242640687119285
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 4.242640687119285
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 2.8284271247461903
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 7.0710678118654755
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 9.899494936611665
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 14.142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:02 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 12.727922061357855
+Aug 29 2011 13:07:02 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:42): 5 neighbors are: [{@id=1, x=1.0, y=1.0}, {@id=2, x=2.0, y=2.0}, {@id=3, x=3.0, y=3.0}, {@id=4, x=4.0, y=4.0}, {@id=5, x=5.0, y=5.0}]
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:02 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=1, x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:02 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=2, x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:02 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=3, x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:02 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=4, x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:02 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=5, x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 4 ) = 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 4 ) = 14.142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 14.142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 14.142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 4.242640687119285
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 4.242640687119285
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 2.8284271247461903
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 7.0710678118654755
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 9.899494936611665
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 14.142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:27 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 12.727922061357855
+Aug 29 2011 13:07:27 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:42): 5 neighbors are: [{@id=1, x=1.0, y=1.0}, {@id=2, x=2.0, y=2.0}, {@id=3, x=3.0, y=3.0}, {@id=4, x=4.0, y=4.0}, {@id=5, x=5.0, y=5.0}]
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:27 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=1, x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:27 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=2, x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:27 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=3, x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:27 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=4, x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:27 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=5, x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 13:07:41 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = 1.0
+Aug 29 2011 13:07:41 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:41 [INFO ] EucleadianDistanceTest.testDistance(EucleadianDistanceTest:32): distance( x1, x2 ) = 2.23606797749979
+Aug 29 2011 13:07:42 [INFO ] DataSource.resolveUrl(DataSource:165): Found classpath-url: classpath:/golf.csv.gz
+Aug 29 2011 13:07:42 [INFO ] DataSource.resolveUrl(DataSource:167):    looking for resource '/golf.csv.gz'
+Aug 29 2011 13:07:42 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class no, label is: null, confidence-gap: 0.10258760063029704 wop=false
+Aug 29 2011 13:07:42 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:61): item is: {outlook=sunny, temperature=cool, humidity=high, windy=TRUE}
+Aug 29 2011 13:07:42 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:62): Prediction is: no
+Aug 29 2011 13:07:42 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class yes, label is: null, confidence-gap: 2.9154388738150683E-4 wop=false
+Aug 29 2011 13:07:42 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:70): item is: {outlook=overcast, temperature=mild, humidity=normal, windy=FALSE}
+Aug 29 2011 13:07:42 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:71): Prediction is: yes
+Aug 29 2011 13:07:42 [INFO ] NaiveBayes.predict(NaiveBayes:262): Predicting class yes, label is: null, confidence-gap: 2.9154388738150683E-4 wop=false
+Aug 29 2011 13:07:42 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:80): item is: {outlook=overcast, temperature=hot, humidity=normal, windy=FALSE}
+Aug 29 2011 13:07:42 [INFO ] NaiveBayesTest.testLearn(NaiveBayesTest:81): Prediction is: yes
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 4 ) = 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 4 ) = 14.142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 14.142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 7 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 7 ) = 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 5 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 5 ) = 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 9 ) = 12.727922061357855
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 9 ) = 14.142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -6.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -6.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 6 ) = 8.48528137423857
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 6 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 3 ) = 4.242640687119285
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 3 ) = 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 2 ) = 2.8284271247461903
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 2 ) = 4.242640687119285
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 4.242640687119285
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 1 ) = 1.4142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 1 ) = 2.8284271247461903
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 7.0710678118654755
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -7.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 9.899494936611665
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -10.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 14.142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -8.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:66):  dist( pivot, 8 ) = 11.313708498984761
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -9.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -9.0
+Aug 29 2011 13:07:42 [INFO ] Neighborhood$NeighborDistance.compare(Neighborhood$NeighborDistance:73):  dist( pivot, 8 ) = 12.727922061357855
+Aug 29 2011 13:07:42 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:42): 5 neighbors are: [{@id=1, x=1.0, y=1.0}, {@id=2, x=2.0, y=2.0}, {@id=3, x=3.0, y=3.0}, {@id=4, x=4.0, y=4.0}, {@id=5, x=5.0, y=5.0}]
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -1.0
+Aug 29 2011 13:07:42 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=1, x=1.0, y=1.0} is: 1.4142135623730951
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -2.0
+Aug 29 2011 13:07:42 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=2, x=2.0, y=2.0} is: 2.8284271247461903
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -3.0
+Aug 29 2011 13:07:42 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=3, x=3.0, y=3.0} is: 4.242640687119285
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -4.0
+Aug 29 2011 13:07:42 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=4, x=4.0, y=4.0} is: 5.656854249492381
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[x]  -  y[x]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[y]  -  y[y]  = -5.0
+Aug 29 2011 13:07:42 [INFO ] NeighborhoodTest.testGetNeighbors(NeighborhoodTest:44):  distance to {@id=5, x=5.0, y=5.0} is: 7.0710678118654755
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[ROOT->CursorNode]]  -  y[tree:edge[ROOT->CursorNode]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[CursorNode->SelectNode]]  -  y[tree:edge[CursorNode->SelectNode]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[SelectNode->ResultColumnList]]  -  y[tree:edge[SelectNode->ResultColumnList]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[ResultColumnList->ResultColumn]]  -  y[tree:edge[ResultColumnList->ResultColumn]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[ResultColumn->AggregateNode]]  -  y[tree:edge[ResultColumn->AggregateNode]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[AggregateNode->ColumnReference]]  -  y[tree:edge[AggregateNode->ColumnReference]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[ColumnReference->'ID']]  -  y[tree:edge[ColumnReference->'ID']]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[SelectNode->FromBaseTable]]  -  y[tree:edge[SelectNode->FromBaseTable]]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[FromBaseTable->'AUDIT_EVENTS']]  -  y[tree:edge[FromBaseTable->'AUDIT_EVENTS']]  = 0.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[SelectNode->WhereClause]]  -  y[tree:edge[SelectNode->WhereClause]]  = -1.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[WhereClause->BinaryRelationalOperatorNode '>']]  -  y[tree:edge[WhereClause->BinaryRelationalOperatorNode '>']]  = -1.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[BinaryRelationalOperatorNode '>'->ColumnReference]]  -  y[tree:edge[BinaryRelationalOperatorNode '>'->ColumnReference]]  = -1.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[ColumnReference->'RECEIVED']]  -  y[tree:edge[ColumnReference->'RECEIVED']]  = -1.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[BinaryRelationalOperatorNode '>'->CharConstantNode]]  -  y[tree:edge[BinaryRelationalOperatorNode '>'->CharConstantNode]]  = -1.0
+Aug 29 2011 13:41:18 [INFO ] EucleadianDistance.distance(EucleadianDistance:44):   x[tree:edge[CharConstantNode->'STRING[e9c8bf6927458615f52f035d78fd7494]']]  -  y[tree:edge[CharConstantNode->'STRING[e9c8bf6927458615f52f035d78fd7494]']]  = -1.0

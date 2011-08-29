@@ -92,7 +92,16 @@ extends DataUtils
 	}
 
 	public static boolean isNumerical( String key, Data item ){
-		return item.containsKey( key ) && item.get( key ).getClass() == Double.class;
+		
+		Serializable val = item.get( key );
+		if( val == null )
+			return false;
+		
+		if( val instanceof Number || val instanceof Double ){
+			return true;
+		}
+		
+		return item.get( key ).getClass() == Double.class;
 	}
 
 	public static boolean isNominal( String key, Data item ){
@@ -102,7 +111,7 @@ extends DataUtils
 
 	public static Double getDouble( String key, Data item ){
 		if( isNumerical( key, item ))
-			return (Double) item.get( key );
+			return new Double( item.get( key ) + "" );
 		else
 			return Double.NaN;
 	}
