@@ -1,0 +1,35 @@
+
+<experiment output="output">
+
+	<title>Untitled</title>
+
+	<description>
+		Put your experiment description here.
+	</description>
+
+
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="http://kirmes.cs.uni-dortmund.de/data/random-stream.csv.gz" />
+
+	<settings>
+		<property name="epsilon" value="0.01" />
+		<property name="ensembleSize" value="10" />
+		<property name="chunkSize" value="1000" />
+	</settings>
+
+	<TestAndTrain input="input" class="stream.eval.TestAndTrain">
+
+		<Baseline class="stream.quantiles.ExactQuantiles" />
+
+		<Learner name="GKQuantiles" class="stream.quantiles.GKQuantiles" epsilon="0.008" />
+		<Learner name="EnsembleQuantiles,MERGE_ROUND_ROBIN" class="stream.quantiles.EnsembleQuantiles" updateMode="MERGE_ROUND_ROBIN" />
+		<Learner name="EnsembleQuantiles,REPLACE_OLDEST" class="stream.quantiles.EnsembleQuantiles" updateMode="REPLACE_OLDEST" />
+		<Learner name="EnsembleQuantiles,MERGE_OLDEST" class="stream.quantiles.EnsembleQuantiles" updateMode="MERGE_OLDEST" />
+		<Learner name="EnsembleQuantiles,REPLACE_MOST_DISSIMILAR" class="stream.quantiles.EnsembleQuantiles" updateMode="REPLACE_MOST_DISSIMILAR" />
+
+		<Plot title="Memory Usage" name="memory.png" />
+		<Plot title="Model Error" name="model-error.png" />
+		<Plot title="Relative Model Error (relative to GKQuantiles)" name="rel-model-error.png" />
+	</TestAndTrain>
+	
+</experiment>

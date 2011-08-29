@@ -1,0 +1,15 @@
+
+
+<Stream class="stream.generator.LabeledGaussianStream" seed="2001">
+
+	<Class name="legal" weight="1.0">
+		<Attribute name="att1" class="stream.generator.Gaussian" mean="6.0" variance="2.8" />
+		<Attribute name="att2" class="stream.generator.Gaussian" mean="3.0" variance="3.8" />
+	</Class>
+	
+	<Class name="attack" weight="0.001">
+		<Attribute name="att1" class="stream.generator.Gaussian" mean="0.4" variance="1.0" />
+		<Attribute name="att2" class="stream.generator.Gaussian" mean="8.0" variance="0.25" />	
+	</Class>
+
+</Stream>
