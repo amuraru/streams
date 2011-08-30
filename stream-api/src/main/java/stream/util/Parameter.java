@@ -55,4 +55,7 @@ public @interface Parameter {
 	 * @return
 	 */
 	String[] values();
+	
+	
+	String description() default "";
 }
