@@ -30,7 +30,7 @@ public @interface Parameter {
 	 * 
 	 * @return
 	 */
-	boolean required() default false;
+	boolean required() default true;
 	
 
 	/**
@@ -54,7 +54,7 @@ public @interface Parameter {
 	 * 
 	 * @return
 	 */
-	String[] values();
+	String[] values() default {};
 	
 	
 	String description() default "";

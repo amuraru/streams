@@ -31,7 +31,7 @@ public class DataStreamFactory
 	static Logger log = LoggerFactory.getLogger( DataStreamFactory.class );
 	final static Map<String,Class<?>> PROCESSORS = new HashMap<String,Class<?>>();
 	static {
-		PROCESSORS.put( "AttributeFilter".toLowerCase(), stream.data.mapper.AttributeFilter.class );
+		PROCESSORS.put( "AttributeFilter".toLowerCase(), stream.data.mapper.FeatureNameFilter.class );
 	}
 	
 	public static DataStreamFactory newInstance(){

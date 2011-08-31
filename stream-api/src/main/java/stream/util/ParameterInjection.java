@@ -4,8 +4,11 @@
 package stream.util;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -63,8 +66,47 @@ public class ParameterInjection {
 	public static void inject( Object o, Map<String,?> params ) throws Exception {
 		log.debug( "Injecting parameters {} into object {}", params, o );
 
+		// the class of this object
+		Class<?> clazz = o.getClass();
+
+		// this set contains a list of parameters that have been successfully set using
+		// accessible fields
+		//
+		Set<String> alreadySet = new HashSet<String>();
+
+		
+		// first we try to directly set the annotated field of the class. this may fail if
+		// the field has private or protected access
+		//
+		for( String k : params.keySet() ){
+			try {
+				Field field = clazz.getDeclaredField( k );
+				if( field != null && field.isAccessible() && field.isAnnotationPresent( Parameter.class ) ){
+					log.info( "Found accessible field {} for class {}", field.getName(), o.getClass() );
+					field.set( o, params.get( k ) );
+					alreadySet.add( k );
+				}
+			} catch (NoSuchFieldException nsfe) {
+				log.warn( "Object of class {} does not provide a field for key '{}'", clazz, k );
+				if( log.isTraceEnabled() )
+					nsfe.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+		// now, walk over all methods and check if one of these is a setter of a corresponding
+		// key value in the parameter map
+		//
 		for( Method m : o.getClass().getMethods() ){
 			for( String k : params.keySet() ){
+
+				if( m.getName().startsWith( "set" ) && alreadySet.contains( k ) ){
+					log.info( "Skipping setter '{}' for already injected field {}", m.getName(), k );
+					continue;
+				}
+
 				//
 				// if the method corresponds to a parameter of the map, try to call it
 				// with the appropriate value
@@ -74,12 +116,13 @@ public class ParameterInjection {
 					Class<?> t = m.getParameterTypes()[0];
 
 					if( t.equals( params.get( k ).getClass() ) ){
+						log.info( "Using setter '{}' to inject parameter '{}'", m.getName(), k );
 						//
 						// if the setter's argument type matches the value object's class
 						// in the parameter-map, we simply inject that object
 						//
 						m.invoke( o, params.get( k ) );
-						
+
 					} else {
 						//
 						// if the setter's argument does NOT match, we try to create a new,
@@ -107,12 +150,49 @@ public class ParameterInjection {
 			if( m.getName().startsWith( "get" ) && m.getParameterTypes().length == 0 ){
 				log.trace( "Found getter '{}' for class '{}'", m.getName(), learner.getClass() );
 				Class<?> rt = m.getReturnType();
-				if( rt.isPrimitive() || rt.equals( String.class ) || rt.equals( Double.class ) ){
+				if( isTypeSupported( rt ) ) { // rt.isPrimitive() || rt.equals( String.class ) || rt.equals( Double.class ) ){
 					Object val = m.invoke( learner, new Object[0] );
 					params.put( m.getName().substring(3,4).toLowerCase() + m.getName().substring( 4 ), "" + val );
 				}
 			}
 		}
 		return params;
+	}
+	
+	
+	public static boolean isGetter( Method m ){
+		if( m.getName().toLowerCase().startsWith( "get" ) ){
+			Class<?> rt = m.getReturnType();
+			if( isTypeSupported( rt ) )
+				return true;
+		}
+		return false;
+	}
+	
+	
+	public static boolean hasGetter( Class<?> clazz, String name ) {
+		try {
+			for( Method m : clazz.getMethods() ){
+				if( isGetter( m ) && m.getName().equalsIgnoreCase( "get" + name ) )
+					return true;
+			}
+		} catch (Exception e){
+		}
+		return false;
+	}
+	
+	
+	public static boolean isTypeSupported( Class<?> clazz ){
+		if( clazz.equals( String.class )
+				|| clazz.equals( Long.class )
+				|| clazz.equals( Integer.class ) 
+				|| clazz.equals( Double.class ) 
+				|| clazz.equals( Boolean.class ) )
+			return true;
+		
+		if( clazz.isPrimitive() )
+			return true;
+		
+		return false;
 	}
 }

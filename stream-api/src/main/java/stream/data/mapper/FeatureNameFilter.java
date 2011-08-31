@@ -10,22 +10,26 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.Parameter;
 
 
 /**
  * @author chris
  *
  */
-public class AttributeFilter 
+public class FeatureNameFilter 
 	implements DataProcessor {
 	
-	static Logger log = LoggerFactory.getLogger( AttributeFilter.class );
+	static Logger log = LoggerFactory.getLogger( FeatureNameFilter.class );
 
+	@Parameter( name = "include" )
 	String include;
+	
+	@Parameter( name = "exclude" )
 	String exclude;
 	
 	
-	public AttributeFilter(){
+	public FeatureNameFilter(){
 		include = ".*";
 		exclude = null;
 	}
