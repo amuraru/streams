@@ -57,7 +57,7 @@ public class ParameterDiscovery {
 
 		for( Method m : clazz.getMethods() ){
 
-			if( ParameterInjection.isGetter( m ) ){
+			if( ParameterDiscovery.isSetter( m ) ){
 				log.info( "Found getter '{}'", m.getName() );
 				String key = m.getName().substring( 3, 4).toLowerCase();
 				if( m.getName().length() > 4 )
@@ -75,6 +75,15 @@ public class ParameterDiscovery {
 	}
 
 	
+	/**
+	 * This method returns the parameter annotation from the given class for the specified
+	 * parameter key. If attribute has been annotated with the given key as name, then this
+	 * method will return <code>null</code>.
+	 * 
+	 * @param clazz
+	 * @param key
+	 * @return
+	 */
 	public static Parameter getParameterAnnotation( Class<?> clazz, String key ){
 
 		Field[] fields = clazz.getDeclaredFields();
@@ -116,6 +125,58 @@ public class ParameterDiscovery {
 		return parameters;
 	}
 
+	
+	
+	public static String getParameterName( Method m ){
+		if( isGetter( m ) ){
+		
+			String key = m.getName().substring( 3, 4 ).toLowerCase();
+			if( m.getName().length() > 3 )
+				key += m.getName().substring( 4 );
+			
+			return key;
+		}
+		
+		return null;
+	}
+	
+	
+
+	/**
+	 * This method defines whether a method matches all requirements of being a get-Method. Basically
+	 * this requires the name to start with <code>get</code> and the return type to be any of the
+	 * ones supported for injection.
+	 * 
+	 * @param m
+	 * @return
+	 */
+	public static boolean isGetter( Method m ){
+		if( m.getName().toLowerCase().startsWith( "get" ) ){
+			Class<?> rt = m.getReturnType();
+			if( ParameterInjection.isTypeSupported( rt ) )
+				return true;
+		}
+		return false;
+	}
+
+
+	/**
+	 * This method defines whether a method matches all requirements of being a get-Method. Basically
+	 * this requires the name to start with <code>set</code> and the single (!) parameter type to be 
+	 * any of the ones supported for injection.
+	 * 
+	 * @param m
+	 * @return
+	 */
+	public static boolean isSetter( Method m ){
+		if( m.getName().toLowerCase().startsWith( "get" ) && m.getParameterTypes().length == 1 ){
+			Class<?> rt = m.getParameterTypes()[0];
+			if( ParameterInjection.isTypeSupported( rt ) )
+				return true;
+		}
+		return false;
+	}
+	
 
 	public static void main( String[] args ) throws Exception {
 

@@ -24,7 +24,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.jwall.web.audit.util.TimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -509,7 +508,7 @@ public class Experiment
 		updateHtml();
 
 		Long seconds = (endTime - startTime) / 1000;
-		log.info( "Experiment finished after {} ", TimeFormat.formatLong( endTime - startTime ) );
+		log.info( "Experiment finished after {} ms", ( endTime - startTime ) );
 		log.info( "{} data items processed ({} items/sec).", i, i / seconds.doubleValue() );
 	}
 

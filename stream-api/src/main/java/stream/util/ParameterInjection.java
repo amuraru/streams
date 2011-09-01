@@ -29,33 +29,6 @@ public class ParameterInjection {
 	static Logger log = LoggerFactory.getLogger( ParameterInjection.class );
 
 
-	/*
-	public static void inject( Object o, Map<String,String> params ) throws Exception {
-		log.debug( "Injecting parameters {} into object {}", params, o );
-
-		for( Method m : o.getClass().getMethods() ){
-			for( String k : params.keySet() ){
-				//
-				// if the method corresponds to a parameter of the map, try to call it
-				// with the appropriate value
-				//
-				if( m.getName().equalsIgnoreCase( "set" + k ) && m.getParameterTypes().length == 1 ){
-					Class<?> t = m.getParameterTypes()[0];
-					try {
-						Constructor<?> c = t.getConstructor( String.class );
-						Object po = c.newInstance( params.get( k ) );
-						log.debug( "Invoking {}({})", m.getName(), po );
-						m.invoke( o, po );
-					} catch (NoSuchMethodException nsm ){
-						log.error( "No String-constructor found for type {} of method {}", t, m.getName() );
-					}
-				}
-			}
-		}
-	}
-	 */
-
-
 	/**
 	 * This method injects a set of parameters to the given object.
 	 * 
@@ -152,7 +125,11 @@ public class ParameterInjection {
 				Class<?> rt = m.getReturnType();
 				if( isTypeSupported( rt ) ) { // rt.isPrimitive() || rt.equals( String.class ) || rt.equals( Double.class ) ){
 					Object val = m.invoke( learner, new Object[0] );
-					params.put( m.getName().substring(3,4).toLowerCase() + m.getName().substring( 4 ), "" + val );
+					String key = ParameterDiscovery.getParameterName( m );
+					if( key != null )
+						params.put( key, "" + val );
+					else
+						log.warn( "Failed to detect parameter name from method '{}'! Skipping that method.", m.getName() );
 				}
 			}
 		}
@@ -161,12 +138,7 @@ public class ParameterInjection {
 	
 	
 	public static boolean isGetter( Method m ){
-		if( m.getName().toLowerCase().startsWith( "get" ) ){
-			Class<?> rt = m.getReturnType();
-			if( isTypeSupported( rt ) )
-				return true;
-		}
-		return false;
+		return ParameterDiscovery.isGetter( m );
 	}
 	
 	

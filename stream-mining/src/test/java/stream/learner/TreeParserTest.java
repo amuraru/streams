@@ -34,8 +34,6 @@ public class TreeParserTest {
 		Double d = ed.distance( x1, x2 );
 		System.out.println( "distance: " + d );
 		
-		
-		fail("Not yet implemented");
 	}
 
 }

@@ -10,6 +10,7 @@
     <module>stream-api</module>
     <module>stream-generator</module>
     <module>stream-mining</module>
+    <module>stream-log</module>
   </modules>
 
   <build>
