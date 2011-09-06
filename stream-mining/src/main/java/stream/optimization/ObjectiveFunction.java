@@ -3,6 +3,11 @@ package stream.optimization;
 
 public interface ObjectiveFunction {
 
+	
+	public void setLambda( double lambda );
+	
+	public double getLambda();
+	
 	/**
 	 * Implements function application of the specific objective function.
 	 * 
@@ -19,5 +24,5 @@ public interface ObjectiveFunction {
 	 * @param item
 	 * @return
 	 */
-	public Vector subgradient( Vector item );
+	public Vector subgradient( Vector w_t, Vector x_i, Double y_i );
 }

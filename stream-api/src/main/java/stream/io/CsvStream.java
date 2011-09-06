@@ -89,7 +89,7 @@ public class CsvStream
 			datum = new DataImpl();
 		else
 			datum.clear();
-
+		
 		String line = readLine();
 		while( line != null && (line.trim().isEmpty() || line.startsWith( "#" ) ) ){
 			if( line.startsWith( "#" ) ){
@@ -128,6 +128,10 @@ public class CsvStream
 	}
 	
 	public String readLine() throws Exception {
+		
+		if( reader == null )
+			initReader();
+		
 		if( buffer != null && ! buffer.isEmpty() )
 			return buffer.removeFirst();
 		return reader.readLine();

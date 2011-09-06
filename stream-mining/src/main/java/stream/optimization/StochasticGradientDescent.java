@@ -1,5 +1,8 @@
 package stream.optimization;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import stream.learner.Learner;
 import stream.model.PredictionModel;
 
@@ -8,8 +11,10 @@ public class StochasticGradientDescent
 {
 	/** The unique class ID */
 	private static final long serialVersionUID = 2773277678142526444L;
+	
+	static Logger log = LoggerFactory.getLogger( StochasticGradientDescent.class );
 
-	double t;
+	double t = 0.0;
 	double b;
 	Vector gt;
 	Vector w;
@@ -18,6 +23,11 @@ public class StochasticGradientDescent
 	
 	double D;
 	ObjectiveFunction objFunction;
+	
+	
+	public StochasticGradientDescent( ObjectiveFunction of ){
+		this.objFunction = of;
+	}
 	
 	
 	protected double etha(){
@@ -36,7 +46,7 @@ public class StochasticGradientDescent
 	@Override
 	public void init() {
 		gt = new DataVector();
-		t = 1.0d;
+		t = 0.0d;
 		b = 0.0d;
 		sum_etha = 0.0d;
 		w = new DataVector();
@@ -48,11 +58,16 @@ public class StochasticGradientDescent
 	 * @see stream.learner.Learner#learn(java.lang.Object)
 	 */
 	@Override
-	public void learn( Vector w_t ) {
-
-		gt = objFunction.subgradient( w_t );
+	public void learn( Vector x_i ) {
+		t = t + 1.0d;
+		double label = x_i.getLabel();
+		gt = objFunction.subgradient( w, x_i, label );
 		
-		w = w.add( gt.scale( (-1) * etha() ) );
+		w = w.sparsify();
+		
+		double eta = etha();
+		Vector gt_scaled = gt.scale( (-1.0d) * eta );
+		w.add( gt_scaled );
 		
 		double n = w.norm();
 		if( n > D ){
@@ -62,7 +77,7 @@ public class StochasticGradientDescent
 		double sc1 = sum_etha / (sum_etha + etha() );
 		double sc2 = etha() / (sum_etha + etha() );
 		
-		avg_w = avg_w.scale( sc1 ).add( w.scale( sc2 ) );
+		avg_w.scale( sc1 ).add( w.scale( sc2 ) );
 		sum_etha += etha();
 	}
 	
@@ -85,5 +100,11 @@ public class StochasticGradientDescent
 	@Override
 	public PredictionModel<Vector, Double> getModel() {
 		return this;
+	}
+	
+	public void printModel(){
+		log.info( "snorm = {}", w.snorm() );
+		//log.info( "b = {}", b );
+		//log.info( "w_t = {}", w );
 	}
 }

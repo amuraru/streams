@@ -1,7 +1,9 @@
 package stream.optimization;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import stream.data.Data;
 import stream.data.DataImpl;
 
 public class DataVector extends DataImpl implements Vector {
@@ -9,6 +11,15 @@ public class DataVector extends DataImpl implements Vector {
 	/** The unique class ID */
 	private static final long serialVersionUID = 1764393665317323676L;
 	Double scale = 1.0d;
+	
+	
+	public DataVector(){
+	}
+	
+	public DataVector( Data data ){
+		super( data );
+	}
+	
 	
 	@Override
 	public void set(int i, double d) {
@@ -26,24 +37,32 @@ public class DataVector extends DataImpl implements Vector {
 		return this;
 	}
 
-	@Override
-	public Vector add(Vector vec) {
+	
+	public void add( double factor, Vector vec ){
 		if( vec instanceof DataVector ){
 			
-			Set<String> keys = keySet();
 			DataVector v = (DataVector) vec;
-			if( v.keySet().size() < keys.size() )
-				keys = v.keySet();
+			Set<String> keys = new HashSet<String>( keySet() );
+			keys.addAll( v.keySet() );
 			
 			for( String key : keys ){
+				Double x1 = 0.0d;
 				if( containsKey( key ) ){
-					Double x1 = (scale) *  ( (Double) get( key ) );
-					Double x2 = (v.scale) *  (Double) v.get( key );
-					put( key, x1 + x2 );
+					x1 = (scale) *  ( (Double) get( key ) );
 				}
+				
+				Double x2 = 0.0d;
+				if( v.containsKey( key ) )
+					x2 = (v.scale) *  (Double) v.get( key );
+				
+				put( key, x1 + factor * x2 );
 			}
 		}
-		return this;
+	}
+	
+	@Override
+	public void add(Vector vec) {
+		add( 1.0d, vec );
 	}
 
 	public double snorm() {
@@ -67,16 +86,45 @@ public class DataVector extends DataImpl implements Vector {
 			Double sum = 0.0d;
 			
 			for( String key : keys ){
+				Double x1 = 0.0d;
+				Double x2 = 0.0d;
+				
 				if( containsKey( key ) ){
-					Double x1 = (scale) *   ( (Double) get( key ) );
-					Double x2 = (v.scale) * (Double) v.get( key );
-					sum += (x1 * x2);
+					x1 = (scale) *   ( (Double) get( key ) );
 				}
+				
+				if( v.containsKey( key ) ){
+					x2 = (v.scale) * (Double) v.get( key );
+				}
+				
+				sum += (x1 * x2);
 			}
 			
 			return sum;
 		}
 
-		return 0;
+		return Double.NaN;
+	}
+
+	@Override
+	public double getLabel() {
+		return (Double) get( "@label" );
+	}
+
+	@Override
+	public Vector sparsify() {
+		
+		Set<String> zeroKeys = new HashSet<String>();
+		for( String key : keySet() ){
+			if( ( (Double) get( key ) ).doubleValue() == 0.0d ){
+				zeroKeys.add( key );
+			}
+		}
+		
+		for( String key : zeroKeys ){
+			remove( key );
+		}
+
+		return this;
 	}
 }

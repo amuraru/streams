@@ -8,11 +8,17 @@ public interface Vector {
 	
 	public Vector scale( double d );
 	
-	public Vector add( Vector vec );
+	public void add( Vector vec );
+	
+	public void add( double scale, Vector vec );
 	
 	public double norm();
 	
 	public double snorm();
 	
 	public double innerProduct( Vector vec );
+	
+	public double getLabel();
+	
+	public Vector sparsify();
 }
