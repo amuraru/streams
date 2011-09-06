@@ -1,13 +1,17 @@
 package stream.optimization;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import stream.data.Data;
+import stream.data.vector.SparseVector;
 import stream.learner.Learner;
 import stream.model.PredictionModel;
 
 public class StochasticGradientDescent 
-	implements Learner<Vector,PredictionModel<Vector,Double>>, PredictionModel<Vector,Double>
+	implements Learner<Data,PredictionModel<Data,Double>>, PredictionModel<Data,Double>
 {
 	/** The unique class ID */
 	private static final long serialVersionUID = 2773277678142526444L;
@@ -16,9 +20,9 @@ public class StochasticGradientDescent
 
 	double t = 0.0;
 	double b;
-	Vector gt;
-	Vector w;
-	Vector avg_w;
+	SparseVector gt;
+	SparseVector w;
+	SparseVector avg_w;
 	double sum_etha;
 	
 	double D;
@@ -45,12 +49,12 @@ public class StochasticGradientDescent
 
 	@Override
 	public void init() {
-		gt = new DataVector();
+		gt = new SparseVector();
 		t = 0.0d;
 		b = 0.0d;
 		sum_etha = 0.0d;
-		w = new DataVector();
-		avg_w = new DataVector();
+		w = new SparseVector();
+		avg_w = new SparseVector();
 	}
 	
 	
@@ -58,26 +62,37 @@ public class StochasticGradientDescent
 	 * @see stream.learner.Learner#learn(java.lang.Object)
 	 */
 	@Override
-	public void learn( Vector x_i ) {
+	public void learn( Data example ) {
+		
+		SparseVector x_i = this.createSparseVector( example );
+		if( x_i == null ){
+			log.error( "Cannot create sparse-vector from example: {}", example );
+			log.error( "Will not use this data point for training!" );
+			return;
+		}
+		
 		t = t + 1.0d;
 		double label = x_i.getLabel();
 		gt = objFunction.subgradient( w, x_i, label );
 		
-		w = w.sparsify();
-		
 		double eta = etha();
-		Vector gt_scaled = gt.scale( (-1.0d) * eta );
-		w.add( gt_scaled );
+		
+		// w = w + (-1.0 * eta) gt
+		//
+		w = w.add( (-1.0 * eta), gt );
 		
 		double n = w.norm();
 		if( n > D ){
-			w = w.scale( D / n );
+			w.scale( D / n );
 		}
 		
 		double sc1 = sum_etha / (sum_etha + etha() );
 		double sc2 = etha() / (sum_etha + etha() );
-		
-		avg_w.scale( sc1 ).add( w.scale( sc2 ) );
+
+		w.scale( sc2 );
+		avg_w.scale( sc1 );
+
+		avg_w = avg_w.add( 1.0d, w );
 		sum_etha += etha();
 	}
 	
@@ -86,7 +101,9 @@ public class StochasticGradientDescent
 	 * @see stream.model.PredictionModel#predict(java.lang.Object)
 	 */
 	@Override
-	public Double predict(Vector item) {
+	public Double predict(Data example) {
+		SparseVector item = this.createSparseVector( example );
+		
 		if( ( b + w.innerProduct( item ) ) < 0.0 )
 			return -1.0d;
 		else
@@ -98,13 +115,27 @@ public class StochasticGradientDescent
 	 * @see stream.learner.Learner#getModel()
 	 */
 	@Override
-	public PredictionModel<Vector, Double> getModel() {
+	public PredictionModel<Data, Double> getModel() {
 		return this;
 	}
 	
 	public void printModel(){
 		log.info( "snorm = {}", w.snorm() );
+		log.info( "  w.size() is {}", w.size() );
 		//log.info( "b = {}", b );
 		//log.info( "w_t = {}", w );
+	}
+	
+	public SparseVector createSparseVector( Data datum ){
+		if( datum.containsKey( ".sparse-vector" ) )
+			return (SparseVector) datum.get( ".sparse-vector" );
+		
+		for( Serializable val : datum.values() ){
+			if( val instanceof SparseVector ){
+				return (SparseVector) val;
+			}
+		}
+		
+		return null;
 	}
 }

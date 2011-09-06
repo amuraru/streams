@@ -5,6 +5,7 @@ import java.util.Set;
 
 import stream.data.Data;
 import stream.data.DataImpl;
+import stream.data.vector.Vector;
 
 public class DataVector extends DataImpl implements Vector {
 
@@ -111,7 +112,6 @@ public class DataVector extends DataImpl implements Vector {
 		return (Double) get( "@label" );
 	}
 
-	@Override
 	public Vector sparsify() {
 		
 		Set<String> zeroKeys = new HashSet<String>();

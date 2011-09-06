@@ -117,6 +117,9 @@ public class DataUtils {
 		return key != null && key.startsWith( Data.ANNOTATION_PREFIX );
 	}
 	
+	public final static boolean isFeature( String key ){
+		return key != null && ! isAnnotation( key ) && ! isHidden( key );
+	}
 	
 	public final static String hide( String key ){
 		if( key.startsWith( Data.HIDDEN_PREFIX ) )

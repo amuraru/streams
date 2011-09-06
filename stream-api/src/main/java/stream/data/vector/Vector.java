@@ -1,4 +1,4 @@
-package stream.optimization;
+package stream.data.vector;
 
 public interface Vector {
 
@@ -19,6 +19,4 @@ public interface Vector {
 	public double innerProduct( Vector vec );
 	
 	public double getLabel();
-	
-	public Vector sparsify();
 }

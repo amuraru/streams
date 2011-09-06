@@ -1,9 +1,12 @@
 package stream.learner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +28,7 @@ extends AbstractClassifier<Data,String>
 	static Logger log = LoggerFactory.getLogger( Perceptron.class );
 
 	/* The learning rate gamma */
-	Double learnRate;
+	Double learnRate = 1.0d;
 
 	/* The label attribute */
 	String labelAttribute;
@@ -33,10 +36,11 @@ extends AbstractClassifier<Data,String>
 	/* The default labels predicted by this model */
 	List<String> labels = new ArrayList<String>();
 
-	/* The attribute which this learner acts upon */
-	List<String> attributes = new ArrayList<String>();
+	double beta0 = 0.0d;
+	Map<String,Double> beta = new HashMap<String,Double>();
 
-	private HyperplaneModel model;    
+	
+	private HyperplaneModel model;
 
 
 
@@ -112,7 +116,7 @@ extends AbstractClassifier<Data,String>
 			labels.add( label );
 			labelIndex = labels.indexOf( label );
 		} 
-		
+
 		if( labelIndex < 0 ){
 			log.error( "My labels are {}, unknown label: {}", labels, label );
 			if( labels.size() == 2 )
@@ -129,24 +133,32 @@ extends AbstractClassifier<Data,String>
 
 		//---reading label
 		// ---start computation
-		Double prediction = model.predict(item);            
-		if (prediction != null && prediction.intValue() != labelIndex ) {            		
-			double direction = (labelIndex == 0) ? -1 : 1;
-			// adjusting bias
-			model.setBias(model.getBias() + (learnRate * direction));
+		Double prediction = model.predict(item);
+		
+		if (prediction != null && prediction.intValue() != labelIndex ) {
+			
+			double direction = (labelIndex == 0) ? -1.0 : 1.0;
+			
+			beta0 = beta0 + ( learnRate * direction );
 
 			// adjusting models weights
-			Map<String,Double> weights = model.getWeights();
-			for (String attribute : attributes ) {
-				Double attributeValue = example.get( attribute );
-				Double weight = weights.get( attribute );
-				if( weight == null )
-					weight = 0.0d;
+			Set<String> keys = new HashSet<String>();
+			keys.addAll( beta.keySet() );
+			keys.addAll( example.keySet() );
 
-				weight += learnRate * direction * attributeValue;
-				weights.put( attribute, weight );
+
+			for (String attribute : keys ) {
+				if( LearnerUtils.isFeature( attribute ) ){
+					Double attributeValue = example.get( attribute );
+					Double weight = beta.get( attribute );
+					if( weight == null )
+						weight = learnRate * direction * attributeValue;
+					else
+						weight = weight + learnRate * direction * attributeValue;
+					
+					beta.put( attribute, weight );
+				}
 			}
-			model.setWeights(weights);			
 		}
 	}
 
