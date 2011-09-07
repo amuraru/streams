@@ -21,4 +21,6 @@ public interface Vector {
 	public double getLabel();
 	
 	public Vector sparsify();
+	
+	public int size();
 }

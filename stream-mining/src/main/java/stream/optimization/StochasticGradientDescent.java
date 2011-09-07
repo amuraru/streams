@@ -79,6 +79,7 @@ public class StochasticGradientDescent
 		
 		avg_w.scale( sc1 ).add( w.scale( sc2 ) );
 		sum_etha += etha();
+		log.info( "w.size() = {}", w.size() );
 	}
 	
 	

@@ -1,0 +1,27 @@
+<experiment output="output">
+
+        <title>Naive Bayes Test</title>
+
+        <description>
+            This experiment is a simple test-case for the Naive Bayes implementation.
+        </description>
+
+
+                        <!-- 
+        <Stream name="input" class="stream.io.CsvStream"
+                        url="http://kirmes.cs.uni-dortmund.de/data/mushrooms-shuffled.csv" />
+                    url="classpath:/multi-golf.csv.gz" />
+
+                         -->
+        <Stream name="input" class="stream.io.CsvStream"
+                        url="file:///Users/chris/iris-shuffled.csv" />
+
+        <TestAndTrain input="input" class="stream.eval.PredictionError" testInterval="1">
+                <Baseline class="stream.learner.LabelPredictor" />
+		<Learner class="stream.learner.Perceptron" />
+
+                <Plot title="Memory Usage" name="memory.png" />
+                <Plot title="Model Error" name="model-error.png" />
+        </TestAndTrain>
+</experiment>
+

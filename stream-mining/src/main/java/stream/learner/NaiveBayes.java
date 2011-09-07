@@ -281,7 +281,8 @@ extends AbstractClassifier<Data,String>
 		//
 		if( labelAttribute == null ){
 			for( String name : item.keySet() )
-				if( name.startsWith( "_class" ) ){
+				if( LearnerUtils.isLabel(name) ){
+					log.info( "Using label '{}'", name );
 					labelAttribute = name;
 					break;
 				}

@@ -58,12 +58,15 @@ public class HyperplaneModel implements PredictionModel<Data, Double> {
 
 		double distance = 0.0;
 		distance = kernel.getDistance( example, weights );
-		distance += bias;        	
+		distance += bias;  
+		return distance;
+		/*
 		if (distance < 0) {
 			return 0.0d;
 		} else {
 			return 1.0d;
 		}
+		 */
 	}   
 
 	/**

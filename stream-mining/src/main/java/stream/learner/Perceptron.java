@@ -1,9 +1,11 @@
 package stream.learner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +34,6 @@ extends AbstractClassifier<Data,String>
 
 	/* The default labels predicted by this model */
 	List<String> labels = new ArrayList<String>();
-
-	/* The attribute which this learner acts upon */
-	List<String> attributes = new ArrayList<String>();
 
 	private HyperplaneModel model;    
 
@@ -137,6 +136,9 @@ extends AbstractClassifier<Data,String>
 
 			// adjusting models weights
 			Map<String,Double> weights = model.getWeights();
+			Set<String> attributes = new HashSet<String>(weights.keySet());
+			attributes.addAll( example.keySet() );
+			
 			for (String attribute : attributes ) {
 				Double attributeValue = example.get( attribute );
 				Double weight = weights.get( attribute );
@@ -167,7 +169,7 @@ extends AbstractClassifier<Data,String>
 		}
 
 		Double pred = model.predict( item );
-		if( pred < 0.5 )
+		if( pred < 0 )
 			return this.labels.get(0);
 		else
 			return this.labels.get(1);

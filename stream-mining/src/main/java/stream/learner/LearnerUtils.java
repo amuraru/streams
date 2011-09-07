@@ -94,14 +94,18 @@ extends DataUtils
 	public static boolean isNumerical( String key, Data item ){
 		
 		Serializable val = item.get( key );
+		return isNumerical( val );
+		//return item.get( key ).getClass() == Double.class;
+	}
+	
+	public static boolean isNumerical( Serializable val ){
 		if( val == null )
 			return false;
 		
 		if( val instanceof Number || val instanceof Double ){
 			return true;
 		}
-		
-		return item.get( key ).getClass() == Double.class;
+		return false;
 	}
 
 	public static boolean isNominal( String key, Data item ){

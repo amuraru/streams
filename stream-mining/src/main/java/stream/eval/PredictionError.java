@@ -127,7 +127,8 @@ public class PredictionError<T> extends AbstractTest<Data, Learner<Data,Predicti
 		for( String key : this.getLearnerCollection().keySet() ){
 			log.debug( "Testing learner {}", key );
 			Learner<Data,PredictionModel<Data,T>> learner = learners.get(key);
-			T pred = learner.getModel().predict( data );
+			PredictionModel<Data,T> model = learner.getModel();
+			T pred = model.predict( data );
 			
 			ConfusionMatrix<String> m = getConfusionMatrix( key );
 			m.add( truth.toString(), pred.toString() );

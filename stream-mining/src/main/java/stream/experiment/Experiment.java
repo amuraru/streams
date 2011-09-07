@@ -481,10 +481,17 @@ public class Experiment
 		while( datum != null && ++i < limit ){
 			try {
 
-				for( DataStreamListener l : preEvaluation )
+				for( DataStreamListener l : preEvaluation ){
 					l.dataArrived( datum );
-
-				evaluation.test( datum );
+				}
+				try {
+					evaluation.test( datum );
+				} catch (Exception e) {
+					log.error( "Testing failed: {}", e.getMessage() );
+					if( log.isDebugEnabled() )
+						e.printStackTrace();
+				}
+				
 				evaluation.train( datum );
 				datum = stream.readNext( datum );
 
