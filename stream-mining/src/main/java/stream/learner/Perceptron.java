@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.Measurable;
 import stream.data.vector.SparseVector;
 import edu.udo.cs.pg542.util.Kernel;
 
@@ -16,7 +17,8 @@ import edu.udo.cs.pg542.util.Kernel;
  * @author Helge Homburg, Christian Bockermann
  */
 public class Perceptron 
-extends AbstractClassifier<Data,String>
+	extends AbstractClassifier<Data,Double>
+	implements Measurable
 {
 	private static final long serialVersionUID = -3263838547557335984L;
 
@@ -49,6 +51,9 @@ extends AbstractClassifier<Data,String>
 		this.learnRate = learnRate;
 	}
 
+	
+	
+	
 	/**
 	 * @return the labelAttribute
 	 */
@@ -93,38 +98,35 @@ extends AbstractClassifier<Data,String>
 			return;
 		}
 
-		String label = null;
+		Double label = null;
 		if( item.get( labelAttribute ) == null ){
 			log.error( "No label found for example!" );
 			return;
 		} else {
-			label = item.get( labelAttribute ).toString();
+			label = new Double( item.get( labelAttribute ).toString() );
 		}
 
-		int labelIndex = labels.indexOf( label );
+		int labelIndex = labels.indexOf( Double.toString( label ) );
 		if( labelIndex < 0  && labels.size() < 2 ){
 			log.info( "Adding label '{}'", label );
-			labels.add( label );
-			labelIndex = labels.indexOf( label );
+			labels.add( label.toString() );
+			labelIndex = labels.indexOf( Double.toString( label ) );
 		} 
 
-		if( labelIndex < 0 ){
-			log.error( "My labels are {}, unknown label: {}", labels, label );
-			if( labels.size() == 2 )
-				log.error( "The perceptron algorithm only works for binary classification tasks!" );
-			return;
-		}
-		
 		SparseVector example = this.createSparseVector( item );
 
 		//---reading label
 		// ---start computation
 		Double prediction = this.predict(example);
+		if( prediction < 0.0d )
+			prediction = -1.0d;
+		else
+			prediction = 1.0d;
 		
-		if (prediction != null && prediction.intValue() != labelIndex ) {
+		if ( prediction * label < 0 ) {
 			double direction = (labelIndex == 0) ? -1.0 : 1.0;
 			beta0 = beta0 + ( learnRate * direction );
-			beta.add( learnRate * direction, example );
+			beta = beta.add( learnRate * direction, example );
 		}
 	}
 
@@ -140,22 +142,38 @@ extends AbstractClassifier<Data,String>
 	 * @see stream.model.PredictionModel#predict(java.lang.Object)
 	 */
 	@Override
-	public String predict(Data item) {
+	public Double predict(Data item) {
 		if( labels.isEmpty() ){
 			log.warn( "No labels available, predicting '?'!" );
-			return "?";
+			return Double.NaN;
 		}
 
 		if( labels.size() == 1 ){
 			log.warn( "Only 1 label available, predicting '{}'!", labels.get( 0 ) );
-			return labels.get( 0 );
+			return -1.0d;
 		}
 
 		SparseVector example = createSparseVector( item );
-		double pred = beta0 + example.innerProduct( beta );
-		if( pred < 0 )
-			return this.labels.get(0);
+		if( predict( example ) < 0.0d )
+			return -1.0d;
 		else
-			return this.labels.get(1);
+			return 1.0d;
+	}
+
+	@Override
+	public double getByteSize() {
+		//
+		// size of beta0 (64 bit)
+		// + size of weight-vector beta
+		//
+		return  8.0d + beta.getByteSize();
+	}
+	
+	
+	public void printModel(){
+		log.info( "----------------------------------------" );
+		log.info( "beta0 = {}", beta0 );
+		log.info( "beat = {}", beta );
+		log.info( "----------------------------------------" );
 	}
 }

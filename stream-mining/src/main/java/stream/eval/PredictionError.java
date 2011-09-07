@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.DataProcessor;
 import stream.data.stats.Statistics;
 import stream.learner.LabelPredictor;
 import stream.learner.Learner;
@@ -26,7 +27,10 @@ import stream.model.PredictionModel;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
-public class PredictionError<T> extends AbstractTest<Data, Learner<Data,PredictionModel<Data,T>>> {
+public class PredictionError<T> 
+	extends AbstractTest<Data, Learner<Data,PredictionModel<Data,T>>> 
+	implements DataProcessor
+{
 
 	/* The global logger for this class */
 	static Logger log = LoggerFactory.getLogger( PredictionError.class );
@@ -37,7 +41,14 @@ public class PredictionError<T> extends AbstractTest<Data, Learner<Data,Predicti
 		@Override
 		public double loss(T x1, T x2) {
 			
-			if( x1 instanceof Double ){
+			
+			if( x1 == x2 || x1.toString().equals( x2.toString() ) ){
+				return 0.0d;
+			} else
+				return 1.0d;
+			/*
+			
+			if( x1 instanceof Double && x2 instanceof Double ){
 				Double d1 = (Double) x1;
 				Double d2 = (Double) x2;
 				return Math.abs(d1 - d2);
@@ -53,12 +64,14 @@ public class PredictionError<T> extends AbstractTest<Data, Learner<Data,Predicti
 				return 0.0d;
 			
 			return 1.0d;
+			 */
 		}
 	};
 	
 	
 	public PredictionError(){
 		super( null, new HashMap<String,Learner<Data,PredictionModel<Data,T>>>() );
+		this.setBaselineLearner( new LabelPredictor<T>() );
 	}
 	
 	
@@ -75,6 +88,13 @@ public class PredictionError<T> extends AbstractTest<Data, Learner<Data,Predicti
 	public PredictionError( Map<String,Learner<Data,PredictionModel<Data,T>>> learner ){
 		super( null, learner );
 		this.setBaselineLearner( new LabelPredictor<T>() );
+	}
+	
+	
+	public PredictionError( Learner<Data,PredictionModel<Data, T>> learner ){
+		this();
+		this.setBaselineLearner( new LabelPredictor<T>() );
+		this.addLearner( learner.toString(), learner );
 	}
 	
 	
@@ -141,5 +161,12 @@ public class PredictionError<T> extends AbstractTest<Data, Learner<Data,Predicti
 		}
 		
 		return error;
+	}
+
+
+	@Override
+	public Data process(Data data) {
+		test( data );
+		return data;
 	}
 }

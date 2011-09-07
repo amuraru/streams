@@ -116,6 +116,11 @@ public class DataStreamFactory
 		DataSource d = new DataSource( ds.get("name"), ds.get("url"), ds.get( "class" ) );
 		if( ds.get( "descriptionUrl" ) != null )
 			d.setDescriptionRef( ds.get( "descriptionUrl" ) );
+		
+		Map<String,String> params = ObjectFactory.newInstance().getAttributes( el );
+		for( String k : params.keySet() ){
+			d.setParameter( k, params.get( k ) );
+		}
 		return d;
 	}
 

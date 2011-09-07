@@ -3,6 +3,7 @@
  */
 package stream.eval;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import stream.learner.Learner;
@@ -25,6 +26,8 @@ public class PredictionResults<D> implements HtmlResult {
 	 */
 	@Override
 	public String toHtml() {
+		DecimalFormat fmt = new DecimalFormat( "0.000" );
+		
 		StringBuffer s = new StringBuffer();
 		s.append( "<div class=\"section\">" );
 		s.append( "<div align=\"center\" class=\"confusionMatrix\">" );
@@ -35,6 +38,15 @@ public class PredictionResults<D> implements HtmlResult {
 			s.append( "<div class=\"confusionMatrix\">" );
 			s.append( "<div class=\"title\">" + learner + "</div>" );
 			s.append( m.get( learner ).toHtml() );
+			s.append( "</div>" );
+			
+			s.append( "<div class=\"accuracy\">\n" );
+			s.append( "<table class=\"performance\">" );
+			s.append( "<tr>" );
+			s.append( "<td>Accuracy:</td>" );
+			s.append( "<td>" + fmt.format( m.get( learner ).calculateAccuracy() ) + "</td>" );
+			s.append( "</tr>" );
+			s.append( "</table>" );
 			s.append( "</div>" );
 			s.append( "</td>" );
 		}

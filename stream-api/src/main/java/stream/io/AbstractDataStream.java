@@ -28,6 +28,8 @@ public abstract class AbstractDataStream implements DataStream {
 	String password;
 	LinkedHashMap<String,Class<?>> attributes = new LinkedHashMap<String,Class<?>>();
 	BufferedReader reader;
+	Long limit = -1L;
+
 
 	public AbstractDataStream( URL url ) throws Exception {
 		this.url = url;
@@ -72,6 +74,14 @@ public abstract class AbstractDataStream implements DataStream {
 	
 	
 	
+	public Long getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Long limit) {
+		this.limit = limit;
+	}
+
 	/**
 	 * @return the username
 	 */

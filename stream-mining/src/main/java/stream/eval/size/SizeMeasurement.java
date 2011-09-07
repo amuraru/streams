@@ -6,6 +6,8 @@ import org.apache.wicket.util.lang.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import stream.data.Measurable;
+
 /**
  * <p>Utility class for the determination of object sizes.</p>
  *
@@ -14,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * be returned.<br />For the size measurement there will be tested whether an object implements
  * the interface {@link Measurable} (which provides an own "getBytes" method so that the size of
  * an object can be set manually or calculated in a more sensible way). If this is the case,
- * {@link Measurable#getBytes()} will be used as size estimation. Otherwise
+ * {@link Measurable#getByteSize()} will be used as size estimation. Otherwise
  * {@link Objects#sizeof(java.lang.Object)} will be used (basically serialization and then reading the
  * number of bytes serialized).</p>
  *
@@ -48,7 +50,7 @@ public class SizeMeasurement {
             double size = 0.0;
             for(Object o : objects) {
                 if (o instanceof Measurable) {
-                    size += ((Measurable) o).getBytes();
+                    size += ((Measurable) o).getByteSize();
                 } else {
                     size += Objects.sizeof(o);
                 }

@@ -38,7 +38,7 @@ extends DataUtils
 
 
 	public static boolean isLabel( String name ){
-		return name.equals( "label" ) || name.startsWith( "class" ) || name.startsWith( "_class" );
+		return name != null && ( name.startsWith( "@label" ) || name.equals( "label" ) || name.startsWith( "class" ) || name.startsWith( "_class" ) );
 	}
 
 

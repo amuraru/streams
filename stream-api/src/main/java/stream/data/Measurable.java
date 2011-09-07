@@ -1,14 +1,11 @@
-package stream.eval.size;
+package stream.data;
 
 import java.io.NotSerializableException;
 import java.io.Serializable;
 
-import stream.learner.Learner;
-import stream.model.Model;
-
 /**
  * <p>
- * If a class implements this interface, {@link #getBytes()} (instead of a standard size measurement
+ * If a class implements this interface, {@link #getByteSize()} (instead of a standard size measurement
  * routine) will be used if an object of that class is provided to
  * {@link SizeMeasurement#sizeOf(java.lang.Object[])}.
  * </p>
@@ -20,7 +17,7 @@ import stream.model.Model;
  * However, if an object contained by a {@link Learner} or {@link Model} is not {@link Serializable}
  * {@link SizeMeasurement#sizeOf(java.lang.Object[])} would fail by throwing a {@link NotSerializableException}.<br />
  * In this case you can let your {@link Learner} or {@link Model} implement this {@link Measurable} interface
- * which has the effect that {@link SizeMeasurement#sizeOf(java.lang.Object[])} will use {@link Measurable#getBytes()}
+ * which has the effect that {@link SizeMeasurement#sizeOf(java.lang.Object[])} will use {@link Measurable#getByteSize()}
  * as object size measurement instead of using {@link Objects#sizeof(java.lang.Object)}.
  * </p>
  *
@@ -35,6 +32,5 @@ public interface Measurable {
      *
      * @return Number of bytes if successful, Double.NaN if an error occurs
      */
-    double getBytes();
-
+    double getByteSize();
 }

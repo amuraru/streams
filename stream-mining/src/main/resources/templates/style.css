@@ -112,7 +112,7 @@ table {
 }
 
 
-table.confusionMatrix {
+table.confusionMatrix, table.performance {
   margin: 10px;
   margin-left: 15px;
   margin-right: 15px;
@@ -132,7 +132,7 @@ table th {
   padding: 4px;
 }
 
-table.confusionMatrix td, table.summary td {
+table.confusionMatrix td, table.summary td, table.performance td {
   border: solid 1px #bbb;
   font-size: 13px;
   font-family: Verdana,Helvetica,Sansserif;

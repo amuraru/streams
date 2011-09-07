@@ -1,6 +1,10 @@
 package stream.data.vector;
 
-public interface Vector {
+import stream.data.Measurable;
+
+public interface Vector
+	extends Measurable
+{
 
 	public void set( int i, double d );
 	
@@ -19,4 +23,8 @@ public interface Vector {
 	public double innerProduct( Vector vec );
 	
 	public double getLabel();
+	
+	public int getMaxIndex();
+	
+	public int getNumberOfNonZeros();
 }

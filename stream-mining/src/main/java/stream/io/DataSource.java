@@ -4,6 +4,7 @@
 package stream.io;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.net.Authenticator;
@@ -16,7 +17,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import stream.io.DataStream;
+import stream.util.ParameterInjection;
 
 /**
  * @author chris
@@ -174,25 +175,38 @@ public class DataSource {
 	public DataStream createDataStream() throws Exception {
 		Class<?> clazz = Class.forName( className );
 
+		DataStream stream;
 
 		if( url != null && ! url.isEmpty() ){
-			Constructor<?> con = clazz.getConstructor( URL.class );
-			URL streamURL = resolveUrl( url );
 
-			if( getParameter( "username" ) != null && getParameter( "password" ) != null ){
-				Authenticator.setDefault( new Authenticator(){
-					@Override
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication( getParameter("username"), getParameter("password").toCharArray() );
-					}
-				});
+			if( "stdin".equals( url ) && clazz.getConstructor( InputStream.class ) != null ){
+				Constructor<?> con = clazz.getConstructor( InputStream.class );
+				stream = (DataStream) con.newInstance( System.in );
+			} else {
+
+				Constructor<?> con = clazz.getConstructor( URL.class );
+				URL streamURL = resolveUrl( url );
+
+				if( getParameter( "username" ) != null && getParameter( "password" ) != null ){
+					Authenticator.setDefault( new Authenticator(){
+						@Override
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication( getParameter("username"), getParameter("password").toCharArray() );
+						}
+					});
+				}
+
+				stream = (DataStream) con.newInstance( streamURL );
 			}
-
-			DataStream stream = (DataStream) con.newInstance( streamURL );
-			return stream;
 		} else {
-			DataStream stream = (DataStream) clazz.newInstance();
-			return stream;
+			stream = (DataStream) clazz.newInstance();
 		}
+
+		if( this.parameter != null && ! this.parameter.isEmpty() ){
+			log.info( "Injection parameters '{}' into datastream object {}", stream );
+			ParameterInjection.inject( stream, this.parameter );
+		}
+
+		return stream;
 	}
 }

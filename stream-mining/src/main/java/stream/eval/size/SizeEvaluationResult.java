@@ -2,6 +2,7 @@ package stream.eval.size;
 
 import java.io.Serializable;
 
+import stream.data.Measurable;
 import stream.learner.Learner;
 
 /**

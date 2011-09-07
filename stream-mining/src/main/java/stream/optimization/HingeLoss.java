@@ -4,7 +4,7 @@ import stream.data.vector.SparseVector;
 
 public class HingeLoss implements ObjectiveFunction {
 
-	double lambda = 1.0d;
+	double lambda = 1.0e-6;
 	
 	public HingeLoss(){
 	}

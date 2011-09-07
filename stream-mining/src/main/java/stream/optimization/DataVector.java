@@ -12,7 +12,7 @@ public class DataVector extends DataImpl implements Vector {
 	/** The unique class ID */
 	private static final long serialVersionUID = 1764393665317323676L;
 	Double scale = 1.0d;
-	
+	int maxIndex = -1;
 	
 	public DataVector(){
 	}
@@ -29,7 +29,13 @@ public class DataVector extends DataImpl implements Vector {
 
 	@Override
 	public double get(int i) {
-		return scale * ( (Double) get( i + "" ) );
+		
+		String key = "" + i;
+		Double val = (Double) get( key );
+		if( val == null )
+			return 0.0d;
+		
+		return scale * val;
 	}
 
 	@Override
@@ -114,10 +120,19 @@ public class DataVector extends DataImpl implements Vector {
 
 	public Vector sparsify() {
 		
+		int max = 0;
+		
 		Set<String> zeroKeys = new HashSet<String>();
 		for( String key : keySet() ){
 			if( ( (Double) get( key ) ).doubleValue() == 0.0d ){
 				zeroKeys.add( key );
+			} else {
+				try {
+					Integer idx = new Integer( key );
+					if( max < idx )
+						max = idx;
+				} catch (Exception e) {
+				}
 			}
 		}
 		
@@ -126,5 +141,20 @@ public class DataVector extends DataImpl implements Vector {
 		}
 
 		return this;
+	}
+
+	@Override
+	public double getByteSize() {
+		return Double.NaN;
+	}
+
+	@Override
+	public int getNumberOfNonZeros() {
+		return this.size();
+	}
+
+	@Override
+	public int getMaxIndex() {
+		return maxIndex;
 	}
 }

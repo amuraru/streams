@@ -28,7 +28,7 @@ public class PerceptronTest {
 		while( item != null ){
 			dataset.add( item );
 			if( i > 0 ){
-				String prediction = p.predict( item );
+				String prediction = p.predict( item ).toString();
 				log.info( "------------------------------------------------" );
 				log.info( "@label: {}", item.get( "@label" ) );
 				log.info( "@pred: {}", prediction );
@@ -50,7 +50,7 @@ public class PerceptronTest {
 		
 		trainErrors = 0;
 		for( Data example : dataset ){
-			String prediction = p.predict( example );
+			String prediction = p.predict( example ).toString();
 			log.info( "------------------------------------------------" );
 			log.info( "@label: {}", example.get( "@label" ) );
 			log.info( "@pred: {}", prediction );

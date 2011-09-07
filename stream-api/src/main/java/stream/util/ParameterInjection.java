@@ -97,19 +97,40 @@ public class ParameterInjection {
 						m.invoke( o, params.get( k ) );
 
 					} else {
+						
 						//
 						// if the setter's argument does NOT match, we try to create a new,
 						// appropriate value for that setter using the string-constructor
 						// of the setter's argument type class
 						//
-						try {
-							Constructor<?> c = t.getConstructor( String.class );
-							Object po = c.newInstance( params.get( k ).toString() );
-							log.debug( "Invoking {}({})", m.getName(), po );
-							m.invoke( o, po );
-						} catch (NoSuchMethodException nsm ){
-							log.error( "No String-constructor found for type {} of method {}", t, m.getName() );
+						Object po = null;
+						
+						if( t.isPrimitive() ){
+							String in = params.get( k ).toString();
+							
+							if( t == Double.TYPE )
+								po = new Double( in );
+							
+							if( t == Integer.TYPE )
+								po = new Integer( in );
+							
+							if( t == Boolean.TYPE )
+								po = new Boolean( in );
+							
+							if( t == Float.TYPE )
+								po = new Float( in );
+							
+						} else {
+							try {
+								Constructor<?> c = t.getConstructor( String.class );
+								po = c.newInstance( params.get( k ).toString() );
+								log.debug( "Invoking {}({})", m.getName(), po );
+							} catch (NoSuchMethodException nsm ){
+								log.error( "No String-constructor found for type {} of method {}", t, m.getName() );
+							}
 						}
+						
+						m.invoke( o, po );
 					}
 				}
 			}
@@ -121,7 +142,7 @@ public class ParameterInjection {
 		Map<String,String> params = new TreeMap<String,String>();
 		for( Method m : learner.getClass().getMethods() ){
 			if( m.getName().startsWith( "get" ) && m.getParameterTypes().length == 0 ){
-				log.trace( "Found getter '{}' for class '{}'", m.getName(), learner.getClass() );
+				log.info( "Found getter '{}' for class '{}'", m.getName(), learner.getClass() );
 				Class<?> rt = m.getReturnType();
 				if( isTypeSupported( rt ) ) { // rt.isPrimitive() || rt.equals( String.class ) || rt.equals( Double.class ) ){
 					Object val = m.invoke( learner, new Object[0] );

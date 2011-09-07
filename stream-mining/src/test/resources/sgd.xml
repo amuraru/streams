@@ -1,0 +1,34 @@
+<experiment output="output">
+
+        <title>Stochastic Gradient Descent</title>
+
+        <description>
+        	This experiment uses SGD (stochastic gradient descent) for training a classifier
+        	on the adult dataset.
+        </description>
+
+<!--
+        <Stream name="input" class="stream.io.SvmLightDataStream"
+				url="http://kirmes.cs.uni-dortmund.de/data/ccat.tr" sparseKey=".sparse-vector" />
+  -->
+<!--
+        <Stream name="input" class="stream.io.SvmLightDataStream"
+				url="file:///Users/chris/sgd/adult/adult.tr" sparseKey=".sparse-vector" />
+-->
+
+        <Stream name="input" class="stream.io.SvmLightDataStream"
+				url="file:///Users/chris/multi-adult.tr" sparseKey=".sparse-vector" limit="100000" />
+
+        <TestAndTrain input="input" class="stream.eval.PredictionError" testInterval="10">
+        
+                <Baseline class="stream.learner.LabelPredictor" />
+                <Learner class="stream.optimization.StochasticGradientDescent" D="1000.0"/>
+		<Learner class="stream.learner.Perceptron" />
+
+                <Plot title="Memory Usage" name="memory.png" />
+                <Plot title="Model Error" name="model-error.png" />
+
+        </TestAndTrain>
+
+</experiment>
+

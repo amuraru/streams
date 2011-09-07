@@ -80,14 +80,14 @@ public class SparseVector
 		int i = 0;
 		int j = 0;
 		int k = 0;
-		int eq = 0;
+		//int eq = 0;
 		
 		while( i < size && j < x.size ){
 
 			if( indexes[i] == x.indexes[j] ) {
 				rind[k] = indexes[i];
 				rval[k++] = values[i++] + factor * x.values[j++];
-				eq++;
+				//eq++;
 			} else {
 				
 				if( indexes[i] < x.indexes[j] ){
@@ -111,9 +111,11 @@ public class SparseVector
 			rval[k++] = x.values[j++];
 		}
 
+		/*
 		System.out.println( "Adding vectors of sizes " + size + " and " + x.size );
 		System.out.println( "Memory size of new Vector is: " + rind.length );
 		System.out.println( "Adding two vectors with " + eq + " overlapping indexes returned sum of size " + k );
+		 */
 		
 		SparseVector vec = new SparseVector( rind, rval, y, false );
 		vec.size = k;
@@ -126,7 +128,7 @@ public class SparseVector
 		int j = 0;
 		double sum = 0.0d;
 
-		while( i < indexes.length && j < x.indexes.length ){
+		while( i < size && j < x.size ){
 
 			if( indexes[i] == x.indexes[j] ) {
 				sum += values[i++] * x.values[j++];
@@ -258,5 +260,44 @@ public class SparseVector
 	public double innerProduct(Vector vec) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	
+	/**
+	 * @see stream.data.vector.Vector#getNumberOfNonZeros()
+	 */
+	@Override
+	public int getNumberOfNonZeros(){
+		return size;
+	}
+	
+
+	/**
+	 * The idealized by size of this vector is the sum of the number of indexes,
+	 * the number of values and the label.
+	 * 
+	 * Indexes are stored as 32bit int, values as 64bit double, the label is stored 
+	 * as 64bit double.
+	 * 
+	 *  @see stream.data.Measurable#getByteSize()
+	 */
+	@Override
+	public double getByteSize() {
+		//
+		// the idealized by size of this vector is the sum of the number of indexes,
+		// the number of values and the label.
+		//
+		// indexes are stored as 32bit int, values as 64bit double
+		// the label is stored as 64bit double
+		//
+		return 4.0d * indexes.length + 8.0 * indexes.length + 8.0d;
+	}
+
+	@Override
+	public int getMaxIndex() {
+		if( size == 0 )
+			return -1;
+		
+		return indexes[size];
 	}
 }

@@ -115,7 +115,8 @@ public class Experiment
 		ParameterInjection.inject( this, settings );
 
 		evaluation = ExperimentFactory.findEvaluation( doc );
-
+		log.info( "Found evaluation: {}", evaluation );
+		
 		List<Element> dataSourceElements = ExperimentFactory.findDataSourceNodes(doc);
 		DataStreamFactory dsf = DataStreamFactory.newInstance( settings );
 		if( dataSourceElements.isEmpty() )
@@ -393,12 +394,20 @@ public class Experiment
 		try {
 			windowSize = Integer.parseInt( this.getParameter( "windowSize" ) );
 		} catch (Exception e) {
-			e.printStackTrace();
+			if( log.isDebugEnabled() )
+				e.printStackTrace();
 			windowSize = 1000;
 		}
 
 		evaluation.addPerformanceListener( new WindowedStatisticsListener( new StatisticsStreamWriter( modelError ), windowSize, true ) ); //new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "model-error.dat" ) ) );
 		evaluation.addPerformanceListener( new MultiStatisticsWriter( getOutputDirectory() ) );
+		
+		
+		for( String key : this.learner.keySet() ){
+			log.info( "Initializing learner {}", key );
+			Learner<?,?> learner = this.learner.get( key );
+			learner.init();
+		}
 
 
 		//

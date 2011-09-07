@@ -31,6 +31,7 @@ import stream.eval.TestAndTrain;
 import stream.io.DataSource;
 import stream.io.DataStream;
 import stream.learner.Learner;
+import stream.util.ObjectFactory;
 import stream.util.ParameterInjection;
 
 /**
@@ -190,6 +191,10 @@ public class ExperimentFactory {
 		Map<String,DataSource> sources = new LinkedHashMap<String,DataSource>();
 		for( String key : ds.keySet() ){
 			DataSource d = new DataSource( key, ds.get(key).get("url"), ds.get(key).get( "class" ) );
+			Map<String,String> params = ObjectFactory.newInstance().getAttributes( node );
+			for( String pk : params.keySet() ){
+				d.setParameter( pk, params.get( pk ) );
+			}
 			sources.put( key, d );
 		}
 		return sources;
@@ -277,6 +282,10 @@ public class ExperimentFactory {
 			Map<String,String> parameters = configs.get( key );
 			log.info( "Learner '{}' has config: {}", key, configs.get( key ) );
 			//log.info( "   class of Learner is '{}'", parameters.get( "class" ) );
+			if( parameters.get( "class" ) != null && result.containsKey( key ) ){
+				log.error( "Multiple learners with name '{}' defined!" );
+				throw new Exception( "Multiple learners defined with the same name '" + key + "'!" );
+			}
 			Learner<?,?> l = ExperimentFactory.create( parameters.get( "class" ), parameters );
 			log.info( "   Created learner: {}", l );
 			result.put( key, l );

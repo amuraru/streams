@@ -1,17 +1,17 @@
 package stream.optimization;
 
-import java.io.Serializable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.Measurable;
 import stream.data.vector.SparseVector;
-import stream.learner.Learner;
-import stream.model.PredictionModel;
+import stream.learner.AbstractClassifier;
 
 public class StochasticGradientDescent 
-	implements Learner<Data,PredictionModel<Data,Double>>, PredictionModel<Data,Double>
+	extends AbstractClassifier<Data,Double>
+	implements Measurable
+//	implements Learner<Data,PredictionModel<Data,Double>>, PredictionModel<Data,Double>, Measurable
 {
 	/** The unique class ID */
 	private static final long serialVersionUID = 2773277678142526444L;
@@ -29,20 +29,45 @@ public class StochasticGradientDescent
 	ObjectiveFunction objFunction;
 	
 	
+	public StochasticGradientDescent(){
+		this( new HingeLoss() );
+	}
+	
 	public StochasticGradientDescent( ObjectiveFunction of ){
 		this.objFunction = of;
 	}
+	
+
+
+	@Override
+	public double getByteSize() {
+		//
+		// 32 bytes is from t, b, sum_etha and D as each is stored as 64bit double
+		//
+		double bs = 32.0d;
+		if( gt != null )
+			bs += gt.getByteSize();
+		
+		if( w != null )
+			bs += w.getByteSize();
+		
+		if( avg_w != null )
+			bs += avg_w.getByteSize();
+		
+		return bs;
+	}
+
 	
 	
 	protected double etha(){
 		return 1.0d / t;
 	}
 	
-	public double getD() {
+	public Double getD() {
 		return D;
 	}
 
-	public void setD(double d) {
+	public void setD( Double d ) {
 		D = d;
 	}
 
@@ -64,6 +89,9 @@ public class StochasticGradientDescent
 	@Override
 	public void learn( Data example ) {
 		
+		if( w == null )
+			init();
+		
 		SparseVector x_i = this.createSparseVector( example );
 		if( x_i == null ){
 			log.error( "Cannot create sparse-vector from example: {}", example );
@@ -82,8 +110,8 @@ public class StochasticGradientDescent
 		w = w.add( (-1.0 * eta), gt );
 		
 		double n = w.norm();
-		if( n > D ){
-			w.scale( D / n );
+		if( n > getD() ){
+			w.scale( getD() / n );
 		}
 		
 		double sc1 = sum_etha / (sum_etha + etha() );
@@ -94,7 +122,6 @@ public class StochasticGradientDescent
 
 		avg_w = avg_w.add( 1.0d, w );
 		sum_etha += etha();
-		log.info( "w.size() = {}", w.size() );
 	}
 	
 	
@@ -110,33 +137,11 @@ public class StochasticGradientDescent
 		else
 			return 1.0d;
 	}
-
-	
-	/**
-	 * @see stream.learner.Learner#getModel()
-	 */
-	@Override
-	public PredictionModel<Data, Double> getModel() {
-		return this;
-	}
 	
 	public void printModel(){
 		log.info( "snorm = {}", w.snorm() );
 		log.info( "  w.size() is {}", w.size() );
 		//log.info( "b = {}", b );
 		//log.info( "w_t = {}", w );
-	}
-	
-	public SparseVector createSparseVector( Data datum ){
-		if( datum.containsKey( ".sparse-vector" ) )
-			return (SparseVector) datum.get( ".sparse-vector" );
-		
-		for( Serializable val : datum.values() ){
-			if( val instanceof SparseVector ){
-				return (SparseVector) val;
-			}
-		}
-		
-		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package stream.io;
 
+import java.io.InputStream;
 import java.net.URL;
 
 import org.slf4j.Logger;
@@ -27,7 +28,6 @@ public class SvmLightDataStream
 	public SvmLightDataStream( String url ) throws Exception {
 		this( new URL( url ), "sparse-vector" );
 	}
-	
 
 	public SvmLightDataStream(URL url) throws Exception {
 		super(url);
@@ -37,6 +37,11 @@ public class SvmLightDataStream
 	public SvmLightDataStream( URL url, String sparseVectorKey ) throws Exception {
 		this(url);
 		this.setSparseKey( sparseVectorKey );
+	}
+
+	
+	public SvmLightDataStream( InputStream in ) throws Exception {
+		super( in );
 	}
 	
 	
@@ -58,6 +63,7 @@ public class SvmLightDataStream
 			this.sparseKey = DataUtils.hide( sparseKey );
 	}
 
+	
 
 	/**
 	 * @see stream.io.AbstractDataStream#readHeader()
@@ -73,6 +79,10 @@ public class SvmLightDataStream
 	@Override
 	public Data readNext(Data item) throws Exception {
 
+		if( limit > 0 && lineNumber > limit ){
+			return null;
+		}
+		
 		if( reader == null )
 			initReader();
 		
@@ -85,8 +95,10 @@ public class SvmLightDataStream
 		
 		Data datum = parseLine( item, line );
 		if( sparseKey != null ){
+			log.debug( "Adding sparse vector as key '{}'", sparseKey );
 			datum.put( sparseKey, readSparseVector( line ) );
-		}
+		} else
+			log.debug( "No sparse key defined, not creating sparse vector!" );
 		return datum;
 	}
 
