@@ -15,11 +15,12 @@ public class SparseVector
 	/** The unique class ID */
 	private static final long serialVersionUID = 8773169606200673610L;
 
-	
+	int size = 0;
 	int[] indexes = new int[0];
 	double[] values = new double[0];
 	double y;
 
+	
 	public SparseVector(){
 		indexes = new int[0];
 		values = new double[0];
@@ -50,6 +51,12 @@ public class SparseVector
 		}
 
 		this.y = y;
+		
+		int j = 0;
+		while( j < indexes.length && indexes[j] >= 0 && !Double.isNaN( values[j]) )
+			j++;
+		
+		size = j;
 	}
 	
 	public double getLabel(){
@@ -58,7 +65,7 @@ public class SparseVector
 	
 
 	public Vector scale( double d ){
-		for( int i = 0; i < values.length; i++ )
+		for( int i = 0; i < size; i++ )
 			values[i] = d * values[i];
 		
 		return this;
@@ -66,19 +73,21 @@ public class SparseVector
 
 	public SparseVector add( double factor, SparseVector x ){
 
-		int[] rind = new int[ indexes.length + x.indexes.length ];
-		double[] rval = new double[ indexes.length + x.indexes.length ];
+		int[] rind = new int[ size + x.size ];
+		double[] rval = new double[ size + x.size ];
 
 
 		int i = 0;
 		int j = 0;
 		int k = 0;
-
-		while( i < indexes.length && j < x.indexes.length ){
+		int eq = 0;
+		
+		while( i < size && j < x.size ){
 
 			if( indexes[i] == x.indexes[j] ) {
 				rind[k] = indexes[i];
 				rval[k++] = values[i++] + factor * x.values[j++];
+				eq++;
 			} else {
 				
 				if( indexes[i] < x.indexes[j] ){
@@ -91,24 +100,24 @@ public class SparseVector
 			}
 		}
 
-		while( i < indexes.length ){
+		while( i < size ){
 			rind[k] = indexes[i];
 			rval[k++] = values[i++];
 		}
 
 
-		while( j < x.indexes.length ){
+		while( j < x.size ){
 			rind[k] = x.indexes[j];
 			rval[k++] = x.values[j++];
 		}
 
+		System.out.println( "Adding vectors of sizes " + size + " and " + x.size );
+		System.out.println( "Memory size of new Vector is: " + rind.length );
+		System.out.println( "Adding two vectors with " + eq + " overlapping indexes returned sum of size " + k );
 		
-		for( int l = k; l < rind.length; l++ ){
-			rind[l] = -1;
-			rval[l] = Double.NaN;
-		}
-
-		return new SparseVector( rind, rval, y, false );
+		SparseVector vec = new SparseVector( rind, rval, y, false );
+		vec.size = k;
+		return vec;
 	}
 	
 	
@@ -136,7 +145,7 @@ public class SparseVector
 
 
 	public double get( int i ){
-		for( int k = 0; k < indexes.length; k++ ){
+		for( int k = 0; k < size; k++ ){
 			if( indexes[k] >= 0 && indexes[k] == i )
 				return values[k];
 
@@ -156,7 +165,7 @@ public class SparseVector
 	public double snorm(){
 		double sum = 0.0d;
 
-		for( int i = 0; i < values.length && indexes[i] >= 0; i++ )
+		for( int i = 0; i < size; i++ )
 			sum += values[i] * values[i];
 
 		return sum;
@@ -164,11 +173,11 @@ public class SparseVector
 
 
 	public int size(){
-		int i = 0;
-		while( i < indexes.length && indexes[i] >= 0 )
-			i++;
-
-		return i;
+		return size;
+	}
+	
+	public int memSize(){
+		return indexes.length;
 	}
 
 	public String toString(){

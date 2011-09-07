@@ -19,11 +19,21 @@ import org.junit.Test;
  */
 public class SparseVectorSpeedTest {
 
+	static int NUMBER_OF_VECTORS = 1000;
+	static List<SparseVector> samples = createRandomVectors( NUMBER_OF_VECTORS );
 	
-	protected SparseVector createRandomVector(){
+	protected static List<SparseVector> createRandomVectors( int num ){
+		ArrayList<SparseVector> rnds = new ArrayList<SparseVector>( num );
+		for( int i = 0; i < num; i++ ){
+			rnds.add( createRandomVector() );
+		}
+		return rnds;
+	}
+	
+	protected static SparseVector createRandomVector(){
 
 		Random rnd = new Random();
-		int size = rnd.nextInt( 10000 );
+		int size = rnd.nextInt( 1000 );
 		
 		TreeSet<Integer> indexes = new TreeSet<Integer>();
 		
@@ -52,36 +62,23 @@ public class SparseVectorSpeedTest {
 	@Test
 	public void testAddDoubleSparseVector() {
 		
-		int runs = 1000;
-		List<SparseVector> set = new ArrayList<SparseVector>( runs );
 		double sizes = 0.0d;
-		
-		for( int i = 0; i < runs; i++ ){
-			SparseVector vec = createRandomVector();
-			set.add( vec );
+		for( SparseVector vec : samples ){
 			sizes += vec.size();
 		}
-		System.out.println( "average vector-size is " + (sizes / runs) );
+		System.out.println( "average vector-size is " + (sizes / samples.size()) );
 		
 		
 		SparseVector sum = new SparseVector();
 		long start = System.currentTimeMillis();
 
-		for( SparseVector vec : set ){
+		for( SparseVector vec : samples ){
 			sum = sum.add( 1.0d, vec );
 		}
 		
 		long end = System.currentTimeMillis();
 		System.out.println( "Sum is: " + sum );
-		System.out.println( "Summing up " + runs + " random vectors took " + (end-start) + "ms.");
+		System.out.println( "Size of sum is: " + sum.size() + ", mem-size is: " + sum.memSize() );
+		System.out.println( "Summing up " + samples.size() + " random vectors took " + (end-start) + "ms.");
 	}
-
-	/**
-	 * Test method for {@link stream.data.vector.SparseVector#innerProduct(stream.data.vector.SparseVector)}.
-	 */
-	@Test
-	public void testInnerProductSparseVector() {
-		fail("Not yet implemented");
-	}
-
 }
