@@ -3,6 +3,10 @@
  */
 package stream.learner;
 
+import java.io.Serializable;
+
+import stream.data.Data;
+import stream.data.vector.SparseVector;
 import stream.model.PredictionModel;
 
 /**
@@ -53,4 +57,19 @@ public abstract class AbstractClassifier<D,C>
 	 */
 	@Override
 	public abstract void learn(D item);
+	
+	
+
+	public SparseVector createSparseVector( Data datum ){
+		if( datum.containsKey( ".sparse-vector" ) )
+			return (SparseVector) datum.get( ".sparse-vector" );
+		
+		for( Serializable val : datum.values() ){
+			if( val instanceof SparseVector ){
+				return (SparseVector) val;
+			}
+		}
+		
+		return null;
+	}
 }

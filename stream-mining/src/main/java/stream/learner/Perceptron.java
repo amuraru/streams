@@ -1,16 +1,13 @@
 package stream.learner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.vector.SparseVector;
 import edu.udo.cs.pg542.util.Kernel;
 
 /**
@@ -35,7 +32,7 @@ extends AbstractClassifier<Data,String>
 	List<String> labels = new ArrayList<String>();
 
 	double beta0 = 0.0d;
-	Map<String,Double> beta = new HashMap<String,Double>();
+	SparseVector beta = new SparseVector();
 
 	
 	public Perceptron() {
@@ -117,48 +114,25 @@ extends AbstractClassifier<Data,String>
 				log.error( "The perceptron algorithm only works for binary classification tasks!" );
 			return;
 		}
-
-
-		Map<String,Double> example = LearnerUtils.getNumericVector( item );
-		if( example.isEmpty() ){
-			log.info( "No numerical attributes found for learning! Ignoring example!" );
-			return;
-		}
+		
+		SparseVector example = this.createSparseVector( item );
 
 		//---reading label
 		// ---start computation
-		Double prediction = this.sign(item);
+		Double prediction = this.predict(example);
 		
 		if (prediction != null && prediction.intValue() != labelIndex ) {
-			
 			double direction = (labelIndex == 0) ? -1.0 : 1.0;
-			
 			beta0 = beta0 + ( learnRate * direction );
-
-			// adjusting models weights
-			Set<String> attributes = new HashSet<String>();
-			attributes.addAll( example.keySet() );
-			attributes.addAll( beta.keySet() );
-
-
-			for (String attribute : attributes ) {
-				if( LearnerUtils.isFeature( attribute ) ){
-					Double attributeValue = example.get( attribute );
-					Double weight = beta.get( attribute );
-					if( weight == null )
-						weight = learnRate * direction * attributeValue;
-					else
-						weight = weight + learnRate * direction * attributeValue;
-					
-					beta.put( attribute, weight );
-				}
-			}
+			beta.add( learnRate * direction, example );
 		}
 	}
 
 	
-	protected Double sign( Data item ){
-		return -1.0;
+	
+	public Double predict( SparseVector example ){
+		double pred = beta0 + example.innerProduct( beta );
+		return pred;
 	}
 	
 
@@ -177,9 +151,8 @@ extends AbstractClassifier<Data,String>
 			return labels.get( 0 );
 		}
 
-		
-		
-		Double pred = sign( item );
+		SparseVector example = createSparseVector( item );
+		double pred = beta0 + example.innerProduct( beta );
 		if( pred < 0 )
 			return this.labels.get(0);
 		else
