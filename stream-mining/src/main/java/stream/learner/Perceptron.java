@@ -1,8 +1,8 @@
 package stream.learner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
-import stream.model.HyperplaneModel;
 import edu.udo.cs.pg542.util.Kernel;
 
 /**
@@ -27,7 +26,7 @@ extends AbstractClassifier<Data,String>
 	static Logger log = LoggerFactory.getLogger( Perceptron.class );
 
 	/* The learning rate gamma */
-	Double learnRate;
+	Double learnRate = 1.0d;
 
 	/* The label attribute */
 	String labelAttribute;
@@ -35,10 +34,10 @@ extends AbstractClassifier<Data,String>
 	/* The default labels predicted by this model */
 	List<String> labels = new ArrayList<String>();
 
-	private HyperplaneModel model;    
+	double beta0 = 0.0d;
+	Map<String,Double> beta = new HashMap<String,Double>();
 
-
-
+	
 	public Perceptron() {
 		this(Kernel.INNER_PRODUCT, 0.05);
 	}
@@ -48,8 +47,8 @@ extends AbstractClassifier<Data,String>
 	}
 
 	public Perceptron(int kernelType, double learnRate) {       
-		this.model = new HyperplaneModel(kernelType);
-		this.model.initModel( new LinkedHashMap<String,Double>(), 0.0d );
+		//this.model = new HyperplaneModel(kernelType);
+		//this.model.initModel( new LinkedHashMap<String,Double>(), 0.0d );
 		this.learnRate = learnRate;
 	}
 
@@ -111,7 +110,7 @@ extends AbstractClassifier<Data,String>
 			labels.add( label );
 			labelIndex = labels.indexOf( label );
 		} 
-		
+
 		if( labelIndex < 0 ){
 			log.error( "My labels are {}, unknown label: {}", labels, label );
 			if( labels.size() == 2 )
@@ -128,30 +127,40 @@ extends AbstractClassifier<Data,String>
 
 		//---reading label
 		// ---start computation
-		Double prediction = model.predict(item);            
-		if (prediction != null && prediction.intValue() != labelIndex ) {            		
-			double direction = (labelIndex == 0) ? -1 : 1;
-			// adjusting bias
-			model.setBias(model.getBias() + (learnRate * direction));
+		Double prediction = this.sign(item);
+		
+		if (prediction != null && prediction.intValue() != labelIndex ) {
+			
+			double direction = (labelIndex == 0) ? -1.0 : 1.0;
+			
+			beta0 = beta0 + ( learnRate * direction );
 
 			// adjusting models weights
-			Map<String,Double> weights = model.getWeights();
-			Set<String> attributes = new HashSet<String>(weights.keySet());
+			Set<String> attributes = new HashSet<String>();
 			attributes.addAll( example.keySet() );
-			
-			for (String attribute : attributes ) {
-				Double attributeValue = example.get( attribute );
-				Double weight = weights.get( attribute );
-				if( weight == null )
-					weight = 0.0d;
+			attributes.addAll( beta.keySet() );
 
-				weight += learnRate * direction * attributeValue;
-				weights.put( attribute, weight );
+
+			for (String attribute : attributes ) {
+				if( LearnerUtils.isFeature( attribute ) ){
+					Double attributeValue = example.get( attribute );
+					Double weight = beta.get( attribute );
+					if( weight == null )
+						weight = learnRate * direction * attributeValue;
+					else
+						weight = weight + learnRate * direction * attributeValue;
+					
+					beta.put( attribute, weight );
+				}
 			}
-			model.setWeights(weights);			
 		}
 	}
 
+	
+	protected Double sign( Data item ){
+		return -1.0;
+	}
+	
 
 	/**
 	 * @see stream.model.PredictionModel#predict(java.lang.Object)
@@ -168,7 +177,9 @@ extends AbstractClassifier<Data,String>
 			return labels.get( 0 );
 		}
 
-		Double pred = model.predict( item );
+		
+		
+		Double pred = sign( item );
 		if( pred < 0 )
 			return this.labels.get(0);
 		else

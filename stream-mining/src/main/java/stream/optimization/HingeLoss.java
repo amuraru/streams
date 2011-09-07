@@ -1,5 +1,7 @@
 package stream.optimization;
 
+import stream.data.vector.SparseVector;
+
 public class HingeLoss implements ObjectiveFunction {
 
 	double lambda = 1.0d;
@@ -9,21 +11,23 @@ public class HingeLoss implements ObjectiveFunction {
 	
 	
 	@Override
-	public Double apply(Vector item) {
+	public Double apply( SparseVector item) {
 		return 0.0d;
 	}
 
 	@Override
-	public Vector subgradient(Vector w_t, Vector x_i, Double label ) {
+	public SparseVector subgradient( SparseVector w, SparseVector x_i, Double label ) {
+		
+		SparseVector w_t = new SparseVector( w );
+		
 		double d = label * w_t.innerProduct( x_i );
 		if( d < 1 ){
-			
-			Vector x_i_scaled = x_i.scale( -1.0d * label );
-			x_i_scaled.add( lambda, w_t ); // w_t_scaled.add( x_i_scaled );
-			
-			return x_i_scaled; //w_t.scale( lambda ).add( x_i.scale( -1.0d * label ) );
+			x_i.scale( -1.0d * label );
+			x_i.add( lambda, w_t );
+			return x_i;
 		} else {
-			return w_t.scale( lambda );
+			w_t.scale( lambda );
+			return w_t;
 		}
 	}
 

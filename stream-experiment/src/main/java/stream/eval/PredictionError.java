@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
-import stream.data.DataUtils;
 import stream.data.stats.Statistics;
+import stream.learner.LearnerUtils;
 import stream.learner.Prediction;
 
 /**
@@ -52,7 +52,7 @@ public class PredictionError
 		String labelKey = null;
 		Serializable labelValue = null;
 		for( String key : data.keySet() ){
-			if( key.startsWith( Data.LABEL_PREFIX ) ){
+			if( key.startsWith( Prediction.LABEL_PREFIX ) ){
 				labelKey = key;
 				labelValue = data.get( key );
 				break;
@@ -80,7 +80,7 @@ public class PredictionError
 				
 				Double err = 0.0d;
 				
-				if( DataUtils.isNumeric( labelValue ) && DataUtils.isNumeric( prediction ) )
+				if( LearnerUtils.isNumerical( labelValue ) && LearnerUtils.isNumerical( prediction ) )
 					err = error( (Double) labelValue, (Double) prediction );
 				else
 					err = error( labelValue, prediction );

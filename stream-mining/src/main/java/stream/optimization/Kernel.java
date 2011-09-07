@@ -1,5 +1,7 @@
 package stream.optimization;
 
+import stream.data.vector.Vector;
+
 public interface Kernel {
 
 	
