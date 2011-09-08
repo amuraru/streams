@@ -3,8 +3,6 @@
  */
 package stream.data.vector;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
