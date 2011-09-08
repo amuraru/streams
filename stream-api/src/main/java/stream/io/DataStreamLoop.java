@@ -68,6 +68,9 @@ public class DataStreamLoop extends DataStreamProcessor {
 		Data item = source.readNext( data );
 		if( item == null ){
 			inLoop = true;
+			if( shuffle )
+				Collections.shuffle( buffer );
+			
 			return readNext( item );
 		}
 		buffer.add( item );
