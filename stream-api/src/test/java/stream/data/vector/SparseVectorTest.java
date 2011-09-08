@@ -6,14 +6,16 @@ package stream.data.vector;
 import junit.framework.Assert;
 
 import org.junit.Test;
-
-import stream.data.vector.SparseVector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author chris
  *
  */
 public class SparseVectorTest {
+    
+    static Logger log = LoggerFactory.getLogger( SparseVectorTest.class );
 
 	/**
 	 * Test method for {@link stream.data.vector.SparseVector#scale(double)}.
@@ -25,10 +27,10 @@ public class SparseVectorTest {
 		double[] vals = new double[]{ 9.1d, 1.4d, 2.1d };
 		
 		SparseVector vec = new SparseVector( indexes, vals, -1 );
-		System.out.println( "vector = " + vec );
+		log.info( "vector = " + vec );
 		double fac = 2.0d;
 		vec.scale( fac );
-		System.out.println( fac + " * vector = " + vec );
+		log.info( fac + " * vector = " + vec );
 		
 		for( int i = 0; i < indexes.length; i++ ){
 			Assert.assertEquals( 2.0 * vals[i], vec.get( indexes[i] ) );
@@ -40,9 +42,6 @@ public class SparseVectorTest {
 	 */
 	@Test
 	public void testAdd() {
-		System.out.println();
-		System.out.println();
-		
 		int[] idx1= new int[]{ 0, 10, 124 };
 		double[] val1 = new double[]{ 9.1d, 1.4d, 2.1d };
 
@@ -52,11 +51,11 @@ public class SparseVectorTest {
 		SparseVector v1 = new SparseVector( idx1, val1, -1 );
 		SparseVector v2 = new SparseVector( idx2, val2, -1 );
 		
-		System.out.println( "v1 = " + v1 );
-		System.out.println( "v2 = " + v2 );
+		log.info( "v1 = " + v1 );
+		log.info( "v2 = " + v2 );
 		
 		SparseVector sumv = v1.add( 1.0d, v2 );
-		System.out.println( "v1 + v2 = " + sumv );
+		log.info( "v1 + v2 = " + sumv );
 
 		Assert.assertEquals( 10.0, sumv.get( 0 ) );
 		Assert.assertEquals( 1.4, sumv.get( 10 ) );
@@ -90,8 +89,8 @@ public class SparseVectorTest {
 
 		SparseVector v1 = new SparseVector( idx1, val1, -1 );
 		Assert.assertEquals( 3, v1.size() );
-		System.out.println( "Checking size of vector " + v1 );
-		System.out.println( "Size is: " + v1.size() );
+		log.info( "Checking size of vector " + v1 );
+		log.info( "Size is: " + v1.size() );
 	}
 
 	@Test

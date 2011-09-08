@@ -52,9 +52,19 @@ public class GnuplotRunner
 	
 	
 	public static void createPlots( File dir ) throws Exception {
+	    
+	    File lock = new File( dir.getAbsolutePath() + File.separator + ".lock_gnuplot" );
+	    if( lock.exists() ){
+	        return;
+	    }
+	    
+	    lock.createNewFile();
+	    
 		String cmd = createPlotCommand( "plot.cmd", dir );
 		String gnuplot = findGnuplot();
 		Runtime.getRuntime().exec( gnuplot + " " + cmd, new String[0], dir );
+		
+		lock.delete();
 	}
 
 	public static String createPlotCommand( String name, File dir ) throws Exception {

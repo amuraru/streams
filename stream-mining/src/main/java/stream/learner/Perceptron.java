@@ -1,7 +1,7 @@
 package stream.learner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.LinkedHashSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class Perceptron
 	String labelAttribute;
 
 	/* The default labels predicted by this model */
-	List<String> labels = new ArrayList<String>();
+	LinkedHashSet<Double> labels = new LinkedHashSet<Double>();
 
 	double beta0 = 0.0d;
 	SparseVector beta = new SparseVector();
@@ -98,20 +98,25 @@ public class Perceptron
 			return;
 		}
 
-		Double label = null;
-		if( item.get( labelAttribute ) == null ){
-			log.error( "No label found for example!" );
-			return;
-		} else {
-			label = new Double( item.get( labelAttribute ).toString() );
+		Serializable val = item.get( labelAttribute );
+		if( val == null ){
+		    log.error( "No label value found for '{}'", labelAttribute );
+		    return;
 		}
-
-		int labelIndex = labels.indexOf( Double.toString( label ) );
-		if( labelIndex < 0  && labels.size() < 2 ){
-			log.info( "Adding label '{}'", label );
-			labels.add( label.toString() );
-			labelIndex = labels.indexOf( Double.toString( label ) );
-		} 
+		
+		Double label = null;
+		
+		if( val instanceof Double ){
+		    label = (Double) val;
+		} else {
+		    log.error( "Only numerical labels {Ê-1.0d, +1.0d } are supported by this learner!" );
+		    return;
+		}
+		
+		if( label < 0.0d )
+		    label = -1.0d;
+		else
+		    label = 1.0d;
 
 		SparseVector example = this.createSparseVector( item );
 
@@ -124,7 +129,7 @@ public class Perceptron
 			prediction = 1.0d;
 		
 		if ( prediction * label < 0 ) {
-			double direction = (labelIndex == 0) ? -1.0 : 1.0;
+			double direction = label;
 			beta0 = beta0 + ( learnRate * direction );
 			beta = beta.add( learnRate * direction, example );
 		}
@@ -143,16 +148,6 @@ public class Perceptron
 	 */
 	@Override
 	public Double predict(Data item) {
-		if( labels.isEmpty() ){
-			log.warn( "No labels available, predicting '?'!" );
-			return Double.NaN;
-		}
-
-		if( labels.size() == 1 ){
-			log.warn( "Only 1 label available, predicting '{}'!", labels.get( 0 ) );
-			return -1.0d;
-		}
-
 		SparseVector example = createSparseVector( item );
 		if( predict( example ) < 0.0d )
 			return -1.0d;
