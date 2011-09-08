@@ -50,18 +50,18 @@ public class SGDTest {
 
 		String url = "http://kirmes.cs.uni-dortmund.de/data/ccat.tr";
 		url = "file:///Users/chris/sgd/rcv1_ccat/ccat.tr";
-		//url = "file:///Users/chris/sgd/adult/adult.tr";
+		url = "file:///Users/chris/sgd/adult/adult.tr";
 		SvmLightDataStream stream = new SvmLightDataStream( url );
 		stream.setLimit( 10000L );
 		String testUrl = "file:///Users/chris/sgd/rcv1_ccat/ccat.tt";
-		//testUrl = "file:///Users/chris/sgd/adult/adult.tt";
+		testUrl = "file:///Users/chris/sgd/adult/adult.tt";
 
 		long start = System.currentTimeMillis();
 
 		List<Data> train = read( stream, 10000 );
 		log.info( "{} examples read in {} ms.", train.size(), System.currentTimeMillis() - start );
 
-		Collections.shuffle( train, new Random( System.currentTimeMillis() ) );
+		//Collections.shuffle( train, new Random( System.currentTimeMillis() ) );
 		
 		start = System.currentTimeMillis();
 		List<Data> test = read( new SvmLightDataStream( testUrl ), 10000 );
@@ -73,6 +73,12 @@ public class SGDTest {
 		sgd.init();
 		sgd.setD( 1000.0d );
 
+		WindowedSGD winSgd = new WindowedSGD( loss );
+		winSgd.init();
+		winSgd.setD( 1000.0d );
+		winSgd.setWindowSize( 5000 );
+		winSgd.setPasses( 10 );
+		
 		start = System.currentTimeMillis();
 
 		Perceptron perceptron = new Perceptron();
@@ -81,10 +87,6 @@ public class SGDTest {
 		int limit = Integer.MAX_VALUE;
 		int i = 0;
 		int passes = 1;
-		
-		List<Double> labels = new ArrayList<Double>();
-		labels.add( 1.0 );
-		labels.add( -1.0d );
 		
 		
 		// multi-pass loop for iterating over the stream multiple times
@@ -97,18 +99,23 @@ public class SGDTest {
 			for( Data item : train ){
 				
 				perceptron.learn( item );
-				//sgd.learn( item );
+				sgd.learn( item );
+				winSgd.learn( item );
 				
 				//
 				// log the squared norm value every 1000th example
 				//
 				if( i > 0 && i % 1000 == 0 ){
-					double norm = sgd.w.snorm();
+					double norm = sgd.w.norm();
+					double wnorm = winSgd.w.snorm();
 					stats.clear();
 					stats.add( "iteration", new Double(i) );
 					stats.add( "sq-norm", norm );
+					stats.add( "windowed.sq-norm", wnorm );
 					normPlot.dataArrived( stats );
+					log.info( "Iteration {}", i );
 				}
+				
 				i++;
 				if( i > limit )
 					break;
@@ -132,48 +139,52 @@ public class SGDTest {
 			}
 		});
 		
-		//performance.addLearner( "SGD", sgd );
+		performance.addLearner( "SGD", sgd );
 		performance.addLearner( "Perceptron", perceptron );
-		
-
+		performance.addLearner( "WindowedSGD", winSgd );
 		
 		// iterate over the test-set and determine the prediction error
 		// using the performance data-processor
 		//
 		start = System.currentTimeMillis();
-		int pos = 0;
-		int neg = 0;
+		double pos = 0;
+		double neg = 0;
 		
 		for( Data item : test ){
 			performance.process( item );
 			
-			/*
-			if( sgd.predict( item ) < 0 )
-				neg++;
+			Double label = (Double) item.get( "@label" );
+			if( label < 0.0d )
+				neg += 1.0d;
 			else
-				pos++;
-			 */
+				pos += 1.0d;
 		}
 		
 		log.info( "sgd predicted {} times -1 and {} times +1", neg, pos );
 		
 		log.info( "Testing on {} examples required {} ms", test.size(), (System.currentTimeMillis() - start ) );
-		
-		
 		// output of the accuracy for all learners
 		//
 		for( String learnerName : performance.getLearnerCollection().keySet() ){
 			log.info( "accuracy( {} ) = {}", learnerName, performance.getConfusionMatrix( learnerName ).calculateAccuracy() );
 		}		
 		
+		double major = pos / (pos+neg);
+		if( neg > pos )
+			major = neg / (pos+neg);
+		log.info( "Error of majority vote is: {}", major );
+		
+		
 		
 		// (optional)
 		// output of the confusion matrix for all learners
 		//
+		/*
 		for( String learnerName : performance.getLearnerCollection().keySet() ){
 		log.info( "-----CONFUSION_MATRIX FOR   {}-------------------------------------\n", learnerName );
 			log.info( "{}", performance.getConfusionMatrix( learnerName ));
 		}
 		log.info( "------------------------------------------------\n" );
+		 */
 	}
 }
