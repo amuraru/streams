@@ -20,24 +20,36 @@ public class StochasticGradientDescent
 
 	double t = 0.0;
 	double b;
+	boolean useb = true;
 	SparseVector gt;
 	SparseVector w;
 	SparseVector avg_w;
 	double sum_etha;
 	
-	double D;
-	ObjectiveFunction objFunction;
+	GaussianFeatureMapping gaussianKernel;
+	boolean useKernel = false;
 	
+	int gradVarMaxSamples = 100;				// Number of samples to be used for estimating gradient norm variance
+	int gradVarSamples = 1;
+	SgdObjectiveFunction obj;
 	
 	public StochasticGradientDescent(){
-		this( new HingeLoss() );
+		this( new SvmHingeLoss() );
 	}
 	
-	public StochasticGradientDescent( ObjectiveFunction of ){
-		this.objFunction = of;
+	public StochasticGradientDescent( SgdObjectiveFunction obj) {
+		this( obj, true );
 	}
 	
-
+	public StochasticGradientDescent( SgdObjectiveFunction obj, boolean useb ){
+		this.obj = obj;
+		this.useb = useb;
+	}
+	
+	public void useGaussianKernel( double gamma, int dimension ) {
+		gaussianKernel = new GaussianFeatureMapping( gamma, dimension );
+		useKernel = true;
+	}
 
 	@Override
 	public double getByteSize() {
@@ -60,18 +72,11 @@ public class StochasticGradientDescent
 	
 	
 	protected double etha(){
-		return 1.0d / t;
+		//return 1.0d / t;
+		return obj.getRadius() / Math.sqrt( obj.getGradientNormVariance() * t);
+		//return 1.0d / (obj.getLambda() * t);
 	}
 	
-	public Double getD() {
-		return D;
-	}
-
-	public void setD( Double d ) {
-		D = d;
-	}
-
-
 	@Override
 	public void init() {
 		gt = new SparseVector();
@@ -80,6 +85,9 @@ public class StochasticGradientDescent
 		sum_etha = 0.0d;
 		w = new SparseVector();
 		avg_w = new SparseVector();
+		
+//		System.out.println("SGD Init: w.snorm() = " + w.snorm());
+//		System.out.println("SGD Init: obj.D = " + obj.getRadius());
 	}
 	
 	
@@ -88,39 +96,66 @@ public class StochasticGradientDescent
 	 */
 	@Override
 	public void learn( Data example ) {
+		SparseVector x_i;
 		
 		if( w == null )
 			init();
 		
-		SparseVector x_i = this.createSparseVector( example );
-		if( x_i == null ){
+		SparseVector input_i = this.createSparseVector( example );
+		if( input_i == null ){
 			log.error( "Cannot create sparse-vector from example: {}", example );
 			log.error( "Will not use this data point for training!" );
 			return;
 		}
 		
+		if(useKernel)
+			x_i = gaussianKernel.transform(input_i);
+		else
+			x_i = input_i;
+
+		if( this.gradVarSamples < this.gradVarMaxSamples ) {
+			obj.estimateGradientVariance(x_i);
+			++this.gradVarSamples;
+			//System.out.println("SGD Init: obj.G = " + Math.sqrt(obj.getGradientNormVariance()));
+			return;
+		}
+		
 		t = t + 1.0d;
 		double label = x_i.getLabel();
-		gt = objFunction.subgradient( w, x_i, label );
-		
 		double eta = etha();
-		
+
+		/*
+		gt = obj.subgradient( w, x_i, label );
 		// w = w + (-1.0 * eta) gt
 		//
 		w = w.add( (-1.0 * eta), gt );
+		*/
 		
-		double n = w.norm();
-		if( n > getD() ){
-			w.scale( getD() / n );
+		double prediction = label*(w.innerProduct(x_i) + b);
+		w.scale(1.0 - obj.getLambda()*eta);
+		if(prediction < 1) {
+			w.add( label*eta, x_i );
+			b = b + label*eta;
+		}
+		
+		double norm;
+		if(useb)
+			norm = Math.sqrt( w.snorm() + b*b );
+		else
+			norm = w.norm();
+		
+		if( norm > obj.getRadius() ){
+			double scalar = obj.getRadius() / norm;
+			w.scale( scalar );
+			if(useb)
+				b *= scalar;
 		}
 		
 		double sc1 = sum_etha / (sum_etha + etha() );
 		double sc2 = etha() / (sum_etha + etha() );
 
-		w.scale( sc2 );
 		avg_w.scale( sc1 );
-
-		avg_w = avg_w.add( 1.0d, w );
+		avg_w.add( sc2, w );
 		sum_etha += etha();
 	}
 	
@@ -130,18 +165,23 @@ public class StochasticGradientDescent
 	 */
 	@Override
 	public Double predict(Data example) {
+		SparseVector x_i;
 		SparseVector item = this.createSparseVector( example );
+		if(useKernel) 
+			x_i = gaussianKernel.transform(item);
+		else
+			x_i = item;
 		
-		if( ( b + w.innerProduct( item ) ) < 0.0 )
+		if( ( avg_w.innerProduct( x_i ) + b) < 0.0 )
 			return -1.0d;
 		else
 			return 1.0d;
 	}
 	
 	public void printModel(){
-		log.info( "snorm = {}", w.snorm() );
-		log.info( "  w.size() is {}", w.size() );
-		//log.info( "b = {}", b );
+		log.info( "snorm = {}", avg_w.snorm() );
+		log.info( "  avg_w.size() is {}", avg_w.size() );
+		log.info( "  b = {}", b );
 		//log.info( "w_t = {}", w );
 	}
 }

@@ -2,6 +2,7 @@ package stream.io;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -150,6 +151,21 @@ public class SvmLightDataStream
 		}
 		
 		if( sparseKey != null ){
+			HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
+
+			for( int i = 1; i < token.length; i++ ){
+				
+				String[] iv = token[i].split( ":" );
+				if( iv.length != 2 ){
+					log.error( "Failed to split token '{}' in line: ", token[i], line );
+					return null;
+				} else {
+					pairs.put(Integer.parseInt( iv[0] ), Double.parseDouble( iv[1] ));
+				}
+			}
+
+			item.put( DataUtils.hide( sparseKey ), new SparseVector( pairs, Double.parseDouble( token[0] ), false ) );			
+			/*
 			int[] indexes = new int[ token.length - 1 ];
 			double[] vals = new double[ token.length - 1 ];
 
@@ -167,6 +183,7 @@ public class SvmLightDataStream
 			}
 
 			item.put( DataUtils.hide( sparseKey ), new SparseVector( indexes, vals, Double.parseDouble( token[0] ), false ) );
+			*/
 		}
 		
 		return item;
@@ -183,12 +200,26 @@ public class SvmLightDataStream
 			line = line.substring( 0, info );
 		
 		String[] token = line.split( "\\s+" );
-		
+
+		HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
+
+		for( int i = 1; i < token.length; i++ ){
+			
+			String[] iv = token[i].split( ":" );
+			if( iv.length != 2 ){
+				log.error( "Failed to split token '{}' in line: ", token[i], line );
+				return null;
+			} else {
+				pairs.put(Integer.parseInt( iv[0] ), Double.parseDouble( iv[1] ));
+			}
+		}
+
+		return new SparseVector( pairs, Double.parseDouble( token[0] ), false );
+		/*
 		int[] indexes = new int[ token.length - 1 ];
 		double[] vals = new double[ token.length - 1 ];
 
 		for( int i = 1; i < token.length; i++ ){
-
 			
 			String[] iv = token[i].split( ":" );
 			if( iv.length != 2 ){
@@ -201,5 +232,6 @@ public class SvmLightDataStream
 		}
 
 		return new SparseVector( indexes, vals, Double.parseDouble( token[0] ), false );
+		*/
 	}
 }
