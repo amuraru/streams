@@ -18,7 +18,7 @@ import stream.io.DataStream;
 import stream.io.SvmLightDataStream;
 import stream.learner.Perceptron;
 
-public class SGDTest_copy {
+public class SGDTest {
 
 	static Logger log = LoggerFactory.getLogger( SGDTest_copy.class );
 
