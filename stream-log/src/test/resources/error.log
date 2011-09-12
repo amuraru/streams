@@ -1,0 +1,112 @@
+Sep 11 15:39:06 modsecurity webapp: [Sun Sep 11 15:39:06 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2
+Sep 11 15:39:06 modsecurity webapp: [Sun Sep 11 15:39:06 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14
+Sep 11 15:39:06 modsecurity webapp: [Sun Sep 11 15:39:06 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19
+Sep 11 15:39:07 modsecurity webapp: [Sun Sep 11 15:39:07 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:15 modsecurity webapp: [Sun Sep 11 15:39:15 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart in /var/www/webdemo/_cart.inc on line 3, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:39:15 modsecurity webapp: [Sun Sep 11 15:39:15 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:39:15 modsecurity webapp: [Sun Sep 11 15:39:15 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:39:15 modsecurity webapp: [Sun Sep 11 15:39:15 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:18 modsecurity webapp: [Sun Sep 11 15:39:18 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:39:18 modsecurity webapp: [Sun Sep 11 15:39:18 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:39:18 modsecurity webapp: [Sun Sep 11 15:39:18 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined variable: info in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:39:18 modsecurity webapp: [Sun Sep 11 15:39:18 2011] [error] [client 192.168.56.1] PHP Warning:  Invalid argument supplied for foreach() in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:39:18 modsecurity webapp: [Sun Sep 11 15:39:18 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:19 modsecurity webapp: [Sun Sep 11 15:39:19 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php
+Sep 11 15:39:19 modsecurity webapp: [Sun Sep 11 15:39:19 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:19 modsecurity webapp: [Sun Sep 11 15:39:19 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=4
+Sep 11 15:39:19 modsecurity webapp: [Sun Sep 11 15:39:19 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:20 modsecurity webapp: [Sun Sep 11 15:39:20 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=1
+Sep 11 15:39:20 modsecurity webapp: [Sun Sep 11 15:39:20 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:21 modsecurity webapp: [Sun Sep 11 15:39:21 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=5
+Sep 11 15:39:21 modsecurity webapp: [Sun Sep 11 15:39:21 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=5
+Sep 11 15:39:21 modsecurity webapp: [Sun Sep 11 15:39:21 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=5
+Sep 11 15:39:21 modsecurity webapp: [Sun Sep 11 15:39:21 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:22 modsecurity webapp: [Sun Sep 11 15:39:22 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:39:22 modsecurity webapp: [Sun Sep 11 15:39:22 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:39:23 modsecurity webapp: [Sun Sep 11 15:39:23 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:23 modsecurity webapp: [Sun Sep 11 15:39:23 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:39:23 modsecurity webapp: [Sun Sep 11 15:39:23 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:39:23 modsecurity webapp: [Sun Sep 11 15:39:23 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:39:41 modsecurity webapp: [Sun Sep 11 15:39:41 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2
+Sep 11 15:39:41 modsecurity webapp: [Sun Sep 11 15:39:41 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14
+Sep 11 15:39:41 modsecurity webapp: [Sun Sep 11 15:39:41 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19
+Sep 11 15:39:42 modsecurity webapp: [Sun Sep 11 15:39:42 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico, referer: http://192.168.56.101/webdemo/
+Sep 11 15:39:46 modsecurity webapp: [Sun Sep 11 15:39:46 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart in /var/www/webdemo/_cart.inc on line 3, referer: http://192.168.56.101/webdemo/
+Sep 11 15:39:46 modsecurity webapp: [Sun Sep 11 15:39:46 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/
+Sep 11 15:39:46 modsecurity webapp: [Sun Sep 11 15:39:46 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/
+Sep 11 15:39:48 modsecurity webapp: [Sun Sep 11 15:39:48 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=2
+Sep 11 15:39:48 modsecurity webapp: [Sun Sep 11 15:39:48 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=2
+Sep 11 15:39:51 modsecurity webapp: [Sun Sep 11 15:39:51 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=3
+Sep 11 15:39:51 modsecurity webapp: [Sun Sep 11 15:39:51 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=3
+Sep 11 15:39:52 modsecurity webapp: [Sun Sep 11 15:39:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:39:52 modsecurity webapp: [Sun Sep 11 15:39:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:39:52 modsecurity webapp: [Sun Sep 11 15:39:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined variable: info in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:39:52 modsecurity webapp: [Sun Sep 11 15:39:52 2011] [error] [client 192.168.56.1] PHP Warning:  Invalid argument supplied for foreach() in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:39:54 modsecurity webapp: [Sun Sep 11 15:39:54 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php
+Sep 11 15:48:43 modsecurity webapp: [Sun Sep 11 15:48:43 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:48:43 modsecurity webapp: [Sun Sep 11 15:48:43 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:48:43 modsecurity webapp: [Sun Sep 11 15:48:43 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:48:45 modsecurity webapp: [Sun Sep 11 15:48:45 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:48:45 modsecurity webapp: [Sun Sep 11 15:48:45 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:48:45 modsecurity webapp: [Sun Sep 11 15:48:45 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:48:52 modsecurity webapp: [Sun Sep 11 15:48:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:48:52 modsecurity webapp: [Sun Sep 11 15:48:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:48:52 modsecurity webapp: [Sun Sep 11 15:48:52 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:00 modsecurity webapp: [Sun Sep 11 15:49:00 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:49:00 modsecurity webapp: [Sun Sep 11 15:49:00 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:49:00 modsecurity webapp: [Sun Sep 11 15:49:00 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:21 modsecurity webapp: [Sun Sep 11 15:49:21 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=4
+Sep 11 15:49:21 modsecurity webapp: [Sun Sep 11 15:49:21 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=4
+Sep 11 15:49:21 modsecurity webapp: [Sun Sep 11 15:49:21 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:23 modsecurity webapp: [Sun Sep 11 15:49:23 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/index.php?cart-add=2
+Sep 11 15:49:23 modsecurity webapp: [Sun Sep 11 15:49:23 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=2
+Sep 11 15:49:23 modsecurity webapp: [Sun Sep 11 15:49:23 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined variable: info in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=2
+Sep 11 15:49:23 modsecurity webapp: [Sun Sep 11 15:49:23 2011] [error] [client 192.168.56.1] PHP Warning:  Invalid argument supplied for foreach() in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=2
+Sep 11 15:49:23 modsecurity webapp: [Sun Sep 11 15:49:23 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:25 modsecurity webapp: [Sun Sep 11 15:49:25 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php
+Sep 11 15:49:25 modsecurity webapp: [Sun Sep 11 15:49:25 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:25 modsecurity webapp: [Sun Sep 11 15:49:25 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=2
+Sep 11 15:49:25 modsecurity webapp: [Sun Sep 11 15:49:25 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:26 modsecurity webapp: [Sun Sep 11 15:49:26 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: name in /var/www/webdemo/add-product.php on line 14, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=4
+Sep 11 15:49:26 modsecurity webapp: [Sun Sep 11 15:49:26 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/add-product.php on line 30, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=4
+Sep 11 15:49:26 modsecurity webapp: [Sun Sep 11 15:49:26 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:49:46 modsecurity webapp: [Sun Sep 11 15:49:46 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/add-product.php on line 30, referer: http://192.168.56.101/webdemo/add-product.php
+Sep 11 15:49:46 modsecurity webapp: [Sun Sep 11 15:49:46 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:36 modsecurity webapp: [Sun Sep 11 15:52:36 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/add-product.php
+Sep 11 15:52:36 modsecurity webapp: [Sun Sep 11 15:52:36 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/add-product.php
+Sep 11 15:52:36 modsecurity webapp: [Sun Sep 11 15:52:36 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/add-product.php
+Sep 11 15:52:36 modsecurity webapp: [Sun Sep 11 15:52:36 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:38 modsecurity webapp: [Sun Sep 11 15:52:38 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:52:38 modsecurity webapp: [Sun Sep 11 15:52:38 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:52:38 modsecurity webapp: [Sun Sep 11 15:52:38 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:39 modsecurity webapp: [Sun Sep 11 15:52:39 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:52:39 modsecurity webapp: [Sun Sep 11 15:52:39 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:52:39 modsecurity webapp: [Sun Sep 11 15:52:39 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:40 modsecurity webapp: [Sun Sep 11 15:52:40 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=6
+Sep 11 15:52:40 modsecurity webapp: [Sun Sep 11 15:52:40 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=6
+Sep 11 15:52:40 modsecurity webapp: [Sun Sep 11 15:52:40 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:41 modsecurity webapp: [Sun Sep 11 15:52:41 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:52:41 modsecurity webapp: [Sun Sep 11 15:52:41 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=5
+Sep 11 15:52:41 modsecurity webapp: [Sun Sep 11 15:52:41 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:45 modsecurity webapp: [Sun Sep 11 15:52:45 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/index.php?cart-add=4
+Sep 11 15:52:45 modsecurity webapp: [Sun Sep 11 15:52:45 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=4
+Sep 11 15:52:45 modsecurity webapp: [Sun Sep 11 15:52:45 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined variable: info in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=4
+Sep 11 15:52:45 modsecurity webapp: [Sun Sep 11 15:52:45 2011] [error] [client 192.168.56.1] PHP Warning:  Invalid argument supplied for foreach() in /var/www/webdemo/cart.php on line 8, referer: http://192.168.56.101/webdemo/index.php?cart-add=4
+Sep 11 15:52:45 modsecurity webapp: [Sun Sep 11 15:52:45 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:47 modsecurity webapp: [Sun Sep 11 15:52:47 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php
+Sep 11 15:52:48 modsecurity webapp: [Sun Sep 11 15:52:48 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:49 modsecurity webapp: [Sun Sep 11 15:52:49 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=5
+Sep 11 15:52:49 modsecurity webapp: [Sun Sep 11 15:52:49 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:51 modsecurity webapp: [Sun Sep 11 15:52:51 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-add in /var/www/webdemo/_cart.inc on line 2, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=4
+Sep 11 15:52:51 modsecurity webapp: [Sun Sep 11 15:52:51 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=4
+Sep 11 15:52:51 modsecurity webapp: [Sun Sep 11 15:52:51 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/cart.php?cart-remove=4
+Sep 11 15:52:51 modsecurity webapp: [Sun Sep 11 15:52:51 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:52 modsecurity webapp: [Sun Sep 11 15:52:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:52:52 modsecurity webapp: [Sun Sep 11 15:52:52 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: cart-remove in /var/www/webdemo/_cart.inc on line 14, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] PHP Notice:  Undefined index: id in /var/www/webdemo/index.php on line 19, referer: http://192.168.56.101/webdemo/index.php?cart-add=1
+Sep 11 15:52:53 modsecurity webapp: [Sun Sep 11 15:52:53 2011] [error] [client 192.168.56.1] File does not exist: /var/www/favicon.ico

@@ -23,12 +23,22 @@
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>org.jwall.web.audit</artifactId>
-			<version>0.5.2</version>
+			<version>0.5.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>stream-api</artifactId>
 			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jwall</groupId>
+			<artifactId>org.jwall.sql.parser</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>jsqlparser</groupId>
+			<artifactId>jsqlparser</artifactId>
+			<version>0.7</version>
 		</dependency>
 	</dependencies>
 
