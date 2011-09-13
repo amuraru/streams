@@ -10,14 +10,48 @@ import stream.data.TreeNode;
 
 public class TreeFeatures implements DataProcessor {
 
+    String key = null;
 	List<TreeFeature> features = new ArrayList<TreeFeature>();
 
+	
+	public TreeFeatures(){
+	    this( null );
+	}
+	
+	public TreeFeatures( String key ){
+	    this.key = key;
+	}
+	
+	
 	/**
+     * @return the key
+     */
+    public String getKey()
+    {
+        return key;
+    }
+
+
+    /**
+     * @param key the key to set
+     */
+    public void setKey(String key)
+    {
+        this.key = key;
+    }
+
+
+    /**
 	 * @see stream.data.DataProcessor#process(stream.data.Data)
 	 */
 	@Override
 	public Data process(Data data) {
-		
+
+	    if( key != null ){
+	        processTree( key, data );
+	        return data;
+	    }
+	    
 		List<String> treeKeys = new ArrayList<String>();
 		
 		for( String key : data.keySet() ){

@@ -78,7 +78,7 @@ public class ObjectFactory
 		// create an instance of this class
 		//
 		Object object = clazz.newInstance();
-
+		
 		// Inject the parameters into the object...
 		//
 		ParameterInjection.inject( object, parameter );

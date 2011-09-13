@@ -77,7 +77,7 @@ public class SvmLightDataStream
 	 * @see stream.io.AbstractDataStream#readNext(stream.data.Data)
 	 */
 	@Override
-	public Data readNext(Data item) throws Exception {
+	public Data readItem(Data item) throws Exception {
 
 		if( limit > 0 && lineNumber > limit ){
 			return null;

@@ -2,8 +2,6 @@ package org.jwall.sql.audit;
 
 import java.util.Stack;
 
-import org.jwall.sql.parser.SQLTreeNode;
-
 import stream.data.TreeNode;
 
 public abstract class TreeWalker
@@ -14,7 +12,7 @@ public abstract class TreeWalker
     
     public TreeNode current(){
         if( stack.isEmpty() ){
-            root = new SQLTreeNode( "root" );
+            root = new ASTNode( "root" );
             stack.push( root );
         }
         return stack.peek();
@@ -22,7 +20,7 @@ public abstract class TreeWalker
     
     
     protected TreeNode dive( String key ){
-        TreeNode node = new SQLTreeNode( encode(key) );
+        TreeNode node = new ASTNode( encode(key) );
         stack.push( node );
         return node;
     }
@@ -34,7 +32,7 @@ public abstract class TreeWalker
 
     
     protected TreeNode leaf( Object o ){
-        TreeNode leaf = new SQLTreeNode( encode(o.toString()) );
+        TreeNode leaf = new ASTNode( encode(o.toString()) );
         current().addChild( leaf );
         return leaf;
     }
