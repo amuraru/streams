@@ -4,6 +4,7 @@
 package stream.learner;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 import org.slf4j.Logger;
@@ -99,17 +100,20 @@ public abstract class AbstractClassifier<D,C>
 			}
 		}
 		
-		int[] idx = new int[ indexes.size() ];
-		double[] vals = new double[ indexes.size() ];
+		//int[] idx = new int[ indexes.size() ];
+		//double[] vals = new double[ indexes.size() ];
+		HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
 		
-		int i = 0;
+		//int i = 0;
 		for( String key : indexes ){
-			idx[i] = Integer.parseInt( key );
-			vals[i] = (Double) datum.get( key );
-			i++;
+			//idx[i] = Integer.parseInt( key );
+			//vals[i] = (Double) datum.get( key );
+			//i++;
+			pairs.put((Integer)Integer.parseInt( key ), (Double)datum.get( key ));
 		}
 		
-		SparseVector vec = new SparseVector( idx, vals, y, false );
+		//SparseVector vec = new SparseVector( idx, vals, y, false );
+		SparseVector vec = new SparseVector( pairs, y, false );
 		log.trace( "SparseVector: {}", vec );
 		return vec;
 	}

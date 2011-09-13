@@ -5,11 +5,6 @@ import stream.data.vector.SparseVector;
 
 public interface ObjectiveFunction {
 
-	
-	public void setLambda( double lambda );
-	
-	public double getLambda();
-	
 	/**
 	 * Implements function application of the specific objective function.
 	 * 
