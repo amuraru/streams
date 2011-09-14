@@ -2,27 +2,52 @@ package stream.optimization;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.plotter.StreamPlotter;
 import stream.data.stats.Statistics;
 import stream.data.stats.StatisticsStreamWriter;
 import stream.eval.LossFunction;
 import stream.eval.PredictionError;
+import stream.eval.TestAndTrain;
 import stream.io.DataStream;
 import stream.io.SvmLightDataStream;
+import stream.learner.Classifier;
+import stream.learner.Learner;
 import stream.learner.Perceptron;
 
-public class SGDTest {
+public class SGDExperiment {
 
-    static Logger log = LoggerFactory.getLogger( SGDTest.class );
+    static Logger log = LoggerFactory.getLogger( SGDExperiment.class );
 
+    
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	TestAndTrain<Data,Classifier<Data,Double>> evaluation = new TestAndTrain<Data,Classifier<Data,Double>>( new PredictionError() );
+	List<Classifier<Data,Double>> classifiers = new ArrayList<Classifier<Data,Double>>();
+	
+	File output;
+	
+	
+	
+	public SGDExperiment( File outputDirectory ) throws Exception {
+		if( !outputDirectory.isDirectory() )
+			outputDirectory.mkdirs();
+		
+		output = outputDirectory;
+		
+
+    	StreamPlotter errorPlot = new StreamPlotter( "Events", new File( output.getAbsolutePath() + File.separator + "model-error.png" ) );
+		errorPlot.setTitle( "Model Error" );
+		evaluation.addPerformanceListener( errorPlot );
+	}
+	
     
     @Test
     public void testDummy(){
@@ -47,27 +72,111 @@ public class SGDTest {
         return dataset;
     }
 
+    
+    public void train( Classifier<Data,Double> learner, Collection<Data> trainingData ){
+    	List<Classifier<Data,Double>> learners = new ArrayList<Classifier<Data,Double>>();
+    	learners.add( learner );
+    	train( learners, trainingData );
+    }
+    
+    
+    public void train( Collection<Data> trainingData ){
+    	long start = System.currentTimeMillis();
+    	
+    	for( Data item : trainingData ){
+    		evaluation.dataArrived( item );
+    	}
+    	
+    	log.info( "Training {} classifiers required {} ms", evaluation.getLearner().size(), System.currentTimeMillis() - start );
+    }
+    
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public void train( List<Classifier<Data,Double>> learner, Collection<Data> trainingData ){
+    	
+		PredictionError performance = new PredictionError();
+    	for( Learner l : learner ){
+    		performance.addLearner( l.toString(), l );
+    	}
+    			
+    	long start = System.currentTimeMillis();
+    	//
+    	//
+    	for( Data item : trainingData ){
+    		for( Learner<Data,?> learningAlgo : learner ){
+    			learningAlgo.learn( item );
+    		}
+    	}
+    	
+    	log.info( "Training of {} algorithms required {} ms", learner.size(), System.currentTimeMillis() - start );
+    }
+    
+    
+    public void test( Collection<Data> testData ){
+    	
+    }
+    
+    
+    public void init(){
+    	for( Learner<Data,?> l : evaluation.getLearner().values() ){
+    		l.init();
+    	}
+    	
+    	
+    }
+    
+    public void add( Classifier<Data,Double> classifier ){
+    	evaluation.addLearner( classifier.toString(), classifier );
+    	classifiers.add( classifier );
+    }
+    
+    
     /**
      * @param args
      */
     public static void main(String[] args) throws Exception {
         try {
-            final Statistics stats = new Statistics();
+        	
+        	File output = new File( "/tmp/output" );
+        	if( ! output.isDirectory() )
+        		output.mkdirs();
+        	final Statistics stats = new Statistics();
+        	
+        	String url = "http://kirmes.cs.uni-dortmund.de/data/ccat.tr";
+        	url = "file:///Users/chris/sgd/rcv1_ccat/ccat.tr";
+        	url = "file:///Users/chris/sgd/adult/adult.tr";
+        	SvmLightDataStream stream = new SvmLightDataStream( url );
+        	stream.setLimit( 10000L );
+        	String testUrl = "file:///Users/chris/sgd/rcv1_ccat/ccat.tt";
+        	testUrl = "file:///Users/chris/sgd/adult/adult.tt";
 
-            String url = "http://kirmes.cs.uni-dortmund.de/data/ccat.tr";
-            url = "file:///Users/chris/sgd/rcv1_ccat/ccat.tr";
-            url = "file:///Users/chris/sgd/adult/adult.tr";
-            SvmLightDataStream stream = new SvmLightDataStream( url );
-            stream.setLimit( 10000L );
-            String testUrl = "file:///Users/chris/sgd/rcv1_ccat/ccat.tt";
-            testUrl = "file:///Users/chris/sgd/adult/adult.tt";
+        	
+        	List<Data> trainingData = read( stream, 10000 );
+        	List<Data> testData = null;
+        	
+        	
+        	SGDExperiment experiment = new SGDExperiment( output );
+        	
+        	
+        	
+        	experiment.init();
+
+        	
+        	for( int i = 0; i < 10; i++ ){
+        		Collections.shuffle( trainingData );
+        		experiment.train(trainingData);
+        	}
+        	
+        	experiment.testDummy();
+        	
+        	
 
             long start = System.currentTimeMillis();
 
             List<Data> train = read( stream, 10000 );
             log.info( "{} examples read in {} ms.", train.size(), System.currentTimeMillis() - start );
 
-            Collections.shuffle( train, new Random( System.currentTimeMillis() ) );
+            //Collections.shuffle( train, new Random( System.currentTimeMillis() ) );
 
             start = System.currentTimeMillis();
             List<Data> test = read( new SvmLightDataStream( testUrl ), 10000 );

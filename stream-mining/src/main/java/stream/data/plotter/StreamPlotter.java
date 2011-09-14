@@ -53,6 +53,12 @@ public class StreamPlotter
 	Map<String,String> properties = new HashMap<String,String>();
 	int plotterCount = 0;
 	
+	
+	public StreamPlotter( String timeKey, File out ){
+		this( timeKey, new ArrayList<String>(), out );
+	}
+	
+	
 	public StreamPlotter( String timeKey, Collection<String> keys, File out ) {
 		super( "" );
 		this.timeKey = timeKey;
