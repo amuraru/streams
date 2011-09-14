@@ -5,9 +5,8 @@ import java.util.Set;
 
 import stream.data.Data;
 import stream.data.DataImpl;
-import stream.data.vector.Vector;
 
-public class DataVector extends DataImpl implements Vector {
+public class DataVector extends DataImpl {
 
 	/** The unique class ID */
 	private static final long serialVersionUID = 1764393665317323676L;
@@ -22,12 +21,10 @@ public class DataVector extends DataImpl implements Vector {
 	}
 	
 	
-	@Override
 	public void set(int i, double d) {
 		put( i + "", new Double( d ) );
 	}
 
-	@Override
 	public double get(int i) {
 		
 		String key = "" + i;
@@ -38,14 +35,13 @@ public class DataVector extends DataImpl implements Vector {
 		return scale * val;
 	}
 
-	@Override
-	public Vector scale(double d) {
+	public DataVector scale(double d) {
 		scale = scale * d;
 		return this;
 	}
 
 	
-	public void add( double factor, Vector vec ){
+	public void add( double factor, DataVector vec ){
 		if( vec instanceof DataVector ){
 			
 			DataVector v = (DataVector) vec;
@@ -67,8 +63,7 @@ public class DataVector extends DataImpl implements Vector {
 		}
 	}
 	
-	@Override
-	public void add(Vector vec) {
+	public void add(DataVector vec) {
 		add( 1.0d, vec );
 	}
 
@@ -76,13 +71,11 @@ public class DataVector extends DataImpl implements Vector {
 		return innerProduct( this );
 	}
 	
-	@Override
 	public double norm(){
 		return Math.sqrt( innerProduct( this ) );
 	}
 
-	@Override
-	public double innerProduct(Vector vec) {
+	public double innerProduct(DataVector vec) {
 		if( vec instanceof DataVector ){
 			
 			Set<String> keys = keySet();
@@ -113,12 +106,11 @@ public class DataVector extends DataImpl implements Vector {
 		return Double.NaN;
 	}
 
-	@Override
 	public double getLabel() {
 		return (Double) get( "@label" );
 	}
 
-	public Vector sparsify() {
+	public void sparsify() {
 		
 		int max = 0;
 		
@@ -140,20 +132,17 @@ public class DataVector extends DataImpl implements Vector {
 			remove( key );
 		}
 
-		return this;
+		//return this;
 	}
 
-	@Override
 	public double getByteSize() {
 		return Double.NaN;
 	}
 
-	@Override
 	public int getNumberOfNonZeros() {
 		return this.size();
 	}
 
-	@Override
 	public int getMaxIndex() {
 		return maxIndex;
 	}

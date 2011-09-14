@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataUtils;
-import stream.data.vector.SparseVector;
+import stream.data.vector.InputVector;
 
 /**
  * This class implements a simple reader to read data in the SVM light data
@@ -115,7 +115,7 @@ public class SvmLightDataStream
 		log.debug( "line[{}]: {}", lineNumber, line );
 		lineNumber++;
 		
-		SparseVector sp = readSparseVector( line );
+		InputVector sp = readSparseVector( line );
 		item.put( sparseKey, sp );
 		return item;
 	}
@@ -164,7 +164,7 @@ public class SvmLightDataStream
 				}
 			}
 
-			item.put( DataUtils.hide( sparseKey ), new SparseVector( pairs, Double.parseDouble( token[0] ), false ) );			
+			item.put( DataUtils.hide( sparseKey ), new InputVector( pairs, false, Double.parseDouble( token[0] ) ) );			
 			/*
 			int[] indexes = new int[ token.length - 1 ];
 			double[] vals = new double[ token.length - 1 ];
@@ -194,7 +194,7 @@ public class SvmLightDataStream
 	}
 	
 	
-	public static SparseVector readSparseVector( String line ) throws Exception {
+	public static InputVector readSparseVector( String line ) throws Exception {
 		int info = line.indexOf( "#" );
 		if( info > 0 )
 			line = line.substring( 0, info );
@@ -214,7 +214,7 @@ public class SvmLightDataStream
 			}
 		}
 
-		return new SparseVector( pairs, Double.parseDouble( token[0] ), false );
+		return new InputVector( pairs, false, Double.parseDouble( token[0] ) );
 		/*
 		int[] indexes = new int[ token.length - 1 ];
 		double[] vals = new double[ token.length - 1 ];

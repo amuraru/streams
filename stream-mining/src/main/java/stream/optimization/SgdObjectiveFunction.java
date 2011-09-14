@@ -1,6 +1,6 @@
 package stream.optimization;
 
-import stream.data.vector.SparseVector;
+import stream.data.vector.InputVector;
 
 public interface SgdObjectiveFunction extends ObjectiveFunction {
 	
@@ -18,6 +18,6 @@ public interface SgdObjectiveFunction extends ObjectiveFunction {
 	
 	public double getGradientNormVariance ();
 	
-	public double estimateGradientVariance (SparseVector x_i);
-	
+	public double estimateGradientVariance (InputVector x_i);
+		
 }

@@ -1,6 +1,7 @@
 package stream.optimization;
 
-import stream.data.vector.SparseVector;
+import stream.data.vector.Vector;
+import stream.data.vector.InputVector;
 
 public class SvmHingeLoss implements SgdObjectiveFunction {
 
@@ -10,7 +11,7 @@ public class SvmHingeLoss implements SgdObjectiveFunction {
 	int	samples = 0;
 	boolean use_b = true;
 	double radius_b = 1000;					// some large value
-	SparseVector w_t;
+	Vector w_t;
 	
 	public SvmHingeLoss(){
 	}
@@ -58,7 +59,7 @@ public class SvmHingeLoss implements SgdObjectiveFunction {
 	 * Estimate G using training examples, using the zero vector as the iterate.
 	 * 
 	 */
-	public double estimateGradientVariance (SparseVector x_i) {
+	public double estimateGradientVariance (InputVector x_i) {
 		if (use_b)
 			grad_variance = (samples*grad_variance + x_i.snorm() + 1.) / (samples + 1.); 	// TODO use this if b is present
 		else
@@ -69,12 +70,12 @@ public class SvmHingeLoss implements SgdObjectiveFunction {
 	
 	
 	@Override
-	public Double apply( SparseVector item ) {
+	public double apply( Vector item ) {
 		return 0.0d;
 	}
 
 	@Override
-	public SparseVector subgradient( SparseVector w, SparseVector x_i, Double label ) {
+	public Vector subgradient( Vector w, InputVector x_i, double label ) {
 		
 		w_t = w;
 		double d = label * w_t.innerProduct( x_i );
@@ -85,6 +86,4 @@ public class SvmHingeLoss implements SgdObjectiveFunction {
 		}
 		return w_t;
 	}
-
-
 }

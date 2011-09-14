@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
-import stream.data.vector.SparseVector;
+import stream.data.vector.InputVector;
 import stream.model.PredictionModel;
 
 /**
@@ -67,16 +67,16 @@ public abstract class AbstractClassifier<D,C>
 	
 	
 
-	public SparseVector createSparseVector( Data datum ){
+	public InputVector createSparseVector( Data datum ){
 		if( datum.containsKey( ".sparse-vector" ) ){
 			log.trace( "Found existing sparse-vector object!" );
-			return (SparseVector) datum.get( ".sparse-vector" );
+			return (InputVector) datum.get( ".sparse-vector" );
 		}
 		
 		for( Serializable val : datum.values() ){
-			if( val instanceof SparseVector ){
+			if( val instanceof InputVector ){
 				log.trace( "Found existing sparse-vector object!" );
-				return (SparseVector) val;
+				return (InputVector) val;
 			}
 		}
 		
@@ -113,7 +113,7 @@ public abstract class AbstractClassifier<D,C>
 		}
 		
 		//SparseVector vec = new SparseVector( idx, vals, y, false );
-		SparseVector vec = new SparseVector( pairs, y, false );
+		InputVector vec = new InputVector( pairs, false, y );
 		log.trace( "SparseVector: {}", vec );
 		return vec;
 	}

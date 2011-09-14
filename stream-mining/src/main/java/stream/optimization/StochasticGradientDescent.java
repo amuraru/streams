@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.Measurable;
-import stream.data.vector.SparseVector;
+import stream.data.vector.Vector;
+import stream.data.vector.InputVector;
 import stream.learner.AbstractClassifier;
 
 public class StochasticGradientDescent 
@@ -21,13 +22,14 @@ public class StochasticGradientDescent
 	double t = 0.0;
 	double b;
 	boolean useb = true;
-	SparseVector gt;
-	SparseVector w;
-	SparseVector avg_w;
+	Vector gt;
+	Vector w;
+	Vector avg_w;
 	double sum_etha;
 	
 	GaussianFeatureMapping gaussianKernel;
 	boolean useKernel = false;
+	int dimension = -1;
 	
 	int gradVarMaxSamples = 100;				// Number of samples to be used for estimating gradient norm variance
 	int gradVarSamples = 1;
@@ -47,6 +49,7 @@ public class StochasticGradientDescent
 	}
 	
 	public void useGaussianKernel( double gamma, int dimension ) {
+		this.dimension = dimension;
 		gaussianKernel = new GaussianFeatureMapping( gamma, dimension );
 		useKernel = true;
 	}
@@ -79,15 +82,18 @@ public class StochasticGradientDescent
 	
 	@Override
 	public void init() {
-		gt = new SparseVector();
 		t = 0.0d;
 		b = 0.0d;
 		sum_etha = 0.0d;
-		w = new SparseVector();
-		avg_w = new SparseVector();
-		
-//		System.out.println("SGD Init: w.snorm() = " + w.snorm());
-//		System.out.println("SGD Init: obj.D = " + obj.getRadius());
+		if(!this.useKernel) { // use sparse representation
+			gt = new Vector();
+			w = new Vector();
+			avg_w = new Vector();
+		} else {				// use dense representation
+			gt = new Vector(dimension);
+			w = new Vector(dimension);
+			avg_w = new Vector(dimension);
+		}
 	}
 	
 	
@@ -96,12 +102,12 @@ public class StochasticGradientDescent
 	 */
 	@Override
 	public void learn( Data example ) {
-		SparseVector x_i;
+		InputVector x_i;
 		
 		if( w == null )
 			init();
 		
-		SparseVector input_i = this.createSparseVector( example );
+		InputVector input_i = this.createSparseVector( example );
 		if( input_i == null ){
 			log.error( "Cannot create sparse-vector from example: {}", example );
 			log.error( "Will not use this data point for training!" );
@@ -165,8 +171,8 @@ public class StochasticGradientDescent
 	 */
 	@Override
 	public Double predict(Data example) {
-		SparseVector x_i;
-		SparseVector item = this.createSparseVector( example );
+		InputVector x_i;
+		InputVector item = this.createSparseVector( example );
 		if(useKernel) 
 			x_i = gaussianKernel.transform(item);
 		else
@@ -180,7 +186,7 @@ public class StochasticGradientDescent
 	
 	public void printModel(){
 		log.info( "snorm = {}", avg_w.snorm() );
-		log.info( "  avg_w.size() is {}", avg_w.size() );
+		log.info( "  avg_w.size() is {}", avg_w.length() );
 		log.info( "  b = {}", b );
 		//log.info( "w_t = {}", w );
 	}

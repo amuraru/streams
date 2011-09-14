@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.Measurable;
-import stream.data.vector.SparseVector;
+import stream.data.vector.Vector;
+import stream.data.vector.InputVector;
 import edu.udo.cs.pg542.util.Kernel;
 
 /**
@@ -34,7 +35,7 @@ public class Perceptron
 	LinkedHashSet<Double> labels = new LinkedHashSet<Double>();
 
 	double beta0 = 0.0d;
-	SparseVector beta = new SparseVector();
+	Vector beta = new Vector();
 
 	
 	public Perceptron() {
@@ -118,7 +119,7 @@ public class Perceptron
 		else
 		    label = 1.0d;
 
-		SparseVector example = this.createSparseVector( item );
+		InputVector example = this.createSparseVector( item );
 
 		//---reading label
 		// ---start computation
@@ -137,7 +138,7 @@ public class Perceptron
 
 	
 	
-	public Double predict( SparseVector example ){
+	public Double predict( InputVector example ){
 		double pred = beta0 + example.innerProduct( beta );
 		return pred;
 	}
@@ -148,7 +149,7 @@ public class Perceptron
 	 */
 	@Override
 	public Double predict(Data item) {
-		SparseVector example = createSparseVector( item );
+		InputVector example = createSparseVector( item );
 		if( predict( example ) < 0.0d )
 			return -1.0d;
 		else

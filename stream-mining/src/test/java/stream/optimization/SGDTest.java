@@ -80,8 +80,8 @@ public class SGDTest {
 		//lambda = 1.0e-8;  // mnist-1m 
 		loss.setLambda( lambda );
 		StochasticGradientDescent sgd = new StochasticGradientDescent( loss );
+		sgd.useGaussianKernel(0.001, 10);
 		sgd.init( );
-		sgd.useGaussianKernel(0.001, 1024);
 		// gamma values
 		// 0.001 adult
 		// 0.01 mnist
@@ -103,7 +103,7 @@ public class SGDTest {
 		StatisticsStreamWriter normPlot = new StatisticsStreamWriter( new File( "/tmp/squared-norm.stats" ) );
 		int limit = Integer.MAX_VALUE;
 		int i = 0;
-		int passes = 10;
+		int passes = 2;
 
 		
 		// multi-pass loop for iterating over the stream multiple times

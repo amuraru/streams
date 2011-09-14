@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
-import stream.data.vector.SparseVector;
+import stream.data.vector.InputVector;
 
 public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 
@@ -58,10 +58,17 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 //		return v;
 //	}
 
+	/**
+	 * Trasforms a sparse input vector to a dense vector
+	 */
 	@Override
-	public SparseVector transform(SparseVector x) {
-		//double[] v = new double[dimension];
-		HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
+	public InputVector transform(InputVector x) {
+		
+		if(!x.isSparse())
+			return null;
+		
+		double[] v = new double[dimension];
+		//HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
 		//int xsize = x.size();
 		//int[] xindex = x.getIndexes();
 		//double[] xvalues = x.getValues();
@@ -89,8 +96,8 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 				innerprod += bi.doubleValue() * xvalues[j];
 				*/ 
 			}
-			//v[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]);
-			pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
+			v[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]);
+			//pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
 			/*
 			if(i<dimension/2.)
 				pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod));
@@ -100,7 +107,8 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 		}
 		
 		//return new SparseVector(this.index, v, x.getLabel());
-		return new SparseVector(pairs, x.getLabel());
+		//return new InputVector(pairs, x.getLabel());
+		return new InputVector(v, false, x.getLabel());
 	}
 
 }

@@ -28,7 +28,7 @@ public class SparseVectorTest {
 	@Test
 	public void testGaussian() {
 		int nExample = 10;
-		int dim = 1000;
+		int dim = 100;
 		double gamma = 0.001;
 		Random rand = new Random();
 		ArrayList<SparseVector> dataset = new ArrayList<SparseVector>();

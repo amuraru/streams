@@ -1,6 +1,7 @@
 package stream.optimization;
 
-import stream.data.vector.SparseVector;
+import stream.data.vector.Vector;
+import stream.data.vector.InputVector;
 
 
 public interface ObjectiveFunction {
@@ -11,7 +12,7 @@ public interface ObjectiveFunction {
 	 * @param item
 	 * @return
 	 */
-	public Double apply( SparseVector item );
+	public double apply( Vector w );
 	
 	
 	/**
@@ -21,5 +22,5 @@ public interface ObjectiveFunction {
 	 * @param item
 	 * @return
 	 */
-	public SparseVector subgradient( SparseVector w_t, SparseVector x_i, Double y_i );
+	public Vector subgradient( Vector w, InputVector x_i, double y_i );
 }

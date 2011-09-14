@@ -1,6 +1,6 @@
 package stream.optimization;
 
-import stream.data.vector.SparseVector;
+import stream.data.vector.InputVector;
 
 public interface ApproximateFeatureMapping {
 
@@ -21,7 +21,8 @@ public interface ApproximateFeatureMapping {
 	 * 
 	 * @param input
 	 * @return
+	 * @throws Exception 
 	 */
-	public SparseVector transform( SparseVector input );
+	public InputVector transform( InputVector input );
 	
 }
