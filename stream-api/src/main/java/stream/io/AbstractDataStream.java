@@ -9,12 +9,15 @@ import java.io.InputStreamReader;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 import stream.data.Data;
 import stream.data.DataImpl;
+import stream.data.DataProcessor;
 
 /**
  * @author chris
@@ -30,6 +33,8 @@ public abstract class AbstractDataStream implements DataStream {
 	BufferedReader reader;
 	Long limit = -1L;
 
+	ArrayList<DataProcessor> preprocessors = new ArrayList<DataProcessor>();
+	
 
 	public AbstractDataStream( URL url ) throws Exception {
 		this.url = url;
@@ -113,17 +118,54 @@ public abstract class AbstractDataStream implements DataStream {
 		this.password = password;
 	}
 
+	
+	public List<DataProcessor> getPreprocessors(){
+	    return this.preprocessors;
+	}
+	
+	public void addPreprocessor( DataProcessor proc ){
+	    preprocessors.add( proc );
+	}
+	
+	public void addPreprocessor( int idx, DataProcessor proc ){
+	    preprocessors.add( idx, proc );
+	}
+	
+	public boolean removePreprocessor( DataProcessor proc ){
+	    return preprocessors.remove( proc );
+	}
+	
+	public DataProcessor removePreprocessor( int idx ){
+	    return preprocessors.remove( idx );
+	}
 
+	
+	
+	
 	/**
 	 * 
 	 */
 	public abstract void readHeader() throws Exception;
 
 	
+	public abstract Data readItem( Data instance ) throws Exception;
+	
+	
 	/**
 	 * @see stream.io.DataStream#readNext()
 	 */
-	public abstract Data readNext( Data item ) throws Exception;
+	public final Data readNext( Data item ) throws Exception {
+	    Data datum = readItem( item );
+	    if( datum == null )
+	        return null;
+	    
+	    for( DataProcessor proc : preprocessors ){
+	        datum = proc.process( datum );
+	        if( datum == null )
+	            return null;
+	    }
+	    return datum;
+	}
 	
 	
 	public Data readNext() throws Exception {

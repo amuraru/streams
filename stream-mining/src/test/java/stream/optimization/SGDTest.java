@@ -20,6 +20,7 @@ import stream.learner.Perceptron;
 
 public class SGDTest {
 
+
 	static Logger log = LoggerFactory.getLogger( SGDTest_copy.class );
 
 

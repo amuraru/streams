@@ -1,12 +1,14 @@
 package org.jwall.sql.audit;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.statement.Statement;
 
-import org.jwall.log.JSqlASTWalker;
-import org.jwall.sql.parser.TreePrinter;
 import org.jwall.web.audit.io.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,10 +34,15 @@ public class SQLStreamParser
     
     final CCJSqlParserManager pm = new CCJSqlParserManager();
     
+    Map<String,String> fixes = new HashMap<String,String>();
+    
     /* The name of the feature containing the SQL query */
     String key = "sql";
 
-
+    Long success = 0L;
+    Long error = 0L;
+    
+    PrintStream errorStream;
     
     
     public SQLStreamParser(){
@@ -47,7 +54,17 @@ public class SQLStreamParser
         setKey( key );
     }
     
+    public Long getErrorCount(){
+        return error;
+    }
     
+    public Long getSuccessCount(){
+        return success;
+    }
+    
+    public Long getTotalCount(){
+        return error + success;
+    }
     
     /**
      * @return the key
@@ -79,7 +96,7 @@ public class SQLStreamParser
         }
         
         if( !data.containsKey( key ) ){
-            log.error( "Input does not contain data for key '{}'", key );
+            //log.error( "Input does not contain data for key '{}'", key );
             return data;
         }
         
@@ -90,37 +107,70 @@ public class SQLStreamParser
             TreeNode tree = parse( query );
             if( tree != null ){
                 String outkey = "@tree:" + key;
-                log.info( "Storing tree as feature '{}': {}", outkey, TreePrinter.toString( tree ) );
+                log.debug( "Storing tree as feature '{}': {}", outkey, tree );
                 data.put( outkey, tree );
             }
-            
+            success++;
         } catch (Exception e) {
+            
+            if( errorStream != null )
+                errorStream.println( query );
+            
             log.error( "Failed to parse SQL: '{}'", query );
             log.error( "  Error was: {}", e.getMessage() );
             if( log.isDebugEnabled() )
                 e.printStackTrace();
+            error++;
         }
         
         return data;
     }
     
     
-    public TreeNode parse( String sql ) throws ParseException {
-        log.info( "Need to parse SQL query: '{}'", sql );
+    
+    
+    /**
+     * @return the errorStream
+     */
+    public PrintStream getErrorStream()
+    {
+        return errorStream;
+    }
+
+
+    /**
+     * @param errorStream the errorStream to set
+     */
+    public void setErrorStream(OutputStream errorStream)
+    {
+        this.errorStream = new PrintStream( errorStream );
+    }
+
+
+    public TreeNode parse( String statement ) throws ParseException {
+        log.trace( "Need to parse SQL query: '{}'", statement );
+        
+        String sql = statement;
+        for( String fix : fixes.keySet() ){
+            if( sql.indexOf( fix ) > 0 )
+                sql = sql.replace( fix, fixes.get( fix ) );
+        }
         
         try {
             
             Statement stmt = pm.parse( new StringReader( sql ) );
-            log.info( "Statement is: {}", stmt );
+            log.trace( "Statement is: {}", stmt );
             
             JSqlASTWalker astWalker = new JSqlASTWalker();
             stmt.accept( astWalker );
             return astWalker.getAST();
             
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ParseException( "Failed to parse sql: '" + sql + "'" );
         }
-        
-        return null;
+    }
+    
+    public Map<String,String> getFixes(){
+        return fixes;
     }
 }

@@ -58,6 +58,11 @@ implements DataStreamListener
 	AbstractTest<D,Learner<D,?>> test;
 	Mapper<Data,D> dataMapper;
 
+	
+	public TestAndTrain( AbstractTest<D,Learner<D,?>> test ){
+		this( null, test );
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	public TestAndTrain( Mapper<Data,D> dataMapper, AbstractTest<D,Learner<D,?>> test ){

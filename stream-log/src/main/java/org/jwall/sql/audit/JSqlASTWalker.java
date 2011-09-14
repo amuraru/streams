@@ -8,6 +8,7 @@ import net.sf.jsqlparser.expression.AllComparisonExpression;
 import net.sf.jsqlparser.expression.AnyComparisonExpression;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
+import net.sf.jsqlparser.expression.operators.relational.ItemsList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.schema.Column;
@@ -37,10 +38,6 @@ import net.sf.jsqlparser.statement.select.SubSelect;
 import net.sf.jsqlparser.statement.select.Union;
 import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
-
-import org.jwall.sql.parser.SQLTreeNode;
-import org.jwall.sql.parser.TreePrinter;
-
 import stream.data.TreeNode;
 
 
@@ -72,13 +69,13 @@ public class JSqlASTWalker
      * @see org.jwall.sql.audit.TreeWalker#leaf(java.lang.Object)
      */
     public TreeNode leaf( Object o ){
-        TreeNode node = new SQLTreeNode( o.toString() );
+        TreeNode node = new ASTNode( o.toString() );
         stack.peek().addChild( node );
         return node;
     }
 
     public TreeNode dive( String str ){
-        TreeNode node = new SQLTreeNode( str );
+        TreeNode node = new ASTNode( str );
         if( ! stack.isEmpty() )
             stack.peek().addChild( node );
         stack.push( node );
@@ -232,7 +229,10 @@ public class JSqlASTWalker
     public void visit(Delete arg0)
     {
         dive( "DELETE" );
-        arg0.accept( this );
+        arg0.getTable().accept( this );
+        dive( "WhereClause" );
+        arg0.getWhere().accept( this );
+        up();
         up();
     }
 
@@ -240,7 +240,24 @@ public class JSqlASTWalker
     public void visit(Update arg0)
     {
         dive( "UPDATE" );
-        arg0.accept( this );
+        arg0.getTable().accept( this );
+        List<?> cols = arg0.getColumns();
+        if( cols != null ){
+            for( int i = 0; i < cols.size(); i++ ){
+                Column col = (Column) cols.get(i);
+                col.accept( this );
+            }
+        }
+        
+        List<?>items = arg0.getExpressions();
+        if( items != null ){
+            dive( "Items");
+            for( int i = 0; i < items.size(); i++ ){
+                Expression exp = (Expression) items.get( i );
+                exp.accept( this );
+            }
+            up();
+        }
         up();
     }
 
@@ -248,7 +265,22 @@ public class JSqlASTWalker
     public void visit(Insert arg0)
     {
         dive( "INSERT" );
-        arg0.accept( this );
+        arg0.getTable().accept( this );
+        List<?> cols = arg0.getColumns();
+        if( cols != null ){
+            for( int i = 0; i < cols.size(); i++ ){
+                Column col = (Column) cols.get(i);
+                col.accept( this );
+            }
+        }
+        
+        ItemsList list = arg0.getItemsList();
+        if( list != null ){
+            dive( "Values" );
+            list.accept( this );
+            up();
+        }
+        
         up();
     }
 
@@ -256,7 +288,23 @@ public class JSqlASTWalker
     public void visit(Replace arg0)
     {
         dive( "REPLACE" );
-        arg0.accept( this );
+        
+        arg0.getTable().accept( this );
+        List<?> cols = arg0.getColumns();
+        if( cols != null ){
+            for( int i = 0; i < cols.size(); i++ ){
+                Column col = (Column) cols.get(i);
+                col.accept( this );
+            }
+        }
+        
+        ItemsList list = arg0.getItemsList();
+        if( list != null ){
+            dive( "Values" );
+            list.accept( this );
+            up();
+        }
+        
         up();
     }
 
@@ -264,7 +312,12 @@ public class JSqlASTWalker
     public void visit(Drop arg0)
     {
         dive( "DROP" );
-        arg0.accept( this );
+        List<?> params = arg0.getParameters();
+        if( params != null ){
+            for( int i = 0; i < params.size(); i++ ){
+                leaf( params.get( i) + "" );
+            }
+        }
         up();
     }
 
@@ -335,7 +388,7 @@ public class JSqlASTWalker
 
     public static void printAST( String sql ) throws Exception {
         System.out.println( "Statement: " + sql );
-        System.out.println( "  => " + TreePrinter.toString( createAST( sql ) ) );
+        System.out.println( "  => " + ( createAST( sql ) ) );
     }
 
 
@@ -344,7 +397,7 @@ public class JSqlASTWalker
             String sql = "SELECT NAME,CREDIT FROM STUDENTS WHERE NAME = 'Robert';";
 
             TreeNode ast = createAST( sql );
-            System.out.println( TreePrinter.toString( ast ) );
+            System.out.println( ast );
 
             printAST( "SELECT * FROM STUDENTS WHERE CREDITS > 10 AND ID = 9423" );
 
@@ -353,6 +406,12 @@ public class JSqlASTWalker
             printAST( "SELECT SUM(CREDITS) FROM STUDENTS GROUP BY NAME, CLASS ORDER BY NAME, EXP(ID), AGE" );
 
             printAST( "CREATE TABLE USERS ( ID INTEGER, NAME VARCHAR(255) )" );
+            
+            printAST( "SELECT * FROM STUDENTS WHERE ID = ( SELECT ID FROM PROD WHERE NAME = 'Karl' )" );
+            
+            printAST( "SELECT profit FROM Sale2010 WHERE month = 8 UNION SELECT profit from Sale2011 WHERE month = 8" );
+            
+            printAST( "SELECT uid,pid,title,description FROM tx_foo_record WHERE deleted = 0 AND tstamp > 3 UNION SELECT uid,pid,username,password FROM admin_users WHERE deleted = 0 AND admin = 1" );
 
         } catch (Exception e) {
             e.printStackTrace();

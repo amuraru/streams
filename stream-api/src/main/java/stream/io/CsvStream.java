@@ -84,7 +84,7 @@ public class CsvStream
 	/**
 	 * @see stream.io.DataStream#readNext()
 	 */
-	public Data readNext( Data datum ) throws Exception {
+	public Data readItem( Data datum ) throws Exception {
 		if( datum == null )
 			datum = new DataImpl();
 		else

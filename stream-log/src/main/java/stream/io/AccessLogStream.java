@@ -75,6 +75,9 @@ public class AccessLogStream
 		}
 
 		AuditEvent evt = reader.readNext();
+		if( evt == null )
+		    return null;
+		
 		return new LogData( evt );
 	}
 	

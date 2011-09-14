@@ -1,0 +1,14 @@
+<experiment source="log">
+
+	<Stream id="log" class="stream.io.CsvStream"
+		url="http://kirmes.cs.uni-dortmund.de/data/random-stream.csv.gz" />
+
+	<Processing source="log">
+	
+	    <Processor id="mysqlTracker" class="org.jwall.sql.audit.MySQLSessionTracker" />
+	
+		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="mysql:sql" />
+	
+	</Processing>		
+
+</experiment>

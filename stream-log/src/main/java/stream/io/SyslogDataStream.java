@@ -58,9 +58,12 @@ public class SyslogDataStream
      * @see stream.io.AbstractDataStream#readNext(stream.data.Data)
      */
     @Override
-    public Data readNext(Data item) throws Exception
+    public Data readItem(Data item) throws Exception
     {
         String line = this.reader.readLine();
+        if( line == null )
+            return null;
+        
         item.put( DATA, line );
         
         Map<String,String> features = parser.parse( line );

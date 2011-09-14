@@ -63,7 +63,7 @@ public class ArffStream
 	 * @see stream.io.AbstractDataStream#readNext(stream.data.Data)
 	 */
 	@Override
-	public Data readNext(Data datum) throws Exception {
+	public Data readItem(Data datum) throws Exception {
 		if( datum == null )
 			datum = new DataImpl();
 		else

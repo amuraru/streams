@@ -46,9 +46,6 @@ import net.sf.jsqlparser.expression.operators.relational.MinorThanEquals;
 import net.sf.jsqlparser.expression.operators.relational.NotEqualsTo;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
-
-import org.jwall.sql.parser.SQLTreeNode;
-
 import stream.data.TreeNode;
 
 public class ExpressionTreeWalker
@@ -62,7 +59,7 @@ public class ExpressionTreeWalker
     @Override
     public TreeNode create(String label)
     {
-        return new SQLTreeNode( label );
+        return new ASTNode( label );
     }
 
 

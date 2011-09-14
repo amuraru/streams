@@ -1,0 +1,84 @@
+110912 10:19:39	  173 Connect	app@localhost on 
+		  173 Init DB	appdb
+		  173 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  173 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  173 Quit	
+110912 10:19:41	  174 Connect	app@localhost on 
+		  174 Init DB	appdb
+		  174 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  174 Query	SELECT id,name,price FROM products
+		  174 Quit	
+110912 10:19:58	  175 Connect	app@localhost on 
+		  175 Init DB	appdb
+		  175 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  175 Query	SELECT id,name,price FROM products
+		  175 Quit	
+110912 10:20:00	  176 Connect	app@localhost on 
+		  176 Init DB	appdb
+		  176 Query	INSERT INTO cart ( session, productId ) VALUES ( 'jfkmk9bfkcs3ii1moqrprscad3', 1)
+		  176 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  176 Query	SELECT id,name,price FROM products
+		  176 Quit	
+110912 10:20:02	  177 Connect	app@localhost on 
+		  177 Init DB	appdb
+		  177 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  177 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  177 Quit	
+110912 10:20:04	  178 Connect	app@localhost on 
+		  178 Init DB	appdb
+		  178 Query	DELETE FROM cart WHERE productId = 1
+		  178 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  178 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  178 Quit	
+110912 10:20:05	  179 Connect	app@localhost on 
+		  179 Init DB	appdb
+		  179 Query	DELETE FROM cart WHERE productId = 2
+		  179 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  179 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  179 Quit	
+110912 10:20:08	  180 Connect	app@localhost on 
+		  180 Init DB	appdb
+		  180 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  180 Query	SELECT id,name,price FROM products
+		  180 Quit	
+110912 10:20:10	  181 Connect	app@localhost on 
+		  181 Init DB	appdb
+		  181 Query	INSERT INTO cart ( session, productId ) VALUES ( 'jfkmk9bfkcs3ii1moqrprscad3', 3)
+		  181 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  181 Query	SELECT id,name,price FROM products
+		  181 Quit	
+110912 10:20:12	  182 Connect	app@localhost on 
+		  182 Init DB	appdb
+		  182 Query	INSERT INTO cart ( session, productId ) VALUES ( 'jfkmk9bfkcs3ii1moqrprscad3', 2)
+		  182 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  182 Query	SELECT id,name,price FROM products
+		  182 Quit	
+110912 10:20:13	  183 Connect	app@localhost on 
+		  183 Init DB	appdb
+		  183 Query	INSERT INTO cart ( session, productId ) VALUES ( 'jfkmk9bfkcs3ii1moqrprscad3', 1)
+		  183 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  183 Query	SELECT id,name,price FROM products
+		  183 Quit	
+110912 10:20:14	  184 Connect	app@localhost on 
+		  184 Init DB	appdb
+		  184 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  184 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  184 Quit	
+110912 10:20:16	  185 Connect	app@localhost on 
+		  185 Init DB	appdb
+		  185 Query	DELETE FROM cart WHERE productId = 3
+		  185 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  185 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  185 Quit	
+110912 10:20:17	  186 Connect	app@localhost on 
+		  186 Init DB	appdb
+		  186 Query	DELETE FROM cart WHERE productId = 2
+		  186 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  186 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  186 Quit	
+110912 10:20:18	  187 Connect	app@localhost on 
+		  187 Init DB	appdb
+		  187 Query	DELETE FROM cart WHERE productId = 1
+		  187 Query	SELECT COUNT(*) FROM cart WHERE session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  187 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = 'jfkmk9bfkcs3ii1moqrprscad3'
+		  187 Quit

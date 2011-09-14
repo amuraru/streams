@@ -25,7 +25,11 @@ public class LogData extends DataImpl {
 	}
 	
 	public LogData( AuditEvent evt ){
-		for( String var : evt.getVariables() )
+		for( String var : evt.getVariables() ){
 			put( var.toUpperCase(), evt.get( var ) );
+		}
+		 
+		Long ts = evt.getDate().getTime();
+		put( "TIMESTAMP", ts.toString() );
 	}
 }
