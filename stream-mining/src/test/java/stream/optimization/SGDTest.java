@@ -80,7 +80,7 @@ public class SGDTest {
 		//lambda = 1.0e-8;  // mnist-1m 
 		loss.setLambda( lambda );
 		StochasticGradientDescent sgd = new StochasticGradientDescent( loss );
-		sgd.useGaussianKernel(0.001, 10);
+		//sgd.useGaussianKernel(0.001, 1024);
 		sgd.init( );
 		// gamma values
 		// 0.001 adult
