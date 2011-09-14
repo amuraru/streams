@@ -4,43 +4,55 @@
 package stream.data.vector;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 /**
- * @author chris
+ * @author chris / Modified by Sangkyun
  *
  */
-public class SparseVector
-	implements Serializable, Vector
+public class SparseVector implements Serializable, Vector
 {
 	/** The unique class ID */
 	private static final long serialVersionUID = 8773169606200673610L;
 
-	int size = 0;
-	int[] indexes = new int[0];
-	double[] values = new double[0];
+	HashMap<Integer,Double> pairs;
+	//int size = 0;
+	//int[] indexes = new int[0];
+	//double[] values = new double[0];
 	double y;
 
 	
 	public SparseVector(){
-		indexes = new int[0];
-		values = new double[0];
+		//indexes = new int[0];
+		//values = new double[0];
+		pairs = new HashMap<Integer,Double>();
 		y = 0.0d;
 	}
 
 	public SparseVector( SparseVector vec ){
-		this( vec.indexes, vec.values, vec.y, true );
+		this.pairs = new HashMap<Integer,Double>(vec.pairs);
+		y = vec.y; 
+		//this( vec.indexes, vec.values, vec.y, true );
 	}
 
-
-	public SparseVector( int[] indexes, double[] values, double y) {
-		this( indexes, values, y, true );
+	//public SparseVector( int[] indexes, double[] values, double y) {
+	public SparseVector( HashMap<Integer,Double> pairs, double y) {
+		//this( indexes, values, y, true );
+		this( pairs, y, true );
 	}
 
-	public SparseVector( int[] indexes, double[] values, double y, boolean copy ){
+	//public SparseVector( int[] indexes, double[] values, double y, boolean copy ){
+	public SparseVector( HashMap<Integer,Double> pairs, double y, boolean copy ){
 		if( !copy ){
-			this.indexes = indexes;
-			this.values = values;
+			//this.indexes = indexes;
+			//this.values = values;
+			this.pairs = pairs;
 		} else {
+			this.pairs = new HashMap<Integer,Double>(pairs);
+			/*
 			this.indexes = new int[ indexes.length ];
 			this.values = new double[ indexes.length ];
 
@@ -48,41 +60,72 @@ public class SparseVector
 				this.indexes[i] = indexes[i];
 				this.values[i] = values[i];
 			}
+			*/
 		}
 
 		this.y = y;
-		
+
+		/*
 		int j = 0;
+
 		while( j < indexes.length && indexes[j] >= 0 && !Double.isNaN( values[j]) )
 			j++;
 		
 		size = j;
+		*/
 	}
 	
 	public double getLabel(){
 		return y;
 	}
 	
+	/*
+	public int[] getIndexes() {
+		return indexes;
+	}
+	
+	public double[] getValues() {
+		return values;
+	}
+	*/
+	public HashMap<Integer,Double> getPairs() {
+		return pairs;
+	}
 
 	public Vector scale( double d ){
+		
+		for( Map.Entry<Integer, Double> entry : pairs.entrySet() ) {
+			entry.setValue( d * entry.getValue() );
+		}
+		/*
 		for( int i = 0; i < size; i++ )
 			values[i] = d * values[i];
-		
+		*/
 		return this;
 	}
 
 	public SparseVector add( double factor, SparseVector x ){
 
+		for(Map.Entry<Integer, Double> entry : x.pairs.entrySet()) {
+			Integer key = entry.getKey();
+			Double val = this.pairs.get(key);
+			if(val==null)
+				this.pairs.put(key, factor * entry.getValue() );
+			else {
+				//val += factor * entry.getValue();
+				this.pairs.put(key, val + factor * entry.getValue());
+			}
+		}
+		/*
 		int[] rind = new int[ size + x.size ];
 		double[] rval = new double[ size + x.size ];
-
 
 		int i = 0;
 		int j = 0;
 		int k = 0;
 		//int eq = 0;
-		
-		while( i < size && j < x.size ){
+
+		while( i < size || j < x.size ){
 
 			if( indexes[i] == x.indexes[j] ) {
 				rind[k] = indexes[i];
@@ -111,19 +154,29 @@ public class SparseVector
 			rval[k++] = x.values[j++];
 		}
 
-		/*
-		System.out.println( "Adding vectors of sizes " + size + " and " + x.size );
-		System.out.println( "Memory size of new Vector is: " + rind.length );
-		System.out.println( "Adding two vectors with " + eq + " overlapping indexes returned sum of size " + k );
-		 */
+		
+		//System.out.println( "Adding vectors of sizes " + size + " and " + x.size );
+		//System.out.println( "Memory size of new Vector is: " + rind.length );
+		//System.out.println( "Adding two vectors with " + eq + " overlapping indexes returned sum of size " + k );
 		
 		SparseVector vec = new SparseVector( rind, rval, y, false );
 		vec.size = k;
 		return vec;
+		*/
+		return this;
 	}
 	
 	
 	public double innerProduct( SparseVector x ){
+		double sum = 0.0d;
+		
+		for(Map.Entry<Integer, Double> entry : x.pairs.entrySet()) {
+			Integer key = entry.getKey();
+			Double val = this.pairs.get(key);
+			if(val!=null)
+				sum += val * entry.getValue();
+		}		
+		/*
 		int i = 0;
 		int j = 0;
 		double sum = 0.0d;
@@ -141,12 +194,37 @@ public class SparseVector
 				}
 			}
 		}
+		*/
 		
 		return sum;
 	}
+	
+	/*
+	public double innerProduct( double[] x ){
+		int i = 0;
+		int j = 0;
+		double sum = 0.0d;
 
+		while( i < size ){
+
+			if( indexes[i] == j ) {
+				sum += values[i++] * x[j++];
+			} else {
+				
+				if( indexes[i] < j ){
+					i++;
+				} else {
+					j++;
+				}
+			}
+		}
+		
+		return sum;
+	}
+	*/
 
 	public double get( int i ){
+		/*
 		for( int k = 0; k < size; k++ ){
 			if( indexes[k] >= 0 && indexes[k] == i )
 				return values[k];
@@ -156,6 +234,8 @@ public class SparseVector
 		}
 
 		return 0.0d;
+		*/
+		return pairs.get(i);
 	}
 
 	
@@ -165,24 +245,44 @@ public class SparseVector
 	
 
 	public double snorm(){
+		/*
 		double sum = 0.0d;
 
 		for( int i = 0; i < size; i++ )
 			sum += values[i] * values[i];
 
 		return sum;
+		*/
+		return innerProduct(this);
 	}
 
 
 	public int size(){
-		return size;
+		//return size;
+		return pairs.size();
 	}
 	
 	public int memSize(){
-		return indexes.length;
+		//return indexes.length;
+		return pairs.size();
 	}
 
 	public String toString(){
+		StringBuffer s = new StringBuffer();
+		s.append( y );
+		s.append( " | " );
+		for( Map.Entry<Integer, Double> entry : pairs.entrySet()){
+			if(entry.getValue() > 0.0d) {
+				s.append( " " );
+				s.append( entry.getKey() );
+				s.append( ":" );
+				s.append( entry.getValue() );
+			}
+		}
+
+		return s.toString();
+
+		/*
 		StringBuffer s = new StringBuffer();
 		s.append( y );
 		s.append( " | " );
@@ -194,6 +294,7 @@ public class SparseVector
 		}
 
 		return s.toString();
+		*/
 	}
 
 	/* (non-Javadoc)
@@ -201,7 +302,9 @@ public class SparseVector
 	 */
 	@Override
 	public void set(int j, double d) {
-		
+
+		this.pairs.put(j, d);
+		/*
 		int pos = -1;
 		
 		for( int i = 0; i < indexes.length; i++ ){
@@ -233,6 +336,7 @@ public class SparseVector
 			
 		this.indexes = rind;
 		this.values = rval;
+		*/
 	}
 	
 
@@ -268,7 +372,8 @@ public class SparseVector
 	 */
 	@Override
 	public int getNumberOfNonZeros(){
-		return size;
+		//return size;
+		return size();
 	}
 	
 
@@ -290,14 +395,18 @@ public class SparseVector
 		// indexes are stored as 32bit int, values as 64bit double
 		// the label is stored as 64bit double
 		//
-		return 4.0d * indexes.length + 8.0 * indexes.length + 8.0d;
+		//return 4.0d * indexes.length + 8.0 * indexes.length + 8.0d;
+		return 0.0d;		// TODO
 	}
 
 	@Override
 	public int getMaxIndex() {
+		/*
 		if( size == 0 )
 			return -1;
 		
 		return indexes[size];
+		*/
+		return -1;	//TODO
 	}
 }

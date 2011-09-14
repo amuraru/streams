@@ -47,7 +47,7 @@ public class WindowedSGD extends StochasticGradientDescent {
 	 * Creates a new instance of this algorithm with a default windowSize
 	 * of 1000 examples.
 	 */
-	public WindowedSGD( ObjectiveFunction objFunction ){
+	public WindowedSGD( SgdObjectiveFunction objFunction ){
 		super( objFunction );
 		setWindowSize( 1000 );
 	}

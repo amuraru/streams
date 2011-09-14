@@ -1,0 +1,125 @@
+Sep 11 15:48:43 modsecurity 110911 15:48:43	   59 Connect	app@localhost on 
+Sep 11 15:48:43 modsecurity 		   59 Init DB	appdb
+Sep 11 15:48:43 modsecurity 		   59 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 4)
+Sep 11 15:48:43 modsecurity 		   59 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:48:43 modsecurity 		   59 Query	SELECT id,name,price FROM products
+Sep 11 15:48:43 modsecurity 		   59 Quit	
+Sep 11 15:48:45 modsecurity 110911 15:48:45	   60 Connect	app@localhost on 
+Sep 11 15:48:45 modsecurity 		   60 Init DB	appdb
+Sep 11 15:48:45 modsecurity 		   60 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 4)
+Sep 11 15:48:45 modsecurity 		   60 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:48:45 modsecurity 		   60 Query	SELECT id,name,price FROM products
+Sep 11 15:48:45 modsecurity 		   60 Quit	
+Sep 11 15:48:52 modsecurity 110911 15:48:52	   61 Connect	app@localhost on 
+Sep 11 15:48:52 modsecurity 		   61 Init DB	appdb
+Sep 11 15:48:52 modsecurity 		   61 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 4)
+Sep 11 15:48:52 modsecurity 		   61 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:48:52 modsecurity 		   61 Query	SELECT id,name,price FROM products
+Sep 11 15:48:52 modsecurity 		   61 Quit	
+Sep 11 15:49:00 modsecurity 110911 15:49:00	   62 Connect	app@localhost on 
+Sep 11 15:49:00 modsecurity 		   62 Init DB	appdb
+Sep 11 15:49:00 modsecurity 		   62 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 4)
+Sep 11 15:49:00 modsecurity 		   62 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:00 modsecurity 		   62 Query	SELECT id,name,price FROM products
+Sep 11 15:49:00 modsecurity 		   62 Quit	
+Sep 11 15:49:21 modsecurity 110911 15:49:21	   63 Connect	app@localhost on 
+Sep 11 15:49:21 modsecurity 		   63 Init DB	appdb
+Sep 11 15:49:21 modsecurity 		   63 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 2)
+Sep 11 15:49:21 modsecurity 		   63 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:21 modsecurity 		   63 Query	SELECT id,name,price FROM products
+Sep 11 15:49:21 modsecurity 		   63 Quit	
+Sep 11 15:49:23 modsecurity 110911 15:49:23	   64 Connect	app@localhost on 
+Sep 11 15:49:23 modsecurity 		   64 Init DB	appdb
+Sep 11 15:49:23 modsecurity 		   64 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:23 modsecurity 		   64 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:23 modsecurity 		   64 Quit	
+Sep 11 15:49:25 modsecurity 110911 15:49:25	   65 Connect	app@localhost on 
+Sep 11 15:49:25 modsecurity 		   65 Init DB	appdb
+Sep 11 15:49:25 modsecurity 		   65 Query	DELETE FROM cart WHERE productId = 2
+Sep 11 15:49:25 modsecurity 		   65 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:25 modsecurity 		   65 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:25 modsecurity 		   65 Quit	
+Sep 11 15:49:25 modsecurity 		   66 Connect	app@localhost on 
+Sep 11 15:49:25 modsecurity 		   66 Init DB	appdb
+Sep 11 15:49:25 modsecurity 		   66 Query	DELETE FROM cart WHERE productId = 4
+Sep 11 15:49:25 modsecurity 		   66 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:25 modsecurity 		   66 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:49:25 modsecurity 		   66 Quit	
+Sep 11 15:49:26 modsecurity 110911 15:49:26	   67 Connect	app@localhost on 
+Sep 11 15:49:26 modsecurity 		   67 Init DB	appdb
+Sep 11 15:49:26 modsecurity 		   67 Query	SELECT id,name,price FROM products
+Sep 11 15:49:26 modsecurity 		   67 Quit	
+Sep 11 15:49:46 modsecurity 110911 15:49:46	   68 Connect	app@localhost on 
+Sep 11 15:49:46 modsecurity 		   68 Init DB	appdb
+Sep 11 15:49:46 modsecurity 		   68 Query	INSERT INTO products ( name, price ) VALUES ( 'Lenovo Netbook', 229)
+Sep 11 15:49:46 modsecurity 		   68 Query	SELECT id,name,price FROM products
+Sep 11 15:49:46 modsecurity 		   68 Quit	
+Sep 11 15:52:36 modsecurity 110911 15:52:36	   69 Connect	app@localhost on 
+Sep 11 15:52:36 modsecurity 		   69 Init DB	appdb
+Sep 11 15:52:36 modsecurity 		   69 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:36 modsecurity 		   69 Query	SELECT id,name,price FROM products
+Sep 11 15:52:36 modsecurity 		   69 Quit	
+Sep 11 15:52:38 modsecurity 110911 15:52:38	   70 Connect	app@localhost on 
+Sep 11 15:52:38 modsecurity 		   70 Init DB	appdb
+Sep 11 15:52:38 modsecurity 		   70 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 1)
+Sep 11 15:52:38 modsecurity 		   70 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:38 modsecurity 		   70 Query	SELECT id,name,price FROM products
+Sep 11 15:52:38 modsecurity 		   70 Quit	
+Sep 11 15:52:39 modsecurity 110911 15:52:39	   71 Connect	app@localhost on 
+Sep 11 15:52:39 modsecurity 		   71 Init DB	appdb
+Sep 11 15:52:39 modsecurity 		   71 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 6)
+Sep 11 15:52:39 modsecurity 		   71 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:39 modsecurity 		   71 Query	SELECT id,name,price FROM products
+Sep 11 15:52:39 modsecurity 		   71 Quit	
+Sep 11 15:52:40 modsecurity 110911 15:52:40	   72 Connect	app@localhost on 
+Sep 11 15:52:40 modsecurity 		   72 Init DB	appdb
+Sep 11 15:52:40 modsecurity 		   72 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 5)
+Sep 11 15:52:40 modsecurity 		   72 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:40 modsecurity 		   72 Query	SELECT id,name,price FROM products
+Sep 11 15:52:40 modsecurity 		   72 Quit	
+Sep 11 15:52:41 modsecurity 110911 15:52:41	   73 Connect	app@localhost on 
+Sep 11 15:52:41 modsecurity 		   73 Init DB	appdb
+Sep 11 15:52:41 modsecurity 		   73 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 4)
+Sep 11 15:52:41 modsecurity 		   73 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:41 modsecurity 		   73 Query	SELECT id,name,price FROM products
+Sep 11 15:52:41 modsecurity 		   73 Quit	
+Sep 11 15:52:45 modsecurity 110911 15:52:45	   74 Connect	app@localhost on 
+Sep 11 15:52:45 modsecurity 		   74 Init DB	appdb
+Sep 11 15:52:45 modsecurity 		   74 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:45 modsecurity 		   74 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:45 modsecurity 		   74 Quit	
+Sep 11 15:52:47 modsecurity 110911 15:52:47	   75 Connect	app@localhost on 
+Sep 11 15:52:47 modsecurity 		   75 Init DB	appdb
+Sep 11 15:52:47 modsecurity 		   75 Query	DELETE FROM cart WHERE productId = 5
+Sep 11 15:52:47 modsecurity 		   75 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:47 modsecurity 		   75 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:47 modsecurity 		   75 Quit	
+Sep 11 15:52:49 modsecurity 110911 15:52:49	   76 Connect	app@localhost on 
+Sep 11 15:52:49 modsecurity 		   76 Init DB	appdb
+Sep 11 15:52:49 modsecurity 		   76 Query	DELETE FROM cart WHERE productId = 4
+Sep 11 15:52:49 modsecurity 		   76 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:49 modsecurity 		   76 Query	SELECT id,name,price FROM products LEFT JOIN cart ON products.id = cart.productId WHERE cart.session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:49 modsecurity 		   76 Quit	
+Sep 11 15:52:51 modsecurity 110911 15:52:51	   77 Connect	app@localhost on 
+Sep 11 15:52:51 modsecurity 		   77 Init DB	appdb
+Sep 11 15:52:51 modsecurity 		   77 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:51 modsecurity 		   77 Query	SELECT id,name,price FROM products
+Sep 11 15:52:51 modsecurity 		   77 Quit	
+Sep 11 15:52:52 modsecurity 110911 15:52:52	   78 Connect	app@localhost on 
+Sep 11 15:52:52 modsecurity 		   78 Init DB	appdb
+Sep 11 15:52:52 modsecurity 		   78 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 1)
+Sep 11 15:52:52 modsecurity 		   78 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:52 modsecurity 		   78 Query	SELECT id,name,price FROM products
+Sep 11 15:52:52 modsecurity 		   78 Quit	
+Sep 11 15:52:53 modsecurity 110911 15:52:53	   79 Connect	app@localhost on 
+Sep 11 15:52:53 modsecurity 		   79 Init DB	appdb
+Sep 11 15:52:53 modsecurity 		   79 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 1)
+Sep 11 15:52:53 modsecurity 		   79 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:53 modsecurity 		   79 Query	SELECT id,name,price FROM products
+Sep 11 15:52:53 modsecurity 		   79 Quit	
+Sep 11 15:52:53 modsecurity 		   80 Connect	app@localhost on 
+Sep 11 15:52:53 modsecurity 		   80 Init DB	appdb
+Sep 11 15:52:53 modsecurity 		   80 Query	INSERT INTO cart ( session, productId ) VALUES ( '19e62e2ji8jopsd6f7jc9a9du7', 1)
+Sep 11 15:52:53 modsecurity 		   80 Query	SELECT COUNT(*) FROM cart WHERE session = '19e62e2ji8jopsd6f7jc9a9du7'
+Sep 11 15:52:53 modsecurity 		   80 Query	SELECT id,name,price FROM products
+Sep 11 15:52:53 modsecurity 		   80 Quit	
