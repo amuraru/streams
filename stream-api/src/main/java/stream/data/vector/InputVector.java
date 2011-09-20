@@ -19,6 +19,10 @@ public class InputVector extends Vector {
 		return y;
 	}
 	
+	public InputVector() {
+		super();
+	}
+		
 	/**
 	 * Creates a dense vector from the given values
 	 * 
@@ -33,6 +37,7 @@ public class InputVector extends Vector {
 	
 	/**
 	 * Creates a sparse vector from the given values
+	 * 
 	 * @param pairs
 	 * @param copy
 	 * @param y
@@ -40,5 +45,14 @@ public class InputVector extends Vector {
 	public InputVector(HashMap<Integer,Double> pairs, boolean copy, double y) {
 		super(pairs, copy);
 		this.y = y;
+	}
+	
+	/**
+	 * Copy constructor
+	 * 
+	 * @param x
+	 */
+	public InputVector(InputVector x) {
+		super(x);
 	}
 }

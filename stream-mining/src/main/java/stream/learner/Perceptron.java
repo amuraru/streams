@@ -110,7 +110,7 @@ public class Perceptron
 		if( val instanceof Double ){
 		    label = (Double) val;
 		} else {
-		    log.error( "Only numerical labels {Ê-1.0d, +1.0d } are supported by this learner!" );
+		    log.error( "Only numerical labels {-1.0d, +1.0d } are supported by this learner!" );
 		    return;
 		}
 		

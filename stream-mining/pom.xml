@@ -9,12 +9,12 @@
 		<repository>
 			<id>jwall</id>
 			<name>jwall.org Maven Repository</name>
-			<url>https://secure.jwall.org/maven/repository/jwall</url>
+			<url>http://secure.jwall.org/maven/repository/jwall</url>
 		</repository>
 		<repository>
 			<id>jwall-snapshots</id>
 			<name>jwall.org Snapshot Repository</name>
-			<url>https://secure.jwall.org/maven/repository/snapshots</url>
+			<url>http://secure.jwall.org/maven/repository/snapshots</url>
 		</repository>
 <!--
 		<repository>
@@ -80,6 +80,11 @@
 			<groupId>weka</groupId>
 			<artifactId>weka</artifactId>
 			<version>3.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.tdo.kernel.GpuKernel</groupId>
+			<artifactId>APXGaussianPhi</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<distributionManagement>

@@ -8,6 +8,8 @@ import java.util.Random;
 
 import stream.data.vector.InputVector;
 
+import edu.tdo.kernel.GpuKernel.APXGaussianPhi;
+
 public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 
 	int dimension;				// Approximation dimension
@@ -20,9 +22,16 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 	Random randUnif;
 	int[] index;
 	
-	public GaussianFeatureMapping( double gamma, int dimension) {
+	double[] transformed;		// An output vector, to avoid memory allocations (NOT thread-safe).
+	
+	// for GPU
+	boolean use_gpu;
+	APXGaussianPhi gpu_phi; // = new APXGaussianPhi(gamma, d);
+	
+	public GaussianFeatureMapping( double gamma, int dimension, boolean use_gpu ) {
 		this.gamma = gamma;
 		this.dimension = dimension;
+		this.use_gpu = use_gpu;
 		init();
 	}
 	
@@ -38,15 +47,20 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 
 	@Override
 	public void init() {
-		randGauss = new Random();
-		randUnif = new Random();
-		randomBasis = new ArrayList<HashMap<Integer,Double>>();
-		randomBias = new double[dimension];
-		index = new int[dimension];
-		for(int i=0; i<dimension; ++i) {
-			index[i] = i;
-			randomBasis.add( new HashMap<Integer,Double>() );
-			randomBias[i] = (2.*Math.PI)*randUnif.nextDouble(); 
+		if(!use_gpu) {
+			randGauss = new Random();
+			randUnif = new Random();
+			randomBasis = new ArrayList<HashMap<Integer,Double>>();
+			randomBias = new double[dimension];
+			index = new int[dimension];
+			transformed = new double[dimension];
+			for(int i=0; i<dimension; ++i) {
+				index[i] = i;
+				randomBasis.add( new HashMap<Integer,Double>() );
+				randomBias[i] = (2.*Math.PI)*randUnif.nextDouble(); 
+			}
+		} else { // GPU
+			gpu_phi = new APXGaussianPhi(gamma, dimension);
 		}
 	}
 	
@@ -67,48 +81,66 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 		if(!x.isSparse())
 			return null;
 		
-		double[] v = new double[dimension];
-		//HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
-		//int xsize = x.size();
-		//int[] xindex = x.getIndexes();
-		//double[] xvalues = x.getValues();
-		double innerprod = 0.0d;
+		if(!use_gpu) {
 
-		for(int i=0; i<dimension; ++i) {
-			HashMap<Integer,Double> basis = randomBasis.get(i);
-			innerprod = 0.0d;
-			//for(int j=0; j<xsize; ++j) {
-			for(Map.Entry<Integer,Double> entry : x.getPairs().entrySet()) {
-				int idx = entry.getKey();
-				Double bi = basis.get(idx);
-				if(bi==null) {
-					bi = new Double(Math.sqrt(2.*gamma)*randGauss.nextGaussian());
-					basis.put(idx, bi);
+			//HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
+			//int xsize = x.size();
+			//int[] xindex = x.getIndexes();
+			//double[] xvalues = x.getValues();
+			double innerprod = 0.0d;
+			
+			for(int i=0; i<dimension; ++i) {
+				HashMap<Integer,Double> basis = randomBasis.get(i);
+				innerprod = 0.0d;
+				//for(int j=0; j<xsize; ++j) {
+				for(Map.Entry<Integer,Double> entry : x.getPairs().entrySet()) {
+					int idx = entry.getKey();
+					Double bi = basis.get(idx);
+					if(bi==null) {
+						bi = new Double(Math.sqrt(2.*gamma)*randGauss.nextGaussian());
+						basis.put(idx, bi);
+					}
+					innerprod += bi * entry.getValue();
+					/*
+					int idx = xindex[j];
+					Double bi = basis.get(idx);
+					if(bi==null) {
+						bi = new Double((2.*gamma)*randGauss.nextGaussian());
+						basis.put(idx, bi);
+					}
+					innerprod += bi.doubleValue() * xvalues[j];
+					*/ 
 				}
-				innerprod += bi * entry.getValue();
+				transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + 2.*Math.PI*randomBias[i]);
+				//pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
 				/*
-				int idx = xindex[j];
-				Double bi = basis.get(idx);
-				if(bi==null) {
-					bi = new Double((2.*gamma)*randGauss.nextGaussian());
-					basis.put(idx, bi);
-				}
-				innerprod += bi.doubleValue() * xvalues[j];
-				*/ 
+				if(i<dimension/2.)
+					pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod));
+				else
+					pairs.put(i, Math.sqrt(2.0/dimension) * Math.sin(innerprod));
+				*/
 			}
-			v[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]);
-			//pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
-			/*
-			if(i<dimension/2.)
-				pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod));
+		} else {
+			int x_len = x.getPairs().size();
+			double[] vals;
+			if(x_len < 32)
+				vals = new double[32];
 			else
-				pairs.put(i, Math.sqrt(2.0/dimension) * Math.sin(innerprod));
+				vals = new double[x_len];
+			int i=0;
+			for(double d : x.getPairs().values()) {
+				vals[i++] = d;
+			}
+			/*
+			for(; i<64; ++i)
+				vals[i] = 0.0;
 			*/
+			transformed = gpu_phi.transform(vals);
 		}
 		
 		//return new SparseVector(this.index, v, x.getLabel());
 		//return new InputVector(pairs, x.getLabel());
-		return new InputVector(v, false, x.getLabel());
+		return new InputVector(transformed, false, x.getLabel());
 	}
 
 }
