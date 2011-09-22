@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.DataProcessor;
 
 
 /**
@@ -27,7 +28,7 @@ import stream.data.Data;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  */
 public class DataStreamWriter 
-	implements DataStreamListener 
+	implements DataStreamListener, DataProcessor
 {
 	static Logger log = LoggerFactory.getLogger( DataStreamWriter.class );
 	PrintStream p;
@@ -97,6 +98,14 @@ public class DataStreamWriter
 		if( dataFilter != null && !dataFilter.matches( datum ) )
 			return;
 		
+		writeHeader( datum );
+
+		// write the datum elements (attribute values)
+		// 
+		write( datum );
+	}
+	
+	public void writeHeader( Data datum ){
 		// write the keys of the very first datum ONCE (attribute names)
 		// or if the number of keys has changed
 		//
@@ -113,6 +122,9 @@ public class DataStreamWriter
 			p.println();
 			headerWritten = true;
 		}
+	}
+	
+	public void write( Data datum ){
 
 		// write the datum elements (attribute values)
 		// 
@@ -126,10 +138,15 @@ public class DataStreamWriter
 		p.println();
 	}
 	
-	
 	public void close(){
 		p.flush();
 		p.close();
 		closed = true;
+	}
+
+	@Override
+	public Data process(Data data) {
+		dataArrived( data );
+		return data;
 	}
 }

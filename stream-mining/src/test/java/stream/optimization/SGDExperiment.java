@@ -152,7 +152,7 @@ public class SGDExperiment {
 
         	
         	List<Data> trainingData = read( stream, 10000 );
-        	List<Data> testData = null;
+        	//List<Data> testData = null;
         	
         	
         	SGDExperiment experiment = new SGDExperiment( output );
@@ -182,15 +182,13 @@ public class SGDExperiment {
             List<Data> test = read( new SvmLightDataStream( testUrl ), 10000 );
             log.info( "{} test examples read in {}ms", test.size(), System.currentTimeMillis() - start );
 
-            HingeLoss loss = new HingeLoss();
+            SvmHingeLoss loss = new SvmHingeLoss();
             loss.setLambda( 1.0e-6 );
             StochasticGradientDescent sgd = new StochasticGradientDescent( loss );
             sgd.init();
-            sgd.setD( 1000.0d );
 
             WindowedSGD winSgd = new WindowedSGD( loss );
             winSgd.init();
-            winSgd.setD( 1000.0d );
             winSgd.setWindowSize( 5000 );
             winSgd.setPasses( 10 );
 

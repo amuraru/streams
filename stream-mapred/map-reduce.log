@@ -1,0 +1,184 @@
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:37): Mapper: stream.hadoop.SgdMapper
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:42): Reducer: stream.hadoop.SgdReducer
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:44): Final output: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001
+Sep 22 2011 17:10:30 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is starting...
+Sep 22 2011 17:10:30 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is starting...
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003
+Sep 22 2011 17:10:30 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is starting...
+Sep 22 2011 17:10:30 [INFO ] MapReduce.main(MapReduce:72): Waiting for mapper Thread[Thread-2,5,main] to finish... 4 mappers running.
+Sep 22 2011 17:10:30 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is starting...
+Sep 22 2011 17:10:30 [INFO ] AbstractStreamMapper.readBlock(AbstractStreamMapper:46): Reading input data
+Sep 22 2011 17:10:30 [INFO ] AbstractStreamMapper.readBlock(AbstractStreamMapper:46): Reading input data
+Sep 22 2011 17:10:30 [INFO ] AbstractStreamMapper.readBlock(AbstractStreamMapper:46): Reading input data
+Sep 22 2011 17:10:30 [INFO ] AbstractStreamMapper.readBlock(AbstractStreamMapper:46): Reading input data
+Sep 22 2011 17:10:36 [INFO ] SgdMapper.process(SgdMapper:51): Training SGD (stream.optimization.StochasticGradientDescent@503c0965)
+Sep 22 2011 17:10:36 [INFO ] SgdMapper.process(SgdMapper:51): Training SGD (stream.optimization.StochasticGradientDescent@4965391b)
+Sep 22 2011 17:10:36 [INFO ] SgdMapper.process(SgdMapper:51): Training SGD (stream.optimization.StochasticGradientDescent@3852fdeb)
+Sep 22 2011 17:10:36 [INFO ] SgdMapper.process(SgdMapper:51): Training SGD (stream.optimization.StochasticGradientDescent@5c939bdb)
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:37): Mapper: stream.hadoop.SgdMapper
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:42): Reducer: stream.hadoop.SgdReducer
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:44): Final output: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001
+Sep 22 2011 17:12:39 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is starting...
+Sep 22 2011 17:12:39 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is starting...
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003
+Sep 22 2011 17:12:39 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is starting...
+Sep 22 2011 17:12:39 [INFO ] MapReduce.main(MapReduce:72): Waiting for mapper Thread[Thread-2,5,main] to finish... 4 mappers running.
+Sep 22 2011 17:12:39 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is starting...
+Sep 22 2011 17:12:48 [INFO ] MapReduce$1.run(MapReduce$1:62): Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is finished
+Sep 22 2011 17:12:48 [INFO ] MapReduce$1.run(MapReduce$1:62): Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is finished
+Sep 22 2011 17:12:48 [INFO ] MapReduce$1.run(MapReduce$1:62): Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is finished
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:72): Waiting for mapper Thread[Thread-3,5,main] to finish... 3 mappers running.
+Sep 22 2011 17:12:48 [INFO ] MapReduce$1.run(MapReduce$1:62): Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is finished
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:72): Waiting for mapper Thread[Thread-4,5,] to finish... 2 mappers running.
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:72): Waiting for mapper Thread[Thread-5,5,] to finish... 1 mappers running.
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:77): All mappers finished.
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:81): Creating intermediate output in /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1902580997252995407__
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:95): 6013 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1902580997252995407__
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:95): 6211 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1902580997252995407__
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:95): 6271 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1902580997252995407__
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:95): 6070 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1902580997252995407__
+Sep 22 2011 17:12:48 [INFO ] MapReduce.main(MapReduce:103): Starting reducer, output is: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:37): Mapper: stream.hadoop.SgdMapper
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:42): Reducer: stream.hadoop.SgdReducer
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:44): Final output: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001
+Sep 22 2011 17:17:52 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is starting...
+Sep 22 2011 17:17:52 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is starting...
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:51): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003
+Sep 22 2011 17:17:52 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is starting...
+Sep 22 2011 17:17:52 [INFO ] MapReduce.main(MapReduce:72): Waiting for mapper Thread[Thread-2,5,main] to finish... 4 mappers running.
+Sep 22 2011 17:17:52 [INFO ] MapReduce$1.run(MapReduce$1:60): Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:56): Mapper: stream.hadoop.SgdMapper
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:63): Reducer: stream.hadoop.SgdReducer
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:67): Final output: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000.map-output
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0000.map-output ~> mnist-100k.tr.part0000.map-output.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001.map-output
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0001.map-output ~> mnist-100k.tr.part0001.map-output.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0000.map-output ~> mnist-100k.tr.part0000.map-output.map-output is finished
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002.map-output
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0002.map-output ~> mnist-100k.tr.part0002.map-output.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0002.map-output ~> mnist-100k.tr.part0002.map-output.map-output is finished
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0001.map-output ~> mnist-100k.tr.part0001.map-output.map-output is finished
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:74): Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003.map-output
+Sep 22 2011 17:18:15 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-2,5,main] to finish... 8 mappers running.
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:83): Mapper mnist-100k.tr.part0003.map-output ~> mnist-100k.tr.part0003.map-output.map-output is starting...
+Sep 22 2011 17:18:15 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0003.map-output ~> mnist-100k.tr.part0003.map-output.map-output is finished
+Sep 22 2011 17:18:24 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is finished
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-3,5,] to finish... 7 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-4,5,main] to finish... 6 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is finished
+Sep 22 2011 17:18:24 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is finished
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-5,5,] to finish... 5 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-6,5,] to finish... 4 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-7,5,] to finish... 3 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-8,5,main] to finish... 2 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce$1.run(MapReduce$1:85): Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is finished
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:95): Waiting for mapper Thread[Thread-9,5,] to finish... 1 mappers running.
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:100): All mappers finished.
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:104): Creating intermediate output in /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 5 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 5 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 5 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 5 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 6271 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 6013 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 6070 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:118): 6211 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp3349791099609848487__
+Sep 22 2011 17:18:24 [INFO ] MapReduce.main(MapReduce:126): Starting reducer, output is: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:50): ###########################################################################################
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:51): #
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:52): #  stream-mapred - A simple Map&Reduce Variant
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:53): #
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:59): #   Mapper: stream.hadoop.SgdMapper
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:66): #   Reducer: stream.hadoop.SgdReducer
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:70): #   Final output: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:71): #
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:74): #  >> Starting MAP phase...
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:75): #
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:80): #  - Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:80): #  - Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001
+Sep 22 2011 17:24:14 [INFO ] MapReduce$1.run(MapReduce$1:89): #  - Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is starting...
+Sep 22 2011 17:24:14 [INFO ] MapReduce$1.run(MapReduce$1:89): #  - Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is starting...
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:80): #  - Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:80): #  - Creating mapper for /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003
+Sep 22 2011 17:24:14 [INFO ] MapReduce$1.run(MapReduce$1:89): #  - Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is starting...
+Sep 22 2011 17:24:14 [INFO ] MapReduce.main(MapReduce:101): #  - Waiting for mapper Thread[Thread-2,5,main] to finish... 4 mappers running.
+Sep 22 2011 17:24:14 [INFO ] MapReduce$1.run(MapReduce$1:89): #  - Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is starting...
+Sep 22 2011 17:24:23 [INFO ] MapReduce$1.run(MapReduce$1:91): #  - Mapper mnist-100k.tr.part0002 ~> mnist-100k.tr.part0002.map-output is finished
+Sep 22 2011 17:24:23 [INFO ] MapReduce$1.run(MapReduce$1:91): #  - Mapper mnist-100k.tr.part0003 ~> mnist-100k.tr.part0003.map-output is finished
+Sep 22 2011 17:24:23 [INFO ] MapReduce$1.run(MapReduce$1:91): #  - Mapper mnist-100k.tr.part0000 ~> mnist-100k.tr.part0000.map-output is finished
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:101): #  - Waiting for mapper Thread[Thread-3,5,main] to finish... 3 mappers running.
+Sep 22 2011 17:24:23 [INFO ] MapReduce$1.run(MapReduce$1:91): #  - Mapper mnist-100k.tr.part0001 ~> mnist-100k.tr.part0001.map-output is finished
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:101): #  - Waiting for mapper Thread[Thread-4,5,] to finish... 2 mappers running.
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:101): #  - Waiting for mapper Thread[Thread-5,5,] to finish... 1 mappers running.
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:105): #  All mappers finished.
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:106): # 
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:107): #  >>> MAP phase complete.
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:108): # 
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:110): ###########################################################################################
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:111): #
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:113): # Creating intermediate output
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:114): # Temporary output is created in '/var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1745725757835182587__'
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:129): #   6013 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1745725757835182587__
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:129): #   6211 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1745725757835182587__
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:129): #   6271 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1745725757835182587__
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:129): #   6070 bytes appended to /var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp1745725757835182587__
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:134): ###########################################################################################
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:135): #
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:136): #  >>> Starting REDUCE phase...
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:137): #
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:140): #  - Starting reducer, output is: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:144): # REDUCE finished.
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:145): #
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:146): # Output is in file OUTPUT
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:147): #
+Sep 22 2011 17:24:23 [INFO ] MapReduce.main(MapReduce:148): ###########################################################################################
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:83): ###########################################################################################
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:84): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:85): #  stream-mapred - A simple Map&Reduce Variant
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:86): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:92): #   Mapper: stream.hadoop.SgdMapper
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:99): #   Reducer: stream.hadoop.SgdReducer
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:103): #   Final output: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:104): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:107): #  >> Starting MAP phase...
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:108): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:113):  #   adding input /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0000
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:113):  #   adding input /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0001
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:113):  #   adding input /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0002
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:113):  #   adding input /Users/chris/Uni/Projekte/streams/stream-mapred/mnist-100k.tr.part0003
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:165): #  All mappers finished.
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:166): # 
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:167): #  >>> MAP phase complete.
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:168): # 
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:170): ###########################################################################################
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:171): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:173): #   Creating intermediate output
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:174): #   Temporary output is created in '/var/folders/d2/wgmmgmj167v9vcj3dlbbbzqw0000gn/T/map_reduce_tmp4170227698490457327__'
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:194): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:195): ###########################################################################################
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:196): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:197): #  >>> Starting REDUCE phase...
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:198): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:201): #  - Starting reducer, output is: /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:205): #  - REDUCE finished.
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:206): #  - Output is in file /Users/chris/Uni/Projekte/streams/stream-mapred/OUTPUT
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:207): #
+Sep 22 2011 17:39:29 [INFO ] MapReduce.main(MapReduce:208): ###########################################################################################

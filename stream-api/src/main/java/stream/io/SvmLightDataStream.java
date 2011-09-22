@@ -92,6 +92,13 @@ public class SvmLightDataStream
 			return null;
 		
 		log.debug( "line[{}]: {}", lineNumber, line );
+		while( line != null && ! line.matches( "^-?\\d(\\.\\d+)?\\s.*" )){
+			line = reader.readLine();
+		}
+		
+		if( line == null )
+			return null;
+		
 		lineNumber++;
 		
 		Data datum = parseLine( item, line );

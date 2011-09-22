@@ -11,6 +11,7 @@
     <module>stream-generator</module>
     <module>stream-mining</module>
     <module>stream-log</module>
+    <module>stream-mapred</module>
   </modules>
 
   <build>

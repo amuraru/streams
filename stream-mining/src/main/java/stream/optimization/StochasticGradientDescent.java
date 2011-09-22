@@ -54,6 +54,14 @@ public class StochasticGradientDescent
 		useKernel = true;
 	}
 
+	public Vector getWeightVector(){
+		return w;
+	}
+	
+	public void setWeightVector( Vector v ){
+		this.w = v;
+	}
+	
 	@Override
 	public double getByteSize() {
 		//

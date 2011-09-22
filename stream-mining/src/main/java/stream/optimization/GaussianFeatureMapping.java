@@ -1,17 +1,25 @@
 package stream.optimization;
 
+import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import stream.data.mapper.Mapper;
 import stream.data.vector.InputVector;
 
-import edu.tdo.kernel.GpuKernel.APXGaussianPhi;
+public class GaussianFeatureMapping implements ApproximateFeatureMapping, Serializable {
 
-public class GaussianFeatureMapping implements ApproximateFeatureMapping {
-
+	/** The unique class ID */
+	private static final long serialVersionUID = -5455524117127186752L;
+	
+	static Logger log = LoggerFactory.getLogger( GaussianFeatureMapping.class );
 	int dimension;				// Approximation dimension
 	int size=0;					// It grows to input dimension eventually.
 	HashSet<Integer> indexes;
@@ -21,20 +29,21 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 	Random randGauss;
 	Random randUnif;
 	int[] index;
-	
+
 	double[] transformed;		// An output vector, to avoid memory allocations (NOT thread-safe).
-	
+
 	// for GPU
 	boolean use_gpu;
-	APXGaussianPhi gpu_phi; // = new APXGaussianPhi(gamma, d);
-	
+	//APXGaussianPhi gpu_phi; // = new APXGaussianPhi(gamma, d);
+	Mapper<double[],double[]> gpu_phi;
+
 	public GaussianFeatureMapping( double gamma, int dimension, boolean use_gpu ) {
 		this.gamma = gamma;
 		this.dimension = dimension;
 		this.use_gpu = use_gpu;
 		init();
 	}
-	
+
 	@Override
 	public void setDimension( int dimension ) {
 		this.dimension = dimension;
@@ -60,27 +69,34 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 				randomBias[i] = (2.*Math.PI)*randUnif.nextDouble(); 
 			}
 		} else { // GPU
-			gpu_phi = new APXGaussianPhi(gamma, dimension);
+			try {
+				Class<?> clazz = Class.forName( "edu.tdo.kernel.GpuKernel" );
+				Constructor<?> con = clazz.getConstructor( Double.class, Integer.class );
+				gpu_phi = (Mapper<double[],double[]>) con.newInstance( gamma, dimension );
+			} catch (Exception e) {
+				throw new RuntimeException( "Failed to instantiate GpuKernel: " + e.getMessage() );
+			}
+			//gpu_phi = new APXGaussianPhi(gamma, dimension);
 		}
 	}
-	
-//	protected double[] newGaussianVector() {
-//		double[] v = new double[input_dimension];
-//		for(int i=0; i<input_dimension; ++i) {
-//			v[i] = (2.*gamma)*randGauss.nextGaussian();
-//		}
-//		return v;
-//	}
+
+	//	protected double[] newGaussianVector() {
+	//		double[] v = new double[input_dimension];
+	//		for(int i=0; i<input_dimension; ++i) {
+	//			v[i] = (2.*gamma)*randGauss.nextGaussian();
+	//		}
+	//		return v;
+	//	}
 
 	/**
 	 * Trasforms a sparse input vector to a dense vector
 	 */
 	@Override
 	public InputVector transform(InputVector x) {
-		
+
 		if(!x.isSparse())
 			return null;
-		
+
 		if(!use_gpu) {
 
 			//HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
@@ -88,7 +104,7 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 			//int[] xindex = x.getIndexes();
 			//double[] xvalues = x.getValues();
 			double innerprod = 0.0d;
-			
+
 			for(int i=0; i<dimension; ++i) {
 				HashMap<Integer,Double> basis = randomBasis.get(i);
 				innerprod = 0.0d;
@@ -109,7 +125,7 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 						basis.put(idx, bi);
 					}
 					innerprod += bi.doubleValue() * xvalues[j];
-					*/ 
+					 */ 
 				}
 				transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + 2.*Math.PI*randomBias[i]);
 				//pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
@@ -118,7 +134,7 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 					pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod));
 				else
 					pairs.put(i, Math.sqrt(2.0/dimension) * Math.sin(innerprod));
-				*/
+				 */
 			}
 		} else {
 			int x_len = x.getPairs().size();
@@ -134,13 +150,16 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 			/*
 			for(; i<64; ++i)
 				vals[i] = 0.0;
-			*/
-			transformed = gpu_phi.transform(vals);
+			 */
+			try {
+				transformed = gpu_phi.map(vals);
+			} catch (Exception e) {
+				log.error( "Failed to run transformation: {}", e.getMessage() );
+			}
 		}
-		
+
 		//return new SparseVector(this.index, v, x.getLabel());
 		//return new InputVector(pairs, x.getLabel());
 		return new InputVector(transformed, false, x.getLabel());
 	}
-
 }
