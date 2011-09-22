@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.data.DataProcessor;
 
 
 /**
@@ -27,7 +30,7 @@ import stream.data.Data;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  */
 public class DataStreamWriter 
-	implements DataStreamListener 
+	implements DataStreamListener, DataProcessor
 {
 	static Logger log = LoggerFactory.getLogger( DataStreamWriter.class );
 	PrintStream p;
@@ -37,6 +40,7 @@ public class DataStreamWriter
 	DataFilter dataFilter = null;
 	List<String> headers = new LinkedList<String>();
 	boolean closed = false;
+	List<String> keys = null;
 	
 	/**
 	 * Create a new DataStreamWriter which writes all data to the
@@ -83,6 +87,17 @@ public class DataStreamWriter
 	}
 	
 	
+	public void setKeys( String str ){
+	    if( str == null )
+	        keys = null;
+	    else {
+	        String[] ks = str.split( "," );
+	        keys = new ArrayList<String>();
+	        for( String k : ks )
+	            keys.add( k );
+	    }
+	}
+	
 	/**
 	 * @see stream.io.DataStreamListener#dataArrived(java.util.Map)
 	 */
@@ -97,12 +112,23 @@ public class DataStreamWriter
 		if( dataFilter != null && !dataFilter.matches( datum ) )
 			return;
 		
+		writeHeader( datum );
+
+		// write the datum elements (attribute values)
+		// 
+		write( datum );
+	}
+	
+	public void writeHeader( Data datum ){
 		// write the keys of the very first datum ONCE (attribute names)
 		// or if the number of keys has changed
 		//
-		if( ! headerWritten || datum.keySet().size() > headers.size() ){
+		if( ! headerWritten || ( keys == null && datum.keySet().size() > headers.size() ) ){
 			p.print( "#" );
 			Iterator<String> it = datum.keySet().iterator();
+			if( keys != null )
+			    it = keys.iterator();
+			
 			while( it.hasNext() ){
 				String name = it.next();
 				headers.add( name );
@@ -113,23 +139,45 @@ public class DataStreamWriter
 			p.println();
 			headerWritten = true;
 		}
+	}
+	
+	public void write( Data datum ){
 
 		// write the datum elements (attribute values)
 		// 
-		Iterator<String> it = datum.keySet().iterator();
-		while(it.hasNext() ){
+		
+		Iterator<String> it = null;
+		if( keys != null )
+		    it = keys.iterator();
+		else
+		    it = datum.keySet().iterator();
+		
+		while( it.hasNext() ){
 			String name = it.next();
-			p.print( datum.get( name ) );
+			String stringValue = "?";
+			Serializable val = datum.get( name );
+			
+			if( val != null )
+			    stringValue = val.toString().replaceAll( "\\n", "\\\\n" );
+			else
+			    stringValue = "null";
+			
+			p.print( stringValue );
 			if( it.hasNext() )
 				p.print( separator );
 		}
 		p.println();
 	}
 	
-	
 	public void close(){
 		p.flush();
 		p.close();
 		closed = true;
+	}
+
+	@Override
+	public Data process(Data data) {
+		dataArrived( data );
+		return data;
 	}
 }

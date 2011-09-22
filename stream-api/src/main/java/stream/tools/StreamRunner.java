@@ -3,6 +3,7 @@ package stream.tools;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -16,7 +17,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import stream.data.Data;
+import stream.data.DataProcessor;
 import stream.io.DataStream;
+import stream.io.DataStreamProcessor;
 import stream.util.ObjectFactory;
 
 public class StreamRunner
@@ -27,6 +30,10 @@ public class StreamRunner
     String source = null;
     Map<String,DataStream> streams = new LinkedHashMap<String,DataStream>();
 
+    /* This is a set of sinks, one sink may be connected to multiple streams (by key) */
+    Map<String,List<DataProcessor>> processors = new LinkedHashMap<String,List<DataProcessor>>();
+
+    
     public StreamRunner( URL url ) throws Exception {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -68,6 +75,16 @@ public class StreamRunner
                     e.printStackTrace();
                 }
             }
+            
+            if( node instanceof Element && node.getNodeName().equals( "Processing" ) ){
+                Element child = (Element) node;
+                
+                DataStreamProcessor proc = new DataStreamProcessor();
+                Map<String,String> attr = objectFactory.getAttributes( child );
+                
+                List<DataProcessor> ps = this.processors.get( attr.get( "source" ) );
+                
+            }
         }
     }
     
@@ -98,7 +115,4 @@ public class StreamRunner
             item = stream.readNext();
         }
     }
-    
-    
-    
 }

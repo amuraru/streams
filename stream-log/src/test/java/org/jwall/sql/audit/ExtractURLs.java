@@ -1,7 +1,6 @@
 package org.jwall.sql.audit;
 
 import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.net.URL;
 
 import org.jwall.web.audit.HttpRequestTree;
@@ -12,6 +11,7 @@ import stream.data.Data;
 import stream.data.DataProcessor;
 import stream.data.tree.TreeEdges;
 import stream.io.AbstractDataStream;
+import stream.io.DataStreamWriter;
 import stream.io.LogFileDataStream;
 import stream.io.LogStreamParser;
 import stream.io.ModSecurityAuditStream;
@@ -32,8 +32,8 @@ public class ExtractURLs
         
         LogStreamParser parser = new LogStreamParser();
         parser.setFormat( "%{REMOTE_ADDR} %{REMOTE_USER} %{REMOTE_AUTH} %{DATE|\\[.*\\]} \"%{REQUEST_METHOD} %{REQUEST_URI} %{REQUEST_PROTO}\" %{RESPONSE_STATUS} %{RESPONSE_SIZE} \"%{REQUEST_HEADERS:REFERER}\" \"%{REQUEST_HEADERS:USER-AGENT}\"" );
-        stream.addPreprocessor( parser );
-        stream.addPreprocessor( new DateParser( "DATE", "[dd/MMM/yyyy:HH:mm:ss Z]" ) );
+        //stream.addPreprocessor( parser );
+        //stream.addPreprocessor( new DateParser( "DATE", "[dd/MMM/yyyy:HH:mm:ss Z]" ) );
         stream.addPreprocessor( new DataProcessor(){
             @Override
             public Data process(Data data)
@@ -64,31 +64,26 @@ public class ExtractURLs
         
         Integer limit = Integer.MAX_VALUE;
         Data item = stream.readNext();
-        String[] out = new String[]{ "TIMESTAMP", "REMOTE_ADDR", "RESPONSE_STATUS", "REQUEST_PATH", "@tree:request" };
-        PrintStream p = new PrintStream( new FileOutputStream( "/Users/chris/shop-requests.log" ) );
+        
+        DataStreamWriter writer = new DataStreamWriter( new FileOutputStream("/Users/chris/test-requests.tsv" ), "\t" );
+        writer.setKeys( "TIMESTAMP,REQUEST_URI,REQUEST_HEADERS:USER-AGENT,@tree:request" );
+        
         //limit = 100;
-        int i = 1;
+        int written = 0;
         while( item != null && limit-- > 0 ){
-            log.info( "item[{}]", i++ );
-            for( String key : item.keySet() ){
-                //log.info( "   {} = {}", key, item.get( key ) );
+            if( written > 0 && written % 100 == 0 ){
+                log.info( "{} items processed.", written );
             }
-            /*
-            Long ts = new Long( item.get( "TIMESTAMP" ).toString() );
-            Date date = new Date( ts );
-             */
-            
-            StringBuffer s = new StringBuffer();
-            for( String key : out ){
-                if( item.get( key ) != null ){
-                    s.append( item.get( key ).toString() );
-                }
-                s.append( "\t" );
+            String uri = "" + item.get( "REQUEST_URI" );
+            if( uri.indexOf( "php" ) > 0 && uri.indexOf( "/blog/" ) < 0 ){
+                writer.dataArrived( item );
+                written++;
             }
             
-            p.println( s.toString() );
             //log.info( "access at: {}", date );
             item = stream.readNext();
         }
+        
+        log.info( "{} items written.", written );
     }
 }

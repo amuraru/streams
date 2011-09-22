@@ -354,7 +354,20 @@ public class Vector implements Serializable, Measurable
 	
 	@Override
 	public double getByteSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		// here we add up the sizes of all things we'er storing
+		// in this vector
+		
+		//
+		// 2 * 8 bytes (64 bit index, 64 bit double value)
+		//
+		double size = pairs.size() * 16.0d;
+		
+		// the scaler
+		size += 8.0d;
+		
+		// the cached norm
+		size += 8.0d;
+		
+		return size;
 	}
 }

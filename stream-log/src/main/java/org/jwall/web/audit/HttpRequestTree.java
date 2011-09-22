@@ -32,6 +32,9 @@ public class HttpRequestTree
 
             TreeNode pathNode;
             String qs = null;
+            if( data.containsKey( "QUERY_STRING" ) )
+                qs = data.get( "QUERY_STRING" ).toString();
+            
             int idx = path.indexOf( "?" );
             if( idx > 0 ){
                 path = uri.substring( 0, idx );

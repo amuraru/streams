@@ -3,11 +3,13 @@
 	<Stream id="log" class="stream.io.CsvStream"
 		url="http://kirmes.cs.uni-dortmund.de/data/random-stream.csv.gz" />
 
-	<Processing source="log">
+	<Processing input="log" output="logData">
 	
 	    <Processor id="mysqlTracker" class="org.jwall.sql.audit.MySQLSessionTracker" />
 	
 		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="mysql:sql" />
+	
+		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />
 	
 	</Processing>		
 

@@ -1,7 +1,5 @@
 package stream.learner;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 
 import org.junit.Test;

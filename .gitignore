@@ -4,3 +4,5 @@ syntax: regexp
 ^target$
 ^.settings
 target$
+stream-mapred/data/
+stream-mapred/stream-mapred.jar
