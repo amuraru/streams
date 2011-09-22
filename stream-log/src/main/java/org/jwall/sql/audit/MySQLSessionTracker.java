@@ -20,7 +20,7 @@ public class MySQLSessionTracker
 {
     static Logger log = LoggerFactory.getLogger( MySQLSessionTracker.class );
     
-    final static Pattern META_INF_PATTERN = Pattern.compile( "(\\d+)\\s(Init DB|Query|Quit|Connect)" );
+    final static Pattern META_INF_PATTERN = Pattern.compile( "(\\d+)\\s(Init\\sDB|Query|Quit|Connect)" );
 
     SimpleDateFormat fmt = new SimpleDateFormat( "yyMMdd HH:mm:ss" );
     String key = "MESSAGE";
@@ -112,10 +112,10 @@ public class MySQLSessionTracker
             log.trace( "  mysql:timestamp = {}", timestamp );
             
             String remain = msg.substring( m.end() );
-            log.trace( "Found match: '{}'", match );
+            log.debug( "Found match: '{}'", match );
             String[] tok = match.split( " ", 2 );
-            log.trace( "  mysql:session = {}", tok[0] );
-            log.trace( "  mysql:action = {}", tok[1] );
+            log.debug( "  mysql:session = {}", tok[0] );
+            log.debug( "  mysql:action = {}", tok[1] );
             
             Session s = sessions.get( tok[0] );
             if( s == null ){
@@ -135,7 +135,13 @@ public class MySQLSessionTracker
             }
             
             if( "Query".equals( tok[1] ) ){
-                s.put( prefix + "query", remain.trim() );
+                String query = remain.trim();
+                int i = query.indexOf( "ON DUPLICATE KEY UPDATE" );
+                if( i > 0 )
+                    query = query.substring( 0, i );
+                
+                s.put( prefix + "query", query );
+                log.trace( "Found query: {}", query );
             }
             
             if( "Quit".equals( tok[1] ) ){

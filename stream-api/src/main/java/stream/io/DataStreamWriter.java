@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +39,7 @@ public class DataStreamWriter
 	DataFilter dataFilter = null;
 	List<String> headers = new LinkedList<String>();
 	boolean closed = false;
+	List<String> keys = null;
 	
 	/**
 	 * Create a new DataStreamWriter which writes all data to the
@@ -83,6 +86,17 @@ public class DataStreamWriter
 	}
 	
 	
+	public void setKeys( String str ){
+	    if( str == null )
+	        keys = null;
+	    else {
+	        String[] ks = str.split( "," );
+	        keys = new ArrayList<String>();
+	        for( String k : ks )
+	            keys.add( k );
+	    }
+	}
+	
 	/**
 	 * @see stream.io.DataStreamListener#dataArrived(java.util.Map)
 	 */
@@ -100,9 +114,12 @@ public class DataStreamWriter
 		// write the keys of the very first datum ONCE (attribute names)
 		// or if the number of keys has changed
 		//
-		if( ! headerWritten || datum.keySet().size() > headers.size() ){
+		if( ! headerWritten || ( keys == null && datum.keySet().size() > headers.size() ) ){
 			p.print( "#" );
 			Iterator<String> it = datum.keySet().iterator();
+			if( keys != null )
+			    it = keys.iterator();
+			
 			while( it.hasNext() ){
 				String name = it.next();
 				headers.add( name );
@@ -116,10 +133,24 @@ public class DataStreamWriter
 
 		// write the datum elements (attribute values)
 		// 
-		Iterator<String> it = datum.keySet().iterator();
-		while(it.hasNext() ){
+		
+		Iterator<String> it = null;
+		if( keys != null )
+		    it = keys.iterator();
+		else
+		    it = datum.keySet().iterator();
+		
+		while( it.hasNext() ){
 			String name = it.next();
-			p.print( datum.get( name ) );
+			String stringValue = "?";
+			Serializable val = datum.get( name );
+			
+			if( val != null )
+			    stringValue = val.toString().replaceAll( "\\n", "\\\\n" );
+			else
+			    stringValue = "null";
+			
+			p.print( stringValue );
 			if( it.hasNext() )
 				p.print( separator );
 		}

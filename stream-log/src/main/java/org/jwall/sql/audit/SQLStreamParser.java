@@ -3,7 +3,9 @@ package org.jwall.sql.audit;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
@@ -16,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import stream.data.Data;
 import stream.data.DataProcessor;
 import stream.data.TreeNode;
+import stream.data.mapper.Mapper;
 
 
 /**
@@ -43,7 +46,7 @@ public class SQLStreamParser
     Long error = 0L;
     
     PrintStream errorStream;
-    
+    List<Mapper<String,String>> preprocessor = new ArrayList<Mapper<String,String>>(); 
     
     public SQLStreamParser(){
         this( "sql" );
@@ -74,6 +77,9 @@ public class SQLStreamParser
         return key;
     }
 
+    public void addMapper( Mapper<String,String> mapper ){
+        this.preprocessor.add( mapper );
+    }
 
     /**
      * @param key the key to set
@@ -95,12 +101,23 @@ public class SQLStreamParser
             return data;
         }
         
-        if( !data.containsKey( key ) ){
+        if( !data.containsKey( key ) || "null".equals( data.get( key ) + "" ) ){
             //log.error( "Input does not contain data for key '{}'", key );
+            log.debug( "Skipping item {}", data );
             return data;
         }
         
         String query = data.get( key ).toString();
+        
+        for( Mapper<String,String> mapper : preprocessor ){
+            String orig = query;
+            try {
+                query = mapper.map( query );
+            } catch (Exception e) {
+                e.printStackTrace();
+                query = orig;
+            }
+        }
         
         try {
             
@@ -109,8 +126,8 @@ public class SQLStreamParser
                 String outkey = "@tree:" + key;
                 log.debug( "Storing tree as feature '{}': {}", outkey, tree );
                 data.put( outkey, tree );
+                success++;
             }
-            success++;
         } catch (Exception e) {
             
             if( errorStream != null )
@@ -166,6 +183,7 @@ public class SQLStreamParser
             return astWalker.getAST();
             
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ParseException( "Failed to parse sql: '" + sql + "'" );
         }
     }

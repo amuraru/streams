@@ -102,9 +102,12 @@ public class JSqlASTWalker
         }
         up();
 
-        dive( "FromList" );
-        plainSelect.getFromItem().accept(this);
-        up();
+        
+        if( plainSelect.getFromItem() != null ){
+            dive( "FromList" );
+            plainSelect.getFromItem().accept(this);
+            up();
+        }
 
         //up();
 
