@@ -70,16 +70,16 @@ started from the jar file and requires several arguments:
 To start the provided "SgdMapper" and "SgdReducer" on the list of
 mnist data parts run:
 
-  # java -cp stream-mapred.jar MapReduce stream.hadoop.SgdMapper stream.hadoop.SgdReducer mnist-100k* OUTPUT
+    # java -cp stream-mapred.jar MapReduce stream.hadoop.SgdMapper stream.hadoop.SgdReducer mnist-100k* OUTPUT
 
 As the mappers will start loading the data in parallel, it makes
 sense to increase the Java heap-space for that:
 
-  # java -Xmx2048M -cp stream-mapred.jar MapReduce ...
+    # java -Xmx2048M -cp stream-mapred.jar MapReduce ...
 
 In addition to that, the MapReduce by default uses 4 parallel
 mapper (threads). This might be too much on some CPUs and effectively
 slow down the process.
 The number of mappers can be limitted with the "max.mappers" variable:
 
-  # java -Dmax.mappers=2 -Xmx2048M -cp stream-mapred.jar MapReduce ...
+    # java -Dmax.mappers=2 -Xmx2048M -cp stream-mapred.jar MapReduce ...
