@@ -8,6 +8,7 @@
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>stream-mapred</artifactId>
+	<name>streams-mapred</name>
 
 	<repositories>
 		<repository>
