@@ -100,7 +100,8 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 						bi = new Double(Math.sqrt(2.*gamma)*randGauss.nextGaussian());
 						basis.put(idx, bi);
 					}
-					innerprod += bi * entry.getValue();
+					//innerprod += bi * entry.getValue();
+					innerprod += bi * Math.sqrt(2.*gamma)*randGauss.nextGaussian();
 					/*
 					int idx = xindex[j];
 					Double bi = basis.get(idx);
@@ -111,7 +112,11 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping {
 					innerprod += bi.doubleValue() * xvalues[j];
 					*/ 
 				}
-				transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + 2.*Math.PI*randomBias[i]);
+				//transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + 2.*Math.PI*randomBias[i]);
+				if(i<dimension/2)
+					transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod);
+				else
+					transformed[i] = Math.sqrt(2.0/dimension) * Math.sin(innerprod);
 				//pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
 				/*
 				if(i<dimension/2.)
