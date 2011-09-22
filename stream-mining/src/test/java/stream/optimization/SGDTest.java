@@ -53,12 +53,14 @@ public class SGDTest {
 		url = "file:///Users/chris/sgd/rcv1_ccat/ccat.tr";
 		url = "file:///Users/chris/sgd/adult/adult.tr";
 		url = "file://localhost/Volumes/sshfs//datasets/datensaetze/sgd/adult/adult.tr";
+		url = "file:///home/share/datensaetze/sgd/adult/adult.tr";
 		SvmLightDataStream stream = new SvmLightDataStream( url );
 		int trainLimit = 10000;
 		stream.setLimit( (long)trainLimit );
 		String testUrl = "file:///Users/chris/sgd/rcv1_ccat/ccat.tt";
 		testUrl = "file:///Users/chris/sgd/adult/adult.tt";
 		testUrl = "file://localhost/Volumes/sshfs//datasets/datensaetze/sgd/adult/adult.tt";
+		testUrl = "file:///home/share/datensaetze/sgd/adult/adult.tt";
 		
 		long start = System.currentTimeMillis();
 
@@ -81,7 +83,7 @@ public class SGDTest {
 		//lambda = 1.0e-8;  // mnist-1m 
 		loss.setLambda( lambda );
 		StochasticGradientDescent sgd = new StochasticGradientDescent( loss );
-		//sgd.useGaussianKernel(0.001, 1024);
+		sgd.useGaussianKernel(0.001, 2048, true);
 		sgd.init( );
 		// gamma values
 		// 0.001 adult

@@ -55,7 +55,7 @@ public class Vector implements Serializable, Measurable
 		this.length = length;
 		vals = new double[length];
 	}
-	
+
 	/**
 	 * Creates a sparse vector from the given indices and values.
 	 * 
@@ -73,7 +73,7 @@ public class Vector implements Serializable, Measurable
 				max_index = index[i]; 
 		}
 	}
-
+	
 	/**
 	 * Creates a dense vector from the given values.
 	 * @param vals
@@ -129,6 +129,33 @@ public class Vector implements Serializable, Measurable
 				if(idx > max_index) max_index = idx;
 				this.pairs.put(idx, val);
 			}
+		}
+	}
+
+	/**
+	 * A copy constructor
+	 */
+	public Vector(Vector x) {
+		type = x.type;
+		
+		if(x.type == Type.DENSE) {
+			length = x.length;		
+			this.vals = new double[length];
+			
+			for(int i=0; i<length; ++i) {
+				vals[i] = x.vals[i];
+				snorm += vals[i]*vals[i];
+			}			
+		}
+		else {
+			this.pairs = new HashMap<Integer,Double>();
+			for(Map.Entry<Integer,Double> xentry : x.getPairs().entrySet()) {
+				int idx = xentry.getKey();
+				double val = xentry.getValue();
+				snorm += val*val;
+				if(idx > max_index) max_index = idx;
+				this.pairs.put(idx, val);
+			}			
 		}
 	}
 	
@@ -327,7 +354,20 @@ public class Vector implements Serializable, Measurable
 	
 	@Override
 	public double getByteSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		// here we add up the sizes of all things we'er storing
+		// in this vector
+		
+		//
+		// 2 * 8 bytes (64 bit index, 64 bit double value)
+		//
+		double size = pairs.size() * 16.0d;
+		
+		// the scaler
+		size += 8.0d;
+		
+		// the cached norm
+		size += 8.0d;
+		
+		return size;
 	}
 }

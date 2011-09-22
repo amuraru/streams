@@ -48,12 +48,20 @@ public class StochasticGradientDescent
 		this.useb = useb;
 	}
 	
-	public void useGaussianKernel( double gamma, int dimension ) {
+	public void useGaussianKernel( double gamma, int dimension, boolean use_gpu ) {
 		this.dimension = dimension;
-		gaussianKernel = new GaussianFeatureMapping( gamma, dimension );
+		gaussianKernel = new GaussianFeatureMapping( gamma, dimension, use_gpu );
 		useKernel = true;
 	}
 
+	public Vector getWeightVector(){
+		return w;
+	}
+	
+	public void setWeightVector( Vector v ){
+		this.w = v;
+	}
+	
 	@Override
 	public double getByteSize() {
 		//

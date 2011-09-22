@@ -9,14 +9,23 @@
 		<repository>
 			<id>jwall</id>
 			<name>jwall.org Maven Repository</name>
-			<url>https://secure.jwall.org/maven/repository/jwall</url>
+			<url>http://secure.jwall.org/maven/repository/jwall</url>
 		</repository>
 		<repository>
 			<id>jwall-snapshots</id>
 			<name>jwall.org Snapshot Repository</name>
-			<url>https://secure.jwall.org/maven/repository/snapshots</url>
+			<url>http://secure.jwall.org/maven/repository/snapshots</url>
 		</repository>
-<!--
+    <repository>
+      <id>spy</id>
+      <name>Spy Repository</name>
+      <layout>default</layout>
+      <url>http://files.couchbase.com/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  <!--
 		<repository>
 			<id>pg542</id>
 			<name>PG542 Maven Repository</name>
@@ -80,6 +89,18 @@
 			<groupId>weka</groupId>
 			<artifactId>weka</artifactId>
 			<version>3.7.3</version>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>edu.tdo.kernel.GpuKernel</groupId>
+			<artifactId>APXGaussianPhi</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		 -->
+		<dependency>
+			<groupId>spy</groupId>
+			<artifactId>spymemcached</artifactId>
+			<version>2.7.1</version>
 		</dependency>
 	</dependencies>
 	<distributionManagement>
