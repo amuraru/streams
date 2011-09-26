@@ -171,7 +171,7 @@ public class MapReduce {
             }
             log.info( "#   " + total + " bytes appended to " + tmp.getAbsolutePath() );
             reader.close();
-            mapped.delete();
+            //mapped.delete();
         }
         intermediate.close();
         

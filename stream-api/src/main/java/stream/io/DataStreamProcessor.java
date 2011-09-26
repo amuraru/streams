@@ -37,7 +37,7 @@ public class DataStreamProcessor
 	/* The attribute/type mapping for this stream */
 	Map<String,Class<?>> finalAttributes = null;
 	
-	/* The list of data processors */
+	/* The list of data preprocessors */
 	List<DataProcessor> processors = new ArrayList<DataProcessor>();
 	
 	
@@ -120,5 +120,23 @@ public class DataStreamProcessor
 			}
 		}
 		return data;
+	}
+
+
+	@Override
+	public void addPreprocessor(DataProcessor proc) {
+		this.processors.add( proc );
+	}
+
+
+	@Override
+	public void addPreprocessor(int idx, DataProcessor proc) {
+		this.processors.add( idx, proc );
+	}
+
+
+	@Override
+	public List<DataProcessor> getPreprocessors() {
+		return processors;
 	}
 }

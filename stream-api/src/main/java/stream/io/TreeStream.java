@@ -3,11 +3,14 @@ package stream.io;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import stream.data.Data;
 import stream.data.DataImpl;
+import stream.data.DataProcessor;
 import stream.data.TreeNode;
 
 
@@ -27,6 +30,7 @@ public class TreeStream implements DataStream {
 	BufferedReader reader;
 	DefaultTreeParser treeParser;
 	Map<String, Class<?>> attributes = new LinkedHashMap<String,Class<?>>();
+	final List<DataProcessor> processors = new ArrayList<DataProcessor>();
 	
 	public TreeStream( URL url ) throws Exception {
 		reader = new BufferedReader( new InputStreamReader( url.openStream() ) );
@@ -82,5 +86,23 @@ public class TreeStream implements DataStream {
 		
 		datum.put( treeAttribute, tree );
 		return datum;
+	}
+
+
+	@Override
+	public void addPreprocessor(DataProcessor proc) {
+		processors.add( proc );
+	}
+
+
+	@Override
+	public void addPreprocessor(int idx, DataProcessor proc) {
+		processors.add( idx, proc );
+	}
+
+
+	@Override
+	public List<DataProcessor> getPreprocessors() {
+		return processors;
 	}
 }

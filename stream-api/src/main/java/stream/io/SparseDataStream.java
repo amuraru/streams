@@ -20,30 +20,30 @@ import stream.data.vector.InputVector;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
-public class SvmLightDataStream 
+public class SparseDataStream 
 	extends AbstractDataStream 
 {
-	static Logger log = LoggerFactory.getLogger( SvmLightDataStream.class );
+	static Logger log = LoggerFactory.getLogger( SparseDataStream.class );
 	long lineNumber = 0;
 	boolean addSparseVector = true;
 	String sparseKey = null;
 	
-	public SvmLightDataStream( String url ) throws Exception {
+	public SparseDataStream( String url ) throws Exception {
 		this( new URL( url ), "sparse-vector" );
 	}
 
-	public SvmLightDataStream(URL url) throws Exception {
+	public SparseDataStream(URL url) throws Exception {
 		super(url);
 		initReader();
 	}
 	
-	public SvmLightDataStream( URL url, String sparseVectorKey ) throws Exception {
+	public SparseDataStream( URL url, String sparseVectorKey ) throws Exception {
 		this(url);
 		this.setSparseKey( sparseVectorKey );
 	}
 
 	
-	public SvmLightDataStream( InputStream in ) throws Exception {
+	public SparseDataStream( InputStream in ) throws Exception {
 		super( in );
 	}
 	
@@ -93,13 +93,7 @@ public class SvmLightDataStream
 		if( line == null )
 			return null;
 		
-		log.debug( "line[{}]: {}", lineNumber, line );
-		while( line != null && ! line.matches( "^-?\\d(\\.\\d+)?\\s.*" )){
-			line = reader.readLine();
-		}
-		
-		if( line == null )
-			return null;
+		line = line.trim();
 		
 		lineNumber++;
 		
@@ -145,17 +139,21 @@ public class SvmLightDataStream
 		if( info > 0 )
 			line = line.substring( 0, info );
 		
+		
 		String[] token = line.split( "\\s+" );
-		item.put( "@label", new Double( token[0] ) );
 
-		for( int i = 1; i < token.length; i++ ){
+		for( int i = 0; i < token.length; i++ ){
 			
 			String[] iv = token[i].split( ":" );
 			if( iv.length != 2 ){
 				log.error( "Failed to split token '{}' in line: ", token[i], line );
 				return null;
 			} else {
-				item.put( iv[0], new Double( iv[1]) );
+				try {
+					item.put( iv[0], new Double( iv[1]) );
+				} catch (Exception e) {
+					item.put( iv[0], iv[1] );
+				}
 			}
 		}
 		
@@ -169,30 +167,14 @@ public class SvmLightDataStream
 					log.error( "Failed to split token '{}' in line: ", token[i], line );
 					return null;
 				} else {
-					pairs.put(Integer.parseInt( iv[0] ), Double.parseDouble( iv[1] ));
+					try {
+						pairs.put(Integer.parseInt( iv[0] ), Double.parseDouble( iv[1] ));
+					} catch (Exception e) {
+					}
 				}
 			}
 
 			item.put( DataUtils.hide( sparseKey ), new InputVector( pairs, false, Double.parseDouble( token[0] ) ) );			
-			/*
-			int[] indexes = new int[ token.length - 1 ];
-			double[] vals = new double[ token.length - 1 ];
-
-			for( int i = 1; i < token.length; i++ ){
-
-				
-				String[] iv = token[i].split( ":" );
-				if( iv.length != 2 ){
-					log.error( "Failed to split token '{}' in line: ", token[i], line );
-					return null;
-				} else {
-					indexes[ i -1 ] = Integer.parseInt( iv[0] );
-					vals[ i - 1 ] = Double.parseDouble( iv[1] );
-				}
-			}
-
-			item.put( DataUtils.hide( sparseKey ), new SparseVector( indexes, vals, Double.parseDouble( token[0] ), false ) );
-			*/
 		}
 		
 		return item;
@@ -219,29 +201,15 @@ public class SvmLightDataStream
 				log.error( "Failed to split token '{}' in line: ", token[i], line );
 				return null;
 			} else {
-				pairs.put(Integer.parseInt( iv[0] ), Double.parseDouble( iv[1] ));
+				try {
+					pairs.put(Integer.parseInt( iv[0] ), Double.parseDouble( iv[1] ));
+				} catch (Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 
 		return new InputVector( pairs, false, Double.parseDouble( token[0] ) );
-		/*
-		int[] indexes = new int[ token.length - 1 ];
-		double[] vals = new double[ token.length - 1 ];
-
-		for( int i = 1; i < token.length; i++ ){
-			
-			String[] iv = token[i].split( ":" );
-			if( iv.length != 2 ){
-				log.error( "Failed to split token '{}' in line: ", token[i], line );
-				return null;
-			} else {
-				indexes[ i -1 ] = Integer.parseInt( iv[0] );
-				vals[ i - 1 ] = Double.parseDouble( iv[1] );
-			}
-		}
-
-		return new SparseVector( indexes, vals, Double.parseDouble( token[0] ), false );
-		*/
 	}
 	
 

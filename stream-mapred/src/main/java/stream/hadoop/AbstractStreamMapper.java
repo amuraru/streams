@@ -2,7 +2,7 @@ package stream.hadoop;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +29,14 @@ public abstract class AbstractStreamMapper
 	static Logger log = LoggerFactory.getLogger( AbstractStreamMapper.class );
 
 	/* The output writer */
-	private PrintWriter writer;
+	private PrintStream outputStream;
 	
 	
 	public DataStream createDataStream( InputStream in ) throws Exception {
 		return new SvmLightDataStream( in );
 	}
 
+	
 	public List<Data> readBlock( InputStream in ){
 
 		List<Data> block = new ArrayList<Data>();
@@ -100,11 +101,11 @@ public abstract class AbstractStreamMapper
 	
 	public final void run( InputStream in, OutputStream out ){
 		List<Data> block = readBlock( in );
-		writer = new PrintWriter( out );
+		outputStream = new PrintStream( out );
 		run( block );
 	}
 	
-	public final PrintWriter getWriter(){
-		return writer;
+	public final PrintStream getWriter(){
+		return outputStream;
 	}
 }
