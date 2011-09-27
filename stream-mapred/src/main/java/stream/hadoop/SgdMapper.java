@@ -42,6 +42,11 @@ public class SgdMapper
 		//lambda = 8.82e-8; // ijcnn1
 		//lambda = 7.17e-7; // covtype
 		//lambda = 1.0e-8;  // mnist-1m 
+		
+		if( System.getProperty( "lambda" ) != null ){
+			lambda = new Double( System.getProperty( "lambda" ) );
+		}
+		
 		loss.setLambda( lambda );
 		sgd = new StochasticGradientDescent( loss );
 		//sgd.useGaussianKernel(0.001, 2048, false);
