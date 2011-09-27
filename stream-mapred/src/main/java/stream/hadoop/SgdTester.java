@@ -52,6 +52,9 @@ implements DataProcessor
 		return errors / tested;
 	}
 
+	public Double getTestSetSize(){
+		return tested;
+	}
 
 	@Override
 	public Data process(Data data) {
@@ -66,6 +69,52 @@ implements DataProcessor
 	}	
 
 
+	public static SgdTester computeTestError( File modelFile, URL testUrl ) throws Exception {
+
+		if( ! modelFile.canRead() ){
+			throw new Exception( "Cannot open file " + modelFile + " for reading!" );
+		}
+
+		log.info( "Reading weight vector from {}", modelFile );
+		List<Data> models = new ArrayList<Data>();
+		
+		SparseDataStream ms = new SparseDataStream( modelFile.toURI().toURL() );
+		Data m = ms.readNext();
+		while( m != null ){
+			models.add( m );
+			m = ms.readNext();
+		}
+
+		log.info( "Found {} weight vectors in file {}", models.size(), modelFile );
+		if( models.isEmpty() ){
+			throw new Exception( "At least one weight vector is required for testing!" );
+		}
+
+		SgdTester test = new SgdTester();
+		
+		Data model = models.get( 0 );
+		InputVector vec = SvmLightDataStream.createSparseVector( model );
+		test.sgd.setWeightVector( vec );
+		if( model.get( "b" ) != null ){
+			log.info( "Using intercept {}", model.get( "b" ) );
+			test.sgd.setIntercept( new Double( model.get("b").toString() ) );
+		}
+		
+		DataStream stream = new SvmLightDataStream( testUrl );
+		Data item = stream.readNext();
+		int count = 0;
+		while( item != null ){
+			test.process( item );
+			if( ++count % 100 == 0 ){
+				log.info( "Test error after {} tests: {}", count, test.getTestError() );
+				log.info( "The prediction accuracy thus is: {}", 1.0d - test.getTestError() );
+			}
+			item = stream.readNext();
+		}
+		
+		return test;
+	}
+	
 
 	/**
 	 * @param args
@@ -84,52 +133,7 @@ implements DataProcessor
 			System.exit(0);
 		}
 
-		File weights = new File( args[0] );
-		if( ! weights.canRead() ){
-			System.err.println( "Cannot open file " + weights + " for reading!" );
-			System.err.println();
-			return;
-		}
-
-		log.info( "Reading weight vector from {}", weights );
-		List<Data> models = new ArrayList<Data>();
-
-		
-		
-		SparseDataStream ms = new SparseDataStream( weights.toURI().toURL() );
-		Data m = ms.readNext();
-		while( m != null ){
-			models.add( m );
-			m = ms.readNext();
-		}
-
-		log.info( "Found {} weight vectors in file {}", models.size(), weights );
-		if( models.isEmpty() ){
-			System.err.println( "At least one weight vector is required for testing!" );
-			System.err.println();
-			return;
-		}
-
-		SgdTester test = new SgdTester();
-		
-		Data model = models.get( 0 );
-		InputVector vec = SvmLightDataStream.createSparseVector( model );
-		test.sgd.setWeightVector( vec );
-		if( model.get( "b" ) != null ){
-			log.info( "Using intercept {}", model.get( "b" ) );
-			test.sgd.setIntercept( new Double( model.get("b").toString() ) );
-		}
-		
-		DataStream stream = new SvmLightDataStream( new URL( args[1] ) );
-		Data item = stream.readNext();
-		int count = 0;
-		while( item != null ){
-			test.process( item );
-			if( ++count % 100 == 0 ){
-				log.info( "Test error after {} tests: {}", count, test.getTestError() );
-				log.info( "The prediction accuracy thus is: {}", 1.0d - test.getTestError() );
-			}
-			item = stream.readNext();
-		}
+		Double testError = computeTestError( new File( args[0] ), new URL( args[1] ) ).getTestError();
+		log.info( "Test error is: {}", testError );
 	}
 }

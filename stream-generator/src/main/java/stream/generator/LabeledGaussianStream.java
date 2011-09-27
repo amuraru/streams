@@ -27,7 +27,6 @@ import org.xml.sax.InputSource;
 import stream.data.Data;
 import stream.data.DataImpl;
 import stream.data.stats.Statistics;
-import stream.io.DataSource;
 import stream.io.DataStream;
 import stream.util.ObjectFactory;
 import stream.util.ParameterInjection;
@@ -38,8 +37,7 @@ import cern.colt.matrix.impl.DenseDoubleMatrix2D;
  *
  */
 public class LabeledGaussianStream 
-	extends DataSource
-	implements DataStream
+	extends GeneratorDataStream 
 {
 	static Logger log = LoggerFactory.getLogger( LabeledGaussianStream.class );
 
@@ -361,7 +359,7 @@ public class LabeledGaussianStream
 	/**
 	 * @see stream.experiment.DataSource#createDataStream()
 	 */
-	@Override
+	//@Override
 	public DataStream createDataStream() throws Exception {
 		return this;
 	}
@@ -370,7 +368,7 @@ public class LabeledGaussianStream
 	/**
 	 * @see stream.experiment.DataSource#getClassName()
 	 */
-	@Override
+	//@Override
 	public String getClassName() {
 		return getClass().getName();
 	}

@@ -17,7 +17,7 @@ import stream.io.DataStream;
  * @author chris
  *
  */
-public class MixedStream implements DataStream {
+public class MixedStream extends GeneratorDataStream {
 
 	Map<String,Class<?>> types = new LinkedHashMap<String,Class<?>>();
 	Double totalWeight = 0.0d;
