@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 
 public abstract class AbstractStreamReducer<I,O>
-	implements HadoopStreamReducer<I,O> 
+	implements StreamReducer<I,O> 
 {
 	PrintWriter writer;
 

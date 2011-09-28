@@ -52,34 +52,51 @@ public class SgdMapper
 		//sgd.useGaussianKernel(0.001, 2048, false);
 		sgd.init();
 	}
+
+
+
 	
-	
+	/**
+	 * @see stream.data.DataProcessor#process(stream.data.Data)
+	 */
 	@Override
-	public void init() {
-		super.init();
-		this.writer = new SparseDataStreamWriter( this.getWriter() );
+	public Data process(Data data) {
+		
+		// check for the end of the current block
+		//
+		if( data != null ){
+			sgd.learn( data );
+		}
+		
+		return data;
 	}
 
 
-
-
+	/**
+	 * @see stream.hadoop.StreamMapper#startBlock()
+	 */
 	@Override
-	public void process(List<Data> items) {
-		
+	public void init() {
+		//
+		// this is for stateful persistent weight vectors only
+		//
 		Vector w_t = (Vector) recall( weightKey );
 		if( w_t != null ){
 			log.debug( "Found previous weights vector with key '{}'!", weightKey );
 			sgd.setWeightVector( w_t );
 		}
+	}
+
+
+	/**
+	 * @see stream.hadoop.StreamMapper#endBlock()
+	 */
+	@Override
+	public void finish() {
 		
-		log.debug( "Training SGD ({})", sgd );
-		
-		for( Data item : items ){
-			sgd.learn( item );
-		}
+		writer = new SparseDataStreamWriter( this.getWriter() );
 
 		log.debug( "Writing out weight-vector" );
-		
 		Data data = new DataImpl();
 		data.put( "@w_id", myId );
 		Vector out = sgd.getWeightVector();
@@ -90,36 +107,9 @@ public class SgdMapper
 		//getWriter().println( "w_" + myId + "\t" + sgd.getWeightVector().toString() );
 		log.debug( "Remembering new weights vector as '{}'", weightKey );
 		remember( weightKey, sgd.getWeightVector() );
+
 	}
 	
-	/**
-	 * @see stream.data.DataProcessor#process(stream.data.Data)
-	 */
-	@Override
-	public Data process(Data data) {
-		
-		// check for the end of the current block
-		//
-		if( data == null ){
-			//
-			// the SGD mapper does per-block processing, so if we reach the
-			// end of a block, then we process the stored items and start
-			// a new one
-			//
-			this.process( block );
-			this.block.clear();
-			
-		} else {
-			//
-			// if not at the end, we're going to add the current
-			// item to the block of data
-			//
-			block.add( data );
-		}
-		
-		return data;
-	}
-
 	
 	/**
 	 * @param args
@@ -127,7 +117,7 @@ public class SgdMapper
 	public static void main(String[] args) throws Exception {
 		InputStream in = System.in;
 		OutputStream out = System.out;
-
+		
 		String source = "http://kirmes.cs.uni-dortmund.de/data/ccat.tr";
 		//source = "http://kirmes.cs.uni-dortmund.de/data/mnist-block.svm_light";
 		//source = "http://kirmes.cs.uni-dortmund.de/data/test-data.svm_light";
