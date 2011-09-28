@@ -48,6 +48,12 @@ public class MapReduce {
     	
         log.info( "#" );
         log.info( "#  >>> Starting MAP phase..." );
+        try {
+        	numberOfMappers = Integer.parseInt( System.getProperty( "maxThreads" ) );
+        	log.info( "#  Using a maximum of {} parallel mapper-threads", numberOfMappers );
+        } catch (Exception e){
+        	numberOfMappers = dataFiles.size();
+        }
         log.info( "#" );
         long start = System.currentTimeMillis();
 
@@ -142,7 +148,7 @@ public class MapReduce {
     
     public File run() throws Exception {
     	
-    	log.info( "#  Running 'map' on {}Êblocks using {} parallel mappers", dataFiles.size(), numberOfMappers );
+    	log.info( "#  Running 'map' on {} blocks using {} parallel mappers", dataFiles.size(), numberOfMappers );
     	List<File> mappedBlocks = doMap( dataFiles );
     	
     	log.info( "#  Running 'reduce' on {} results", mappedBlocks.size() );

@@ -75,10 +75,11 @@ public class SgdExperiment {
 		
 		File resultFile = new File( outputDirectory.getAbsolutePath() + File.separator + "test.error" );
 		PrintStream out = new PrintStream( new FileOutputStream( resultFile ) );
-		out.println( "#T;M;testSetSize" );
+		out.println( "#T;M;testSetSize;testError" );
 		out.print( this.blockSize );
 		out.print( ";" + this.blocks );
 		out.print( ";" + test.getTestSetSize() );
+		out.print( ";" + test.getTestError() );
 		out.println();
 	}
 
@@ -115,7 +116,7 @@ public class SgdExperiment {
 		int T = Integer.parseInt( args[0] );
 		int M = Integer.parseInt( args[1] );
 		log.info( "Using block-size T = {}", T );
-		log.info( "Using M = {}Ênumber of blocks", M );
+		log.info( "Using M = {} number of blocks", M );
 		//
 		// usage is: 
 		//
