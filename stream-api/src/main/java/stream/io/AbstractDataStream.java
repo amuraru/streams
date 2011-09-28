@@ -72,6 +72,7 @@ public abstract class AbstractDataStream implements DataStream {
 		readHeader();
 	}
 	
+
 	public Map<String,Class<?>> getAttributes(){
 		return attributes;
 	}

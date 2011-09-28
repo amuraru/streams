@@ -67,7 +67,7 @@ public abstract class AbstractClassifier<D,C>
 	
 	
 
-	public InputVector createSparseVector( Data datum ){
+	public static InputVector createSparseVector( Data datum ){
 		if( datum.containsKey( ".sparse-vector" ) ){
 			log.trace( "Found existing sparse-vector object!" );
 			return (InputVector) datum.get( ".sparse-vector" );

@@ -3,9 +3,11 @@
  */
 package stream.io;
 
+import java.util.List;
 import java.util.Map;
 
 import stream.data.Data;
+import stream.data.DataProcessor;
 
 /**
  * <p>
@@ -35,4 +37,11 @@ public interface DataStream {
 	
 	
 	public Data readNext( Data datum ) throws Exception;
+	
+	
+	public void addPreprocessor( DataProcessor proc );
+	
+	public void addPreprocessor( int idx, DataProcessor proc );
+	
+	public List<DataProcessor> getPreprocessors();
 }

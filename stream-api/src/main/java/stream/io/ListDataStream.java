@@ -8,9 +8,11 @@ import java.util.Map;
 
 import stream.data.Data;
 import stream.data.DataImpl;
+import stream.data.DataProcessor;
 
 public class ListDataStream implements DataStream {
 
+	final List<DataProcessor> processors = new ArrayList<DataProcessor>();
 	List<Data> data;
 	int pos = 0;
 	
@@ -38,5 +40,23 @@ public class ListDataStream implements DataStream {
 		}
 		
 		return null;
+	}
+
+
+	@Override
+	public void addPreprocessor(DataProcessor proc) {
+		processors.add( proc );
+	}
+
+
+	@Override
+	public void addPreprocessor(int idx, DataProcessor proc) {
+		processors.add( idx, proc );
+	}
+
+
+	@Override
+	public List<DataProcessor> getPreprocessors() {
+		return processors;
 	}
 }

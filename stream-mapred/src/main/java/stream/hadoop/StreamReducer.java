@@ -1,6 +1,6 @@
 package stream.hadoop;
 
-public interface HadoopStreamReducer<I,O> {
+public interface StreamReducer<I,O> {
 
 	public I read();
 	

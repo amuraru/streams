@@ -22,18 +22,18 @@ import stream.data.Data;
  *
  */
 public class AccessLogStream 
-	implements DataStream {
+	extends AbstractDataStream {
 
 	AccessLogAuditReader reader;
 	AuditEvent pending = null;
 	Map<String,Class<?>> attributes = null;
-	
 	
 	/**
 	 * @param url
 	 * @throws Exception
 	 */
 	public AccessLogStream(URL url) throws Exception {
+		super( url );
 		reader = new AccessLogAuditReader( url.openStream() );
 		pending = reader.readNext();
 		
@@ -80,9 +80,15 @@ public class AccessLogStream
 		
 		return new LogData( evt );
 	}
-	
-	
-	public Data readNext( Data data ) throws Exception {
+
+
+
+	@Override
+	public Data readItem(Data instance) throws Exception {
 		return readNext();
+	}
+
+	@Override
+	public void readHeader() throws Exception {
 	}
 }

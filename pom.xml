@@ -12,6 +12,7 @@
     <module>stream-mining</module>
     <module>stream-log</module>
     <module>stream-mapred</module>
+    <module>stream-web</module>
   </modules>
 
   <build>

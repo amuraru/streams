@@ -10,6 +10,8 @@ import stream.io.DataStream;
 public interface DataIndexService
     extends Remote
 {
+	public final static String DATA_SET_NAME = "@dataset.name";
+	
     public Set<String> listDataSets() throws RemoteException;
     
     public DataStream openStream( String dataSetName ) throws RemoteException;

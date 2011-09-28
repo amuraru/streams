@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import stream.data.vector.Vector;
+
 /**
  * <p>
  * This class provides some static convenience methods for accessing data items. In
@@ -130,5 +132,19 @@ public class DataUtils {
 	
 	public final static boolean isHiddenOrSpecial( String key ){
 		return isHidden( key ) || isSpecial( key );
+	}
+	
+
+	public static Data put( Data data, Vector out ){
+		if( out.getType() == Vector.Type.DENSE ){
+			for( int i = 0; i < out.length(); i++ ){
+				data.put( "" + i, out.get(i) );
+			}
+		} else {
+			for( Integer key : out.getPairs().keySet() ){
+				data.put( key.toString(), out.getPairs().get( key ) );
+			}
+		}
+		return data;
 	}
 }

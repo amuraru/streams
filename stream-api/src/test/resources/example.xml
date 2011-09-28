@@ -12,5 +12,10 @@
 		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />
 	
 	</Processing>		
-
+	
+<!-- 
+    <Stream id="sql" class="stream.io.SyslogStream">
+    	<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="mysql:sql" />
+    </Stream>
+ -->
 </experiment>

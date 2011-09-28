@@ -1,8 +1,10 @@
 package stream.io;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -240,5 +242,57 @@ public class SvmLightDataStream
 
 		return new SparseVector( indexes, vals, Double.parseDouble( token[0] ), false );
 		*/
+	}
+	
+
+	public static InputVector createSparseVector( Data datum ){
+		if( datum.containsKey( ".sparse-vector" ) ){
+			log.trace( "Found existing sparse-vector object!" );
+			return (InputVector) datum.get( ".sparse-vector" );
+		}
+		
+		for( Serializable val : datum.values() ){
+			if( val instanceof InputVector ){
+				log.trace( "Found existing sparse-vector object!" );
+				return (InputVector) val;
+			}
+		}
+		
+		TreeSet<String> indexes = new TreeSet<String>();
+		for( String key : datum.keySet() ){
+			Serializable val = datum.get( key );
+			if( !DataUtils.isAnnotation( key ) && key.matches( "\\d+" ) && val instanceof Double ){
+				log.debug( "Found numeric feature {}", key );
+				indexes.add( key );
+			} else {
+				log.debug( "Skipping non-numeric feature {} of type {}", key, val.getClass() );
+			}
+		}
+		
+		double y = Double.NaN;
+		if( datum.containsKey( "@label" ) ){
+			try {
+				y = (Double) datum.get( "@label" );
+			} catch (Exception e) {
+				y = Double.NaN;
+			}
+		}
+		
+		//int[] idx = new int[ indexes.size() ];
+		//double[] vals = new double[ indexes.size() ];
+		HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
+		
+		//int i = 0;
+		for( String key : indexes ){
+			//idx[i] = Integer.parseInt( key );
+			//vals[i] = (Double) datum.get( key );
+			//i++;
+			pairs.put((Integer)Integer.parseInt( key ), (Double)datum.get( key ));
+		}
+		
+		//SparseVector vec = new SparseVector( idx, vals, y, false );
+		InputVector vec = new InputVector( pairs, false, y );
+		log.trace( "SparseVector: {}", vec );
+		return vec;
 	}
 }

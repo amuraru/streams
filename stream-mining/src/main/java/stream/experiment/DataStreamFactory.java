@@ -15,7 +15,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import stream.data.DataProcessor;
-import stream.generator.LabeledGaussianStream;
 import stream.io.DataSource;
 import stream.io.DataStreamProcessor;
 import stream.util.ObjectFactory;
@@ -107,10 +106,12 @@ public class DataStreamFactory
 	public DataSource createDataSource( Element el ) throws Exception {
 
 		String className = el.getAttribute( "class" );
+		/*
 		if( className != null && className.equals( "stream.generator.LabeledGaussianStream" ) ){
 			LabeledGaussianStream ds = (LabeledGaussianStream) ObjectFactory.newInstance().create( el );
 			return ds;
 		}
+		 */
 		
 		Map<String,String> ds = getAttributes( el );
 		DataSource d = new DataSource( ds.get("name"), ds.get("url"), ds.get( "class" ) );

@@ -54,7 +54,11 @@ public class MapReduce {
             @Override
             public void run() {
                 log.debug( "#  - Mapper " + file.getName() + " ~> " + outFile.getName() + " is starting..." );
-                map.run( in, out );
+                try {
+                	map.run( in, out );
+                } catch (Exception e) {
+                	e.printStackTrace();
+                }
                 log.debug( "#  - Mapper " + file.getName() + " ~> " + outFile.getName() + " is finished" );
             }
         });
@@ -171,7 +175,7 @@ public class MapReduce {
             }
             log.info( "#   " + total + " bytes appended to " + tmp.getAbsolutePath() );
             reader.close();
-            mapped.delete();
+            //mapped.delete();
         }
         intermediate.close();
         

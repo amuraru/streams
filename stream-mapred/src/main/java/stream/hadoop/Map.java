@@ -40,7 +40,11 @@ public class Map {
 				@Override
 				public void run() {
 					System.out.println( "Mapper " + file.getAbsolutePath() + " ~> " + outFile.getAbsolutePath() + " is starting..." );
-					map.run( in, out );
+					try {
+						map.run( in, out );
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					System.out.println( "Mapper " + file.getAbsolutePath() + " ~> " + outFile.getAbsolutePath() + " is finished" );
 				}
 			});

@@ -9,13 +9,12 @@ import java.util.Random;
 
 import stream.data.Data;
 import stream.data.DataImpl;
-import stream.io.DataStream;
 
 /**
  * @author chris
  *
  */
-public class RandomStream implements DataStream {
+public class RandomStream extends GeneratorDataStream {
 
 	Random random;
 	Map<String,Class<?>> attributes = new LinkedHashMap<String,Class<?>>();

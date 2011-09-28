@@ -70,6 +70,19 @@ public class StreamRunner
                         streams.put( id, stream );
                     }
                     
+                    NodeList proc = child.getElementsByTagName( "Processor");
+                    for( int j = 0; j < proc.getLength(); j++ ){
+                    	Node n = proc.item(j);
+                    	if( n instanceof Element ) {
+                    		try {
+                    			DataProcessor processor = (DataProcessor) objectFactory.create( (Element) n );
+                    			stream.addPreprocessor( processor );
+                    		} catch (Exception e) {
+                    			e.printStackTrace();
+                    		}
+                    	}
+                    }
+                    
                 } catch (Exception e) {
                     log.error( "Failed to create object: {}", e.getMessage() );
                     e.printStackTrace();
@@ -79,11 +92,15 @@ public class StreamRunner
             if( node instanceof Element && node.getNodeName().equals( "Processing" ) ){
                 Element child = (Element) node;
                 
+                /*
+                 */
                 DataStreamProcessor proc = new DataStreamProcessor();
                 Map<String,String> attr = objectFactory.getAttributes( child );
                 
                 List<DataProcessor> ps = this.processors.get( attr.get( "source" ) );
-                
+                for( DataProcessor processor : ps ){
+                	proc.addDataProcessor( processor );
+                }
             }
         }
     }

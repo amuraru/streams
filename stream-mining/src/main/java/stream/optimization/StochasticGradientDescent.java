@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.Measurable;
-import stream.data.vector.Vector;
 import stream.data.vector.InputVector;
+import stream.data.vector.Vector;
 import stream.learner.AbstractClassifier;
 
 public class StochasticGradientDescent 
@@ -55,12 +55,21 @@ public class StochasticGradientDescent
 	}
 
 	public Vector getWeightVector(){
-		return w;
+		return avg_w;
 	}
 	
 	public void setWeightVector( Vector v ){
-		this.w = v;
+		this.avg_w = v;
 	}
+	
+	public Double getIntercept(){
+		return this.b;
+	}
+	
+	public void setIntercept( Double d ){
+		this.b = d;
+	}
+	
 	
 	@Override
 	public double getByteSize() {
@@ -191,6 +200,21 @@ public class StochasticGradientDescent
 		else
 			return 1.0d;
 	}
+	
+	public Double predict( Vector weightVector, Data example ){
+		InputVector x_i;
+		InputVector item = this.createSparseVector( example );
+		if(useKernel) 
+			x_i = gaussianKernel.transform(item);
+		else
+			x_i = item;
+		
+		if( ( weightVector.innerProduct( x_i ) + b) < 0.0 )
+			return -1.0d;
+		else
+			return 1.0d;
+	}
+	
 	
 	public void printModel(){
 		log.info( "snorm = {}", avg_w.snorm() );

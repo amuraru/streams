@@ -12,13 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataImpl;
-import stream.io.DataStream;
 
 /**
  * @author chris
  *
  */
-public class GaussianStream implements DataStream {
+public class GaussianStream extends GeneratorDataStream {
 
 	static Logger log = LoggerFactory.getLogger( GaussianStream.class );
 	
@@ -42,7 +41,7 @@ public class GaussianStream implements DataStream {
 	 * @param numberOfClasses  The number of classes.
 	 * @param attributeDistributions  The parameterization of the attribute distributions.
 	 */
-	public GaussianStream(){
+	public GaussianStream() {
 	}
 	
 	
