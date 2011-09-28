@@ -105,9 +105,9 @@ implements DataProcessor
 		int count = 0;
 		while( item != null ){
 			test.process( item );
-			if( ++count % 100 == 0 ){
-				log.info( "Test error after {} tests: {}", count, test.getTestError() );
-				log.info( "The prediction accuracy thus is: {}", 1.0d - test.getTestError() );
+			if( ++count % 1000 == 0 ){
+				log.debug( "Test error after {} tests: {}", count, test.getTestError() );
+				log.debug( "The prediction accuracy thus is: {}", 1.0d - test.getTestError() );
 			}
 			item = stream.readNext();
 		}

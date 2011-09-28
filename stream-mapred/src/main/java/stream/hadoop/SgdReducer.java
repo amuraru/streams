@@ -86,7 +86,7 @@ extends AbstractStreamReducer<Data,Data>
 	 * create a sparse-vector from that line. If no more lines can be read, then
 	 * this method simply returns <code>NULL</code>.
 	 * 
-	 * @see stream.hadoop.HadoopStreamReducer#read()
+	 * @see stream.hadoop.StreamReducer#read()
 	 */
 	@Override
 	public Data read() {
@@ -102,7 +102,7 @@ extends AbstractStreamReducer<Data,Data>
 
 
 	/**
-	 * @see stream.hadoop.HadoopStreamReducer#write(java.lang.Object)
+	 * @see stream.hadoop.StreamReducer#write(java.lang.Object)
 	 */
 	@Override
 	public void write(Data out) {

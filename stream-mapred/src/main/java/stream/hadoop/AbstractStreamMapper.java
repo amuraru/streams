@@ -23,7 +23,7 @@ import stream.io.SvmLightDataStream;
  *
  */
 public abstract class AbstractStreamMapper 
-	implements HadoopStreamMapper 
+	implements StreamMapper 
 {
 	/* The logger for this class */
 	static Logger log = LoggerFactory.getLogger( AbstractStreamMapper.class );
@@ -61,48 +61,20 @@ public abstract class AbstractStreamMapper
 		}
 		return block;
 	}
-
-
-	/**
-	 * This method is called before the data is processed. This is intended to be
-	 * used for initialization.
-	 */
-	@Override
-	public void init(){
-	}
-	
-
-	/**
-	 * This is the main work method. It can be used to iterate over the data block
-	 * multiple times. 
-	 */
-	@Override
-	public void process(List<Data> items) {
-	}
-
-	/**
-	 * This method is called after the processing is completed. Usually this is useful
-	 * for cleaning up any temporal data, etc.
-	 */
-	@Override
-	public void finish(){
-	}
 	
 	
-	private final void run( List<Data> block ){
-		init();
-		process( block );
-		getWriter().flush();
-		finish();
-		getWriter().flush();
-		getWriter().close();
-	}
-	
-	
-	public final void run( InputStream in, OutputStream out ){
-		List<Data> block = readBlock( in );
+	public void run( InputStream in, OutputStream out ) throws Exception {
 		outputStream = new PrintStream( out );
-		run( block );
+		this.init();
+		
+		DataStream stream = this.createDataStream( in );
+		Data item = stream.readNext();
+		while( item != null ){
+			process( item );
+			item = stream.readNext();
+		}
+		
+		finish();
 	}
 	
 	public final PrintStream getWriter(){
