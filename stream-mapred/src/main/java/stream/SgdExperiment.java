@@ -139,6 +139,7 @@ public class SgdExperiment {
 		}
 		
 		log.info( "Writing results to {}", out );
+		
 
 		SgdExperiment exp = new SgdExperiment( T, M, train, test, out );
 		exp.run();
