@@ -23,6 +23,7 @@ public class Partitioner {
 		}
 
 		CommandLineArgs cla = new CommandLineArgs( params );
+		cla.dumpArgs();
 		cla.setSystemProperties( "partitioner" );
 		
 		if( cla.getArguments().size() > 0 )
@@ -33,22 +34,23 @@ public class Partitioner {
 		
 		try {
 			
-			int limit = Integer.MAX_VALUE;
+			int limit = Integer.parseInt( cla.getOption( "limit", "" + Integer.MAX_VALUE ) );
 			int lines = Integer.parseInt( cla.getOption( "block.size", "1000" ) );
 			int parts = Integer.parseInt( cla.getOption( "max.parts", "10" ) );
-			
-			int i = 0;
 			
 			System.out.println( "Using block-size of " + lines + " lines" );
 			System.out.println( "Creating blocks from a maximum of " + limit + " examples" );
 			
 			
-			url = new URL( args[i] );
+			url = new URL( cla.getArguments().get( 0 ) );
 			File outputDirectory = new File( "." );
+			
+			if( cla.getArguments().size() > 1 )
+				outputDirectory = new File( cla.getArguments().get( 1 ) );
 			
 			stream.Partitioner p = new stream.Partitioner();
 			if( cla.getOption( "shuffle" ) != null )
-				p.createPartitions( lines, parts, limit, url, outputDirectory);
+				p.shuffledPartitions(lines, parts, limit, url, outputDirectory);
 			else
 				p.createPartitions( lines, parts, limit, url, outputDirectory );
 

@@ -107,7 +107,7 @@ public class MapReduce {
 		File tmp = File.createTempFile( "map_reduce_tmp", "__" );
 		log.info( "#   Creating intermediate output");
 		log.info( "#   Temporary output is created in '{}'", tmp.getAbsolutePath() );
-		//tmp.deleteOnExit();
+		tmp.deleteOnExit();
 		FileWriter intermediate = new FileWriter( tmp );
 		for( File mapped : outputs ){
 
@@ -123,7 +123,7 @@ public class MapReduce {
 			}
 			log.info( "#   " + total + " bytes appended to " + tmp.getAbsolutePath() );
 			reader.close();
-			//mapped.delete();
+			mapped.delete();
 		}
 		intermediate.close();
 
@@ -135,6 +135,8 @@ public class MapReduce {
 		log.info( "#" );
 		FileInputStream mapInput = new FileInputStream( tmp );
 		StreamReducer reducer = (StreamReducer) reducerClass.newInstance();
+		ParameterInjection.injectSystemProperties( reducer, "reducer.args" );
+		
 		log.info( "#  - Starting reducer, output is: " + finalOutput.getAbsolutePath() );
 		FileOutputStream fos = new FileOutputStream( finalOutput );
 		reducer.reduce( mapInput, fos );

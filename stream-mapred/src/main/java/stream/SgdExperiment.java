@@ -190,8 +190,8 @@ public class SgdExperiment {
 		}
 		log.info( "" );
 
-		int T = Integer.parseInt( System.getProperty( "experiment.T" ) );
-		int M = Integer.parseInt( System.getProperty( "experiment.M" ) );
+		int T = Integer.parseInt( System.getProperty( "experiment.args.T" ) );
+		int M = Integer.parseInt( System.getProperty( "experiment.args.M" ) );
 		URL train = new URL( System.getProperty( "experiment.training.url" ) );
 		URL test = new URL( System.getProperty( "experiment.test.url" ) );
 		String outDir = "" + System.getProperty( "experiment.output" );

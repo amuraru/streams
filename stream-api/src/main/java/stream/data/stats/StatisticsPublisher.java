@@ -43,8 +43,13 @@ public class StatisticsPublisher implements StatisticsListener {
 
 
 	public static void publish( URL url, Statistics stats ) throws Exception {
-		log.debug( "publishing statistics to URL {}", url );
 		String userInfo = url.getUserInfo();
+		
+		String urlString = url.toExternalForm();
+		if( userInfo != null )
+			urlString = urlString.replace( userInfo, "****:****" );
+		
+		log.info( "Publishing statistics to URL {}", urlString );
 		log.debug( "User info is: {}", userInfo );
 
 		URLConnection con = url.openConnection();
