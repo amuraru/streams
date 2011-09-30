@@ -79,7 +79,7 @@ public class Partitioner {
 			w.add( line );
 			
 			if( w.size() >= blockSize ){
-				log.debug( "Block writer {} is full, closing file {} and removing the writer", idx, w.getFile() );
+				log.info( "Block writer {} is full, closing file {} and removing the writer", idx, w.getFile() );
 				w.close();
 				writers.remove( w );
 			}

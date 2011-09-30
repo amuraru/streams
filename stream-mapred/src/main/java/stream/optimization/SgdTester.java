@@ -101,7 +101,7 @@ implements DataProcessor
 		DataStream stream = new SvmLightDataStream( testUrl );
 		Data item = stream.readNext();
 		int count = 0;
-		while( item != null && count < 10000 ){
+		while( item != null ){
 			test.process( item );
 			if( ++count % 1000 == 0 ){
 				log.debug( "Test error after {} tests: {}", count, test.getTestError() );
