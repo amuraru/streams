@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,7 +178,28 @@ public class ParameterDiscovery {
 		return false;
 	}
 	
+	public static Map<String,String> getProperties( String prefix, Properties p ){
+		String pre = prefix;
+		if( ! pre.endsWith( "." ) )
+			pre = pre + ".";
+		
+		Map<String,String> params = new HashMap<String,String>();
+		
+		for( Object o : p.keySet() ){
+			String key = o.toString();
+			if( key.startsWith( pre ) ){
+				params.put( key.substring( pre.length() ), p.getProperty( key ) );
+			}
+		}
+		
+		return params;
+	}
 
+	public static Map<String,String> getSystemProperties( String prefix ){
+		return getProperties( prefix, System.getProperties() );
+	}
+	
+	
 	public static void main( String[] args ) throws Exception {
 
 		Map<String,Object> params = new HashMap<String,Object>();

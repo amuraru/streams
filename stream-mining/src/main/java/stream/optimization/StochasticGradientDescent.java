@@ -94,6 +94,7 @@ public class StochasticGradientDescent
 	protected double etha(){
 		//return 1.0d / t;
 		return obj.getRadius() / Math.sqrt( obj.getGradientNormVariance() * t);
+		//return obj.getRadius() / Math.sqrt( obj.getGradientNormVariance() * 1000.0d );
 		//return 1.0d / (obj.getLambda() * t);
 	}
 	

@@ -3,8 +3,14 @@
  */
 package stream.io;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.LinkedList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataImpl;
@@ -16,6 +22,8 @@ import stream.data.DataImpl;
 public class CsvStream
 	extends AbstractDataStream
 {
+	static Logger log = LoggerFactory.getLogger( CsvStream.class );
+	
 	String splitExpression = "(;|,)";
 	LinkedList<String> buffer;
 	
@@ -27,6 +35,13 @@ public class CsvStream
 		super(url);
 	}
 	
+	public CsvStream(InputStream in) throws Exception {
+		super(in);
+		this.splitExpression = "(;|,)";
+		log.debug( "Split expression is: {}", splitExpression );
+		//initReader();
+		reader = new BufferedReader( new InputStreamReader( in ) );
+	}
 	
 	public CsvStream(URL url, String splitExp) throws Exception {
 		super( url );
@@ -49,11 +64,12 @@ public class CsvStream
 
 
 	public void readHeader() throws Exception {
+		log.debug( "Reading header, splitExpression is '{}'", splitExpression );
 		if( buffer == null )
 			buffer = new LinkedList<String>();
 		
 		String line = reader.readLine();
-
+		log.debug( "line is: {}", line );
 		while( line.startsWith( "#" ) )
 			line = line.substring( 1 );
 		
@@ -93,7 +109,7 @@ public class CsvStream
 		String line = readLine();
 		while( line != null && (line.trim().isEmpty() || line.startsWith( "#" ) ) ){
 			if( line.startsWith( "#" ) ){
-				String dt[] = line.split( splitExpression );
+				String dt[] = line.substring(1).split( splitExpression );
 				for( int i = 0; i < dt.length; i++ ){
 					if( i < dt.length ){
 						if( dt[i].matches( "\\d*\\.\\d*" ) )

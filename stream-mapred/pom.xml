@@ -8,7 +8,8 @@
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>stream-mapred</artifactId>
-	<name>streams-mapred</name>
+	<name>stream-mapred</name>
+	<version>1.0.3</version>
 
 	<repositories>
 		<repository>
@@ -69,5 +70,4 @@
 	</build>
 
 	
-	<version>1.0.2</version>
 </project>

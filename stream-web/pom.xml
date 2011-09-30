@@ -38,8 +38,28 @@
   	</dependency>
   	<dependency>
   		<groupId>org.slf4j</groupId>
-  		<artifactId>slf4j-simple</artifactId>
+  		<artifactId>slf4j-log4j12</artifactId>
   		<version>1.6.2</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-taglibs</artifactId>
+  		<version>3.0.7.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-config</artifactId>
+  		<version>3.0.7.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.madgag</groupId>
+  		<artifactId>markdownj-core</artifactId>
+  		<version>0.4.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>postgresql</groupId>
+  		<artifactId>postgresql</artifactId>
+  		<version>9.0-801.jdbc4</version>
   	</dependency>
   </dependencies>
   <build>
@@ -47,6 +67,9 @@
 	  <plugin>
 	    <groupId>org.mortbay.jetty</groupId>
 	    <artifactId>maven-jetty-plugin</artifactId>
+	    <configuration>
+	    	<contextPath>/results</contextPath>
+	    </configuration>
 	  </plugin>
 	</plugins>
   </build>

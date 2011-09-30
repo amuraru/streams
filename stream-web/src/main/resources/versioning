@@ -1,0 +1,11 @@
+Versioning
+==========
+
+Each page stored in the *SciNotes* system is associated with a timestamp. Upon 
+modification, a new copy of the page is stored, associated with the current time. 
+This allows for retrieving all versions of a page/article/memo.
+
+The orange clock icon on the upper right of each page will show a list of the 
+last 10 versions of the current page.
+
+

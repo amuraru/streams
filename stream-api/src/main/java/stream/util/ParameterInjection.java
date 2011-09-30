@@ -136,6 +136,12 @@ public class ParameterInjection {
 			}
 		}
 	}
+	
+	
+	public static void injectSystemProperties( Object object, String prefix ) throws Exception {
+		Map<String,String> params = ParameterDiscovery.getSystemProperties( prefix );
+		inject( object, params );
+	}
 
 
 	public static Map<String,String> extract( Object learner ) throws Exception {

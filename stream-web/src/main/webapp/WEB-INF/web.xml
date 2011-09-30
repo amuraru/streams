@@ -3,20 +3,64 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Data Web Storage</display-name>
-  
-  <listener>
-  	<listener-class>stream.web.servlet.DataStorageContextListener</listener-class>
-  </listener>
-  
-  <servlet>
-  	<servlet-name>DataUploadServlet</servlet-name>
-  	<servlet-class>stream.web.servlet.DataUploadServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>DataUploadServlet</servlet-name>
-  	<url-pattern>/data/upload</url-pattern>
-  </servlet-mapping>
-  
+	<display-name>Data Web Storage</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/applicationContext.xml
+			/WEB-INF/applicationContext-security.xml
+		</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>stream.web.servlet.DataStorageContextListener</listener-class>
+	</listener>
+
+
+
+	<servlet>
+		<servlet-name>DataUploadServlet</servlet-name>
+		<servlet-class>stream.web.servlet.DataUploadServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>StatisticsServlet</servlet-name>
+		<servlet-class>stream.web.servlet.StatisticsServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>NotesServlet</servlet-name>
+		<servlet-class>stream.web.servlet.NotesServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>NotesServlet</servlet-name>
+		<url-pattern>/notes/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DataUploadServlet</servlet-name>
+		<url-pattern>/data/upload</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>StatisticsServlet</servlet-name>
+		<url-pattern>/stats/*</url-pattern>
+	</servlet-mapping>
+
 </web-app>

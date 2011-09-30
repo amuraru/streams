@@ -69,7 +69,7 @@ public abstract class AbstractDataStream implements DataStream {
 
 	public AbstractDataStream( InputStream in ) throws Exception {
 		reader = new BufferedReader( new InputStreamReader( in ) );
-		readHeader();
+		//readHeader();
 	}
 	
 

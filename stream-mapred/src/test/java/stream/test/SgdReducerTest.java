@@ -2,7 +2,7 @@ package stream.test;
 
 import java.net.URL;
 
-import stream.hadoop.SgdReducer;
+import stream.optimization.SgdReducer;
 
 public class SgdReducerTest {
 

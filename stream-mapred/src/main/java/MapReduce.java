@@ -14,8 +14,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import stream.hadoop.AbstractStreamMapper;
-import stream.hadoop.AbstractStreamReducer;
+import stream.mapred.StreamMapper;
+import stream.mapred.StreamReducer;
 
 public class MapReduce {
 
@@ -49,7 +49,7 @@ public class MapReduce {
         final InputStream in = new FileInputStream( file );
         final OutputStream out = new FileOutputStream( outFile );
 
-        final AbstractStreamMapper map = (AbstractStreamMapper) mapClass.newInstance();
+        final StreamMapper map = (StreamMapper) mapClass.newInstance();
         Thread t = new Thread( new Runnable(){
             @Override
             public void run() {
@@ -187,7 +187,7 @@ public class MapReduce {
         log.info( "#  >>> Starting REDUCE phase..." );
         log.info( "#" );
         FileInputStream mapInput = new FileInputStream( tmp );
-        AbstractStreamReducer reducer = (AbstractStreamReducer) reducerClass.newInstance();
+        StreamReducer reducer = (StreamReducer) reducerClass.newInstance();
         log.info( "#  - Starting reducer, output is: " + finalOutput.getAbsolutePath() );
         FileOutputStream fos = new FileOutputStream( finalOutput );
         reducer.reduce( mapInput, fos );

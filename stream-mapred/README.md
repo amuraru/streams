@@ -40,10 +40,12 @@ is suitable for CSV,..)
   To create a partitioned dataset from a URL, simply use the 
 stream-mapred.jar created above and run:
 
-  # java -cp stream-mapred -b 1000 -l 10000 http://kirmes.cs.uni-dortmund.de/data/mnist-100k.tr
+  # java -cp stream-mapred.jar stream.Partitioner \
+      --max-parts 4 --block-size 1000 --limit 10000 \
+      --input-url http://kirmes.cs.uni-dortmund.de/data/mnist-100k.tr
 
   This will download up to 10000 examples ( '-l' is for 'limit' ) and
-put it into files of 1000 examples each (the '-b' is for 'block-size).
+put it into files of 1000 examples each (the '-b' is for `block-size`).
 The outcome will be files named as
 
      mnist-100k.tr.part0000
@@ -53,6 +55,14 @@ The outcome will be files named as
 
   The data files are written to the current working directory.
 
+  To create shuffled partitions, you can specify the `-s SEED` option,
+which will randomly distribute the data items over the resulting parts.
+The argument to `-s` is a seed value (Long) or `-1` if a random seed
+value should be used. The intention of specifying a seed value is to be
+able to recreate the same partitioning of the data later on.
+
+  The seed value can also be specified by using the system property
+`global.random.seed`.
 
 
 Map&Reduce Runner

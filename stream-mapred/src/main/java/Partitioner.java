@@ -1,12 +1,9 @@
 
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.net.URL;
-import java.text.DecimalFormat;
+
+import stream.util.CommandLineArgs;
 
 public class Partitioner {
 
@@ -17,110 +14,47 @@ public class Partitioner {
 		String[] args = params;
 		URL url;
 		
+		
 		if( args.length < 1 ){
 			System.out.println( "Usage:" );
 			System.out.println( "    java ... stream.hadoop.Partitioner [-b LINES] [-l LIMIT] URL" );
 			System.out.println();
 			return;
 		}
+
+		CommandLineArgs cla = new CommandLineArgs( params );
+		cla.setSystemProperties( "partitioner" );
+		
+		if( cla.getArguments().size() > 0 )
+			System.setProperty( "partitioner.input.url", cla.getArguments().get( 0 ) );
+		
+		if( cla.getArguments().size() > 1 )
+			System.setProperty( "partitioner.output", cla.getArguments().get( 1 ) );
 		
 		try {
+			
 			int limit = Integer.MAX_VALUE;
-			int lines = 1000;
+			int lines = Integer.parseInt( cla.getOption( "block.size", "1000" ) );
+			int parts = Integer.parseInt( cla.getOption( "max.parts", "10" ) );
 			
 			int i = 0;
-			
-			if( "-b".equals( args[i] ) || "--block-size".equals( args[i] ) ){
-				System.out.println( "Adding block-size " + args[i] + " " + args[i+1] );
-				lines = Integer.parseInt( args[i+1] );
-				i++;
-				i++;
-			}
-			
-			if( "-l".equals( args[i] ) || "--limit".equals( args[i] ) ){
-				System.out.println( "Adding limit " + args[i] + " " + args[i+1] );
-				limit = Integer.parseInt( args[i+1] );
-				i++;
-				i++;
-			}
 			
 			System.out.println( "Using block-size of " + lines + " lines" );
 			System.out.println( "Creating blocks from a maximum of " + limit + " examples" );
 			
+			
 			url = new URL( args[i] );
-			File f = new File(url.getFile());
-			String name = f.getName();
+			File outputDirectory = new File( "." );
 			
-			int part = 0;
-			DecimalFormat fmt = new DecimalFormat( "0000" );
-			
-			int count = 0;
-			PrintStream out = null;
-			BufferedReader r = new BufferedReader( new InputStreamReader( url.openStream() ) );
-			String line = r.readLine();
-			while( line != null && count < limit ){
-				if( out == null || count % lines == 0 ){
-					if( out != null )
-						out.close();
-					File file = new File( name + ".part" + fmt.format( part ) );
-					out = new PrintStream( new FileOutputStream( file ) );
-					part++;
-					System.out.println( "Writing to file " + file.getAbsolutePath() );
-				}
-				count++;
-				out.println( line );
-				line = r.readLine();
-			}
-			
-			if( out != null )
-				out.close();
-			
-			r.close();
+			stream.Partitioner p = new stream.Partitioner();
+			if( cla.getOption( "shuffle" ) != null )
+				p.createPartitions( lines, parts, limit, url, outputDirectory);
+			else
+				p.createPartitions( lines, parts, limit, url, outputDirectory );
+
 			
 		} catch (Exception e) {
 			System.out.println( "Error: " + e.getMessage() );
 		}
-	}
-	
-	
-	public static void partition( int blockSize, int limit, URL url, File outputDirectory ) throws Exception {
-		File f = new File(url.getFile());
-		String name = f.getName();
-		
-		if( outputDirectory.isFile() )
-			throw new Exception( "Output directory '" + outputDirectory.getAbsolutePath() + "' is a file!" );
-		
-		if( ! outputDirectory.isDirectory() )
-			outputDirectory.mkdirs();
-		
-		if( !outputDirectory.isDirectory() )
-			throw new Exception( "Failed to create outputDirectory '" + outputDirectory.getAbsolutePath() + "'!" );
-		
-		int part = 0;
-		DecimalFormat fmt = new DecimalFormat( "0000" );
-		
-		int count = 0;
-		PrintStream out = null;
-		BufferedReader r = new BufferedReader( new InputStreamReader( url.openStream() ) );
-		String line = r.readLine();
-		while( line != null && count < limit ){
-			if( out == null || count % blockSize == 0 ){
-				if( out != null )
-					out.close();
-				File file = new File( outputDirectory.getAbsolutePath() + File.separator + name + ".part" + fmt.format( part ) );
-				out = new PrintStream( new FileOutputStream( file ) );
-				part++;
-				System.out.println( "Writing to file " + file.getAbsolutePath() );
-			}
-			count++;
-			out.println( line );
-			line = r.readLine();
-		}
-		
-		if( out != null )
-			out.close();
-		
-		r.close();
-
 	}
 }
