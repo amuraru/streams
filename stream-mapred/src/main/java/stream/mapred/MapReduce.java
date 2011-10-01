@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,20 @@ public class MapReduce {
 		this.numberOfMappers = mappers;
 		this.dataFiles.addAll( inputBlocks );
 		this.outputFile = outputFile;
+	}
+
+
+	public StreamReducer createReducer() throws Exception {
+		StreamReducer reducer = (StreamReducer) reducerClass.newInstance();
+		ParameterInjection.injectSystemProperties( reducer, "reducer.args" );
+		return reducer;
+	}
+
+
+	public StreamMapper createMapper() throws Exception {
+		StreamMapper mapper = (StreamMapper) mapperClass.newInstance();
+		ParameterInjection.injectSystemProperties( mapper, "mapper.args" );
+		return mapper;
 	}
 
 
@@ -100,7 +115,6 @@ public class MapReduce {
 
 
 
-	@SuppressWarnings("rawtypes")
 	public void doReduce( List<File> outputs, File finalOutput ) throws Exception {
 		log.info( "###########################################################################################" );
 		log.info( "#" );
@@ -134,9 +148,8 @@ public class MapReduce {
 		log.info( "#  >>> Starting REDUCE phase..." );
 		log.info( "#" );
 		FileInputStream mapInput = new FileInputStream( tmp );
-		StreamReducer reducer = (StreamReducer) reducerClass.newInstance();
-		ParameterInjection.injectSystemProperties( reducer, "reducer.args" );
-		
+		StreamReducer reducer = createReducer();
+
 		log.info( "#  - Starting reducer, output is: " + finalOutput.getAbsolutePath() );
 		FileOutputStream fos = new FileOutputStream( finalOutput );
 		reducer.reduce( mapInput, fos );
@@ -153,6 +166,39 @@ public class MapReduce {
 
 
 	public File run() throws Exception {
+
+
+		if( dataFiles.isEmpty() ){
+			log.info( "No data files provided, running single-threaded map-reduce on standard input" );
+			File intermediate = File.createTempFile( "_intermediate_result", ".dat" );
+			//intermediate.deleteOnExit();
+			log.debug( "Writing intermediate results to " + intermediate.getAbsolutePath() );
+
+			OutputStream out = new FileOutputStream( intermediate );
+
+			log.info( "Running Mapper on standard input..." );
+			StreamMapper mapper = createMapper();
+			mapper.run( System.in, out);
+			out.flush();
+			out.close();
+
+			OutputStream result = System.out;
+			if( outputFile != null ){
+				log.info( "Writing output to " + outputFile.getAbsolutePath() );
+				result = new FileOutputStream( outputFile );
+			} else {
+				log.info( "Writing output to standard output" );
+			}
+
+			log.info( "Running Reducer on intermediate results..." );
+			FileInputStream in = new FileInputStream( intermediate );
+			StreamReducer reducer = createReducer();
+			reducer.reduce( in, result );
+			result.flush();
+			result.close();
+			return outputFile;
+		}
+
 
 		log.info( "#  Running 'map' on {} blocks using {} parallel mappers", dataFiles.size(), numberOfMappers );
 		List<File> mappedBlocks = doMap( dataFiles );
@@ -191,16 +237,15 @@ public class MapReduce {
 		return new File( inputFile.getAbsolutePath() + ".map-output" );
 	}
 
-	public static Thread createMapper( Class<?> mapClass, File inputFile, final File outFile ) throws Exception {
+	public Thread createMapper( Class<?> mapClass, File inputFile, final File outFile ) throws Exception {
 		final File file = inputFile;
 		log.debug( "#  - Creating mapper for " + file.getAbsolutePath() );
 
 		final InputStream in = new FileInputStream( file );
 		final OutputStream out = new FileOutputStream( outFile );
 
-		final StreamMapper map = (StreamMapper) mapClass.newInstance();
-		ParameterInjection.injectSystemProperties( map, "mapper.args" );
-		
+		final StreamMapper map = createMapper();
+
 		Thread t = new Thread( new Runnable(){
 			@Override
 			public void run() {
@@ -220,170 +265,115 @@ public class MapReduce {
 	public Long getMapTime(){
 		return mapTime;
 	}
-	
+
 	public Long getReduceTime(){
 		return reduceTime;
 	}
-	
-	
-	
+
+
+
+
 	/**
-	 * @param args
+	 * 
+	 * @param params
+	 * @throws Exception
 	 */
-	@SuppressWarnings("rawtypes")
-	public static void main(String[] args) throws Exception {
-
+	public static void main(String[] params) throws Exception {
 		Properties p = new Properties();
-		if( args.length == 1 ){
-			p.load( new FileReader( new File( args[0] ) ) );
+
+		if( params.length == 1 ){
+			File file = new File( params[0] );
+			if( !file.canRead() ){
+				System.err.println( "Cannot read settings file '" + file.getAbsolutePath() + "'!" );
+				System.exit( -1 );
+			} else {
+				p.load( new FileReader( file ) );
+			}
+		} else {
+			System.err.println( "Usage:" );
+			System.err.println( "       java MapReduce properties" );
+			System.err.println();
+			System.exit( -1 );
 		}
+
 		p = CommandLineArgs.expandSystemProperties( p );
-		
-		for( Object key : p.keySet() ){
-			String k = key.toString();
-			String value = p.getProperty( k );
-			if( value.indexOf( "${" ) >= 0 ){
-				for( Object o : System.getProperties().keySet() ){
-					String os = "${" + o.toString() + "}";
-					value = value.replace( os, System.getProperty( o.toString() ) );
-				}
-			}
+		CommandLineArgs.populateSystemProperties( p );
+
+
+		log.debug( "" );
+		TreeSet<String> opts = new TreeSet<String>();
+		for( Object k : p.keySet() ){
+			opts.add( k.toString() );
 		}
-		
-		int maxMappers = 4;
+		for( String k : opts ){
+			String sys = System.getProperty( k );
+			if( sys == null )
+				sys = p.getProperty(k);
+			log.debug( "   " + k + " = " + p.getProperty( k ) );
+		}
+		log.debug( "" );
+
+		int numberOfMappers = 4;
 		try {
-			maxMappers = Integer.parseInt( p.getProperty( "mapper.threads" ) );
+			numberOfMappers = Integer.parseInt( System.getProperty( "mapper.threads" ) );
 		} catch (Exception e) {
-			maxMappers = 4;
+			numberOfMappers = Runtime.getRuntime().availableProcessors();
 		}
+		log.debug( "Using a maximum of " + numberOfMappers + " concurrent mapper threads" );
 
-		if( args.length != 1 && args.length < 3 ){
-			log.info( "Usage:" );
-			log.info( "     java stream.MapReduce properties-file" );
-			log.info( "  or" );
-			log.info( "     java stream.MapReduce map.class.name reduce.class.name file1 file2 file2  OUTPUT" );
-		}
+		log.info( "" );
+		Class<?> mapperClass = Class.forName( System.getProperty( "mapper.class" ) );
+		log.info( "  Mapper class is " + mapperClass.getName() );
+		Class<?> reducerClass = Class.forName( System.getProperty( "reducer.class" ) );
+		log.info( "  Reducer class is " + reducerClass.getName() );
+		log.info( "" );
 
-		log.info( "###########################################################################################" );
-		log.info( "#" );
-		log.info( "#  stream-mapred - A simple Map&Reduce Variant" );
-		log.info( "#" );
-		Class<?> clazz = findClass( args[0] );
-		if( clazz == null ){
-			System.err.println( "Cannot find MapperClass " + args[0] );
-			System.exit( -1 );
-		}
-		log.info( "#   Mapper: " + args[0] );
+		List<File> inputFiles = new ArrayList<File>();
+		if( System.getProperty( "mapper.input" ) != null ){
+			File inputDirectory = new File( System.getProperty( "mapper.input" ) );
+			if( !inputDirectory.isDirectory() ){
+				log.error( "Input-directory '{}' is not a directory!", System.getProperty( "mapper.input" ) );
+				return;
+			} else {
 
-		Class<?> reducerClass = findClass( args[1] );
-		if( reducerClass == null ){
-			System.err.println( "Cannod find ReducerClass " + args[1] );
-			System.exit( -1 );
-		}
-		log.info( "#   Reducer: " + args[1] );
-
-		List<Thread> mappers = new ArrayList<Thread>();
-		File finalOutput = new File( args[ args.length - 1 ] );
-		log.info( "#   Final output: " + finalOutput.getAbsolutePath() );
-		log.info( "#" ); 
-		final List<File> outputs = new ArrayList<File>();
-		List<File> inputs = new ArrayList<File>();
-		for( int i = 2; i < args.length -1; i++ ){
-			File f = new File( args[i] );
-			log.info( "#   adding input {}", f.getAbsolutePath() );
-			inputs.add( f );
-		}
-
-		log.info( "#" );
-		log.info( "#  >>> Starting MAP phase..." );
-		log.info( "#" );
-		long start = System.currentTimeMillis();
-		long mapTime = 0L;
-
-		while( ! mappers.isEmpty() || ! inputs.isEmpty() ){
-
-			Iterator<Thread> it = mappers.iterator();
-			while( it.hasNext() ){
-				Thread t = it.next();
-				if( ! t.isAlive() ){
-					log.debug( "#  Mapper {} finished, removing from list", t );
-					it.remove();
+				File[] files = inputDirectory.listFiles();
+				if( files != null ){
+					for( File f : files ){
+						if( f.isFile() ){
+							inputFiles.add( f );
+						}
+					}
 				}
 			}
+		}
 
-			while( mappers.size() < maxMappers && !inputs.isEmpty() ){
-				File input = inputs.remove( 0 );
-				log.debug( "#   Creating mapper for {}", input );
-				File outputFile = createOutfile( input );
-				outputs.add( outputFile );
-				Thread t = createMapper( clazz, input, outputFile);
-				mappers.add( t );
-				t.start();
-			}
-			try {
-				if( mappers.size() + inputs.size() > 0 ){
-					log.info( "#    {} mappers running, {} input-files waiting to be processed", mappers.size(), inputs.size() );
-					Thread.sleep( 1000 );
-				}
-			} catch (Exception e) {
+		File outputFile = null;
+		if( System.getProperty( "reducer.output" ) != null )
+			outputFile = new File( System.getProperty( "reducer.output" ) );
+
+		//
+		// usage is: 
+		//
+		//     java stream.SgdExperiment -T blockSize -M blocks URL-train URL-test
+		//
+		//
+		if( outputFile != null ){
+			File out = outputFile.getParentFile();
+			out.mkdirs();
+			if( ! out.isDirectory() ){
+				log.error( "Failed to create output directory {}", out );
+				return;
 			}
 		}
-		mapTime = System.currentTimeMillis() - start;
-		log.info( "#  All mappers finished." );
-		log.info( "# ");
-		log.info( "#  >>> MAP phase complete." );
-		log.info( "# ");
-
-		log.info( "###########################################################################################" );
-		log.info( "#" );
-		File tmp = File.createTempFile( "map_reduce_tmp", "__" );
-		log.info( "#   Creating intermediate output");
-		log.info( "#   Temporary output is created in '{}'", tmp.getAbsolutePath() );
-		//tmp.deleteOnExit();
-		FileWriter intermediate = new FileWriter( tmp );
-		for( File mapped : outputs ){
-
-			char[] buf = new char[ 4096 ];
-			FileReader reader = new FileReader( mapped );
-			int read = reader.read( buf );
-			int total = read;
-			while( read > 0 ){
-				intermediate.write( buf, 0, read );
-				read = reader.read( buf );
-				if( read > 0 )
-					total += read;
+		if( !inputFiles.isEmpty() ){
+			log.info( "Processing the following {} input files:", inputFiles.size() );
+			for( File f : inputFiles ){
+				log.info( "   {}", f.getAbsolutePath() );
 			}
-			log.info( "#   " + total + " bytes appended to " + tmp.getAbsolutePath() );
-			reader.close();
-			//mapped.delete();
 		}
-		intermediate.close();
-
-		long startReduce = System.currentTimeMillis();
-		long reduceTime = 0L;
-		log.info( "#" );
-		log.info( "###########################################################################################" );
-		log.info( "#" );
-		log.info( "#  >>> Starting REDUCE phase..." );
-		log.info( "#" );
-		FileInputStream mapInput = new FileInputStream( tmp );
-		StreamReducer reducer = (StreamReducer) reducerClass.newInstance();
-		log.info( "#  - Starting reducer, output is: " + finalOutput.getAbsolutePath() );
-		FileOutputStream fos = new FileOutputStream( finalOutput );
-		reducer.reduce( mapInput, fos );
-		fos.close();
-		reduceTime = System.currentTimeMillis() - startReduce;
-		log.info( "#  - REDUCE finished." );
-		log.info( "#  - Output is in file {}", finalOutput.getAbsolutePath() );
-		log.info( "#" );
-		log.info( "#" );
-		log.info( "###########################################################################################" );
-		log.info( "# ");
-		log.info( "#  Map-Phase required:      {} ms", mapTime );
-		log.info( "#  Reduce-phase required:   {} ms", reduceTime );
-		log.info( "#  ------------------------------------------" );
-		log.info( "#  Total processing time is {} ms", reduceTime + mapTime );
-		log.info( "# ");
-		log.info( "###########################################################################################" );
+		if( outputFile != null )
+			log.info( "Writing results to {}", outputFile );
+		stream.mapred.MapReduce exp = new stream.mapred.MapReduce( mapperClass, reducerClass, numberOfMappers, inputFiles, outputFile );
+		exp.run();
 	}
 }

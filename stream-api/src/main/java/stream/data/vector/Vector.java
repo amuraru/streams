@@ -1,9 +1,12 @@
 package stream.data.vector;
 
+import stream.data.Data;
+import stream.data.DataUtils;
 import stream.data.Measurable;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 /**
  * @author Sangkyun Lee
@@ -369,5 +372,52 @@ public class Vector implements Serializable, Measurable
 		size += 8.0d;
 		
 		return size;
+	}
+	
+	
+
+	public static InputVector createSparseVector( Data datum ){
+		if( datum.containsKey( ".sparse-vector" ) ){
+			return (InputVector) datum.get( ".sparse-vector" );
+		}
+		
+		for( Serializable val : datum.values() ){
+			if( val instanceof InputVector ){
+				return (InputVector) val;
+			}
+		}
+		
+		TreeSet<String> indexes = new TreeSet<String>();
+		for( String key : datum.keySet() ){
+			Serializable val = datum.get( key );
+			if( !DataUtils.isAnnotation( key ) && key.matches( "\\d+" ) && val instanceof Double ){
+				indexes.add( key );
+			}
+		}
+		
+		double y = Double.NaN;
+		if( datum.containsKey( "@label" ) ){
+			try {
+				y = (Double) datum.get( "@label" );
+			} catch (Exception e) {
+				y = Double.NaN;
+			}
+		}
+		
+		//int[] idx = new int[ indexes.size() ];
+		//double[] vals = new double[ indexes.size() ];
+		HashMap<Integer,Double> pairs = new HashMap<Integer,Double>();
+		
+		//int i = 0;
+		for( String key : indexes ){
+			//idx[i] = Integer.parseInt( key );
+			//vals[i] = (Double) datum.get( key );
+			//i++;
+			pairs.put((Integer)Integer.parseInt( key ), (Double)datum.get( key ));
+		}
+		
+		//SparseVector vec = new SparseVector( idx, vals, y, false );
+		InputVector vec = new InputVector( pairs, false, y );
+		return vec;
 	}
 }

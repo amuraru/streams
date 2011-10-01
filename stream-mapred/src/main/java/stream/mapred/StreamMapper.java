@@ -2,16 +2,13 @@ package stream.mapred;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
+import stream.io.CsvStream;
 import stream.io.DataStream;
-import stream.io.SvmLightDataStream;
 
 
 /**
@@ -22,69 +19,53 @@ import stream.io.SvmLightDataStream;
  * @author Christian Bockermann
  *
  */
-public abstract class StreamMapper 
+public abstract class StreamMapper
+	extends AbstractDataProcessor
 	implements Mapper 
 {
 	/* The logger for this class */
 	static Logger log = LoggerFactory.getLogger( StreamMapper.class );
 
-	/* The input data stream */
-	private DataStream inputStream;
-	
-	/* The output writer */
-	private PrintStream outputStream;
 
-	
-	public DataStream getInputStream(){
-		return inputStream;
-	}
-	
-	public DataStream createDataStream( InputStream in ) throws Exception {
-		return new SvmLightDataStream( in );
+	/**
+	 * @see stream.mapred.Mapper#init()
+	 */
+	@Override
+	public void init() throws Exception {
 	}
 
 	
-	public List<Data> readBlock( InputStream in ){
-
-		List<Data> block = new ArrayList<Data>();
-		try {
-			DataStream stream = createDataStream( in );
-			Data item = stream.readNext();
-
-			log.debug( "Reading input data" );
-			while( item != null ){
-				block.add( item );
-				try {
-					item = stream.readNext();
-				} catch (Exception e) {
-					log.error( "Failed to read item: {}", e.getMessage() );
-					item = null;
-				}
-			}
-		} catch (Exception e) {
-			log.error( "Failed reading input-block: {}", e.getMessage() );
-			if( log.isDebugEnabled() )
-				e.printStackTrace();
-		}
-		return block;
+	/**
+	 * @see stream.mapred.Mapper#finish()
+	 */
+	@Override
+	public void finish() throws Exception {
 	}
+
 	
 	
-	public void run( InputStream in, OutputStream out ) throws Exception {
-		inputStream = createDataStream( in );
-		outputStream = new PrintStream( out );
+	/**
+	 * @see stream.mapred.AbstractDataProcessor#createDataInputStream(java.io.InputStream)
+	 */
+	@Override
+	public DataStream createDataInputStream(InputStream in) throws Exception {
+		if( "csv".equalsIgnoreCase( System.getProperty( "mapper.input.format" ) ) )
+			return new CsvStream( in );
+		
+		return super.createDataInputStream( in );
+	}
+
+	
+	public final void run( InputStream in, OutputStream out ) throws Exception {
+		this.init( in, out );
 		this.init();
 		
-		Data item = inputStream.readNext();
+		Data item = read();
 		while( item != null ){
 			process( item );
-			item = inputStream.readNext();
+			item = read();
 		}
 		
 		finish();
-	}
-	
-	public final PrintStream getWriter(){
-		return outputStream;
 	}
 }

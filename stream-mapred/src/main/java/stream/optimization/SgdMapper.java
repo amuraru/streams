@@ -2,7 +2,6 @@ package stream.optimization;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import stream.data.DataImpl;
 import stream.data.DataUtils;
 import stream.data.vector.Vector;
 import stream.io.DataStreamWriter;
-import stream.io.SparseDataStreamWriter;
 import stream.mapred.StatefulStreamMapper;
 
 public class SgdMapper 
@@ -104,9 +102,7 @@ public class SgdMapper
 	 */
 	@Override
 	public void finish() {
-		
-		writer = new SparseDataStreamWriter( this.getWriter() );
-
+		writer = getDataOutputStream();
 		log.debug( "Writing out weight-vector" );
 		Data data = new DataImpl();
 		data.put( "@w_id", myId );
@@ -128,12 +124,6 @@ public class SgdMapper
 	public static void main(String[] args) throws Exception {
 		InputStream in = System.in;
 		OutputStream out = System.out;
-		
-		String source = "http://kirmes.cs.uni-dortmund.de/data/ccat.tr";
-		//source = "http://kirmes.cs.uni-dortmund.de/data/mnist-block.svm_light";
-		//source = "http://kirmes.cs.uni-dortmund.de/data/test-data.svm_light";
-		source = "file:///Users/chris/mnist-test.tr";
-		in = (new URL( source ).openStream() );
 		SgdMapper mapper = new SgdMapper();
 		mapper.run( in, out );
 	}

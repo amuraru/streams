@@ -2,27 +2,55 @@ package stream.mapred;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 
-public abstract class StreamReducer<I,O>
-	implements Reducer<I,O> 
+import stream.data.Data;
+import stream.io.DataStream;
+import stream.io.DataStreamFactory;
+import stream.io.DataStreamWriter;
+import stream.io.SparseDataStream;
+
+public abstract class StreamReducer
+	extends AbstractDataProcessor
+	implements Reducer 
 {
-	PrintWriter writer;
+	
+	/**
+	 * @see stream.mapred.AbstractDataProcessor#createDataInputStream(java.io.InputStream)
+	 */
+	@Override
+	public DataStream createDataInputStream(InputStream in) throws Exception {
+		return new SparseDataStream( in );
+	}
 
-	public void init( InputStream in, OutputStream out ){
-		writer = new PrintWriter( out );
+	
+	
+	
+	/**
+	 * @see stream.mapred.AbstractDataProcessor#createDataOutputStream(java.io.OutputStream)
+	 */
+	@Override
+	public DataStreamWriter createDataOutputStream(OutputStream out) throws Exception {
+		return DataStreamFactory.createDataOutputStream( System.getProperty( "reducer.output.format"), out );
 	}
-	
-	public abstract void reduce();
-	
-	public PrintWriter getWriter(){
-		return writer;
-	}
-	
-	public final void reduce( InputStream in, OutputStream out ){
+
+
+
+
+	public void reduce( InputStream in, OutputStream out ) throws Exception {
 		init( in, out );
+		
 		reduce();
-		getWriter().flush();
-		getWriter().close();
+	}
+	
+	public void reduce() throws Exception {
+		init();
+		
+		Data item = read();
+		while( item != null ){
+			process( item );
+			item = read();
+		}
+		
+		finish();
 	}
 }

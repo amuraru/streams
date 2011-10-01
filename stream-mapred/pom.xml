@@ -58,7 +58,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>stream.hadoop.SgdMapper</mainClass>
+							<mainClass>stream.mapred.MapReduce</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Quantiles-Version>${pom.version}</Quantiles-Version>

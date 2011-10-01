@@ -12,8 +12,6 @@ import stream.data.Data;
 import stream.data.DataImpl;
 import stream.data.vector.Vector;
 import stream.io.SparseDataStream;
-import stream.io.SparseDataStreamWriter;
-import stream.io.SvmLightDataStream;
 import stream.mapred.StreamMapper;
 
 /**
@@ -53,7 +51,7 @@ public class SgdTestMapper extends StreamMapper {
 			log.info( "Loading model (weights) from {}", file );
 			SparseDataStream stream = new SparseDataStream( new FileInputStream( file ) );
 			Data weights = stream.readNext();
-			Vector weightsVector = SvmLightDataStream.createSparseVector( weights );
+			Vector weightsVector = Vector.createSparseVector( weights );
 
 			sgd.init();
 			sgd.setWeightVector( weightsVector );
@@ -68,19 +66,7 @@ public class SgdTestMapper extends StreamMapper {
 		}
 	}
 
-	/**
-	 * @see stream.mapred.Mapper#finish()
-	 */
-	@Override
-	public void finish() {
-		SparseDataStreamWriter output = new SparseDataStreamWriter( this.getWriter() );
-		Data data = new DataImpl();
-		data.put( "testSetSize", testCount );
-		data.put( "testErrors", testErrors );
-		output.process( data );
-		output.close();
-	}
-
+	
 	/**
 	 * @see stream.data.DataProcessor#process(stream.data.Data)
 	 */
@@ -88,11 +74,23 @@ public class SgdTestMapper extends StreamMapper {
 	public Data process(Data data) {
 		Double prediction = sgd.predict( sgd.getWeightVector(), data );
 		Double label = new Double( data.get( "@label" ).toString() );
-
+		
 		if( prediction * label < 0 ){
 			testErrors += 1.0d;
 		}
 		testCount += 1.0d;
 		return data;
-	}	
+	}
+	
+	
+	/**
+	 * @see stream.mapred.Mapper#finish()
+	 */
+	@Override
+	public void finish() throws Exception {
+		Data data = new DataImpl();
+		data.put( "testSetSize", testCount );
+		data.put( "testErrors", testErrors );
+		write( data );
+	}
 }
