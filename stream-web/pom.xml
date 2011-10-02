@@ -68,7 +68,7 @@
 	    <groupId>org.mortbay.jetty</groupId>
 	    <artifactId>maven-jetty-plugin</artifactId>
 	    <configuration>
-	    	<contextPath>/results</contextPath>
+	    	<contextPath></contextPath>
 	    </configuration>
 	  </plugin>
 	</plugins>

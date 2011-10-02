@@ -22,7 +22,6 @@
 		<intercept-url pattern="/favicon.ico" access='permitAll' />
 		<intercept-url pattern="/images/**" filters='none' />
 		<intercept-url pattern="/login.jsp" filters="none" />
-		
 		<intercept-url pattern="/notes/*.edit" access="hasRole('EDIT')" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<http-basic/>

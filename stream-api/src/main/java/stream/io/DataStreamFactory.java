@@ -24,6 +24,9 @@ public class DataStreamFactory {
 		if( format != null && "csv".equalsIgnoreCase( format.trim() ) )
 			return new DataStreamWriter( out );
 		
+		if( format != null && "sparse".equalsIgnoreCase( format.trim() ) )
+			return new SparseDataStreamWriter( out );
+		
 		return new SparseDataStreamWriter( out );
 	}
 	
@@ -32,6 +35,9 @@ public class DataStreamFactory {
 
 		if( format != null && "csv".equalsIgnoreCase( format.trim() ) )
 			return new CsvStream( in );
+		
+		if( format != null && "sparse".equalsIgnoreCase( format.trim() ) )
+			return new SparseDataStream( in );
 		
 		return new SvmLightDataStream( in );
 	}

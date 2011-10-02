@@ -58,6 +58,7 @@ public class DataStorage {
 			.addAnnotatedClass( stream.data.storage.model.DataItem.class )
 			.addAnnotatedClass( stream.data.storage.model.StatisticsItem.class )
 			.addAnnotatedClass( stream.data.storage.model.NoteItem.class )
+			.addAnnotatedClass( stream.data.storage.model.LogMessageItem.class )
 			.setProperties( p )
 			.setNamingStrategy( new DefaultComponentSafeNamingStrategy() );
 

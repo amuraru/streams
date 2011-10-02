@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.util.CommandLineArgs;
+import stream.util.ExperimentLog;
 import stream.util.ParameterInjection;
 
 public class MapReduce {
@@ -25,9 +26,10 @@ public class MapReduce {
 	static Logger log = LoggerFactory.getLogger( MapReduce.class );
 
 	static String[] PREFIXES = new String[]{ 
-		"", "stream.", "stream.mapred.", "stream.map.", "stream.reduce.", "stream.hadoop.", "stream.optimization." 
+		"", "stream.", "stream.mapred.", "stream.mapper.", "stream.reducer.", "stream.hadoop.", "stream.optimization." 
 	};
 
+	String experimentName = "";
 	Class<?> mapperClass;
 	Class<?> reducerClass;
 	int numberOfMappers = 4;
@@ -37,11 +39,22 @@ public class MapReduce {
 	long reduceTime = 0L;
 
 	public MapReduce( Class<?> mapperClass, Class<?> reducerClass, int mappers, List<File> inputBlocks, File outputFile ){
+		experimentName = ExperimentLog.getExperimentName();
+		ExperimentLog.log( "================================================" );
+		ExperimentLog.log( experimentName, "Starting Map&Reduce Experiment '{}'", experimentName );
+		ExperimentLog.log( "Initializing Map&Reduce process" );
 		this.mapperClass = mapperClass;
 		this.reducerClass = reducerClass;
 		this.numberOfMappers = mappers;
 		this.dataFiles.addAll( inputBlocks );
 		this.outputFile = outputFile;
+		ExperimentLog.log( "    Mapper:  {}", mapperClass );
+		ExperimentLog.log( "    Reducer: {}", reducerClass );
+		
+		ExperimentLog.log( "  Blocks to process:" );
+		for( File file : inputBlocks ){
+			ExperimentLog.log( ExperimentLog.getExperimentName(), "    file: {}", file.getAbsolutePath() );
+		}
 	}
 
 
@@ -67,6 +80,7 @@ public class MapReduce {
 
 		log.info( "#" );
 		log.info( "#  >>> Starting MAP phase..." );
+		ExperimentLog.log( "Starting MAP phase, {} block(s) need to be processed", data.size() );
 		try {
 			numberOfMappers = Integer.parseInt( System.getProperty( "mapper.threads" ) );
 			log.info( "#  Using a maximum of {} parallel mapper-threads", numberOfMappers );
@@ -105,6 +119,7 @@ public class MapReduce {
 			}
 		}
 		mapTime = System.currentTimeMillis() - start;
+		ExperimentLog.log( "Map phase completed in {} ms", mapTime );
 		log.info( "#  All mappers finished." );
 		log.info( "# ");
 		log.info( "#  >>> MAP phase complete." );
@@ -121,6 +136,7 @@ public class MapReduce {
 		File tmp = File.createTempFile( "map_reduce_tmp", "__" );
 		log.info( "#   Creating intermediate output");
 		log.info( "#   Temporary output is created in '{}'", tmp.getAbsolutePath() );
+		ExperimentLog.log( "Collecting intermediate outputs" );
 		tmp.deleteOnExit();
 		FileWriter intermediate = new FileWriter( tmp );
 		for( File mapped : outputs ){
@@ -146,6 +162,7 @@ public class MapReduce {
 		log.info( "###########################################################################################" );
 		log.info( "#" );
 		log.info( "#  >>> Starting REDUCE phase..." );
+		ExperimentLog.log( experimentName, "Starting REDUCE phase" );
 		log.info( "#" );
 		FileInputStream mapInput = new FileInputStream( tmp );
 		StreamReducer reducer = createReducer();
@@ -155,6 +172,7 @@ public class MapReduce {
 		reducer.reduce( mapInput, fos );
 		fos.close();
 		reduceTime = System.currentTimeMillis() - startReduce;
+		ExperimentLog.log( "REDUCE completed in {} ms", reduceTime );
 		log.info( "#  - REDUCE finished." );
 		log.info( "#  - Output is in file {}", finalOutput.getAbsolutePath() );
 		log.info( "#" );
@@ -167,6 +185,7 @@ public class MapReduce {
 
 	public File run() throws Exception {
 
+		//ExperimentLog.log( experimentName, "========================================================" );
 
 		if( dataFiles.isEmpty() ){
 			log.info( "No data files provided, running single-threaded map-reduce on standard input" );
@@ -196,6 +215,13 @@ public class MapReduce {
 			reducer.reduce( in, result );
 			result.flush();
 			result.close();
+
+			ExperimentLog.log( "Map-Phase required:      {} ms", mapTime );
+			ExperimentLog.log( "Reduce-phase required:   {} ms", reduceTime );
+			ExperimentLog.log( "------------------------------------------" );
+			ExperimentLog.log( "Total processing time is {} ms", reduceTime + mapTime );
+			ExperimentLog.log( "========================================================" );
+
 			return outputFile;
 		}
 
@@ -210,6 +236,11 @@ public class MapReduce {
 		log.info( "#" );
 		log.info( "###########################################################################################" );
 		log.info( "# ");
+		ExperimentLog.log( "Map-Phase required:      {} ms", mapTime );
+		ExperimentLog.log( "Reduce-phase required:   {} ms", reduceTime );
+		ExperimentLog.log( "------------------------------------------" );
+		ExperimentLog.log( "Total processing time is {} ms", reduceTime + mapTime );
+		ExperimentLog.log( "========================================================" );
 		log.info( "#  Map-Phase required:      {} ms", mapTime );
 		log.info( "#  Reduce-phase required:   {} ms", reduceTime );
 		log.info( "#  ------------------------------------------" );
@@ -322,9 +353,9 @@ public class MapReduce {
 		log.debug( "Using a maximum of " + numberOfMappers + " concurrent mapper threads" );
 
 		log.info( "" );
-		Class<?> mapperClass = Class.forName( System.getProperty( "mapper.class" ) );
+		Class<?> mapperClass = findClass( System.getProperty( "mapper.class" ), new String[]{ "", "Mapper" }, PREFIXES );
 		log.info( "  Mapper class is " + mapperClass.getName() );
-		Class<?> reducerClass = Class.forName( System.getProperty( "reducer.class" ) );
+		Class<?> reducerClass = findClass( System.getProperty( "reducer.class" ), new String[]{ "", "Reducer" }, PREFIXES );
 		log.info( "  Reducer class is " + reducerClass.getName() );
 		log.info( "" );
 
@@ -375,5 +406,34 @@ public class MapReduce {
 			log.info( "Writing results to {}", outputFile );
 		stream.mapred.MapReduce exp = new stream.mapred.MapReduce( mapperClass, reducerClass, numberOfMappers, inputFiles, outputFile );
 		exp.run();
+	}
+
+	
+	
+	public static Class<?> findClass( String name, String[] suffixes, String[] paths ){
+		Class<?> clazz;
+		try {
+			clazz = Class.forName( name );
+			if( clazz != null )
+				return clazz;
+		} catch (Exception e){
+		}
+
+		for( String path : paths ){
+			for( String suffix : suffixes ){
+
+				try {
+					clazz = Class.forName( path + name + suffix );
+					if( clazz != null ){
+						log.debug( "Found class {}", clazz );
+						return clazz;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return null;
 	}
 }
