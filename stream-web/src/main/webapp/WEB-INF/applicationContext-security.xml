@@ -23,7 +23,8 @@
 		<intercept-url pattern="/images/**" filters='none' />
 		<intercept-url pattern="/login.jsp" filters="none" />
 		<intercept-url pattern="/notes/*.edit" access="hasRole('EDIT')" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/stats/*" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/logs/*" access="hasRole('ROLE_USER')" />
 		<http-basic/>
 		<!-- 
 		<form-login login-page="/login.jsp" default-target-url='/index.jsp' />
@@ -31,7 +32,7 @@
 		<logout logout-url="/logout" logout-success-url='/' invalidate-session='true' />
 
 		<!-- Uncomment to limit the number of sessions a user can have -->
-		<session-management invalid-session-url="/login.jsp" session-fixation-protection='newSession'>
+		<session-management invalid-session-url="/index.jsp" session-fixation-protection='newSession'>
 		<!-- 
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		 -->

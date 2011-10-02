@@ -12,27 +12,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 /**
  * @author chris
  *
  */
 @Entity
 @Table( name = "NOTES" )
+@XStreamAlias( "Note" )
 public class NoteItem implements Serializable {
 	
 	/** The unique class ID */
 	private static final long serialVersionUID = 4850723658162107595L;
 
+	@XStreamAsAttribute
 	@Id @GeneratedValue
 	Integer id;
 	
 	
+	@XStreamAsAttribute
 	@Column( name = "NAME" )
 	String name;
 	
 	@Column( name = "TEXT", columnDefinition = "TEXT" )
 	String text;
-	
+
+	@XStreamAsAttribute
 	@Column( name = "CREATED")
 	Date created;
 	

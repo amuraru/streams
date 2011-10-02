@@ -1,10 +1,14 @@
 body {
    margin: auto;
-   width: 1024px;
    font-family: Georgia,Times;
    font-size: 13pt;	
 }
 
+div.body {
+	width: 1024px;
+	margin: auto;
+	color: #444;
+}
 
 h1,h2,h3,h4 {
 	margin-top: 30px;
@@ -44,11 +48,13 @@ div.msg {
 }
 
 #footer {
-	width: 1024px;
+	position: absolute;
+	bottom: 10px;
+	right: 0px;
 	margin-top: 80px;
-	padding-top: 4px;
-	padding-right: 4px;
-	border-top: solid 1px #888;
+	padding-top: 10px;
+	padding-right: 20px;
+	//border-top: solid 1px #ccc;
 	text-align: right;
 	font-size: 10pt;
 	color: #888;
@@ -105,6 +111,7 @@ textarea {
 	margin-right: 4px;
 	font-family: Verdana, Arial;
 	font-size: 10pt;
+	color: #bbb;
 }
 
 .noteActions {

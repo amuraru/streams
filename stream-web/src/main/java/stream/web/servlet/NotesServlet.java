@@ -65,7 +65,7 @@ public class NotesServlet extends HttpServlet {
 			
 			log.debug( "Key is: '{}'", key );
 			if( "".equals( key ) ){
-				log.info( "Empty key specified, delegating to note-list" );
+				log.debug( "Empty key specified, delegating to note-list" );
 				RequestDispatcher disp = req.getRequestDispatcher( "/notes.jsp" );
 				disp.forward( req, resp );
 				return;
@@ -155,7 +155,7 @@ public class NotesServlet extends HttpServlet {
 			return;
 		}
 
-		log.info( "Appending to statistics with key {}", key );
+		log.debug( "Appending to statistics with key {}", key );
 		
 		try {
 			
@@ -206,11 +206,11 @@ public class NotesServlet extends HttpServlet {
 		String base = req.getContextPath();
 		String servlet = req.getServletPath();
 		String prefix = base + servlet;
-		log.info( "base: {}", base );
-		log.info( "servlet: {}", servlet );
+		log.debug( "base: {}", base );
+		log.debug( "servlet: {}", servlet );
 		
-		log.info( "prefix: {}", prefix );
-		log.info( "URI: {}", req.getRequestURI() );
+		log.debug( "prefix: {}", prefix );
+		log.debug( "URI: {}", req.getRequestURI() );
 
 		try {
 			String key = req.getRequestURI().substring( prefix.length() + 1 );

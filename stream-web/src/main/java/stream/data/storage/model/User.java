@@ -15,12 +15,16 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 /**
  * @author chris
  *
  */
 @Entity
 @Table( name = "USERS" )
+@XStreamAlias( "User" )
 public class User implements Serializable {
 	
 	/** The unique class ID */
@@ -28,9 +32,11 @@ public class User implements Serializable {
 
 	@Id
 	@Column( name = "USERNAME" )
+	@XStreamAsAttribute
 	String login;
 	
 	@Column( name = "PASSWORD" )
+	@XStreamAsAttribute
 	String password;
 	
 	@ElementCollection( fetch = FetchType.EAGER )

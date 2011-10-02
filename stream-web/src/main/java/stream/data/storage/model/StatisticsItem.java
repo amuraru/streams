@@ -15,20 +15,27 @@ import javax.persistence.Table;
 import stream.data.Data;
 import stream.util.MD5;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 @Entity
 @Table( name = "STATISTICS" )
+@XStreamAlias( "Statistics" )
 public class StatisticsItem implements Serializable {
 
 	/** The unique class ID */
 	private static final long serialVersionUID = 620590771202483079L;
 
+	@XStreamAsAttribute
 	@Id
 	@Column( name = "ID" )
 	String id;
 
+	@XStreamAsAttribute
 	@Column( name = "NAME" )
 	String key;
-	
+
+	@XStreamAsAttribute
 	@Column( name = "TIMESTAMP" )
 	Long timestamp = System.currentTimeMillis();
 
@@ -43,8 +50,8 @@ public class StatisticsItem implements Serializable {
 
 
 	public StatisticsItem( Data dat ) throws Exception {
-		this.setObject( dat );
 		this.timestamp = System.currentTimeMillis();
+		this.setObject( dat );
 	}
 
 
@@ -124,6 +131,9 @@ public class StatisticsItem implements Serializable {
 
 		if( id == null ){
 			id = MD5.md5( data );
+			
+			if( timestamp != null )
+				id = MD5.md5( id + timestamp );
 		}
 	}
 }

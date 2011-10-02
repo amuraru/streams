@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>    
 	
-<div style="margin-top: 0px; height: 28px; padding: 4px; border: solid 1px #f0f0f0;">
+<div style="margin-top: 0px; height: 28px; padding: 4px;">
 	
 	<div class="nodeActions" style="float: right; ">
 	<% if( request.getAttribute( "edit" ) != null ){ %>
@@ -11,7 +11,7 @@
 			<img src="<%= request.getContextPath() %>/images/cancel.png" />
 		</a>
 	<% } %>
-		
+	<% if( request.isUserInRole( "ROLE_USER" ) ){ %>
 		<div class="noteAction" style="float: left;">
 			<img src="<%= request.getContextPath() %>/images/document-history2.png" />
 			<div class="noteActionItem">
@@ -27,6 +27,7 @@
 			%>
 			</div>
 		</div>
+		<% } %>
 		<% if( request.isUserInRole( "EDIT" ) ){ %>
 		<div class="noteAction" style="float: left;">
 			<a href="<%= request.getContextPath() %>/notes/<%= request.getAttribute( "key" ) %>.edit?time=<%= request.getParameter("time") %>"><img src="<%=request.getContextPath() %>/images/document-edit.png"/></a>
