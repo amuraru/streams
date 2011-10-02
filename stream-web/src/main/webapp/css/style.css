@@ -173,6 +173,7 @@ textarea {
 	padding-right: 10px;	
 }
 
+
 .markdownHtml pre {
 	margin-left: 30px;
 	margin-right: 30px;
@@ -182,4 +183,9 @@ textarea {
 	border: solid 1px #e0e0e0;
 	color: #666;
 	font-size: 13px;
+}
+
+
+p.equation {
+	text-align: center;
 }

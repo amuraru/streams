@@ -1,0 +1,10 @@
+
+p.equation {
+	text-align: center;
+}
+
+
+img.inlineEquation {
+	vertical-align: bottom;
+	padding-bottom: 2px;
+}

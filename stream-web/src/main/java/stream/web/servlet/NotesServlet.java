@@ -20,10 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import stream.web.layout.Markdown;
 import stream.web.services.NoteService;
 import stream.web.services.NoteServiceImpl;
-
-import com.petebevin.markdown.MarkdownProcessor;
 
 /**
  * @author chris
@@ -75,12 +74,9 @@ public class NotesServlet extends HttpServlet {
 			log.trace( "note text is:\n{}", txt );
 			String html = "";
 			if( txt != null ){
-				MarkdownProcessor md = new MarkdownProcessor();
-				html = md.markdown( txt );
-				
+				html = Markdown.compile( txt );
 				List<Date> history = noteService.getChanges( key );
 				req.setAttribute( "history", history );
-				
 			} else {
 				
 				if( txt == null && !req.getRequestURI().endsWith( ".edit" ) ){

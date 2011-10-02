@@ -7,7 +7,7 @@
 		
 
   <div style="margin: auto; padding: 30px; padding-top: 10px;">
-  	<%= stream.web.SciNotesContext.staticNote( "welcome" ) %>
+  	<%= stream.web.SciNotesContext.getNote( "welcome" ) %>
   </div>		
 
 
