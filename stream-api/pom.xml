@@ -23,6 +23,11 @@
 			<version>1.6.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>20041127.091804</version>
+		</dependency>
 	</dependencies>
 	<distributionManagement>
 		<repository>
@@ -36,7 +41,7 @@
 			<url>https://secure.jwall.org/maven/repository/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -47,6 +52,22 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<finalName>stream-tools-${pom.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifestEntries>
+							<StreamAPI>${pom.version}</StreamAPI>
+							<StreamTools-Version>${pom.version}</StreamTools-Version>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
-	</build>	
+	</build>
 </project>

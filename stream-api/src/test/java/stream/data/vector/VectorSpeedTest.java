@@ -11,8 +11,6 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-import stream.data.vector.Vector;
-
 /**
  * @author chris
  *
@@ -52,14 +50,18 @@ public class VectorSpeedTest {
 			k++;
 		}
 		
-		return new Vector( idx, val, -1 );
+		return new Vector( idx, val );
 	}
 	
+	@Test
+	public void testDummy(){
+		// simple dummy test method
+	}
 	
 	/**
 	 * Test method for {@link stream.data.vector.Vector#add(double, stream.data.vector.Vector)}.
 	 */
-	@Test
+	//@Test
 	public void testAddDoubleVector() {
 		
 		double sizes = 0.0d;

@@ -52,7 +52,21 @@ public class Perceptron
 		this.learnRate = learnRate;
 	}
 
+	public Vector getWeightsVector(){
+		return beta;
+	}
 	
+	public void setWeightsVector( Vector v ){
+		beta = v;
+	}
+	
+	public Double getIntercept(){
+		return beta0;
+	}
+	
+	public void setIntercept( Double b ){
+		beta0 = b;
+	}
 	
 	
 	/**
@@ -119,7 +133,7 @@ public class Perceptron
 		else
 		    label = 1.0d;
 
-		InputVector example = this.createSparseVector( item );
+		InputVector example = createSparseVector( item );
 
 		//---reading label
 		// ---start computation

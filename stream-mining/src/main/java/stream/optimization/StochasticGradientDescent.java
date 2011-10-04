@@ -95,6 +95,7 @@ public class StochasticGradientDescent
 	protected double etha(){
 		//return 1.0d / t;
 		return obj.getRadius() / Math.sqrt( obj.getGradientNormVariance() * t);
+		//return obj.getRadius() / Math.sqrt( obj.getGradientNormVariance() * 1000.0d );
 		//return 1.0d / (obj.getLambda() * t);
 	}
 	
@@ -126,7 +127,7 @@ public class StochasticGradientDescent
 		if( w == null )
 			init();
 		
-		InputVector input_i = this.createSparseVector( example );
+		InputVector input_i = Vector.createSparseVector( example );
 		if( input_i == null ){
 			log.error( "Cannot create sparse-vector from example: {}", example );
 			log.error( "Will not use this data point for training!" );
@@ -192,7 +193,7 @@ public class StochasticGradientDescent
 	@Override
 	public Double predict(Data example) {
 		InputVector x_i;
-		InputVector item = this.createSparseVector( example );
+		InputVector item = Vector.createSparseVector( example );
 		if(useKernel) 
 			x_i = gaussianKernel.transform(item);
 		else
@@ -206,7 +207,7 @@ public class StochasticGradientDescent
 	
 	public Double predict( Vector weightVector, Data example ){
 		InputVector x_i;
-		InputVector item = this.createSparseVector( example );
+		InputVector item = Vector.createSparseVector( example );
 		if(useKernel) 
 			x_i = gaussianKernel.transform(item);
 		else

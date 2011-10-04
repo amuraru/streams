@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,10 @@ public class SGDTest {
 
 	static Logger log = LoggerFactory.getLogger( SGDTest.class );
 
-
+	@Test
+	public void testDummy(){
+		// test dummy
+	}
 
 	public static List<Data> read( DataStream stream, int num ){
 		List<Data> dataset = new ArrayList<Data>();

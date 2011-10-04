@@ -8,7 +8,8 @@
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>stream-mapred</artifactId>
-	<name>streams-mapred</name>
+	<name>stream-mapred</name>
+	<version>1.2.0</version>
 
 	<repositories>
 		<repository>
@@ -57,7 +58,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>stream.hadoop.SgdMapper</mainClass>
+							<mainClass>stream.mapred.MapReduce</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Quantiles-Version>${pom.version}</Quantiles-Version>
@@ -69,5 +70,4 @@
 	</build>
 
 	
-	<version>1.0.2</version>
 </project>
