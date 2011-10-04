@@ -17,6 +17,7 @@ import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import stream.tools.MemoryLogger;
 import stream.util.CommandLineArgs;
 import stream.util.ExperimentLog;
 import stream.util.ParameterInjection;
@@ -330,6 +331,19 @@ public class MapReduce {
 		p = CommandLineArgs.expandSystemProperties( p );
 		CommandLineArgs.populateSystemProperties( p );
 
+		
+		Runtime.getRuntime().addShutdownHook( new Thread(){
+			public void run(){
+				ExperimentLog.log( "Experiment cancelled on user-request!" );
+			}
+		});
+
+		
+		if( System.getProperty( "memory.log" ) != null ){
+			MemoryLogger memlog = new MemoryLogger();
+			memlog.start();
+		}
+		
 
 		log.debug( "" );
 		TreeSet<String> opts = new TreeSet<String>();

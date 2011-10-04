@@ -17,7 +17,9 @@ import stream.util.MD5;
  * @author chris
  *
  */
-public class LatexMathCompiler {
+public class LatexMathCompiler 
+	extends MarkdownPreprocessor
+{
 
 	static Logger log = LoggerFactory.getLogger( LatexMathCompiler.class );
 
@@ -46,6 +48,8 @@ public class LatexMathCompiler {
 
 
 	public LatexMathCompiler(){
+		super( "$$", "$$" );
+		
 		if( convert == null ){
 			convert = findExecutable( SEARCH_PATHS, "convert" );
 		}
@@ -66,6 +70,7 @@ public class LatexMathCompiler {
 			File f = new File( path + File.separator + cmd );
 			if( f.isFile() ){
 				if( f.canExecute() ){
+					log.debug( "Found command '{}' at '{}'", cmd, f.getAbsolutePath() );
 					return f.getAbsolutePath();
 				} else {
 					log.error( "Not allowed to execute {}", f.getAbsolutePath() );
@@ -101,12 +106,20 @@ public class LatexMathCompiler {
 			File auxFile = new File( pwd.getAbsolutePath() + File.separator + texFile.getName().replace( ".tex", ".aux" ) );
 			File logFile = new File( pwd.getAbsolutePath() + File.separator + texFile.getName().replace( ".tex", ".log" ) );
 
-			String exec = pdflatex + " " + texFile.getAbsolutePath();
+			String exec = pdflatex + "  -output-directory " + pwd.getAbsolutePath() + " " + texFile.getAbsolutePath();
 			log.debug( "Compiling file: {}", exec );
 			Runtime rt = Runtime.getRuntime();
 			Process p = rt.exec( exec );
+			
+			if( p.exitValue() != 0 ){
+				log.error( "Failed to compile tex-file!" );
+				dumpErrors( p );
+				throw new Exception( "Failed to compile tex-file!" );
+			}
+			
 			if( log.isDebugEnabled() )
 				dump( p );
+			
 			exec = convert + " -verbose -density 150 -trim " + pdfFile.getAbsolutePath() + " -quality 100 -sharpen 0x1.0 " + pngFile.getAbsolutePath();
 			log.debug( "Converting to PNG: {}", exec );
 			p = rt.exec( exec );
@@ -146,17 +159,29 @@ public class LatexMathCompiler {
 			e.printStackTrace();
 		}
 
+	}
+	
+
+	public static void dumpErrors( Process p ){
 		try {
 			BufferedReader r = new BufferedReader( new InputStreamReader( p.getErrorStream() ) );
 			String line = r.readLine();
 			while( line != null ){
-				log.debug( "Error: {}", line );
+				log.error( "Error: {}", line );
 				line = r.readLine();
 			}
 			r.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+
+	/**
+	 * @see stream.web.layout.MarkdownPreprocessor#compile(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Substitution compile(String source, String start, String end) {
+		return null;
 	}
 }

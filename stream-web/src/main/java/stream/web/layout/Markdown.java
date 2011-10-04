@@ -104,6 +104,9 @@ public class Markdown {
 							}
 						}
 						idx = src.indexOf( "$$", end + delim.length() );
+						while( idx >= 1 && src.indexOf( idx - 1 ) == '\\' ){
+							idx = src.indexOf( "$$", end + delim.length() );
+						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
