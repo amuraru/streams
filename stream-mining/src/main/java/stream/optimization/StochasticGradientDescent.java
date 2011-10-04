@@ -21,6 +21,7 @@ public class StochasticGradientDescent
 
 	double t = 0.0;
 	double b;
+	double avg_b;
 	boolean useb = true;
 	Vector gt;
 	Vector w;
@@ -63,11 +64,11 @@ public class StochasticGradientDescent
 	}
 	
 	public Double getIntercept(){
-		return this.b;
+		return this.avg_b;
 	}
 	
 	public void setIntercept( Double d ){
-		this.b = d;
+		this.avg_b = d;
 	}
 	
 	
@@ -102,6 +103,7 @@ public class StochasticGradientDescent
 	public void init() {
 		t = 0.0d;
 		b = 0.0d;
+		avg_b = 0.0d;
 		sum_etha = 0.0d;
 		if(!this.useKernel) { // use sparse representation
 			gt = new Vector();
@@ -143,8 +145,9 @@ public class StochasticGradientDescent
 			//System.out.println("SGD Init: obj.G = " + Math.sqrt(obj.getGradientNormVariance()));
 			return;
 		}
-		
+
 		t = t + 1.0d;
+
 		double label = x_i.getLabel();
 		double eta = etha();
 
@@ -175,12 +178,17 @@ public class StochasticGradientDescent
 				b *= scalar;
 		}
 		
-		double sc1 = sum_etha / (sum_etha + etha() );
-		double sc2 = etha() / (sum_etha + etha() );
-
-		avg_w.scale( sc1 );
+		//double sc1 = sum_etha / (sum_etha + etha() );
+		//double sc2 = etha() / (sum_etha + etha() );
+		double sc1 = (t-1.) / t;
+		double sc2 = 1. / t;
+		
+		if(sc1 > 0) 
+			avg_w.scale( sc1 );
 		avg_w.add( sc2, w );
-		sum_etha += etha();
+		avg_b = avg_b*sc1 + sc2*b;
+		
+		//sum_etha += etha();
 	}
 	
 	

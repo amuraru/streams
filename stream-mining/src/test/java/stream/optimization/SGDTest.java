@@ -22,7 +22,7 @@ import stream.learner.Perceptron;
 public class SGDTest {
 
 
-	static Logger log = LoggerFactory.getLogger( SGDTest_copy.class );
+	static Logger log = LoggerFactory.getLogger( SGDTest.class );
 
 	@Test
 	public void testDummy(){
@@ -54,17 +54,19 @@ public class SGDTest {
 		final Statistics stats = new Statistics();
 
 		String url = "http://kirmes.cs.uni-dortmund.de/data/ccat.tr";
-		url = "file:///Users/chris/sgd/rcv1_ccat/ccat.tr";
-		url = "file:///Users/chris/sgd/adult/adult.tr";
-		url = "file://localhost/Volumes/sshfs//datasets/datensaetze/sgd/adult/adult.tr";
-		url = "file:///home/share/datensaetze/sgd/adult/adult.tr";
+		//url = "file:///Users/chris/sgd/rcv1_ccat/ccat.tr";
+		//url = "file:///Users/chris/sgd/adult/adult.tr";
+		//url = "file://localhost/Volumes/sshfs//datasets/datensaetze/sgd/adult/adult.tr";
+		//url = "file:///home/share/datensaetze/sgd/adult/adult.tr";
+		url = "file:///home/share/datensaetze/sgd/mnist/mnist.tr";
 		SvmLightDataStream stream = new SvmLightDataStream( url );
 		int trainLimit = 10000;
 		stream.setLimit( (long)trainLimit );
 		String testUrl = "file:///Users/chris/sgd/rcv1_ccat/ccat.tt";
-		testUrl = "file:///Users/chris/sgd/adult/adult.tt";
-		testUrl = "file://localhost/Volumes/sshfs//datasets/datensaetze/sgd/adult/adult.tt";
-		testUrl = "file:///home/share/datensaetze/sgd/adult/adult.tt";
+		//testUrl = "file:///Users/chris/sgd/adult/adult.tt";
+		//testUrl = "file://localhost/Volumes/sshfs//datasets/datensaetze/sgd/adult/adult.tt";
+		//url = "file:///home/share/datensaetze/sgd/adult/adult.tr";
+		testUrl = "file:///home/share/datensaetze/sgd/mnist/mnist.tt";
 		
 		long start = System.currentTimeMillis();
 
@@ -87,7 +89,7 @@ public class SGDTest {
 		//lambda = 1.0e-8;  // mnist-1m 
 		loss.setLambda( lambda );
 		StochasticGradientDescent sgd = new StochasticGradientDescent( loss );
-		sgd.useGaussianKernel(0.001, 2048, true);
+		//sgd.useGaussianKernel(0.001, 2048, true);
 		sgd.init( );
 		// gamma values
 		// 0.001 adult
