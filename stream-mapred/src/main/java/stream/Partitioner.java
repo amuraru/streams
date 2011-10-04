@@ -17,6 +17,8 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import stream.util.ExperimentLog;
+
 public class Partitioner {
 	
 	static Logger log = LoggerFactory.getLogger( Partitioner.class );
@@ -68,8 +70,11 @@ public class Partitioner {
 			writers.add( writer );
 		}
 
+		Long total = Math.max( new Long( blockSize * numberOfPartitions ), limit );
+		fmt = new DecimalFormat( "0.00%" );
+		
 		log.debug( "Created {} file-writers", writers.size() );
-		int count = 0;
+		Long count = 0L;
 		BufferedReader r = new BufferedReader( new InputStreamReader( url.openStream() ) );
 		String line = r.readLine();
 		while( line != null && !writers.isEmpty() && count < limit ){
@@ -89,6 +94,12 @@ public class Partitioner {
 			}
 			
 			count++;
+			
+			if( count % 10000 == 0 ){
+				log.info( "Processed {} examples,  {} completed", fmt.format( 100.0 * count.doubleValue() / total.doubleValue() ) );
+				ExperimentLog.log( "Processed {} examples,  {} completed", fmt.format( 100.0 * count.doubleValue() / total.doubleValue() ) );
+			}
+			
 			line = r.readLine();
 		}
 		
