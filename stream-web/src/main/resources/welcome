@@ -1,8 +1,0 @@
-Welcome to SciNotes
-===================
-
-*SciNotes* is a simple wiki-like system for storing notes, recording
-results or centralizing logs of experiments performed with the
-[streams](http://github.com/cbockermann/streams) framework. It
-uses the popular [Markdown](http://en.wikipedia.org/wiki/Markdown)
-syntax for any notes or articles stored.
