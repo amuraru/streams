@@ -79,8 +79,8 @@ public class GuassianFeatureMappingTest {
 	@Test
 	public void testGaussianStat() {
 
-		int nRuns = 1000;
-		int dim = 10;
+		int nRuns = 100;
+		int dim = 2;
 		int nExample = 2;
 		double gamma = 0.01;
 		int maxpower = 14;
@@ -105,12 +105,12 @@ public class GuassianFeatureMappingTest {
 			}
 			
 			// Create Approx Kernel
-			GaussianFeatureMapping kernel = new GaussianFeatureMapping(gamma, approxdim, true);
+			//GaussianFeatureMapping kernel = new GaussianFeatureMapping(gamma, approxdim, true);			
 			
 			ArrayList<Double> errorlist = new ArrayList<Double>();
 			for(int r = 0; r<nRuns; ++r) {
 				
-				
+				GaussianFeatureMapping kernel = new GaussianFeatureMapping(gamma, approxdim, false);	
 
 				ArrayList<InputVector> trans_dataset = new ArrayList<InputVector>();
 				for(InputVector v : dataset) {

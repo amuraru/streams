@@ -70,7 +70,7 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping, Serial
 			}
 		} else { // GPU
 			try {
-				Class<?> clazz = Class.forName( "edu.tdo.kernel.GpuKernel" );
+				Class<?> clazz = Class.forName( "edu.tdo.kernel.GpuKernel.APXGaussianPhi" );
 				Constructor<?> con = clazz.getConstructor( Double.class, Integer.class );
 				gpu_phi = (Mapper<double[],double[]>) con.newInstance( gamma, dimension );
 			} catch (Exception e) {
@@ -117,7 +117,8 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping, Serial
 						basis.put(idx, bi);
 					}
 					//innerprod += bi * entry.getValue();
-					innerprod += bi * Math.sqrt(2.*gamma)*randGauss.nextGaussian();
+					Random randG = new Random(System.currentTimeMillis());
+					innerprod += bi * Math.sqrt(2.*gamma)*randG.nextGaussian();
 					/*
 					int idx = xindex[j];
 					Double bi = basis.get(idx);
@@ -129,10 +130,11 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping, Serial
 					 */ 
 				}
 				//transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod + 2.*Math.PI*randomBias[i]);
-				if(i<dimension/2)
-					transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod);
-				else
-					transformed[i] = Math.sqrt(2.0/dimension) * Math.sin(innerprod);
+				//if(i<dimension/2)
+				//	transformed[i] = Math.sqrt(2.0/dimension) * Math.cos(innerprod);
+				//else
+				//	transformed[i] = Math.sqrt(2.0/dimension) * Math.sin(innerprod);
+				transformed[i] = Math.sqrt(1.0/dimension) * Math.cos(innerprod);
 				//pairs.put(i, Math.sqrt(2.0/dimension) * Math.cos(innerprod + randomBias[i]));
 				/*
 				if(i<dimension/2.)
