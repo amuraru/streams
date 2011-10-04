@@ -145,7 +145,8 @@ public class StochasticGradientDescent
 			//System.out.println("SGD Init: obj.G = " + Math.sqrt(obj.getGradientNormVariance()));
 			return;
 		}
-		
+
+		t = t + 1.0d;
 
 		double label = x_i.getLabel();
 		double eta = etha();
@@ -179,16 +180,15 @@ public class StochasticGradientDescent
 		
 		//double sc1 = sum_etha / (sum_etha + etha() );
 		//double sc2 = etha() / (sum_etha + etha() );
-		double sc1 = t / (t+1);
-		double sc2 = 1 / (t+1);
+		double sc1 = (t-1.) / t;
+		double sc2 = 1. / t;
 		
-		avg_w.scale( sc1 );
+		if(sc1 > 0) 
+			avg_w.scale( sc1 );
 		avg_w.add( sc2, w );
 		avg_b = avg_b*sc1 + sc2*b;
 		
 		//sum_etha += etha();
-		
-		t = t + 1.0d;
 	}
 	
 	
