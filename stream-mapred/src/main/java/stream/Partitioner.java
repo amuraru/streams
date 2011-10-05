@@ -70,7 +70,7 @@ public class Partitioner {
 			writers.add( writer );
 		}
 
-		Long total = Math.max( new Long( blockSize * numberOfPartitions ), limit );
+		Long total = new Long( blockSize * numberOfPartitions );
 		fmt = new DecimalFormat( "0.00%" );
 		
 		log.debug( "Created {} file-writers", writers.size() );
