@@ -21,6 +21,12 @@ public class StatisticsPublisher implements StatisticsListener {
 
 	static Logger log = LoggerFactory.getLogger( StatisticsPublisher.class );
 	URL resultUrl;
+	
+	static {
+		
+		
+		
+	} 
 
 	public StatisticsPublisher( URL url ){
 		resultUrl = url;

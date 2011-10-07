@@ -40,7 +40,7 @@ is suitable for CSV,..)
   To create a partitioned dataset from a URL, simply use the 
 stream-mapred.jar created above and run:
 
-  # java -cp stream-mapred.jar stream.Partitioner \
+     # java -cp stream-mapred.jar stream.Partitioner \
       --max-parts 4 --block-size 1000 --limit 10000 \
       --input-url http://kirmes.cs.uni-dortmund.de/data/mnist-100k.tr
 

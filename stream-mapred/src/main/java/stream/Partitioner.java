@@ -96,8 +96,8 @@ public class Partitioner {
 			count++;
 			
 			if( count % 10000 == 0 ){
-				log.info( "Processed {} examples,  {} completed", fmt.format( 100.0 * count.doubleValue() / total.doubleValue() ) );
-				ExperimentLog.log( "Processed {} examples,  {} completed", fmt.format( 100.0 * count.doubleValue() / total.doubleValue() ) );
+				log.info( "Processed {} examples,  {} completed", fmt.format( count.doubleValue() / total.doubleValue() ) );
+				ExperimentLog.log( "Processed {} examples,  {} completed", fmt.format( count.doubleValue() / total.doubleValue() ) );
 			}
 			
 			line = r.readLine();

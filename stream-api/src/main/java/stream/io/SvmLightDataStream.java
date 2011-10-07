@@ -94,7 +94,7 @@ public class SvmLightDataStream
 			return null;
 		
 		log.debug( "line[{}]: {}", lineNumber, line );
-		while( line != null && ! line.matches( "^-?\\d(\\.\\d+)?\\s.*" )){
+		while( line != null && ! line.matches( "^(-|\\+)?\\d(\\.\\d+)?\\s.*" )){
 			line = reader.readLine();
 		}
 		
