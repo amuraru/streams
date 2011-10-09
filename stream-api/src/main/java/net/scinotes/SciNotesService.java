@@ -27,14 +27,15 @@ public final class SciNotesService {
 
 	static Logger log = LoggerFactory.getLogger( SciNotesService.class );
 	
-	final static SciNotesService globalInstance = new SciNotesService( "https://api.scinotes.net" );
+	final static SciNotesService globalInstance = new SciNotesService( "https://www.scinotes.net" );
 	
 	final Properties p = new Properties();
 	URL remoteUrl;
+	URL resultUrl;
 	String basicAuth = null;
 
 	protected SciNotesService() throws Exception {
-		this( new URL( "https://api.scinotes.net" ) );
+		this( new URL( "https://www.scinotes.net" ) );
 	}
 
 	public SciNotesService( String url ){
@@ -54,7 +55,7 @@ public final class SciNotesService {
 
 
 	private void init(){
-		p.put( "net.scinotes.username", System.getProperty( "user.name" ) );
+		p.put( "scinotes.user", System.getProperty( "user.name" ) );
 
 		File userProps = null;
 		try {
@@ -71,9 +72,9 @@ public final class SciNotesService {
 
 		p.putAll( System.getProperties() );
 
-		if( p.getProperty( "net.scinotes.username" ) != null && p.getProperty( "net.scinotes.password" ) != null ){
-			String user = p.getProperty( "net.scinotes.username" );
-			String pass = p.getProperty( "net.scinotes.password" );
+		if( p.getProperty( "scinotes.user" ) != null && p.getProperty( "scinotes.password" ) != null ){
+			String user = p.getProperty( "scinotes.user" );
+			String pass = p.getProperty( "scinotes.password" );
 			basicAuth = "Basic " + new String( Base64.encodeBase64( (user + ":" + pass ).getBytes() ) );
 		}
 	}
@@ -102,8 +103,9 @@ public final class SciNotesService {
 	}
 
 	
-	public void sendResults( Statistics statistics ){
+	public void sendResults( String key, Statistics statistics ){
 		
+
 	}
 	
 
@@ -116,7 +118,7 @@ public final class SciNotesService {
 
 
 		String userInfo = url.getUserInfo();
-
+		
 		String urlString = url.toExternalForm();
 		if( userInfo != null )
 			urlString = urlString.replace( userInfo, "****:****" );

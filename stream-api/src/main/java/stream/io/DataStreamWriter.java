@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -35,6 +36,7 @@ public class DataStreamWriter
 	static Logger log = LoggerFactory.getLogger( DataStreamWriter.class );
 	PrintStream p;
 	String separator = " ";
+	String lastHeader = null;
 	boolean headerWritten = false;
 	String filter = ".*";
 	DataFilter dataFilter = null;
@@ -123,6 +125,13 @@ public class DataStreamWriter
 		// write the keys of the very first datum ONCE (attribute names)
 		// or if the number of keys has changed
 		//
+		String header = createHeader( datum );
+		if( lastHeader == null || !lastHeader.equals( header ) ){
+			p.println( header );
+			lastHeader = header;
+			return;
+		}
+		
 		if( ! headerWritten || ( keys == null && datum.keySet().size() > headers.size() ) ){
 			p.print( "#" );
 			Iterator<String> it = datum.keySet().iterator();
@@ -168,6 +177,20 @@ public class DataStreamWriter
 		}
 		p.println();
 	}
+	
+	
+	protected String createHeader( Data item ){
+		StringWriter s = new StringWriter();
+		s.append( "#" );
+		Iterator<String> it = item.keySet().iterator();
+		while( it.hasNext() ){
+			s.append( it.next() );
+			if( it.hasNext() )
+				s.append( separator );
+		}
+		return s.toString();
+	}
+	
 	
 	public void close(){
 		p.flush();

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>AuditConsole</title>
+    <author email="chris@jwall.org">Christian Bockermann</author>
+  </properties>
+
+
+  <body>
+
+    <!-- The body of the document contains a number of sections -->
+    <section name="QuickStart">
+
+	<p>
+		The easiest way to get started with the AuditConsole is most likely by using the standalone distribution. It is available at
+	</p>
+	<div align="center">
+		<a href="https://secure.jwall.org/download/AuditConsole/AuditConsole-0.3b-standalone.zip">AuditConsole-0.3b-standalone.zip</a> 
+	</div>
+	<p>
+		and comes bundled with an Apache Tomcat.
+	</p>
+	
+	<h3>Install</h3>
+	<p>
+		The steps to deploy this standalone version are pretty simple:
+	</p>
+	<ol>
+		<li>Download the above zip file</li>
+		<li>Unzip the file to a location of your choice, e.g. <code>/opt</code>. This will create the directory <code>/opt/AuditConsole</code>
+<pre>
+cd /opt
+unzip /path/to/AuditConsole-0.3b-standalone.zip
+</pre>
+		</li>
+	</ol>
+
+<h4 style="border: none; padding-bottom: 0px; margin-bottom: 0px;">Starting the AuditConsole</h4>
+<div>
+	The steps above leave you with an AuditConsole which is instantly ready to run. In order to start the console follow these steps:
+</div>
+	
+<ol>
+	<li>Change to <code>/opt/AuditConsole</code> by issuing
+<pre>
+cd /opt/AuditConsole
+</pre>
+	</li>
+	<li>Startup the bundled tomcat:
+<pre>
+./bin/startup.sh
+</pre>
+	</li>
+	<li>Point your browser to
+<pre>
+http://localhost:8080/
+</pre>
+	</li>
+</ol>
+</section>
+	
+  </body>
+</document>

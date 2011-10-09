@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>AuditConsole</title>
+    <author email="chris@jwall.org">Christian Bockermann</author>
+  </properties>
+
+
+  <body>
+
+    <!-- The body of the document contains a number of sections -->
+    <section name="Setup a Sensor">
+      <p>
+		A sensor is an entity which describes an <code>mlogc</code> process that is allowed to send ModSecurity events to your 
+		AuditConsole. In order for ModSecurity/<code>mlogc</code> to send events, you'll have to create a sensor in the AuditConsole 
+		and configure <code>mlogc</code> on the ModSecurity side.
+      </p>
+      <p>
+		Adding a sensor is done by following the <i>System/Sensors</i> in the toolbar. This is only allowed for users with permission
+		<code>SETUP</code>. To add a sensor, you need to specify the sensor's name, its password and (optionally) the address it is 
+		limitted to. It might also be a good idea to enter a short description for your sensor, which reminds you about the sensor's
+		purpose (e.g. information about the server/site which is connected to the sensor).
+      </p>
+	  <p>
+		As an example, you may want to add a test-sensor using <code>sensor</code> as name and <code>test</code> as password. The sensor 
+		is immediately active and can receive events from the ModSecurity module.
+	  </p>
+	  <p>
+		Now, the <code>mlogc</code> tools needs to be set up to sent the events to the console.
+		An excerpt of a sample configuration for <code>mlogc</code> is shown in the following:
+	  </p>
+<pre>
+#
+# ModSecurity Console receiving URI. You can change the host
+# and the port parts but leave everything else as is.
+#
+ConsoleURI          "http://127.0.0.1:8080/AuditConsole/rpc/auditLogReceiver"
+
+#
+# Sensor credentials
+#
+SensorUsername      "sensor"
+SensorPassword      "test"
+</pre>
+		<p>
+			Basically you just need to adjust the <code>ConsoleURI</code> to match your AuditConsole instance. Given that you integrated 
+			the mlogc and adjusted its configuration as shown above, you should now have an AuditConsole which receives events from your Apache.
+		</p>
+	</section>
+	
+  </body>
+</document>

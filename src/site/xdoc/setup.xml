@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+
+  <properties>
+    <title>Page Title</title>
+    <author email="user@company.com">John Doe</author>
+  </properties>
+
+  <!-- Optional HEAD element, which is copied as is into the XHTML <head> element -->
+
+  <body>
+  
+  <section name="Setup">
+	<p>
+		The AuditConsole is implemented as a J2EE web-application. It does not rely on any special enterprise 
+		container and therefore runs in any servlet-container supporting the Servlet-Specification 2.5.
+	</p>
+	<p>
+		The Console has successfully been tested running within the jetty (6.1.20) and the tomcat (6.0.20) 
+		servlet-containers on Windows (tomcat) and Linux systems (tomcat &amp; jetty). Any other container should 
+		be fine as well. The setup is pretty simple and requires only two steps:
+	</p>
+	
+	
+	<ol>
+		<li>
+			Install the WAR archive
+		</li>
+		<li>
+			Setup an external database (optional)
+		</li>
+		<li>
+			Setup the Console
+		</li>
+	</ol>
+
+	<p>
+		The first step requires a simple copy of the <code>AuditConsole.war</code> file to the appropriate directory 
+		of your servlet-container and the second step is done by stepping through the initial setup-wizzard of
+		the console.
+	</p>
+	
+	<p>
+		I present the steps in detail below.
+	</p>
+	
+	
+	<h3>
+		Install the WAR Archive
+	</h3>
+	
+	
+		<p>
+			The install of the AuditConsole takes no more than putting the distributed WAR archive into the deployment 
+			directory of your servlet-container and starting the container. In most standard setups of Tomcat and Jetty 
+			this will automatically deploy the Console.
+		</p>
+
+		<p>
+			As an example, with a Apache Tomcat unzipped at <code>/usr/local/apache-tomcat-6.0.20</code>, you would simply copy 
+			the WAR archive <code>AuditConsole.war</code> to
+		</p>
+	
+		<div align="center">
+			<code>/usr/local/apache-tomcat-6.0.20/webapps</code>
+		</div>
+		
+		
+		<p>
+			With the default Tomcat settings, this will deploy the console at the URL
+		</p>
+
+		<div align="center">
+			<code>http://address-of-your-server:8080/AuditConsole</code>
+		</div>	
+		
+	
+		<h4>Setup an external Database (optional)</h4>
+	
+
+		<p>
+			If you want to use an external database, such as MySQL or PostGres, you will have to set up this 
+			database first, before running the Console Setup. If you just want to use the internal database 
+			(Derby), which is perfectly fine, then you can skip this step.
+		</p>
+
+		<p>
+			The AuditConsole will take care of table/schema creation, but cannot create an external database 
+			itself. Thus, you need to do this manually. The following steps need to be taken:
+		</p>
+
+		<ol>
+			<li>
+				Add the JDBC driver to your servlet-container
+			</li>
+			<li>
+				Create the database
+			</li>
+			<li>
+				Create a user which is allowed to connect and create the schema.
+			</li>
+		</ol>
+
+
+		<h4>Adding the JDBC Driver to your Container</h4>
+			
+			
+			<p>
+				The AuditConsole will access your database using a Java Database driver. Such drivers are provided
+				by most database vendors (MySQL, PostGres, Oracle, ...) and cannot be easily included into the AuditConsole 
+				distribution due to license restrictions. (For instance, MySQL's Connector/J is a GPL library, which I 
+				cannot redistribute with AuditConsole as it is currently closed-source.)
+			</p>
+			
+			<p>
+				So the first thing you'll have to do, is to fetch the appropriate database driver from you vendor and 
+				include it into your servlet container. For MySQL you will need to download the <i>Connector/J</i> package from 
+				http://dev.mysql.com/downloads/connector/j/5.1.html, unzip it and copy the <code>mysql-connector-java-5.x.y.jar</code> 
+				into your servlet-container's library path.
+			</p>
+
+			<p>
+				For MySQL and Apache Tomcat this would require the following steps:
+			</p>
+
+<pre style="font-size: 9pt;">
+   #  unzip mysql-connector-java-5.1.10.zip
+   #  cp mysql-connector-java-5.1.10/mysql-connector-java-5.1.10.jar /usr/local/apache-tomcat-6.0.20/lib/
+</pre>
+
+			
+
+	<h4>Creating a MySQL-Database</h4>
+<p>
+If you're using MySQL as external database, you would need to run <code>mysqladmin</code> to create the database and grant the required privileges to the database user of the AuditConsole.
+Creating a database can be done by
+</p>
+
+<pre>
+   # mysqladmin -u root -p create AuditEventDB
+</pre>
+
+<p>
+In this case the database name will be <code>AuditEventDB</code>, but you're free to choose any other name as well.
+</p>
+
+<p>
+Next, you need to create a user, which can connect to the database, create tables and so on. In mysql you would simple connect to the new database and
+use the <code>GRANT</code> command to create the privileges:
+</p>
+
+<pre>
+   # mysql -u root -p AuditEventDB
+   mysql> GRANT ALL ON AuditEventDB.* TO wacUser@localhost identified by 'wacPassword';
+   mysql> FLUSH PRIVILEGES;
+   mysql> QUIT;
+</pre>
+
+<p>
+Of course you're not bound to using <code>wacUser</code> as the username and <code>wacPassword</code> as the password. Any other combination will work as well, you simply have to use the same credentials in the setup of the console.
+</p>
+
+<p>
+In order to verify the permissions, try to connect to the database with this user:
+</p>
+
+<pre>
+    # mysql -u wacUser -pwacPassword -h localhost AuditEventDB
+</pre>
+
+<p>
+If this connection succeeds, you're ready to take the Console Setup step.
+</p>
+
+<h3>Setup up the Console</h3>
+
+<p>
+After you deployed the AuditConsole and having your Tomcat running, it is time to setup the basic console settings. The console provides some few wizzard-forms for the first-time setup. Pointing your browser to 
+</p>
+
+<pre>
+   http://address-of-your-server:8080/AuditConsole
+</pre>
+
+<p>
+will directly lead you to these setup-forms. Beforehand you must authorize yourself. The initial credentials are <code>admin</code> for the login and <code>admin</code> as the password. Don't forget to change the password immediately after you have completed the setup.
+</p>
+
+<p>
+The basic setup process requires the following steps
+</p>
+
+<ol>
+	<li>Setup the base-directory</li>
+	<li>Setup the backend storage-engine.</li>
+</ol>
+
+
+
+
+
+
+<h3>Setup the Base-Directory</h3>
+
+<p>
+The AuditConsole requires a directory for storing its configuration, user-configurations, runtime-statistics and so on. This directory should be empty at setup-time and needs to be writable to the user running the AuditConsole (the user of your servlet-container). A good place for this directory is for example
+</p>
+
+<pre>
+    /opt/AuditConsole
+</pre>
+
+<p>
+If this directory does not exist and the servlet-container is not allowed to create directories below <code>/opt</code>, you can simply create this your self and set the ownership to the user of your servlet-container. For example, if your container is running under user {{{tomcat6}}} and group {{{tomcat6}}}, you might simply run the following commands:
+</p>
+
+<pre>
+   # mkdir /opt/AuditConsole
+   # chown tomcat6 /opt/AuditConsole
+   # chgrp tomcat6 /opt/AuditConsole
+</pre>
+
+<p>
+<i>Previous Setups</i>: If you have previously set up a console, you can also specify this previous console's base-directory, in which case the console will be started with these settings. This is especially useful for updates.
+</p>
+
+
+	<h3>Setup the Backend Storage Engine</h3>
+
+
+<p>
+Once you have chosen the base-directory, you need to setup the Storage Engine. This engine is responsible for receiving events and indexing and storing them onto the local disk. The events are received from the <code>mlogc</code> tool in the same way as in the ModSecurity Console.
+</p>
+
+<p>
+The <code>data-directory</code> is finally the directory where all the received audit-events are stored. This should be located in a large disk, depending on the expected number of events.
+All received events are indexed in a database schema. The database integrated within the console is an embedded Java database (Derby), which allows you to start the console right away. To do so, simply leave the default settings.
+</p>
+
+<p>
+In case you want to use an external database you are required to set this up first (see ''2. Setup external Database''). Currently, only mysql has been tested. 
+You would need to specify the database-url and the user to connect to that database (and to create the required tables). 
+</p>
+
+<p>
+If you have previously create the database as described in ''2. Setup external Database'', then you need to specify you database-settings as choosen in this previous step. Following the MySQL-example from above, the required settings for this step would be:
+</p>
+
+<pre>
+||URL:|| {{{jdbc:mysql://localhost:3306/AuditEventDB}}} ||
+||User:|| {{{wacUser}}}  ||
+||Password: || {{{wacPassword}}} ||
+</pre>
+
+<p>
+After these steps you should have your AuditConsole running.
+</p>
+
+
+	<h3>What's next?</h3>
+
+<p>
+After you have set up your Console, it is time to change the <code>admin</code>-password using
+the <i>User-Preferences</i> (in the gray toolbar, to the right) to make sure nobody else enters your system.
+</p>
+
+<p>
+The first steps then are to add <i>sensors</i> to your console. This is done using the sensors-screen (in menu <i>System/Sensors</i>). To add a sensor, you need to specify the sensor's name, its password and (optionally) the address it is limitted to.
+</p>
+
+<p>
+As an example, you may want to add a test-sensor using <code>sensor</code> as name and <code>test</code> as password. The sensor is immediately active and can receive events from the ModSecurity module.
+</p>
+
+<p>
+Now, the <code>mlogc</code> tools needs to be set up to sent the events to the console.
+An excerpt of a sample configuration for <code>mlogc</code> is shown in the following:
+</p>
+
+<pre>
+#
+# ModSecurity Console receiving URI. You can change the host
+# and the port parts but leave everything else as is.
+#
+ConsoleURI          "http://127.0.0.1:8080/AuditConsole/rpc/auditLogReceiver"
+
+#
+# Sensor credentials
+#
+SensorUsername      "sensor"
+SensorPassword      "test"
+</pre>
+
+<p>
+Basically you just need to adjust the <code>ConsoleURI</code> to match your AuditConsole instance. Given that you integrated the mlogc and adjusted its configuration as shown above, you should now have an AuditConsole which receives events from your Apache.
+</p>
+</section>
+</body>
+</document>

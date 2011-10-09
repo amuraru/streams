@@ -59,6 +59,10 @@ public class StatisticsStreamWriter
 		p = new PrintStream( out );
 	}
 	
+	public StatisticsStreamWriter( OutputStream out, String separator ){
+		this( out );
+		this.separator = separator;
+	}
 	
 	public void setAttributeFilter( String filter ){
 		this.filter = filter;

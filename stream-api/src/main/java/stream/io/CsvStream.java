@@ -43,6 +43,13 @@ public class CsvStream
 		reader = new BufferedReader( new InputStreamReader( in ) );
 	}
 	
+	public CsvStream(InputStream in, String splitter ) throws Exception {
+		super(in);
+		this.splitExpression = splitter;
+		log.debug( "Split expression is: {}", splitExpression );
+		reader = new BufferedReader( new InputStreamReader( in ) );
+	}
+	
 	public CsvStream(URL url, String splitExp) throws Exception {
 		super( url );
 		this.url = url;
@@ -112,7 +119,7 @@ public class CsvStream
 				String dt[] = line.substring(1).split( splitExpression );
 				for( int i = 0; i < dt.length; i++ ){
 					if( i < dt.length ){
-						if( dt[i].matches( "\\d*\\.\\d*" ) )
+						if( dt[i].matches( "(-|\\+)?\\d*\\.\\d*" ) )
 							attributes.put( dt[i], Double.class );
 						else
 							attributes.put( dt[i], String.class );
