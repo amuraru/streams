@@ -126,11 +126,15 @@ public class DataStreamWriter
 		// or if the number of keys has changed
 		//
 		String header = createHeader( datum );
+		if( lastHeader != null && lastHeader.equals( header ) )
+			return;
+		
 		if( lastHeader == null || !lastHeader.equals( header ) ){
 			p.println( header );
 			lastHeader = header;
 			return;
 		}
+		
 		
 		if( ! headerWritten || ( keys == null && datum.keySet().size() > headers.size() ) ){
 			p.print( "#" );
@@ -183,6 +187,10 @@ public class DataStreamWriter
 		StringWriter s = new StringWriter();
 		s.append( "#" );
 		Iterator<String> it = item.keySet().iterator();
+		
+		if( keys != null )
+			it = keys.iterator();
+		
 		while( it.hasNext() ){
 			s.append( it.next() );
 			if( it.hasNext() )

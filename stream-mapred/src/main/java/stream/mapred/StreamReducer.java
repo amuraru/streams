@@ -13,6 +13,7 @@ public abstract class StreamReducer
 	extends AbstractDataProcessor
 	implements Reducer 
 {
+	boolean verbose = "true".equalsIgnoreCase( System.getProperty( "reducer.verbose" ) );
 	
 	/**
 	 * @see stream.mapred.AbstractDataProcessor#createDataInputStream(java.io.InputStream)
@@ -44,10 +45,13 @@ public abstract class StreamReducer
 	
 	public void reduce() throws Exception {
 		init();
-		
+		long count = 0L;
 		Data item = read();
 		while( item != null ){
+			count++;
 			process( item );
+			if( verbose && count % 10000 == 0 )
+				log.debug( "Reducer '{}': {} data items processed", getClass(), count );
 			item = read();
 		}
 		

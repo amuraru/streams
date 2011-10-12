@@ -25,6 +25,7 @@ public abstract class StreamMapper
 {
 	/* The logger for this class */
 	static Logger log = LoggerFactory.getLogger( StreamMapper.class );
+	boolean verbose = "true".equalsIgnoreCase( System.getProperty( "mapper.verbose" ) );
 
 
 	/**
@@ -61,8 +62,12 @@ public abstract class StreamMapper
 		this.init();
 		
 		Data item = read();
+		long count = 0L;
 		while( item != null ){
+			count++;
 			process( item );
+			if( verbose && count % 10000 == 0)
+				log.debug( "Mapper '{}': {} data items processed", getClass(), count );
 			item = read();
 		}
 		
