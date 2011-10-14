@@ -114,7 +114,8 @@ public class SQLStreamParser
             try {
                 query = mapper.map( query );
             } catch (Exception e) {
-                e.printStackTrace();
+                if( log.isTraceEnabled() )
+                    e.printStackTrace();
                 query = orig;
             }
         }
@@ -135,7 +136,7 @@ public class SQLStreamParser
             
             log.error( "Failed to parse SQL: '{}'", query );
             log.error( "  Error was: {}", e.getMessage() );
-            if( log.isDebugEnabled() )
+            if( log.isTraceEnabled() )
                 e.printStackTrace();
             error++;
         }
@@ -183,7 +184,8 @@ public class SQLStreamParser
             return astWalker.getAST();
             
         } catch (Exception e) {
-            e.printStackTrace();
+            if( log.isTraceEnabled() )
+                e.printStackTrace();
             throw new ParseException( "Failed to parse sql: '" + sql + "'" );
         }
     }

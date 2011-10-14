@@ -53,4 +53,9 @@ public class Base64Codec {
 	public byte[] decode( byte[] data ){
 		return Base64.decodeBase64( data );
 	}
+	
+	public static String encode( String string ){
+	    byte[] encoded = Base64.encodeBase64( string.getBytes() );
+	    return new String( encoded );
+	}
 }

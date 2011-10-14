@@ -137,7 +137,11 @@ public class CsvStream
 			for( String name : attributes.keySet() ){
 				if( i < tok.length ){
 					if( Double.class.equals( attributes.get( name ) ) ){
-						datum.put( name, new Double( removeQuotes( tok[i] ) ) );
+					    try {
+					        datum.put( name, new Double( removeQuotes( tok[i] ) ) );
+					    } catch (Exception e) {
+					        datum.put( name, removeQuotes( tok[i] ) );
+					    }
 					} else
 						datum.put( name, removeQuotes( tok[i] ) );
 					i++;
