@@ -39,8 +39,13 @@ public class Base64Codec {
      * @param data The data to encode.
      * @return The encoded data.
      */
-	public byte[] encode( byte[] data ){
+	public static byte[] encode( byte[] data ){
 		return Base64.encodeBase64( data );
+	}
+	
+	
+	public static String encode( String data ){
+		return new String( Base64.encodeBase64( data.getBytes() ) );
 	}
 
 	
@@ -50,7 +55,7 @@ public class Base64Codec {
 	 * @param data The data to decode.
 	 * @return The decoded data.
 	 */
-	public byte[] decode( byte[] data ){
+	public static byte[] decode( byte[] data ){
 		return Base64.decodeBase64( data );
 	}
 }
