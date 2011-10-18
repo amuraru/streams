@@ -18,6 +18,10 @@ public class SvmLightStreamWriter extends DataStreamWriter {
 	Map<String,Integer> indexes = new HashMap<String,Integer>();
 	Integer largestIndex = 0;
 
+	
+	public SvmLightStreamWriter(){
+	}
+	
 	public SvmLightStreamWriter(OutputStream out) {
 		super(out);
 	}

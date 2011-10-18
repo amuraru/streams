@@ -32,6 +32,7 @@ public abstract class AbstractDataStream implements DataStream {
 	LinkedHashMap<String,Class<?>> attributes = new LinkedHashMap<String,Class<?>>();
 	BufferedReader reader;
 	Long limit = -1L;
+	Long count = 0L;
 
 	ArrayList<DataProcessor> preprocessors = new ArrayList<DataProcessor>();
 	
@@ -156,6 +157,10 @@ public abstract class AbstractDataStream implements DataStream {
 	 * @see stream.io.DataStream#readNext()
 	 */
 	public final Data readNext( Data item ) throws Exception {
+		
+		if( limit > 0 && count >= limit )
+			return null;
+		
 	    Data datum = readItem( item );
 	    if( datum == null )
 	        return null;
@@ -165,6 +170,7 @@ public abstract class AbstractDataStream implements DataStream {
 	        if( datum == null )
 	            return null;
 	    }
+	    count++;
 	    return datum;
 	}
 	

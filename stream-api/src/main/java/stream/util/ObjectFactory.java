@@ -71,7 +71,7 @@ public class ObjectFactory
 		params.putAll( variables );
 		params.putAll( parameter );
 
-		log.info( "Parameters for new class: {}", params );
+		log.debug( "Parameters for new class: {}", params );
 
 		Class<?> clazz = Class.forName( className );
 

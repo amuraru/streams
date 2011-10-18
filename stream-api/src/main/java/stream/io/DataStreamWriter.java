@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -43,6 +44,16 @@ public class DataStreamWriter
 	List<String> headers = new LinkedList<String>();
 	boolean closed = false;
 	List<String> keys = null;
+	String url;
+
+	
+	public DataStreamWriter(){
+	}
+	
+	public DataStreamWriter( URL url ) throws Exception {
+		this( new FileOutputStream( new File( url.toURI() ) ) );
+	}
+	
 	
 	/**
 	 * Create a new DataStreamWriter which writes all data to the
@@ -58,6 +69,21 @@ public class DataStreamWriter
 	public DataStreamWriter( File file, String separator) throws IOException {
 		this( file );
 		this.separator = separator;
+	}
+	
+	
+	public void setUrl( String url ){
+		this.url = url;
+		File file = new File( url );
+		try {
+			p = new PrintStream( new FileOutputStream( file ) );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getUrl(){
+		return this.url;
 	}
 	
 	
@@ -89,6 +115,21 @@ public class DataStreamWriter
 	}
 	
 	
+	
+	/**
+	 * @return the separator
+	 */
+	public String getSeparator() {
+		return separator;
+	}
+
+	/**
+	 * @param separator the separator to set
+	 */
+	public void setSeparator(String separator) {
+		this.separator = separator;
+	}
+
 	public void setKeys( String str ){
 	    if( str == null )
 	        keys = null;

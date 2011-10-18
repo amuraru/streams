@@ -56,7 +56,15 @@ public class CsvStream
 		this.splitExpression = splitExp;
 		this.initReader();
 	}
+	
+	
+	public void setSeparator( String separator ){
+		splitExpression = separator;
+	}
 
+	public String getSeparator(){
+		return splitExpression;
+	}
 	
 	public String removeQuotes( String str ){
 		String s = str;

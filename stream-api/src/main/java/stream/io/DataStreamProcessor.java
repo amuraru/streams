@@ -103,12 +103,17 @@ public class DataStreamProcessor
 	 */
 	@Override
 	public Data process(Data input) {
+		
+		log.trace( "Processing item with {} processors", processors.size() );
+		
 		Data data = input;
 		if( input == null )
 			return null;
 		
-		for( DataProcessor p : processors )
+		for( DataProcessor p : processors ){
+			log.trace( "Processing item with processor {}", p );
 			data = p.process( data );
+		}
 
 		if( finalAttributes == null ){
 			finalAttributes = new LinkedHashMap<String,Class<?>>();

@@ -55,7 +55,7 @@ public class ParameterInjection {
 			try {
 				Field field = clazz.getDeclaredField( k );
 				if( field != null && field.isAccessible() && field.isAnnotationPresent( Parameter.class ) ){
-					log.info( "Found accessible field {} for class {}", field.getName(), o.getClass() );
+					log.debug( "Found accessible field {} for class {}", field.getName(), o.getClass() );
 					field.set( o, params.get( k ) );
 					alreadySet.add( k );
 				}
@@ -76,7 +76,7 @@ public class ParameterInjection {
 			for( String k : params.keySet() ){
 
 				if( m.getName().startsWith( "set" ) && alreadySet.contains( k ) ){
-					log.info( "Skipping setter '{}' for already injected field {}", m.getName(), k );
+					log.debug( "Skipping setter '{}' for already injected field {}", m.getName(), k );
 					continue;
 				}
 
@@ -123,7 +123,7 @@ public class ParameterInjection {
 						} else {
 							try {
 								Constructor<?> c = t.getConstructor( String.class );
-								po = c.newInstance( params.get( k ).toString() );
+								po = c.newInstance( params.get( k ).toString().trim() );
 								log.debug( "Invoking {}({})", m.getName(), po );
 							} catch (NoSuchMethodException nsm ){
 								log.error( "No String-constructor found for type {} of method {}", t, m.getName() );
@@ -148,7 +148,7 @@ public class ParameterInjection {
 		Map<String,String> params = new TreeMap<String,String>();
 		for( Method m : learner.getClass().getMethods() ){
 			if( m.getName().startsWith( "get" ) && m.getParameterTypes().length == 0 ){
-				log.info( "Found getter '{}' for class '{}'", m.getName(), learner.getClass() );
+				log.debug( "Found getter '{}' for class '{}'", m.getName(), learner.getClass() );
 				Class<?> rt = m.getReturnType();
 				if( isTypeSupported( rt ) ) { // rt.isPrimitive() || rt.equals( String.class ) || rt.equals( Double.class ) ){
 					Object val = m.invoke( learner, new Object[0] );

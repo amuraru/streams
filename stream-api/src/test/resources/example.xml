@@ -1,21 +1,26 @@
 <experiment source="log">
 
-	<Stream id="log" class="stream.io.CsvStream"
+	<Stream id="log" class="stream.io.CsvStream" limit="200"
 		url="http://kirmes.cs.uni-dortmund.de/data/random-stream.csv.gz" />
+<!-- 
+	<Stream id="log" class="stream.io.CsvStream"
+		url="file:/Users/chris/demo-shop.log" separator="\|" />
+ -->
 
-	<Processing input="log" output="logData">
-	
+	<Process input="log" output="logData">
+<!-- 
 	    <Processor id="mysqlTracker" class="org.jwall.sql.audit.MySQLSessionTracker" />
 	
-		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="mysql:sql" />
-	
-		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />
-	
-	</Processing>		
-	
+		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="sql:query" />
+ -->	
+ 		<processor id="create-label" class="stream.data.mapper.RandomLabel" seed="1000"/>
+ 		<processor id="rename-att1" class="stream.data.mapper.KeyMapper" old="att1" new="x" />
 <!-- 
-    <Stream id="sql" class="stream.io.SyslogStream">
-    	<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="mysql:sql" />
-    </Stream>
- -->
+		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />
+ -->	
+	
+		<Processor id="write" class="stream.io.SvmLightStreamWriter" url="/Users/chris/test.csv" separator="||" />
+		
+	</Process>
+	
 </experiment>

@@ -1,0 +1,19 @@
+<experiment source="log">
+
+	<Stream id="log" class="stream.io.CsvStream" limit="1000"
+		url="file:/Users/chris/demo-shop.log" separator="\|">
+		
+ 		<Processor class="stream.data.mapper.KeyMapper" old="REQUEST_HEADERS:User-Agent" new="@label" />
+		<Processor class="stream.data.mapper.BinaryLabels" />
+	</Stream>
+
+	<Process input="log" output="logData">
+<!-- 
+	    <Processor id="mysqlTracker" class="org.jwall.sql.audit.MySQLSessionTracker" />
+ -->	
+		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="sql:query" />
+		<Processor id="write" class="stream.io.DataStreamWriter" url="/Users/chris/test.csv" separator="&#09;&#09;&#09;" />
+		
+	</Process>
+	
+</experiment>
