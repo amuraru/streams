@@ -3,6 +3,7 @@ package org.jwall.sql.audit;
 import java.io.FileOutputStream;
 import java.net.URL;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,6 @@ import stream.data.mapper.Mapper;
 import stream.data.tree.CountLeaves;
 import stream.data.tree.CountNodes;
 import stream.data.tree.TreeFeatures;
-import stream.data.tree.TreeHeight;
 import stream.io.CsvStream;
 import stream.io.DataStream;
 import stream.io.DataStreamWriter;
@@ -22,6 +22,11 @@ public class DemoShopAnalysis
 {
     static Logger log = LoggerFactory.getLogger( DemoShopAnalysis.class );
 
+    @Test
+    public void dummy(){
+    }
+    
+    
     /**
      * @param args
      */
@@ -64,7 +69,6 @@ public class DemoShopAnalysis
         TreeFeatures tf = new TreeFeatures();
         tf.add( new CountLeaves() );
         tf.add( new CountNodes() );
-        tf.add( new TreeHeight() );
 
         MultiSet<String> stmts = new MultiSet<String>();
         MultiSet<String> counts = new MultiSet<String>();
