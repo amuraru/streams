@@ -12,7 +12,9 @@ package stream.data;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
-public interface DataProcessor {
+public interface DataProcessor 
+	extends Processor<Data,Data> 
+{
 
 	/**
 	 * Process the given unit of data. 

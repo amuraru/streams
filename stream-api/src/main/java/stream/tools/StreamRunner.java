@@ -26,6 +26,7 @@ import stream.util.ParameterInjection;
 
 public class StreamRunner
 {
+	public final static String DEFAULT_INPUT_STREAM = "stream.input.default";
 	static Logger log = LoggerFactory.getLogger( StreamRunner.class );
 	ObjectFactory objectFactory = ObjectFactory.newInstance();
 
@@ -52,8 +53,11 @@ public class StreamRunner
 	public void init( Document doc ) throws Exception {
 		Element root = doc.getDocumentElement();
 		source = root.getAttribute( "source" );
-		if( source ==  null )
-			throw new Exception( "No source-key has been defined! Expecting 'source' element!" );
+		if( source ==  null || source.trim().isEmpty() ){
+			log.warn( "No 'source' defined, using default '{}'", DEFAULT_INPUT_STREAM );
+			source = DEFAULT_INPUT_STREAM;
+			//throw new Exception( "No source-key has been defined! Expecting 'source' element!" );
+		}
 
 		NodeList children = root.getChildNodes();
 
@@ -69,8 +73,13 @@ public class StreamRunner
 
 					DataStream stream = createStream( attr );
 					if( stream != null ){
-						if( id == null )
-							id = "" + stream;
+						if( id == null ){
+							id = DEFAULT_INPUT_STREAM; // "" + stream;
+							log.info( "No 'id' defined for stream '{}', using default name '{}'", stream, DEFAULT_INPUT_STREAM );
+							if( streams.get( DEFAULT_INPUT_STREAM ) != null ){
+								throw new Exception( "Multiple stream definitions for id '" + DEFAULT_INPUT_STREAM + "'!" );
+							}
+						}
 						streams.put( id, stream );
 					}
 
@@ -90,7 +99,6 @@ public class StreamRunner
 
 				} catch (Exception e) {
 					log.error( "Failed to create object: {}", e.getMessage() );
-					e.printStackTrace();
 				}
 			}
 
@@ -107,9 +115,10 @@ public class StreamRunner
 					src = attr.get( "input" );
 
 				if( src == null ){
-					log.error( "No input defined for processor-chain {}", node );
+					log.warn( "No input stream defined using '{}'", DEFAULT_INPUT_STREAM );
+					src = DEFAULT_INPUT_STREAM;
 				}
-
+				
 				List<DataProcessor> procs = this.getDataProcessors( child ); 
 				log.debug( "Adding {} processors to processing-chain", procs.size() );
 				for( DataProcessor p : procs )
