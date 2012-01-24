@@ -41,20 +41,6 @@
 			<version>1.2.14</version>
 		</dependency>
 	</dependencies>
-	<!-- 
-	<distributionManagement>
-		<repository>
-			<id>jwall</id>
-			<name>jwall.org Maven Repository</name>
-			<url>https://secure.jwall.org/maven/repository/jwall</url>
-		</repository>
-		<snapshotRepository>
-			<id>jwall-snapshots</id>
-			<name>jwall.org Snapshot Repository</name>
-			<url>https://secure.jwall.org/maven/repository/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-	 -->
 
 	<build>
 		<plugins>

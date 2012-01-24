@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>stream-generator</name>
 	<artifactId>stream-generator</artifactId>
-	<version>1.0</version>
 	<parent>
 		<groupId>org.jwall</groupId>
 		<artifactId>streams</artifactId>
@@ -28,18 +27,6 @@
 			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>jwall</id>
-			<name>jwall.org Maven Repository</name>
-			<url>https://secure.jwall.org/maven/repository/jwall</url>
-		</repository>
-		<snapshotRepository>
-			<id>jwall-snapshots</id>
-			<name>jwall.org Snapshot Repository</name>
-			<url>https://secure.jwall.org/maven/repository/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<build>
 		<plugins>
