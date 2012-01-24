@@ -33,7 +33,20 @@
 		</site>
 	</distributionManagement>
 
-
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://kilab.cs.uni-dortmund.de/jenkins/</url>
+	</ciManagement>
+	
+	<developers>
+		<developer>
+			<name>Christian Bockermann</name>
+			<email>christian.bockermann@cs.uni-dortmund.de</email>
+			<organization>Informatik LS8, TU-Dortmund</organization>
+			<organizationUrl>http://www-ai.cs.uni-dortmund.de</organizationUrl>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 
 	<build>
 		<plugins>
@@ -93,6 +106,11 @@
 				<version>2.8</version>
 				<configuration>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.11</version>
 			</plugin>
 		</plugins>
 	</reporting>
