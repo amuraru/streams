@@ -1,6 +1,32 @@
+#banner {
+	background-image: none;
+	padding: 10px;
+	padding-left: 15px;
+	height: 60px;
+}
+
+#breadcrumbs {
+	background-image: none;
+	height: 10px;
+	margin: 8px;
+	background-color: #e0e0e0;
+	border: solid 1px #d0d0d0;
+}
+
+#leftColumn {
+	margin-left: 10px;
+	border: none;
+}
+
+#bodyColumn {
+	margin-left: 220px;
+	padding-top: 10px;
+	width: 80%;
+}
+
 body {
   font-family: Verdana,Arial,Helvetica,sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   background: white;
   color: #444;
   text-align: left;
@@ -9,23 +35,22 @@ body {
 }
 
 p {
-  font-size: 16px;
   line-height: 130%;
 }
 
 h1, h2, h3, h4 {
-  font-family: Verdana,Arial,Helvetica;
+  font-family: Georgia,Times,Verdana,Arial,Helvetica;
   font-weight: bold;
 }
 h1 {
-  font-size: x-large;
-  font-weight: normal;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-right: 4px;
-  padding-left: 10px;
-  margin: 0px;
-  border-bottom: #f0f0f0 solid 1px;
+  	font-weight: normal;
+  	padding-top: 4px;
+  	padding-bottom: 4px;
+  	padding-right: 4px;
+  	padding-left: 0px;
+  	margin: 0px;
+  	margin-top: 10px;
+  	border-bottom: #d0d0d0 solid 1px;
 }
 h1 a:link, h1 a:visited {
   text-decoration: none;
@@ -92,12 +117,6 @@ input,textarea {
   padding-left: 40px;
   margin-left: 240px;
   width:800px;
-}
-
-#breadcrumbs {
-    height: 24px;
-    font-size: 13px;
-    font-family: Verdana,Arial,Helvetica;
 }
 
 #section {

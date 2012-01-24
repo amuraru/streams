@@ -7,6 +7,12 @@
 	<version>1.0</version>
 	<packaging>pom</packaging>
 	<description>Additional learning algorithms for the PG542 stream processing framework</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	
 	<modules>
 		<module>stream-api</module>
 		<module>stream-generator</module>
@@ -14,7 +20,6 @@
 		<module>stream-log</module>
 		<module>stream-mapred</module>
 	</modules>
-
 
 	<distributionManagement>
 		<repository>
@@ -37,7 +42,7 @@
 		<system>Jenkins</system>
 		<url>https://kilab.cs.uni-dortmund.de/jenkins/</url>
 	</ciManagement>
-	
+
 	<developers>
 		<developer>
 			<name>Christian Bockermann</name>
@@ -63,6 +68,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.0</version>
+<!--
+  -->
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
@@ -100,6 +107,12 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
+<!--
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jxr-maven-plugin</artifactId>
+      </plugin>
+  -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>

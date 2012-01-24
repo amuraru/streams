@@ -14,11 +14,9 @@
   <body>
   
     <links>
-<!--
-      <item name="Maven" href="http://maven.apache.org/"/>
-      <item name="Apache" href="http://www.apache.org/"/>
-  -->
     </links>
+    
+    <publishDate position="right" />
     
 	<menu name="Documentation">
 		<item name="Quickstart" href="quickstart.html"/>
