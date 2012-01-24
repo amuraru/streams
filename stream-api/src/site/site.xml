@@ -1,4 +1,4 @@
-<project name="streams">
+<project name="AuditConsole">
   <bannerLeft>
     <name>streams</name>
     <src>http://www-ai.cs.uni-dortmund.de/ci/Medienpool/Seitenbilder/logo_tu.png</src>
@@ -14,21 +14,35 @@
   <body>
   
     <links>
-<!--
-      <item name="Maven" href="http://maven.apache.org/"/>
-      <item name="Apache" href="http://www.apache.org/"/>
-  -->
     </links>
-    
-	<menu name="Documentation">
-		<item name="Quickstart" href="quickstart.html"/>
+
+
+    <menu ref="parent" />
+
+<!--
+    <menu name="AuditConsole">
+      <item collapse="true" name="AuditConsole" href="index.html">
+	<item name="Features" href="features.html" />
+	<item name="Screenshots" href="screenshots.html" />
+      </item>
+      <item collapse="true" name="Documentation" href="documentation.html">
+         <item name="User Guide" href="user-guide/index.html" />
+      </item>
+    </menu>
+  -->
+<!--
+
+		<item name="Setup" href="setup.html" />
+		<item name="Sensors" href="setup/sensors.html"/>
 		<item name="User Guide" href="userguide.html" />
 	</menu>
+    -->
+	<menu name="Documentation">
+		<item name="Quickstart" href="quickstart.html"/>
+	</menu>
   
-	<menu ref="modules" />
-
 	<menu ref="reports"/>
-	
+
   </body>
 
   <skin>

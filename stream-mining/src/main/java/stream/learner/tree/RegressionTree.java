@@ -101,11 +101,7 @@ public class RegressionTree
 			}
 		}
 		
-		if( possibleSplitpoint != null ){
-			return possibleSplitpoint;
-		}
-
-		return null;
+		return possibleSplitpoint;
 	}
 
 	protected void computeSDRs(BTreeNode node, double preSd ){ //, double leqParentElements, double leqParentSum, double leqParentSquaredSum, double greaterParentElements, double greaterParentSum, double greaterParentSquaredSum, double preSd){
