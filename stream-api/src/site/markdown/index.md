@@ -39,6 +39,7 @@ meaning, and it is by convention that we define how this works. A few simple con
   3. Annotations and hidden keys are considered *special*
   4. All other keys are considered *normal variables*
 
+
 As one area of application of `streams` is the online learning and classification tasks, these
 tasks rely on a strict model of features *x_1,...,x_p* and labels *y*. Generally, the
 features are *variables* and the labels are *target variables* in the statistical sense.
