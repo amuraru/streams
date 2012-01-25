@@ -105,10 +105,7 @@ input,textarea {
   margin-bottom: 10px;
   position: relative;
 }
-#body {
-  margin: none;
-  background: white;
-}
+
 #content {
   background: white;
   padding-top: 20px;
@@ -124,21 +121,6 @@ input,textarea {
   background-color: red;
 }
 
-#sidebar {
-  font-family: Verdana,Helvetica;
-  text-align: center;
-  background: white;
-  float: left;
-  width: 180px;
-  padding-left: 8px;
-  padding-top: 0px;
-  padding-right: 10px;
-  padding-bottom: 32px;
-  margin-top: 8px;
-  margin-left: 10px;
-  margin-right: 40px;
-  font-size: 11px;
-}
 #footer {
   clear: both;
   text-align: center;
@@ -148,48 +130,6 @@ input,textarea {
 }
 #footer a {
   color: gray;
-}
-.sidebarItem {
-  background: white;
-  margin-bottom: 16px;
-  //border: solid 1px #bbb;
-  text-align: left;
-}
-.sidebarItemTitle {
-  text-align: left;
-  font-size: 14px;
-  font-weight: normal;
-  //background: white url('images/sidebartitle.jpg') no-repeat left top;
-  //background-color: #e0e0e0;
-  color: #444;
-  padding-left: 8px;
-  padding-top: 4px;
-  padding-bottom: 2px;
-  height: 20px;
-  border: none;
-  border-bottom: solid 1px #e0e0e0;
-}
-.sidebarItemTitle span a {
-  color: white;
-  text-decoration: none;
-}
-.sidebarItemBody {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-.sidebarItem ul {
-  margin: 0px;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-.sidebarItem li {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  padding-right: 8px;
-  list-style-type: none;
 }
 
 a:link {
@@ -205,25 +145,6 @@ a:visited {
   color: #003366;
 }
 
-#blogName {
-  font-size: 44px;
-  color: white;
-  padding-top: 8px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-weight: normal;
-}
-#blogDescription {
-  font-size: 16px;
-  color: white;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-weight: normal;
-  position: absolute;
-  bottom: 20px;
-  left: 24px;
-}
 
 div.source {
 	border: solid 1px #e0e0e0;
@@ -231,63 +152,11 @@ div.source {
 }
 
 
-.contentItem {
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  background: white;
-}
-.contentItemBody {
-  line-height: 1.5;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 30px;
-  padding-right: 30px;
-  text-align: left;
-}
-.contentItemLinks {
-  float: right;
-  text-align: right;
-  font-size: 11px;
-  color: gray;
-}
-.contentItemLinks form {
-  padding: 0px;
-  margin: 0px;
-}
-.contentItemLinks a {
-  color: gray;
-  text-decoration: none;
-}
 .even {
   background: #F4F4F4;
 }
 .odd {
   background: white;
-}
-.small {
-  font-size: 11px;
-}
-.metadata, .metadata a {
-  font-size: 11px;
-  color: gray;
-  line-height: 1.5em;
-}
-.approved {
-}
-.pending {
-  background: transparent url('images/pending.gif') no-repeat top left;
-  border: solid orange 1px;
-}
-.rejected {
-  background: transparent url('images/rejected.gif') no-repeat top left;
-  border: solid red 1px;
-}
-.published {
-}
-.unpublished {
 }
 blockquote {
   background: white url('images/blockquote.png') no-repeat top left;
@@ -316,20 +185,7 @@ blockquote {
   line-height: 1.0em;
   text-align: center;
 }
-.sidebarTagCloud {
-  font-size: 22px;
-  line-height: 0.7em;
-  text-align: center;
-}
 
-.photo {
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  border: solid black 1px;
-  text-align: center;
-}
 .codeSample {
   font-family: Courier, sans-serif;
   font-size: 11px;
@@ -368,27 +224,6 @@ blockquote {
 }
 #feeds a:hover {
   text-decoration: underline;
-}
-thead {
-  text-align: left;
-  background: #6e7d8e;
-  color: white;
-}
-th, th a:link, th a:visited {
-  font-weight: normal;
-  color: white;
-}
-.authenticated {
-  background: transparent url( 'images/authenticated.gif' ) no-repeat center left;
-  padding-left: 10px;
-}
-.unauthenticated {
-}
-.avatar {
-  float: left;
-  max-height: 50px;
-  max-width: 50px;
-  margin-right: 10px;
 }
 
 div.submenu {
