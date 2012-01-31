@@ -1,4 +1,4 @@
-<project name="AuditConsole">
+<project name="stream-api">
   <bannerLeft>
     <name>streams</name>
     <src>http://www-ai.cs.uni-dortmund.de/ci/Medienpool/Seitenbilder/logo_tu.png</src>
@@ -12,33 +12,16 @@
   </bannerRight>
   
   <body>
-  
-    <links>
-    </links>
-
 
     <menu ref="parent" />
+        <menu name="Documentation">
+            <item name="Overview" href="overview.html" />
+            
+            <item name="Stream Experiments" href="experiment.html" />
+        </menu>
 
-<!--
-    <menu name="AuditConsole">
-      <item collapse="true" name="AuditConsole" href="index.html">
-	<item name="Features" href="features.html" />
-	<item name="Screenshots" href="screenshots.html" />
-      </item>
-      <item collapse="true" name="Documentation" href="documentation.html">
-         <item name="User Guide" href="user-guide/index.html" />
-      </item>
-    </menu>
-  -->
-<!--
-
-		<item name="Setup" href="setup.html" />
-		<item name="Sensors" href="setup/sensors.html"/>
-		<item name="User Guide" href="userguide.html" />
-	</menu>
-    -->
-	<menu name="Documentation">
-		<item name="Quickstart" href="quickstart.html"/>
+	<menu name="Development">
+	    <item name="A simple DataProcessor" href="dataprocessor.html" />
 	</menu>
   
 	<menu ref="reports"/>
@@ -46,10 +29,9 @@
   </body>
 
   <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-stylus-skin</artifactId>
-    <version>1.2</version>
+    <groupId>edu.udo</groupId>
+    <artifactId>sfb876-skin</artifactId>
+    <version>0.1</version>
   </skin>
-  
-  <poweredBy></poweredBy>
+
 </project>
