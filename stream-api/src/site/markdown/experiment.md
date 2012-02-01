@@ -26,7 +26,9 @@ writing the result into another CSV file:
          </Process>
      </experiment>
 
-The elements within the `<processors>` tag all directly refer to Java classes
+The `<Process>` element represents a single thread that continuously reads
+items from the specified input stream and executes all nested/inner elements.
+The elements within the `<Process>` tag all directly refer to Java classes
 provided within the *Stream-API*. All of these classes can be found in the
 package `stream.data`, or sub packages, e.g. `stream.data.mapper.AddId`.
 
