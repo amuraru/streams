@@ -9,7 +9,7 @@ to standard output.
 in SVM-light format and write out sparse vectors (map jobs) or read
 in a list of sparse vectors and write out a single sparse vector.
 
-To previously split your data into blocks, see the [partitioner](map-reduce-partitioner)
+To previously split your data into blocks, see the [partitioner](partitioner.html)
 page for details.
 
 

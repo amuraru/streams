@@ -31,9 +31,9 @@
   </body>
 
   <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-stylus-skin</artifactId>
-    <version>1.2</version>
+    <groupId>edu.udo</groupId>
+    <artifactId>sfb876-skin</artifactId>
+    <version>0.1</version>
   </skin>
   
   <poweredBy></poweredBy>

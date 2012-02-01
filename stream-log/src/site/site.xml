@@ -12,16 +12,14 @@
   </bannerRight>
   
   <body>
-  
-    <links>
-    </links>
-
 
     <menu ref="parent" />
 
+<!--
 	<menu name="Documentation">
 		<item name="Data Partitioner" href="partitioner.html"/>
 	</menu>
+  -->
   
 	<menu ref="reports"/>
 
