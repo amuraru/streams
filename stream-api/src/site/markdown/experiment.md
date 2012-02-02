@@ -11,7 +11,7 @@ CSV file, adds an ID column and removes all but two named columns before
 writing the result into another CSV file:
 
      <experiment>
-         <Stream id="test-stream"
+         <Stream id="test-stream" class="stream.io.CsvStream"
                  url="http://kirmes.cs.uni-dortmund.de/data/test.csv.gz" />
 
          <Process input="test-stream">
@@ -52,7 +52,7 @@ queries and parses these into ASTs (parse trees) and writes the trees into
 a CSV based file format:
 
      <experiment>
-         <Stream id="sql-log"
+         <Stream id="sql-log" class="stream.io.SyslogDataStream"
                  url="file:///var/log/mysql.log" />
 
          <Process input="sql-log">

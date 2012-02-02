@@ -12,7 +12,7 @@ import stream.data.DataProcessor;
 import stream.data.tree.TreeEdges;
 import stream.io.AbstractDataStream;
 import stream.io.DataStreamWriter;
-import stream.io.LogFileDataStream;
+import stream.io.LogDataStream;
 import stream.io.LogStreamParser;
 import stream.io.ModSecurityAuditStream;
 
@@ -26,7 +26,7 @@ public class ExtractURLs
     public static void main(String[] args)
         throws Exception
     {
-        AbstractDataStream stream = new LogFileDataStream( new URL( "file:/Users/chris/shop-access.log" ) );
+        AbstractDataStream stream = new LogDataStream( new URL( "file:/Users/chris/shop-access.log" ) );
         
         stream = new ModSecurityAuditStream( new URL( "file:/Users/chris/shop-audit.log" ) );
         

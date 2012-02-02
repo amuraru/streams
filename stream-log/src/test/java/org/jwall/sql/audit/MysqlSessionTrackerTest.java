@@ -16,7 +16,7 @@ import stream.data.tree.TreeEdges;
 import stream.io.DataStream;
 import stream.io.DataStreamProcessor;
 import stream.io.DataStreamWriter;
-import stream.io.LogFileDataStream;
+import stream.io.LogDataStream;
 import stream.io.SyslogDataStream;
 
 public class MysqlSessionTrackerTest
@@ -33,7 +33,7 @@ public class MysqlSessionTrackerTest
         URL url = MysqlSessionTrackerTest.class.getResource( "/mysql.log" );
         url = new URL( "file:/Users/chris/sql-mining/query.log" );
         DataProcessor p = new MySQLSessionTracker();
-        DataStream stream = new LogFileDataStream( url );
+        DataStream stream = new LogDataStream( url );
         stream = new SyslogDataStream( url );
         DataStreamProcessor dsp = new DataStreamProcessor( stream );
         dsp.addDataProcessor( p );
