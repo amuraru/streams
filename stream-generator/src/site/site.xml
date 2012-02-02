@@ -1,4 +1,4 @@
-<project name="streams">
+<project name="stream-generator">
   <bannerLeft>
     <name>streams</name>
     <src>http://www-ai.cs.uni-dortmund.de/ci/Medienpool/Seitenbilder/logo_tu.png</src>
@@ -13,18 +13,9 @@
     
   <publishDate position="right" />
 
-  
   <body>
   
-    <links>
-    </links>
-    
-	<menu name="Documentation">
-		<item name="Quickstart" href="quickstart.html"/>
-		<item name="User Guide" href="userguide.html" />
-	</menu>
-  
-	<menu ref="modules" />
+    <menu ref="parent" />
 
 	<menu ref="reports"/>
 	
@@ -36,5 +27,4 @@
     <version>0.1</version>
   </skin>
   
-  <poweredBy></poweredBy>
 </project>

@@ -3,6 +3,7 @@ package org.jwall.sql.audit;
 import java.io.FileOutputStream;
 import java.net.URL;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,11 @@ public class DemoShopAnalysis
 {
     static Logger log = LoggerFactory.getLogger( DemoShopAnalysis.class );
 
+    @Test
+    public void dummy(){
+    }
+    
+    
     /**
      * @param args
      */

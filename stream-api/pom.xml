@@ -2,9 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>stream-api</name>
-	<groupId>org.jwall</groupId>
 	<artifactId>stream-api</artifactId>
-	<version>1.2</version>
+	<version>1.2.1</version>
+	<parent>
+		<groupId>org.jwall</groupId>
+		<artifactId>streams</artifactId>
+		<version>1.0</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -34,18 +41,6 @@
 			<version>1.2.14</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>jwall</id>
-			<name>jwall.org Maven Repository</name>
-			<url>https://secure.jwall.org/maven/repository/jwall</url>
-		</repository>
-		<snapshotRepository>
-			<id>jwall-snapshots</id>
-			<name>jwall.org Snapshot Repository</name>
-			<url>https://secure.jwall.org/maven/repository/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<build>
 		<plugins>
@@ -89,4 +84,34 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.4</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>scm</report>
+							<report>cim</report>
+							<report>dependencies</report>
+							<!-- <report>issue-tracking</report> <report>license</report> -->
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>	
 </project>

@@ -29,7 +29,6 @@ public class StreamRunner
     static Logger log = LoggerFactory.getLogger( StreamRunner.class );
     ObjectFactory objectFactory = ObjectFactory.newInstance();
 
-    String source = null;
     Map<String,DataStream> streams = new LinkedHashMap<String,DataStream>();
 
     /* This is a set of sinks, one sink may be connected to multiple streams (by key) */
@@ -51,9 +50,6 @@ public class StreamRunner
 
     public void init( Document doc ) throws Exception {
         Element root = doc.getDocumentElement();
-        source = root.getAttribute( "source" );
-        if( source ==  null )
-            throw new Exception( "No source-key has been defined! Expecting 'source' element!" );
 
         NodeList children = root.getChildNodes();
 
@@ -194,11 +190,6 @@ public class StreamRunner
 
         if( streams.isEmpty() )
             throw new Exception( "No data-stream defined!" );
-
-        DataStream stream = streams.get( source );
-        if( stream == null )
-            throw new Exception( "No stream found for source key '" + source + "'!" );
-
 
 
         log.info( "Need to handle {} sources: {}", streams.size(), streams.keySet() );

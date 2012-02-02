@@ -2,9 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pg542</groupId>
-        <name>stream-mining</name>
+    <name>stream-mining</name>
 	<artifactId>stream-mining</artifactId>
 	<version>0.2-SNAPSHOT</version>
+	<parent>
+		<artifactId>streams</artifactId>
+		<groupId>org.jwall</groupId>
+		<version>1.0</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
 	<repositories>
 		<repository>
 			<id>jwall</id>
@@ -103,18 +110,6 @@
 			<version>2.7.1</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>jwall</id>
-			<name>jwall.org Maven Repository</name>
-			<url>https://secure.jwall.org/maven/repository/jwall</url>
-		</repository>
-		<snapshotRepository>
-			<id>jwall-snapshots</id>
-			<name>jwall.org Snapshot Repository</name>
-			<url>https://secure.jwall.org/maven/repository/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<build>
 		<plugins>

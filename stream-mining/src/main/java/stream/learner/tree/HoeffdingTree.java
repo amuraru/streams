@@ -272,7 +272,7 @@ public class HoeffdingTree implements Learner<Data, HoeffdingTreeModel> {
 	 * @param quantileThresholds quantiles to find the best thresholds. Default: {@link HoeffdingTree#DEFAULT_QUANTILES}
 	 * @return Returns a list of thresholds for numeric features
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static List<Serializable> getNumericThresholds(Collection<Serializable> values, Double ... quantileThresholds) {
 		List<Serializable> thresholds = new ArrayList<Serializable>();
 		Arrays.sort(quantileThresholds);
@@ -303,7 +303,7 @@ public class HoeffdingTree implements Learner<Data, HoeffdingTreeModel> {
 	 * @param numericValue a numeric value
 	 * @return the nominal value to which the numeric value is mapped.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Comparable numericToNominal(Collection<Comparable> nominalValues, Comparable numericValue) {
 		Comparable smallestNominal = null;
 		for (Comparable nominal : nominalValues) {
@@ -544,11 +544,11 @@ public class HoeffdingTree implements Learner<Data, HoeffdingTreeModel> {
 		 * @param value a valid value for the specified feature
 		 * @param labelIndex the index of the class label
 		 */
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		private void incrementCounter(String feature, Serializable value, int labelIndex) {
 			int featureIndex = this.remainingFeatures.indexOf(feature);
 			if (featureIndex != -1) {
-				Class type = tree.getType( feature );
+				Class<?> type = tree.getType( feature );
 				if( type == Double.class ){
 					this.counter[featureIndex]
 					             [HoeffdingTree.this.featureValuePairs.get(feature).indexOf(numericToNominal((List)HoeffdingTree.this.featureValuePairs.get(feature), (Comparable)value))]

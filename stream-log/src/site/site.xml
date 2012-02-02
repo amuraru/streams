@@ -1,4 +1,4 @@
-<project name="streams">
+<project name="AuditConsole">
   <bannerLeft>
     <name>streams</name>
     <src>http://www-ai.cs.uni-dortmund.de/ci/Medienpool/Seitenbilder/logo_tu.png</src>
@@ -10,24 +10,19 @@
     <src>http://www-ai.cs.uni-dortmund.de/header-bg-topLeft.png</src>
     <href></href>
   </bannerRight>
-    
-  <publishDate position="right" />
-
   
   <body>
-  
-    <links>
-    </links>
-    
-	<menu name="Documentation">
-		<item name="Quickstart" href="quickstart.html"/>
-		<item name="User Guide" href="userguide.html" />
-	</menu>
-  
-	<menu ref="modules" />
 
+    <menu ref="parent" />
+
+<!--
+	<menu name="Documentation">
+		<item name="Data Partitioner" href="partitioner.html"/>
+	</menu>
+  -->
+  
 	<menu ref="reports"/>
-	
+
   </body>
 
   <skin>
@@ -35,6 +30,5 @@
     <artifactId>sfb876-skin</artifactId>
     <version>0.1</version>
   </skin>
-  
-  <poweredBy></poweredBy>
+
 </project>

@@ -14,10 +14,11 @@
 		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="sql:query" />
  -->	
  		<processor id="create-label" class="stream.data.mapper.RandomLabel" seed="1000"/>
- 		<!--
  		<processor id="rename-att1" class="stream.data.mapper.KeyMapper" old="att1" new="x" />
- 		  -->
- 		<KeyMapper id="rename-att1" old="att1" new="x" />
+ 		
+ 		<KeyMapper old="att1" new="x" />
+ 		<HideFeature key="attributeX" />
+ 		
 <!-- 
 		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />
  -->	

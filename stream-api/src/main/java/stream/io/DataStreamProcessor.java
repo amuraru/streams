@@ -89,6 +89,8 @@ public class DataStreamProcessor
 	@Override
 	public Data readNext() throws Exception {
 		Data data = source.readNext();
+		if( data == null )
+			return null;
 		return process( data );
 	}
 
@@ -115,7 +117,7 @@ public class DataStreamProcessor
 			data = p.process( data );
 		}
 
-		if( finalAttributes == null ){
+		if( finalAttributes == null && data != null ){
 			finalAttributes = new LinkedHashMap<String,Class<?>>();
 			for( String key : data.keySet() ){
 				if( data.get( key ).getClass().equals( Double.class ) )

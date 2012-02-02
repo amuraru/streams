@@ -94,7 +94,7 @@ public class StreamProcess extends Thread {
 			Data item = input.readNext();
 			while( item != null && (limit < 0 || cnt < limit ) ){
 				cnt++;
-				log.trace( "Processing {}", item );
+				log.info( "Processing {}", item );
 				
 				for( DataProcessor proc : processors ){
 					log.trace( "pushing copy of item to processor {}", proc );

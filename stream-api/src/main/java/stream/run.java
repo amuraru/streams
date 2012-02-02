@@ -19,22 +19,29 @@ public class run
             System.out.println();
             System.exit( -1 );
         }
-
+        
+        URL url = null;
+        
+        
+        File file = new File( args[0] );
+        if( file.isFile() ){
+        	try {
+        		url = file.toURI().toURL();
+        	} catch (Exception e) {
+        	}
+        }
+        
         try {
-            
-            URL url = null;
-            
-            File f = new File( args[0] );
-            if( f.isFile() ){
-                url = new URL( "file:" + f.getAbsolutePath() );
-            } else {
-                url = new URL( args[0] );
-            }
+        	if( url == null )
+        		url = new URL( args[0] );
 
-            StreamRunner runner = new StreamRunner( url );
-            runner.run();
+        	System.out.println( "Reading experiment layout from " + url );
+        	StreamRunner runner = new StreamRunner( url );
+        	System.out.println( "Starting stream experiment..." );
+        	runner.run();
+        	
         } catch (Exception e) {
-            e.printStackTrace();
+        	System.err.println( e.getMessage() );
         }
     }
 }

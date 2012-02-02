@@ -9,6 +9,20 @@ import org.slf4j.LoggerFactory;
 import stream.data.Data;
 import stream.data.DataProcessor;
 
+
+/**
+ * <p>
+ * This processor implements a parser that can parse the String contents of a
+ * specific key into its parts. The parser is generic and derived from a "format"
+ * string.
+ * </p>
+ * <p>
+ * By default it uses the key <code>MESSAGE</code> as the input key.
+ * </p>
+ * 
+ * @author Christian Bockermann &lt;christian.bockermann@udo.edu&gt;
+ *
+ */
 public class LogStreamParser
     implements DataProcessor
 {
@@ -39,8 +53,21 @@ public class LogStreamParser
         return format;
     }
     
-    
     /**
+	 * @return the key
+	 */
+	public String getKey() {
+		return key;
+	}
+
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	/**
      * @see stream.data.DataProcessor#process(stream.data.Data)
      */
     @Override

@@ -1,10 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!-- <parent> <artifactId>streams</artifactId> <groupId>org.jwall</groupId> 
-		<version>1.0</version> <relativePath>..</relativePath> </parent> -->
-	<groupId>org.jwall</groupId>
-	<version>1.0</version>
+	<parent>
+		<artifactId>streams</artifactId>
+		<groupId>org.jwall</groupId>
+		<version>1.0</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<version>0.5</version>
 	<artifactId>stream-log</artifactId>
 	<name>stream-log</name>
 	<description>This is a simple module providing access to various log-streams (parsers,…)</description>
@@ -15,20 +19,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<id>jwall</id>
-			<url>https://secure.jwall.org/maven/repository/jwall/</url>
-		</repository>
-		<snapshotRepository>
-			<id>jwall-snapshots</id>
-			<url>https://secure.jwall.org/maven/repository/snapshots/</url>
-		</snapshotRepository>
-		<site>
-			<id>www.jwall.org</id>
-			<url>scp://www.jwall.org:/var/www/jwall.org/htdocs/org.jwall.web.audit/</url>
-		</site>
-	</distributionManagement>
 
 	<repositories>
 		<repository>
@@ -43,20 +33,15 @@
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>org.jwall.web.audit</artifactId>
-			<version>0.5.3</version>
+			<version>0.5.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>stream-api</artifactId>
-			<version>1.2</version>
+			<version>1.2.1</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.jwall</groupId>
-			<artifactId>org.jwall.sql.parser</artifactId>
-			<version>0.1-SNAPSHOT</version>
-		</dependency>
-		 -->
+		<!-- <dependency> <groupId>org.jwall</groupId> <artifactId>org.jwall.sql.parser</artifactId> 
+			<version>0.1-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<groupId>jsqlparser</groupId>
 			<artifactId>jsqlparser</artifactId>

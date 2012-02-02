@@ -87,7 +87,7 @@ public class HoeffdingTreeNode implements Serializable {
 	 * @param value a valid value for the feature represented by this node
 	 * @return the next node following the path of the given value
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public HoeffdingTreeNode getchild(Serializable value, Class featureType) {
 		
 		if( featureType == Double.class )
