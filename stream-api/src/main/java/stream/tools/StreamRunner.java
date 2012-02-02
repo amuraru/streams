@@ -52,12 +52,6 @@ public class StreamRunner
 
 	public void init( Document doc ) throws Exception {
 		Element root = doc.getDocumentElement();
-		source = root.getAttribute( "source" );
-		if( source ==  null || source.trim().isEmpty() ){
-			log.warn( "No 'source' defined, using default '{}'", DEFAULT_INPUT_STREAM );
-			source = DEFAULT_INPUT_STREAM;
-			//throw new Exception( "No source-key has been defined! Expecting 'source' element!" );
-		}
 
 		NodeList children = root.getChildNodes();
 
@@ -177,12 +171,6 @@ public class StreamRunner
 
 		if( streams.isEmpty() )
 			throw new Exception( "No data-stream defined!" );
-
-		DataStream stream = streams.get( source );
-		if( stream == null )
-			throw new Exception( "No stream found for source key '" + source + "'!" );
-
-
 
 		log.info( "Need to handle {} sources: {}", streams.size(), streams.keySet() );
 
