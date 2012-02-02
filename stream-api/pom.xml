@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>stream-api</name>
 	<artifactId>stream-api</artifactId>
-	<version>1.2.1</version>
+	<version>1.2.2</version>
 	<parent>
 		<groupId>org.jwall</groupId>
 		<artifactId>streams</artifactId>
@@ -39,6 +39,7 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
