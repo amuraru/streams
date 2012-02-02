@@ -98,7 +98,9 @@ public class StreamProcess extends Thread {
 				
 				for( DataProcessor proc : processors ){
 					log.trace( "pushing copy of item to processor {}", proc );
-					proc.process( item );
+					item = proc.process( item );
+					if( item == null )
+					    break;
 				}
 				item = input.readNext();
 			}

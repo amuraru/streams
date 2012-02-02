@@ -17,7 +17,7 @@ public class SvmLightStreamWriter extends DataStreamWriter {
 	 * features with a numeric (integer) name will be mapped to their value directly */
 	Map<String,Integer> indexes = new HashMap<String,Integer>();
 	Integer largestIndex = 0;
-
+	boolean includeAnnotations = true;
 	
 	public SvmLightStreamWriter(){
 	}
@@ -75,7 +75,7 @@ public class SvmLightStreamWriter extends DataStreamWriter {
 				annotation.append( "'" );
 			}
 		}
-		if( annotation.length() > 0 ){
+		if( includeAnnotations && annotation.length() > 0 ){
 			p.print( " #" );
 			p.print( annotation.toString() );
 		}
@@ -83,7 +83,28 @@ public class SvmLightStreamWriter extends DataStreamWriter {
 		p.println();
 	}
 	
-	protected String lineEscape( Serializable val ){
+	
+	
+	
+	
+	
+	/**
+     * @return the includeAnnotations
+     */
+    public boolean isIncludeAnnotations()
+    {
+        return includeAnnotations;
+    }
+
+    /**
+     * @param includeAnnotations the includeAnnotations to set
+     */
+    public void setIncludeAnnotations(boolean includeAnnotations)
+    {
+        this.includeAnnotations = includeAnnotations;
+    }
+
+    protected String lineEscape( Serializable val ){
 		if( val == null )
 			return "";
 		

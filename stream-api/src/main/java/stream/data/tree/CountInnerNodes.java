@@ -1,26 +1,18 @@
 package stream.data.tree;
 
-import java.io.Serializable;
-
 import stream.data.TreeNode;
 
-public class CountNodes 
-	extends AbstractTreeFeature 
+public class CountInnerNodes 
+	extends CountNodes
 {
     
-    public CountNodes(){
-        this.id = "nodeCount";
+    public CountInnerNodes(){
+        id = "innerNodeCount";
     }
-
-	@Override
-	public Serializable compute(TreeNode tree) {
-		return getNumberOfNodes( tree );
-	}
-	
-	
+    
 	public Integer getNumberOfNodes( TreeNode tree ){
 		if( tree.isLeaf() )
-			return 1;
+			return 0;
 		
 		Integer sum = 1;
 		for( TreeNode ch : tree.children() )
