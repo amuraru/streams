@@ -50,6 +50,21 @@ public class SQLStreamParser
     
     public SQLStreamParser(){
         this( "sql" );
+        
+        this.addMapper(  new Mapper<String,String>(){
+            @Override
+            public String map(String input) throws Exception {
+                while( input.endsWith( "#" ) ){
+                    input = input.substring( 0, input.length() - 1 );
+                }
+
+                if( input.indexOf( "AND SLEEP(5)" ) >= 0 ){
+                    return input.replace( "AND SLEEP(5)", "AND myDummySleep > SLEEP(5)" );
+                }
+
+                return input;
+            }
+        } );
     }
     
     

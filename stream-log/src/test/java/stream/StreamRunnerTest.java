@@ -18,7 +18,7 @@ public class StreamRunnerTest
      * @param args
      */
     public static void main( String[] args ) throws Exception {
-        URL url = StreamRunner.class.getResource( "/example.xml" );
+        URL url = StreamRunner.class.getResource( "/demo-shop.xml" );
         StreamRunner runner = new StreamRunner( url );
         runner.run();
     }

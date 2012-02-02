@@ -1,0 +1,32 @@
+<experiment source="log">
+
+	<Stream id="log" class="stream.io.CsvStream" limit="10000" url="file:/tmp/demo-shop.log" separator="\|">
+		
+ 		<Processor class="stream.data.mapper.KeyMapper" old="REQUEST_HEADERS:User-Agent" new="@label" />
+ 		<!-- 
+		<Processor class="stream.data.mapper.BinaryLabels" />
+
+ 		<Processor class="stream.filter.Exclude" key="REQUEST_URI" regex="/shop/view-product" />
+ 		 -->
+	</Stream>
+
+	<Process input="log" output="logData">
+		<Processor id="fixSQL" class="org.jwall.sql.audit.SQLFixes" key="sql:query" />
+		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="sql:query" />
+	        <Processor class="org.jwall.sql.audit.SQLMapLabeler" key="@label" />
+                <Processor class="org.jwall.sql.audit.FixSQLMapLabels" key="sql:query" labelKey="@label" />
+                <CreateID/>
+
+		<Processor class="stream.data.mapper.SetValue" key="innerNodeCount(@tree:sql:query)" value="200" />
+                <Processor class="stream.data.mapper.SetValue" key="nodeCount(@tree:sql:query)" value="200" />
+                <Processor class="stream.data.mapper.SetValue" key="height(@tree:sql:query)" value="200" />
+
+		<Processor id="innerNodeCount" class="stream.data.tree.CountInnerNodes" />
+		<Processor id="nodeCount" class="stream.data.tree.CountNodes" />
+		<Processor id="height" class="stream.data.tree.TreeHeight" />
+		<Processor id="write" class="stream.io.DataStreamWriter" 
+			   keys="@id,REQUEST_METHOD,REQUEST_URI,@label,innerNodeCount(@tree:sql:query),nodeCount(@tree:sql:query),height(@tree:sql:query),sql:query,@tree:sql:query"
+                           url="/Users/chris/test.csv" separator="___" />
+		
+	</Process>
+</experiment>

@@ -51,7 +51,7 @@ public class ObjectFactory
 	
 	public Object create( Element node ) throws Exception {
 		Map<String,String> params = getAttributes( node );
-		Object obj = create( params.get( "class" ), params );
+		Object obj = create( this.findClassForElement( node ), params );
 		Map<String,String> realParams = ParameterInjection.extract( obj );
 		for( String key : realParams.keySet() )
 			node.setAttribute( key, realParams.get( key ) );
@@ -94,5 +94,29 @@ public class ObjectFactory
 			map.put( attr.getNodeName(), expand( attr.getNodeValue() ) );
 		}
 		return map;
+	}
+	
+	
+	public String findClassForElement( Element node ) throws Exception {
+	    if( node.getAttribute( "class" ) != null && ! "".equals( node.getAttribute( "class" ) ) )
+	        return node.getAttribute( "class" );
+	    
+	    String[] prefixes = new String[]{
+	            "", "stream.data.", "stream.data.mapper.", "stream.data.tree.", "stream.filter.", "stream.data.filter.", "stream.data.stats.", "stream.data.vector." 
+	    };
+	    
+	    
+	    for( String prefix : prefixes ){
+	        
+	        try {
+	            Class<?> clazz = Class.forName( prefix + node.getNodeName() );
+	            log.debug( "Auto-detected class {} for node {}", clazz, node.getNodeName() );
+	            return clazz.getName();
+	        } catch (Exception e) {
+	            log.debug( "No class '{}' found", prefix + node.getNodeName() );
+	        }
+	    }
+	    
+	    throw new Exception( "Failed to determine class for node '" + node.getNodeName() + "'!");
 	}
 }

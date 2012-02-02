@@ -1,0 +1,42 @@
+<experiment source="log">
+
+	<Stream id="log" class="stream.io.CsvStream" limit="10000" url="file:/Users/chris/typo3-attacks.csv" separator="___">
+		
+ 		<Processor class="stream.data.mapper.KeyMapper" old="REQUEST_HEADERS:User-Agent" new="@label" />
+ 		<!-- 
+
+
+ 		<Processor class="stream.filter.Exclude" key="REQUEST_URI" regex="/shop/view-product" />
+ 		 -->
+	</Stream>
+
+	<Process input="log" output="logData">
+		<Processor id="fixSQL" class="org.jwall.sql.audit.SQLFixes" key="sql:query" />
+		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="sql:query" />
+	        <Processor class="org.jwall.sql.audit.SQLMapLabeler" key="@label" />
+                <Processor class="org.jwall.sql.audit.FixSQLMapLabels" key="sql:query" labelKey="@label" />
+
+		<Processor class="stream.data.mapper.SetValue" key="innerNodeCount(@tree:sql:query)" value="200" />
+                <Processor class="stream.data.mapper.SetValue" key="nodeCount(@tree:sql:query)" value="200" />
+                <Processor class="stream.data.mapper.SetValue" key="height(@tree:sql:query)" value="200" />
+		<SetValue key="@label" value="-1.0" />
+
+<!--
+		<Processor class="stream.data.mapper.NGrams" key="sql:query" n="3" />
+ -->
+ 		<CreateID key="id" />
+		<tree.CountInnerNodes id="innerNodeCount" />
+		<Processor id="innerNodeCount" class="stream.data.tree.CountInnerNodes" />
+		<Processor id="nodeCount" class="stream.data.tree.CountNodes" />
+		<Processor id="height" class="stream.data.tree.Height" />
+		<Processor id="edge" class="stream.data.tree.TreeEdges" />
+		<Processor class="stream.data.mapper.BinaryLabels" />
+		<Processor id="write" class="stream.io.SvmLightStreamWriter" 
+			   includeAnnotations="false"
+		               url="/Users/chris/typo3-sql-vectors.svmlight" />
+		               
+		<Processor id="writeCsv" class="stream.io.DataStreamWriter" separator="___"
+		           url="/Users/chris/t3-sql-vectors.csv" />
+		
+	</Process>
+</experiment>

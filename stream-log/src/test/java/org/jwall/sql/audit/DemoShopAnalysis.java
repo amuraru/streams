@@ -14,6 +14,7 @@ import stream.data.mapper.Mapper;
 import stream.data.tree.CountLeaves;
 import stream.data.tree.CountNodes;
 import stream.data.tree.TreeFeatures;
+import stream.data.tree.Height;
 import stream.io.CsvStream;
 import stream.io.DataStream;
 import stream.io.DataStreamWriter;
@@ -32,6 +33,7 @@ public class DemoShopAnalysis
      */
     public static void main(String[] args) throws Exception {
         URL url = DemoShopAnalysis.class.getResource( "/demo-shop.log" );
+        url = new URL( "file:/Users/chris/demo-shop.log" );
         log.info( "Reading stream from {}", url );
         DataStream stream = new CsvStream( url, "\\|" );
 
@@ -46,14 +48,6 @@ public class DemoShopAnalysis
                 if( input.indexOf( "AND SLEEP(5)" ) >= 0 ){
                     return input.replace( "AND SLEEP(5)", "AND myDummySleep > SLEEP(5)" );
                 }
-                
-                /*
-                if( input.matches( "SLEEP\\(\\d+\\)" ) ){
-                    input = input.replaceAll( "SLEEP\\(\\d+\\)", "myDummySleep > SLEEP(5)" );
-                }
-                 */
-
-
 
                 return input;
             }
@@ -64,11 +58,14 @@ public class DemoShopAnalysis
         int syntaxOk = 0;
         int parseOk = 0;
 
-        DataStreamWriter writer = new DataStreamWriter( new FileOutputStream( "/Users/chris/sql-trees.csv" ), ";" );
-
+        DataStreamWriter writer = new DataStreamWriter( new FileOutputStream( "/Users/chris/sql-trees.csv" ), "|||" );
+        writer.setKeys( "@label,REQUEST_URI,leafCount(@tree:sql:query),nodeCount(@tree:sql:query),height(@tree:sql:query),sql:query" );
         TreeFeatures tf = new TreeFeatures();
         tf.add( new CountLeaves() );
         tf.add( new CountNodes() );
+        tf.add( new Height() );
+
+        stream.addPreprocessor( tf );
 
         MultiSet<String> stmts = new MultiSet<String>();
         MultiSet<String> counts = new MultiSet<String>();
@@ -76,12 +73,30 @@ public class DemoShopAnalysis
 
         Data item = stream.readNext();
         while( item != null ){
+
+
+
+
             if(("" + item.get("sql:query")).indexOf( "SLEEP" ) >0 ){
                 log.info( "Item has valid SQL: {} => {}", item.get( "sql:ok" ), item.get( "sql:query" ) );
                 log.info( "Item has query-tree: {}", item.get( "@tree:sql:query" ) );
             }
             boolean validMySQLSyntax = "true".equals( item.get( "sql:ok" ) );
             boolean sqlMapAttack = ( "" + item.get( "REQUEST_HEADERS:User-Agent") ).indexOf( "sqlmap" ) >= 0;
+            sqlMapAttack = ( "" + item.get( "REQUEST_HEADERS:User-Agent" ) ).indexOf( "Java/1.6.0_26") < 0;
+            boolean jsqlParse = item.get( "@tree:sql:query" ) != null;
+
+            String query = item.get( "sql:query" ).toString().trim();
+            if( query.matches( "^SELECT id,name,description,price FROM products WHERE id = \\d+$" ) ){
+                log.info( "Labeling unsuccessful probe as normal: {}", query );
+                sqlMapAttack = false;
+            }
+
+
+            if( sqlMapAttack )
+                counts.add( "sqlMapAttack" );
+            else 
+                counts.add( "regularQuery" );
 
             Data example = new DataImpl();
             if( sqlMapAttack )
@@ -89,8 +104,8 @@ public class DemoShopAnalysis
             else
                 example.put( "@label", "normal" );
 
+            example.put( "REQUEST_URI", item.get( "REQUEST_URI" ) );
             example.put( "query", item.get( "sql:query" ) );
-
 
             if( item.get( "@tree:sql:query" ) == null ){
 
@@ -104,11 +119,13 @@ public class DemoShopAnalysis
             } else {
                 example.put( "@tree:sql:query", item.get( "@tree:sql:query" ) );
             }
-            
+
+            example.putAll( item );
+
+
             if( example.get( "@tree:sql:query" ) != null )
                 writer.process( example );
 
-            boolean jsqlParse = item.get( "@tree:sql:query" ) != null;
             if( jsqlParse ){
 
                 Data tree = new DataImpl();
@@ -119,12 +136,6 @@ public class DemoShopAnalysis
                 } else {
                     //out.print( "normal" );
                 }
-
-                /*
-                out.print( ";" );
-                out.println( item.get( "sql:query").toString().replaceAll( ";", "" ) );
-                out.println( item.get( "@tree:sql:query" ) );
-                 */
             }
 
 
@@ -137,14 +148,12 @@ public class DemoShopAnalysis
             if( sqlMapAttack ){
 
             }
-            if( item.get( "@tree:sql:query" ) != null ){
-                parseOk++;
-            }
 
             counts.add( "validMysql: " + validMySQLSyntax + "  sqlmapAttack: " + sqlMapAttack + "  jsqlParse: " + jsqlParse );
 
 
             count++;
+
             item = stream.readNext();
         }
         log.info( "" );

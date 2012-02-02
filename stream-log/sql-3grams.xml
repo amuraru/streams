@@ -1,0 +1,19 @@
+<experiment source="log">
+
+	<Stream id="log" class="stream.io.CsvStream" limit="10000" url="file:/tmp/demo-shop.log" separator="\|">
+ 		<Processor class="stream.data.mapper.KeyMapper" old="REQUEST_HEADERS:User-Agent" new="@label" />
+	</Stream>
+
+	<Process input="log" output="logData">
+		<Processor id="fixSQL" class="org.jwall.sql.audit.SQLFixes" key="sql:query" />
+	        <Processor class="org.jwall.sql.audit.SQLMapLabeler" key="@label" />
+                <Processor class="org.jwall.sql.audit.FixSQLMapLabels" key="sql:query" labelKey="@label" />
+
+		<Processor class="stream.data.mapper.NGrams" key="sql:query" n="4" />
+		<Processor class="stream.data.mapper.BinaryLabels" />
+		<Processor id="write" class="stream.io.SvmLightStreamWriter" 
+			   includeAnnotations="false"
+                           url="/Users/chris/demo-shop-sql-4grams.svmlight" />
+		
+	</Process>
+</experiment>
