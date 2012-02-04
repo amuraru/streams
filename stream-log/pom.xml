@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>stream-api</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2</version>
 		</dependency>
 		<!-- <dependency> <groupId>org.jwall</groupId> <artifactId>org.jwall.sql.parser</artifactId> 
 			<version>0.1-SNAPSHOT</version> </dependency> -->
