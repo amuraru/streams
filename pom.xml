@@ -21,6 +21,14 @@
 		<module>stream-mapred</module>
 	</modules>
 
+	<repositories>	
+		<repository>
+			<id>jwall</id>
+			<name>jwall.org Maven Repository</name>
+			<url>http://secure.jwall.org/maven/repository/jwall</url>
+		</repository>
+	</repositories>
+
 	<distributionManagement>
 		<repository>
 			<id>jwall</id>
