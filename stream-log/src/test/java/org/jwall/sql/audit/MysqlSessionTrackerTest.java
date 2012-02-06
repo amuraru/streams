@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.net.URL;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,10 @@ public class MysqlSessionTrackerTest
 {
     final static Logger log = LoggerFactory.getLogger( MysqlSessionTrackerTest.class );
     
+    
+    @Test
+    public void test(){
+    }
 
     /**
      * @param args
@@ -31,7 +36,7 @@ public class MysqlSessionTrackerTest
         throws Exception
     {
         URL url = MysqlSessionTrackerTest.class.getResource( "/mysql.log" );
-        url = new URL( "file:/Users/chris/sql-mining/query.log" );
+        //url = new URL( "file:/Users/chris/sql-mining/query.log" );
         DataProcessor p = new MySQLSessionTracker();
         DataStream stream = new LogDataStream( url );
         stream = new SyslogDataStream( url );
@@ -79,8 +84,8 @@ public class MysqlSessionTrackerTest
         dsp.addDataProcessor( sqlParser );
         dsp.addDataProcessor( new TreeEdges() );
 
-        PrintStream out = new PrintStream( new FileOutputStream( "/Users/chris/test-queries2.tsv" ) );
-        DataStreamWriter dsw = new DataStreamWriter( new FileOutputStream( "/Users/chris/sql-mining/test-sql.tsv" ), "\t" );
+        PrintStream out = new PrintStream( new FileOutputStream( "test-queries2.tsv" ) );
+        DataStreamWriter dsw = new DataStreamWriter( new FileOutputStream( "test-sql.tsv" ), "\t" );
         dsw.setKeys( "mysql:timestamp,mysql:session,mysql:database,@tree:mysql:query" );
         Long count = 0L;
         Data item = dsp.readNext();

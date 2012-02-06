@@ -1,10 +1,18 @@
 package org.jwall.sql.audit;
 
+import org.junit.Test;
+
 import stream.data.TreeNode;
 
 public class ParseSQLTest
 {
 
+    
+    @Test
+    public void test(){
+    }
+
+    
     /**
      * @param args
      */

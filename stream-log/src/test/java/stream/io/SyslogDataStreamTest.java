@@ -3,6 +3,7 @@ package stream.io;
 import java.io.Serializable;
 import java.net.URL;
 
+import org.junit.Test;
 import org.jwall.sql.audit.SQLStreamParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,11 @@ import stream.data.tree.TreeEdges;
 public class SyslogDataStreamTest
 {
     static Logger log = LoggerFactory.getLogger( SyslogDataStreamTest.class );
+    
+    @Test
+    public void test(){
+    	
+    }
     
     /**
      * @param args
