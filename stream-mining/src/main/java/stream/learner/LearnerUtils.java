@@ -62,7 +62,7 @@ extends DataUtils
 	public static Set<String> getNumericAttributes( Data item ){
 		Set<String> set = new LinkedHashSet<String>();
 		for( String key : item.keySet() )
-			if( !isLabel( key ) && !isHidden( key ) && isNumerical( key, item ) )
+			if( !isHiddenOrSpecial(key) && !isHidden( key ) && isNumerical( key, item ) )
 				set.add( key );
 		return set;
 	}

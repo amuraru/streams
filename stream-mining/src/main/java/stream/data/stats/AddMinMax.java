@@ -53,8 +53,8 @@ public class AddMinMax implements
 					else
 						min = Math.min( min, val );
 					minima.put( f, min );
-					input.put( "MAX(" + f + ")", max );
-					input.put( "MIN(" + f + ")", min );
+					input.put( getMaxName(f), max );
+					input.put( getMinName(f), min );
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,5 +74,13 @@ public class AddMinMax implements
 				features.add( key );
 			}
 		}
+	}
+	
+	public String getMaxName( String name ){
+		return "@max:" + name;
+	}
+	
+	public String getMinName( String name ){
+		return "@min" + name;
 	}
 }

@@ -120,4 +120,19 @@ public class SyslogDataStream
         
         return now;
     }
+    
+    
+	/**
+	 * @see stream.io.DataStream#close()
+	 */
+	@Override
+	public void close() {
+		try {
+			reader.close();
+		} catch (Exception e) {
+			log.error( "Failed to properly close reader: {}", e.getMessage() );
+			if( log.isDebugEnabled() )
+				e.printStackTrace();
+		}
+	}
 }

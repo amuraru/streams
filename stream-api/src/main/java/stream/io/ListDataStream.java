@@ -59,4 +59,9 @@ public class ListDataStream implements DataStream {
 	public List<DataProcessor> getPreprocessors() {
 		return processors;
 	}
+	
+	
+	public void close(){
+		data.clear();
+	}
 }

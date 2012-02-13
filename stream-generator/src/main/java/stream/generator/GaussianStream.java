@@ -154,4 +154,8 @@ public class GaussianStream extends GeneratorDataStream {
 	public Long getNextSeed(){
 		return seedGenerator.nextLong();
 	}
+	
+	
+	public void close(){
+	}
 }

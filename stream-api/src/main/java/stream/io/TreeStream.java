@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import stream.data.Data;
 import stream.data.DataImpl;
 import stream.data.DataProcessor;
@@ -26,6 +29,7 @@ import stream.data.TreeNode;
  */
 public class TreeStream implements DataStream {
 
+	static Logger log = LoggerFactory.getLogger( TreeStream.class );
 	String treeAttribute = "tree";
 	BufferedReader reader;
 	DefaultTreeParser treeParser;
@@ -104,5 +108,22 @@ public class TreeStream implements DataStream {
 	@Override
 	public List<DataProcessor> getPreprocessors() {
 		return processors;
+	}
+	
+	
+
+	
+	/**
+	 * @see stream.io.DataStream#close()
+	 */
+	@Override
+	public void close() {
+		try {
+			reader.close();
+		} catch (Exception e) {
+			log.error( "Failed to properly close reader: {}", e.getMessage() );
+			if( log.isDebugEnabled() )
+				e.printStackTrace();
+		}
 	}
 }

@@ -54,6 +54,7 @@ public class GaussianFeatureMapping implements ApproximateFeatureMapping, Serial
 		return dimension;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void init() {
 		if(!use_gpu) {

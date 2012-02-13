@@ -146,4 +146,8 @@ public class DataStreamProcessor
 	public List<DataProcessor> getPreprocessors() {
 		return processors;
 	}
+	
+	
+	public void close(){
+	}
 }

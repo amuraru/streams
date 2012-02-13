@@ -38,6 +38,7 @@ public interface DataStream {
 	
 	public Data readNext( Data datum ) throws Exception;
 	
+	public void close();
 	
 	public void addPreprocessor( DataProcessor proc );
 	

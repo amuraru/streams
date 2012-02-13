@@ -45,6 +45,7 @@ public class RTree extends ModelTree<RegressionTreeStatistics,Double> implements
 	/**
 	 * @see stream.learner.AbstractClassifier#learn(java.lang.Object)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void learn(Data item) {
 		

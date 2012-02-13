@@ -81,4 +81,13 @@ public class MixedStream extends GeneratorDataStream {
 		MixedStream ms = new MixedStream();
 		ms.readNext();
 	}
+
+
+
+	/**
+	 * @see stream.io.DataStream#close()
+	 */
+	@Override
+	public void close() {
+	}
 }

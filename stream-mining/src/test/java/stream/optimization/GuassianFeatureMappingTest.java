@@ -7,9 +7,6 @@ import java.util.Random;
 import org.junit.Test;
 
 import stream.data.vector.InputVector;
-import stream.optimization.GaussianFeatureMapping;
-
-import junit.framework.Assert;
 
 public class GuassianFeatureMappingTest {
 

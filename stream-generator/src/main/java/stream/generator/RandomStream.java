@@ -77,4 +77,9 @@ public class RandomStream extends GeneratorDataStream {
 	public void set( String key, Object val ){
 		store.put( key, val );
 	}
+	
+	
+	
+	public void close(){
+	}
 }

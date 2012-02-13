@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 
 import org.slf4j.Logger;
@@ -44,10 +45,14 @@ public class CsvStream
 	}
 	
 	public CsvStream(InputStream in, String splitter ) throws Exception {
+		this( in, Charset.defaultCharset(), splitter );
+	}	
+	
+	public CsvStream(InputStream in, Charset charset, String splitter ) throws Exception {
 		super(in);
 		this.splitExpression = splitter;
 		log.debug( "Split expression is: {}", splitExpression );
-		reader = new BufferedReader( new InputStreamReader( in ) );
+		reader = new BufferedReader( new InputStreamReader( in, charset ) );
 	}
 	
 	public CsvStream(URL url, String splitExp) throws Exception {
@@ -178,5 +183,20 @@ public class CsvStream
 			return null;
 		
 		return datum;
+	}
+
+	
+	/**
+	 * @see stream.io.DataStream#close()
+	 */
+	@Override
+	public void close() {
+		try {
+			reader.close();
+		} catch (Exception e) {
+			log.error( "Failed to properly close reader: {}", e.getMessage() );
+			if( log.isDebugEnabled() )
+				e.printStackTrace();
+		}
 	}
 }

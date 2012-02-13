@@ -18,7 +18,6 @@ public class SyslogDataStreamTest
     
     @Test
     public void test(){
-    	
     }
     
     /**

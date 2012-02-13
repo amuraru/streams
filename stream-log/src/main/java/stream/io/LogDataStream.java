@@ -83,4 +83,19 @@ public class LogDataStream
     public void setFormat( String fmt ){
     	this.parser = new LogStreamParser( fmt );
     }
+    
+    
+	/**
+	 * @see stream.io.DataStream#close()
+	 */
+	@Override
+	public void close() {
+		try {
+			reader.close();
+		} catch (Exception e) {
+			log.error( "Failed to properly close reader: {}", e.getMessage() );
+			if( log.isDebugEnabled() )
+				e.printStackTrace();
+		}
+	}
 }

@@ -392,4 +392,12 @@ public class LabeledGaussianStream
 		LabeledGaussianStream g = new LabeledGaussianStream( doc.getDocumentElement() );
 		return g;
 	}
+
+
+	/**
+	 * @see stream.io.DataStream#close()
+	 */
+	@Override
+	public void close() {
+	}
 }
