@@ -1,0 +1,14 @@
+package %{PACKAGE};
+
+import com.rapidminer.stream.DataStreamOperator;
+import com.rapidminer.operator.OperatorDescription;
+
+/**
+ * AUTO GENERATED wrapper Operator.
+ */
+public class %{CLASSNAME} extends DataStreamOperator {
+
+    public %{CLASSNAME}( OperatorDescription desc ){
+        super( desc, %{DATA_PROCESSOR_CLASS}.class );
+    }
+}

@@ -9,8 +9,6 @@ public class HideFeature implements DataProcessor {
 
 	@Parameter( name = "key" )
 	String key;
-
-	String exp;
 	
 	public String getKey() {
 		return key;
@@ -18,15 +16,6 @@ public class HideFeature implements DataProcessor {
 
 	public void setKey(String key) {
 		this.key = key;
-	}
-
-	
-	public String getRegex(){
-		return exp;
-	}
-	
-	public void setRegex( String str ){
-		exp = str;
 	}
 
 	/**

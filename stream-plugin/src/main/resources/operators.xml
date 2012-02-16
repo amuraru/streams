@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<operators docbundle="com/rapidminer/stream/resources/i18n/DataStreamOperatorsDoc" name="DataStream" version="5.0">
+<group key="stream.sources">
+	<operator>
+		<key>CSV Stream</key>
+		<class>com.rapidminer.stream.reader.CsvDataStreamReader</class>
+	</operator>
+</group>
+<group key="stream.operators">
+    <operator>
+      <key>AddId</key>
+      <class>com.rapidminer.stream.operators.AddIdOperator</class>
+    </operator>
+    <operator>
+      <key>BinaryLabels</key>
+      <class>com.rapidminer.stream.operators.BinaryLabelsOperator</class>
+    </operator>
+    <operator>
+      <key>CreateID</key>
+      <class>com.rapidminer.stream.operators.CreateIDOperator</class>
+    </operator>
+    <operator>
+      <key>FeatureNameFilter</key>
+      <class>com.rapidminer.stream.operators.FeatureNameFilterOperator</class>
+    </operator>
+    <operator>
+      <key>HideFeature</key>
+      <class>com.rapidminer.stream.operators.HideFeatureOperator</class>
+    </operator>
+    <operator>
+      <key>MapKeys</key>
+      <class>com.rapidminer.stream.operators.MapKeysOperator</class>
+    </operator>
+    <operator>
+      <key>MapValues</key>
+      <class>com.rapidminer.stream.operators.MapValuesOperator</class>
+    </operator>
+    <operator>
+      <key>NGrams</key>
+      <class>com.rapidminer.stream.operators.NGramsOperator</class>
+    </operator>
+    <operator>
+      <key>NumericalBinning</key>
+      <class>com.rapidminer.stream.operators.NumericalBinningOperator</class>
+    </operator>
+    <operator>
+      <key>RandomBinaryLabel</key>
+      <class>com.rapidminer.stream.operators.RandomBinaryLabelOperator</class>
+    </operator>
+    <operator>
+      <key>RemoveAttributes</key>
+      <class>com.rapidminer.stream.operators.RemoveAttributesOperator</class>
+    </operator>
+    <operator>
+      <key>RemoveZeroes</key>
+      <class>com.rapidminer.stream.operators.RemoveZeroesOperator</class>
+    </operator>
+    <operator>
+      <key>SelectAttributes</key>
+      <class>com.rapidminer.stream.operators.SelectAttributesOperator</class>
+    </operator>
+    <operator>
+      <key>SetValue</key>
+      <class>com.rapidminer.stream.operators.SetValueOperator</class>
+    </operator>
+  </group>
+</operators>

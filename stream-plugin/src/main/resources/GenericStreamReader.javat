@@ -1,0 +1,14 @@
+package %{PACKAGE};
+
+import com.rapidminer.stream.DataStreamOperator;
+import com.rapidminer.operator.OperatorDescription;
+
+/**
+ * AUTO GENERATED wrapper reader.
+ */
+public class %{CLASSNAME} extends DataStreamReader {
+
+    public %{CLASSNAME}( OperatorDescription desc ){
+        super( desc, %{DATA_STREAM_CLASS}.class );
+    }
+}

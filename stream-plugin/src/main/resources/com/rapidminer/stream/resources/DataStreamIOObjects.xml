@@ -1,0 +1,16 @@
+<ioobjects>
+   	<ioobject
+   		name="Data"
+   		class="com.rapidminer.stream.DataObject"
+   		supertype="com.rapidminer.io.AbstractIOObject"
+   		reportable="false">
+      <renderer>com.rapidminer.stream.ui.DataObjectRenderer</renderer>
+   </ioobject>
+   	<ioobject
+   		name="DataSource"
+   		class="com.rapidminer.stream.DataSourceObject"
+   		supertype="com.rapidminer.io.AbstractIOObject"
+   		reportable="false">
+      <renderer>com.rapidminer.stream.ui.DataSourceRenderer</renderer>
+   </ioobject>
+</ioobjects>

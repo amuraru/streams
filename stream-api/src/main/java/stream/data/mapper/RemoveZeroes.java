@@ -8,6 +8,7 @@ import java.util.List;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.data.DataUtils;
 
 /**
  * @author chris
@@ -24,6 +25,10 @@ public class RemoveZeroes implements DataProcessor {
 
 
 		for( String key : data.keySet() ){
+			
+			if( DataUtils.isSpecial( key ) )
+				continue;
+			
 			try {
 				Double val = new Double( data.get( key ).toString() );
 				if( val == 0.0d )
@@ -38,5 +43,4 @@ public class RemoveZeroes implements DataProcessor {
 
 		return data;
 	}
-
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<operators name="DataStream" version="5.0" docbundle="com/rapidminer/stream/resources/i18n/DataStreamOperatorsDoc">
+
+<group key="stream">
+    <operator>
+        <key>Data Stream Process</key>
+        <class>com.rapidminer.stream.DataStreamProcess</class>
+    </operator>
+</group>
+
+
+<group key="stream.sources">
+	<operator>
+		<key>CSV Data Stream</key>
+		<class>com.rapidminer.stream.reader.CsvDataStreamReader</class>
+	</operator>
+	
+	<operator>
+		<key>ExampleSet DataStream</key>
+		<class>com.rapidminer.stream.reader.ExampleSetDataStream</class>
+	</operator>
+</group>
+
+
+<group key="stream.adapter">
+    <operator>
+    	<key>DataStream2ExampleSet</key>
+    	<class>com.rapidminer.stream.reader.DataStream2ExampleSet</class>
+    </operator>
+</group>
+
+</operators>

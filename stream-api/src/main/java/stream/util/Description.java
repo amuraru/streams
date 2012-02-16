@@ -6,13 +6,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation can be used to annotate class fields and define them as
- * parameter.
+ * <p>
+ * This annotation can be used to specify documentation settings for the 
+ * annotated data processor implementation.
+ * </p>
  * 
- * @author chris
+ * @author Christan Bockermann &lt;christian.bockermann@udo.edu&gt;
  *
  */
-@Target( ElementType.FIELD )
+@Target( ElementType.TYPE )
 @Retention( RetentionPolicy.RUNTIME )
 public @interface Description {
 
@@ -21,7 +23,20 @@ public @interface Description {
 	 * 
 	 * @return
 	 */
-	String value();
+	String text() default "";
 	
-	String tooltip();
+	
+	/**
+	 * A URL reference for further documentation or description.
+	 * 
+	 * @return
+	 */
+	String url() default "";
+	
+	
+	/**
+	 * A group name to which the annotated class belongs.
+	 * @return
+	 */
+	String group() default "";
 }

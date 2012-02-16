@@ -2,6 +2,7 @@ package stream.data.mapper;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.Description;
 import stream.util.ParameterUtils;
 
 
@@ -16,6 +17,7 @@ import stream.util.ParameterUtils;
  * @author Christian Bockermann &lt;christian.bockermann@udo.edu&gt;
  *
  */
+@Description( group="stream.preprocessing.data" )
 public class RemoveAttributes implements DataProcessor {
 
 	String[] keys = new String[0];

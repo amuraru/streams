@@ -49,7 +49,17 @@ public class ParameterDiscovery {
 			if( param != null ){
 				log.info( "Found @parameter annotated field '{}'", field.getName() );
 				log.info( "    field.getType() = {}", field.getType() );
-				types.put( param.name(), field.getType() );
+				
+				String name = param.name();
+				if( name == null || name.isEmpty() )
+					name = field.getName();
+				
+				Class<?> type = param.type();
+				if( ! Object.class.equals( type ) ){
+					types.put( param.name(), param.type() );
+				} else {
+					types.put( param.name(), field.getType() );
+				}
 			} else {
 				log.info( "Field '{}' is not annotated as parameter", field.getName() );
 			}
@@ -59,16 +69,25 @@ public class ParameterDiscovery {
 		for( Method m : clazz.getMethods() ){
 
 			if( ParameterDiscovery.isSetter( m ) ){
-				log.info( "Found getter '{}'", m.getName() );
+				
+				log.info( "Found setter '{}'", m.getName() );
 				String key = m.getName().substring( 3, 4).toLowerCase();
 				if( m.getName().length() > 4 )
 					key += m.getName().substring( 4 );
+				
+				Parameter param = m.getAnnotation( Parameter.class );
+				if( param != null ){
+					log.info( "setter-method is annotated: {}", param );
+					if( param.name() != null && ! param.name().isEmpty() ){
+						key = param.name();
+					}
+				}
 				
 				if( ! types.containsKey( key ) ){
 					log.info( "  => parameter '{}'", key );
 					types.put( key, m.getReturnType() );
 				} else
-					log.info( "Parameter {} already defined by annotation", key );
+					log.info( "Parameter {} already defined by field-annotation", key );
 			}
 		}
 
@@ -170,7 +189,7 @@ public class ParameterDiscovery {
 	 * @return
 	 */
 	public static boolean isSetter( Method m ){
-		if( m.getName().toLowerCase().startsWith( "get" ) && m.getParameterTypes().length == 1 ){
+		if( m.getName().toLowerCase().startsWith( "set" ) && m.getParameterTypes().length == 1 ){
 			Class<?> rt = m.getParameterTypes()[0];
 			if( ParameterInjection.isTypeSupported( rt ) )
 				return true;

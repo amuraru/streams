@@ -6,13 +6,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation can be used to annotate class fields and define them as
+ * This annotation can be used to annotate class methods and define them as
  * parameter.
  * 
- * @author chris
+ * @author Christian Bockermann &lt;christian.bockermann@udo.edu&gt;
  *
  */
-@Target( ElementType.FIELD )
+@Target( { ElementType.FIELD, ElementType.METHOD } )
 @Retention( RetentionPolicy.RUNTIME )
 public @interface Parameter {
 
@@ -22,7 +22,7 @@ public @interface Parameter {
 	 * 
 	 * @return
 	 */
-	String name();
+	String name() default "";
 	
 	/**
 	 * An optional parameter for the parameter which states whether this parameter is optional
@@ -57,5 +57,15 @@ public @interface Parameter {
 	String[] values() default {};
 	
 	
+	/**
+	 * The default value as string for this parameter
+	 * @return
+	 */
+	String defaultValue() default "";
+	
+	
 	String description() default "";
+	
+	
+	Class<?> type() default Object.class;
 }

@@ -1,0 +1,151 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.udo.cs.ai</groupId>
+	<artifactId>stream-plugin</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<name>RapidMiner_StreamPlugin</name>
+
+	<repositories>
+		<repository>
+			<id>jwall</id>
+			<name>jwall.org Maven Repository</name>
+			<url>http://secure.jwall.org/maven/repository/all</url>
+		</repository>
+	</repositories>
+
+        <distributionManagement>
+                <repository>
+                        <id>jwall</id>
+                        <name>jwall.org Maven Repository</name>
+                        <url>https://secure.jwall.org/maven/repository/jwall</url>
+                </repository>
+                <snapshotRepository>
+                        <id>jwall-snapshots</id>
+                        <name>jwall.org Snapshot Repository</name>
+                        <url>https://secure.jwall.org/maven/repository/snapshots</url>
+                </snapshotRepository>
+                <site>
+                        <id>kirmes</id>
+                        <url>scp://bockerma@kirmes.cs.uni-dortmund.de/home/bockerma/public_html/streams/</url>
+                </site>
+        </distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.rapid-i</groupId>
+			<artifactId>rapidminer</artifactId>
+			<version>5.1.008-shortened</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jwall</groupId>
+			<artifactId>stream-api</artifactId>
+			<version>1.2.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>pg542</groupId>
+			<artifactId>stream-mining</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/generated-sources/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.rapidminer.stream.util.OperatorGenerator</mainClass>
+					<arguments>
+						<argument>src/generated-sources/java</argument>
+						<argument>src/main/resources/com/rapidminer/stream/resources/DataStreamOperators-core.xml</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<finalName>DataStream-Plugin-${pom.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+						</manifest>
+						<manifestEntries>
+							<Implementation-Vendor>Christian Bockermann</Implementation-Vendor>
+							<Implementation-Title>DataStream Plugin</Implementation-Title>
+							<Implementation-URL>http://sfb876.cs.tu-dortmund.de/streams/stream-plugin/</Implementation-URL>
+							<Implementation-Version>${pom.version}</Implementation-Version>
+							<Specification-Title></Specification-Title>
+							<Specification-Version></Specification-Version>
+							<RapidMiner-Version>5.1</RapidMiner-Version>
+							<RapidMiner-Type>RapidMiner_Extension</RapidMiner-Type>
+							<Plugin-Dependencies></Plugin-Dependencies>
+							<Extension-ID>rmx_DataStream</Extension-ID>
+							<Namespace>DataStream</Namespace>
+							<Initialization-Class>com.rapidminer.PluginInit</Initialization-Class>
+							<IOObject-Descriptor>/com/rapidminer/stream/resources/DataStreamIOObjects.xml</IOObject-Descriptor>
+							<Operator-Descriptor>/com/rapidminer/stream/DataStreamOperators.xml</Operator-Descriptor>
+							<ParseRule-Descriptor>/com/rapidminer/stream/DataStreamParseRules.xml</ParseRule-Descriptor>
+							<Group-Descriptor>/com/rapidminer/stream/resources/DataStreamGroups.properties</Group-Descriptor>
+							<Error-Descriptor>/com/rapidminer/stream/resources/i18n/DataStreamErrors.properties</Error-Descriptor>
+							<UserError-Descriptor>/com/rapidminer/stream/resources/i18n/DataStreamUserErrorMessages.properties</UserError-Descriptor>
+							<GUI-Descriptor>/com/rapidminer/stream/resources/i18n/DataStreamGUI.properties</GUI-Descriptor>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -16,7 +16,7 @@ public class ListDataStream implements DataStream {
 	List<Data> data;
 	int pos = 0;
 	
-	public ListDataStream( Collection<Data> items ){
+	public ListDataStream( Collection<? extends Data> items ){
 		data = new ArrayList<Data>( items );
 		pos = 0;
 	}
