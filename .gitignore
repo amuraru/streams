@@ -7,3 +7,5 @@ syntax: regexp
 target$
 stream-mapred/data/
 stream-mapred/stream-mapred.jar
+^stream-plugin/src/generated-sources
+stream-plugin/src/generated-sources

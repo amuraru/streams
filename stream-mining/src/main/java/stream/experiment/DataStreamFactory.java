@@ -105,8 +105,8 @@ public class DataStreamFactory
 
 	public DataSource createDataSource( Element el ) throws Exception {
 
-		String className = el.getAttribute( "class" );
 		/*
+		String className = el.getAttribute( "class" );
 		if( className != null && className.equals( "stream.generator.LabeledGaussianStream" ) ){
 			LabeledGaussianStream ds = (LabeledGaussianStream) ObjectFactory.newInstance().create( el );
 			return ds;

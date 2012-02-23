@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -16,7 +17,7 @@ import stream.model.Model;
  * @author Benedikt Kulmann
  * @see StickySampling
  */
-public final class StickySamplingModel<T> implements StaticFrequentItemModel<T> {
+public final class StickySamplingModel<T extends Serializable> implements StaticFrequentItemModel<T> {
 
     private static final long serialVersionUID = 1L;
 
@@ -128,7 +129,7 @@ public final class StickySamplingModel<T> implements StaticFrequentItemModel<T> 
      * {@inheritDoc}
      */
     @Override
-    public long getTotalCount() {
+    public Long getTotalCount() {
         return elementsCounted;
     }
 
@@ -193,4 +194,12 @@ public final class StickySamplingModel<T> implements StaticFrequentItemModel<T> 
         sb.append("]");
         return sb.toString();
     }
+
+	/* (non-Javadoc)
+	 * @see stream.counter.CountModel#getCount(java.io.Serializable)
+	 */
+	@Override
+	public Long getCount(T value) {
+		return predict( value );
+	}
 }

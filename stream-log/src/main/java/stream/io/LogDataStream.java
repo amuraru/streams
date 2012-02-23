@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import stream.data.Data;
+import stream.util.Parameter;
 
 
 /**
@@ -80,6 +81,8 @@ public class LogDataStream
     	return null;
     }
     
+    
+    @Parameter( name="format", required=false )
     public void setFormat( String fmt ){
     	this.parser = new LogStreamParser( fmt );
     }

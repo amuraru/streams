@@ -1,0 +1,13 @@
+package %{PACKAGE};
+
+import com.rapidminer.operator.OperatorDescription;
+
+/**
+ * AUTO GENERATED wrapper for DataStreamWriter implementations.
+ */
+public class %{CLASSNAME} extends stream.plugin.operators.output.GenericStreamWriterOperator {
+
+    public %{CLASSNAME}( OperatorDescription desc ){
+        super( desc, %{DATA_STREAM_CLASS}.class );
+    }
+}

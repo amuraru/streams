@@ -1,5 +1,7 @@
 package stream.counter;
 
+import java.io.Serializable;
+
 import stream.learner.Learner;
 import stream.model.Model;
 
@@ -11,7 +13,7 @@ import stream.model.Model;
  * @author Benedikt Kulmann
  * @see StickySamplingModel
  */
-public final class StickySampling<T> implements Learner<T, CountModel<T>> {
+public final class StickySampling<T extends Serializable> implements Learner<T, CountModel<T>> {
 
 	private static final long serialVersionUID = 1L;
 

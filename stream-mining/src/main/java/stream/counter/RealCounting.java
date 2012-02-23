@@ -1,5 +1,7 @@
 package stream.counter;
 
+import java.io.Serializable;
+
 import stream.learner.Learner;
 
 /**
@@ -12,7 +14,7 @@ import stream.learner.Learner;
  *
  * @author Benedikt Kulmann, office@kulmann.biz
  */
-public class RealCounting<T> implements Learner<T, CountModel<T>> {
+public class RealCounting<T extends Serializable> implements Learner<T, CountModel<T>> {
 
     private static final long serialVersionUID = 1L;
 

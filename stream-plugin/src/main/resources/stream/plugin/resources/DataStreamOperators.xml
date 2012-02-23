@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<operators docbundle="stream/plugin/resources/DataStreamOperatorsDoc" name="DataStream" version="5.0">
+
+
+<group key="Data Stream">
+    <operator>
+        <key>Data Stream Process</key>
+        <class>stream.plugin.processing.DataStreamProcess</class>
+    </operator>
+</group>
+
+
+<group key="Data Stream.Sources">
+	<operator>
+		<key>CSV Data Stream</key>
+		<class>stream.plugin.sources.CsvDataStreamReader</class>
+	</operator>
+	<operator>
+		<key>ExampleSet DataStream</key>
+		<class>stream.plugin.sources.ExampleSetDataStream</class>
+	</operator>
+<operator>
+      <key>AccessLogStream</key>
+      <class>stream.io.AccessLogStreamOperator</class>
+    </operator>
+    <operator>
+      <key>ArffStream</key>
+      <class>stream.io.ArffStreamOperator</class>
+    </operator>
+    <operator>
+      <key>CsvStream</key>
+      <class>stream.io.CsvStreamOperator</class>
+    </operator>
+    <operator>
+      <key>LogDataStream</key>
+      <class>stream.io.LogDataStreamOperator</class>
+    </operator>
+    <operator>
+      <key>ModSecurityAuditStream</key>
+      <class>stream.io.ModSecurityAuditStreamOperator</class>
+    </operator>
+    <operator>
+      <key>SparseDataStream</key>
+      <class>stream.io.SparseDataStreamOperator</class>
+    </operator>
+    <operator>
+      <key>SvmLightDataStream</key>
+      <class>stream.io.SvmLightDataStreamOperator</class>
+    </operator>
+    <operator>
+      <key>SyslogDataStream</key>
+      <class>stream.io.SyslogDataStreamOperator</class>
+    </operator>
+  </group>
+
+
+<group key="Data Stream.Processing">
+</group>
+
+
+<group key="Data Stream.Processing.Convert">
+	<operator>
+		<key>Array to ExampleSet</key>
+		<class>stream.plugin.processing.convert.Array2ExampleSet</class>
+	</operator>
+	<operator>
+		<key>ExampleSet to Array</key>
+		<class>stream.plugin.processing.convert.ExampleSet2Array</class>
+	<operator>
+		<key>Merge Data Items</key>
+		<class>stream.plugin.processing.convert.MergeDataObjectOperator</class>
+	</operator>
+	</operator>
+</group>
+
+
+<group key="Data Stream.Processing.Transformations">
+
+</group>
+
+
+<group key="Data Stream.Output">
+</group>
+
+<group key="Data Stream.Monitoring">
+    <operator>
+      <key>Print Data</key>
+      <class>stream.data.test.PrintDataOperator</class>
+    </operator>
+  </group>
+  <group key="Data Stream.Processing.Annotations">
+    <operator>
+      <key>CreateID</key>
+      <class>stream.plugin.processing.transform.CreateIDOperator</class>
+    </operator>
+  </group>
+  <group key="Data Stream.Processing.Script">
+    <operator>
+      <key>JavaScript</key>
+      <class>stream.data.JavaScriptOperator</class>
+    </operator>
+  </group>
+  <group key="Data Stream.Processing.Transformations.Attributes">
+    <operator>
+      <key>MapKeys</key>
+      <class>stream.plugin.processing.transform.MapKeysOperator</class>
+    </operator>
+    <operator>
+      <key>RemoveAttributes</key>
+      <class>stream.plugin.processing.transform.RemoveAttributesOperator</class>
+    </operator>
+  </group>
+  <group key="Data Stream.Processing.Transformations.Data">
+    <operator>
+      <key>MapValues</key>
+      <class>stream.plugin.processing.transform.MapValuesOperator</class>
+    </operator>
+    <operator>
+      <key>RemoveZeroes</key>
+      <class>stream.plugin.processing.transform.RemoveZeroesOperator</class>
+    </operator>
+    <operator>
+      <key>SetValue</key>
+      <class>stream.plugin.processing.transform.SetValueOperator</class>
+    </operator>
+  </group>
+  <group key="stream.data.test">
+    <operator>
+      <key>PrintDataProcessor</key>
+      <class>stream.data.PrintDataProcessorOperator</class>
+    </operator>
+  </group>
+</operators>

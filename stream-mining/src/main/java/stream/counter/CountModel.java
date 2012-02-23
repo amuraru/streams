@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import stream.model.PredictionModel;
@@ -13,13 +14,13 @@ import stream.model.PredictionModel;
  *
  * @author Benedikt Kulmann, office@kulmann.biz
  */
-public interface CountModel<T> extends PredictionModel<T, Long> {
+public interface CountModel<T extends Serializable> extends PredictionModel<T,Long> {
 
     /**
      * Returns the total number of elements counted so far.
      * @return the total number of elements counted so far.
      */
-    long getTotalCount();
+    Long getTotalCount();
 
     /**
      * Returns the current "key set" of the counting algorithm which means the different
@@ -27,5 +28,9 @@ public interface CountModel<T> extends PredictionModel<T, Long> {
      * @return The set of different elements which have occurred so far.
      */
     Set<T> keySet();
-
+    
+    
+    public Long getCount( T value );
+    
+    //public void count( T value );
 }

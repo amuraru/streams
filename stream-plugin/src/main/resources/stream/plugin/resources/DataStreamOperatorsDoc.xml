@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<operatorHelp lang="en_EN">
+  <operator>
+    <name>Data Stream Process</name>
+    <synopsis/>
+    <key>Data Stream Process</key>
+  </operator>
+  <operator>
+    <name>Print Data</name>
+    <synopsis/>
+    <key>Print Data</key>
+  </operator>
+  <operator>
+    <name>CreateID</name>
+    <synopsis/>
+    <help>&lt;h1&gt;CreateID&lt;/h1&gt;
+
+&lt;p&gt;This processor simply adds an incremental identifier to each processed
+data item. By default, this identifier is stored as feature &lt;code&gt;@id&lt;/code&gt;, but
+can be used with any other name as well.&lt;/p&gt;
+
+&lt;p&gt;The following example creates a processor adding IDs with name &lt;code&gt;@uid&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;CreateID key="@uid" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;IDs are numbered starting from 0, but can also start at arbitrary
+integer values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;CreateID key="@uid" start="10" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</help>
+    <key>CreateID</key>
+  </operator>
+  <operator>
+    <name>Array to ExampleSet</name>
+    <synopsis/>
+    <key>Array to ExampleSet</key>
+  </operator>
+  <operator>
+    <name>ExampleSet to Array</name>
+    <synopsis/>
+    <key>ExampleSet to Array</key>
+  </operator>
+  <operator>
+    <name>Merge Data Items</name>
+    <synopsis/>
+    <key>Merge Data Items</key>
+  </operator>
+  <operator>
+    <name>JavaScript</name>
+    <synopsis/>
+    <help>&lt;h1&gt;JavaScript&lt;/h1&gt;
+
+&lt;p&gt;This processor can be used to execute simple JavaScript snippets
+using the Java-6 ECMA scripting engine.&lt;/p&gt;
+
+&lt;p&gt;The processor binds the data item as &lt;code&gt;data&lt;/code&gt; object to the script
+context to allow for accessing the item. The following snippet
+prints out the message "Test" and stores the string &lt;code&gt;test&lt;/code&gt; with
+key &lt;code&gt;@tag&lt;/code&gt; in the data object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  println( "Test" );
+  data.put( "@tag", "Test" );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;External Scripts&lt;/h2&gt;
+
+&lt;p&gt;The processor can also be used to run JavaScript snippets from
+external files, by simply specifying the &lt;code&gt;file&lt;/code&gt; attribute:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;JavaScript file="/path/to/script.js" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</help>
+    <key>JavaScript</key>
+  </operator>
+  <operator>
+    <name>MapKeys</name>
+    <synopsis/>
+    <help>&lt;h1&gt;MapKeys&lt;/h1&gt;
+
+&lt;p&gt;This processor provides a way to map keys (feature names) to other
+values. This is sometimes required to match special processors that
+rely on specific feature names:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;MapKeys from="labelAttribute" to="@label" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A more complex setting can be used by specifying the map in a &lt;code&gt;key=value&lt;/code&gt;
+file, e.g. stored as &lt;code&gt;my-map.txt&lt;/code&gt;. With such a file, the processor can
+be specified as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;MapKeys map="my-map.txt" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where the &lt;code&gt;my-map.txt&lt;/code&gt; file may look like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  attr1=sepalLength
+  attr2=sepalWidth
+  ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which will map the keys according to the map. &lt;/p&gt;
+</help>
+    <key>MapKeys</key>
+  </operator>
+  <operator>
+    <name>RemoveAttributes</name>
+    <synopsis/>
+    <help>&lt;h1&gt;RemoveAttributes&lt;/h1&gt;
+
+&lt;p&gt;This processors provides the possibility to remove a set of features
+from each processed data item. The list can be specified by setting
+the &lt;code&gt;keys&lt;/code&gt; parameter to the list of features to be removed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;RemoveAttributes keys="attr1,attr2,attr3" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The key strings will be splitted at each comma and will be trimmed,
+i.e. the list above will have the same effect as the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;RemoveAttributes keys="attr1, attr2 , attr3" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</help>
+    <key>RemoveAttributes</key>
+  </operator>
+  <operator>
+    <name>MapValues</name>
+    <synopsis/>
+    <help>&lt;h1&gt;MapValue&lt;/h1&gt;
+
+&lt;p&gt;This processor provides a way to map values of a specific feature
+onto other values. For example, mapping all labels &lt;code&gt;0.0&lt;/code&gt; to the
+value &lt;code&gt;-1.0&lt;/code&gt; can be done using&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;MapValues key="@label" from="0.0" to="-1.0" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is useful, e.g. when required to map labels or other categorical
+data to different values.&lt;/p&gt;
+
+&lt;p&gt;A more complex setting can be used by specifying the map in a &lt;code&gt;key=value&lt;/code&gt;
+file, e.g. stored as &lt;code&gt;my-map.txt&lt;/code&gt;. With such a file, the processor can
+be specified as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;MapValues key="@label" map="my-map.txt" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where the &lt;code&gt;my-map.txt&lt;/code&gt; file may look like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  false=-1.0
+  true=1.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which will map the string values &lt;code&gt;true&lt;/code&gt; and &lt;code&gt;false&lt;/code&gt; according to the map. &lt;/p&gt;
+</help>
+    <key>MapValues</key>
+  </operator>
+  <operator>
+    <name>RemoveZeroes</name>
+    <synopsis/>
+    <help>&lt;h1&gt;RemoveZeroes&lt;/h1&gt;
+
+&lt;p&gt;This processor will remove any values which equal 0 in the numerical
+sense. This can be used to remove a large number of features to create
+a sparse item:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;RemoveZeroes /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Special attributes, such as &lt;code&gt;@label&lt;/code&gt; or similar are left untouched.&lt;/p&gt;
+</help>
+    <key>RemoveZeroes</key>
+  </operator>
+  <operator>
+    <name>SetValue</name>
+    <synopsis/>
+    <help>&lt;h1&gt;SetValue&lt;/h1&gt;
+
+&lt;p&gt;This processors allows for setting a feature to a single, constant
+value:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;SetValue key="attribute1" value="abc" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</help>
+    <key>SetValue</key>
+  </operator>
+  <operator>
+    <name>AccessLogStream</name>
+    <synopsis/>
+    <key>AccessLogStream</key>
+  </operator>
+  <operator>
+    <name>ArffStream</name>
+    <synopsis/>
+    <key>ArffStream</key>
+  </operator>
+  <operator>
+    <name>CSV Data Stream</name>
+    <synopsis/>
+    <key>CSV Data Stream</key>
+  </operator>
+  <operator>
+    <name>CsvStream</name>
+    <synopsis/>
+    <key>CsvStream</key>
+  </operator>
+  <operator>
+    <name>ExampleSet DataStream</name>
+    <synopsis/>
+    <key>ExampleSet DataStream</key>
+  </operator>
+  <operator>
+    <name>LogDataStream</name>
+    <synopsis/>
+    <key>LogDataStream</key>
+  </operator>
+  <operator>
+    <name>ModSecurityAuditStream</name>
+    <synopsis/>
+    <key>ModSecurityAuditStream</key>
+  </operator>
+  <operator>
+    <name>SparseDataStream</name>
+    <synopsis/>
+    <key>SparseDataStream</key>
+  </operator>
+  <operator>
+    <name>SvmLightDataStream</name>
+    <synopsis/>
+    <key>SvmLightDataStream</key>
+  </operator>
+  <operator>
+    <name>SyslogDataStream</name>
+    <synopsis/>
+    <key>SyslogDataStream</key>
+  </operator>
+  <operator>
+    <name>PrintDataProcessor</name>
+    <synopsis/>
+    <key>PrintDataProcessor</key>
+  </operator>
+</operatorHelp>

@@ -52,6 +52,7 @@ implements DataStreamListener
 
 	Map<String,Statistics> total = new HashMap<String,Statistics>();
 
+	@SuppressWarnings("rawtypes")
 	MemoryUsage memoryUsage = new MemoryUsage();
 	Statistics totalError = new Statistics();
 	Statistics maxMem = new Statistics();
@@ -93,6 +94,7 @@ implements DataStreamListener
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	public Statistics test( Data data ){
 
 		if( tests == 0 || tests % this.getTestInterval() != 0 )

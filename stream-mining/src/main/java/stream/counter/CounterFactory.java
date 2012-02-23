@@ -1,5 +1,7 @@
 package stream.counter;
 
+import java.io.Serializable;
+
 /**
  * <p>Factory for the creation of instances of the different count algorithms.</p>
  *
@@ -15,7 +17,7 @@ public class CounterFactory {
     private CounterFactory() {
     }
 
-    public static <T> SpaceSaving<T> createInstanceSpaceSaving(int counters, double minsupport, double maxError){
+    public static <T extends Serializable> SpaceSaving<T> createInstanceSpaceSaving(int counters, double minsupport, double maxError){
     	return new SpaceSaving<T>(counters, minsupport, maxError);
     }
     /**
@@ -29,7 +31,7 @@ public class CounterFactory {
      * the top-k overhead, than set k to 0 or lower
      * @return A new instance of {@link CountSketch}
      */
-    public static <T> CountSketch<T> createInstanceCountSketch(int domain, int numberOfHashFunctions, int numberOfBuckets, int k) {
+    public static <T extends Serializable> CountSketch<T> createInstanceCountSketch(int domain, int numberOfHashFunctions, int numberOfBuckets, int k) {
         return new CountSketch<T>(domain, numberOfHashFunctions, numberOfBuckets, k);
     }
 
@@ -44,7 +46,7 @@ public class CounterFactory {
      * the top-k overhead, than set k to 0 or lower
      * @return A new instance of {@link CountMinSketch}
      */
-    public static <T> CountMinSketch<T> createInstanceCountMinSketch(int domain, int numberOfHashFunctions, int numberOfBuckets, int k) {
+    public static <T extends Serializable> CountMinSketch<T> createInstanceCountMinSketch(int domain, int numberOfHashFunctions, int numberOfBuckets, int k) {
         return new CountMinSketch<T>(domain, numberOfHashFunctions, numberOfBuckets, k);
     }
 
@@ -55,7 +57,7 @@ public class CounterFactory {
      * @param maxError the maximum error bound
      * @return A new instance of {@link LossyCounting}
      */
-    public static <T> LossyCounting<T> createInstanceLossyCounting(double maxError) {
+    public static <T extends Serializable> LossyCounting<T> createInstanceLossyCounting(double maxError) {
         return new LossyCounting<T>(maxError);
     }
 
@@ -67,7 +69,7 @@ public class CounterFactory {
      * @param k the k for top k concerns
      * @return A new instance of {@link RealCounting}
      */
-    public static <T> RealCounting<T> createInstanceRealCounting(double minSupport, int k) {
+    public static <T extends Serializable> RealCounting<T> createInstanceRealCounting(double minSupport, int k) {
         return new RealCounting<T>(minSupport, k);
     }
 
@@ -80,7 +82,7 @@ public class CounterFactory {
      * @param maxFailure the maximum failure rate
      * @return A new instance of {@link StickySampling}
      */
-    public static <T> StickySampling<T> createInstanceStickySampling(double minSupport, double maxError, double maxFailure) {
+    public static <T extends Serializable> StickySampling<T> createInstanceStickySampling(double minSupport, double maxError, double maxFailure) {
         return new StickySampling<T>(minSupport, maxError, maxFailure);
     }
 

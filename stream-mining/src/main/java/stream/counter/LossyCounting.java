@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ import stream.learner.Learner;
  *
  * @param <T>
  */
-public class LossyCounting<T> implements Learner<T, CountModel<T>> {
+public class LossyCounting<T extends Serializable> implements Learner<T, CountModel<T>> {
 
     private static final long serialVersionUID = 1L;
 

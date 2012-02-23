@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.Description;
 
 
 /**
@@ -23,6 +24,7 @@ import stream.data.DataProcessor;
  * @author Christian Bockermann &lt;christian.bockermann@udo.edu&gt;
  *
  */
+@Description( group="Data Stream.Sources", text= "")
 public class LogStreamParser
     implements DataProcessor
 {

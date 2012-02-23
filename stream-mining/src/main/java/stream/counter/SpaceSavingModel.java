@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,7 +24,7 @@ import stream.model.Model;
  * @param <T>
  */
 
-public class SpaceSavingModel<T> implements DynamicFrequentItemModel<T> {
+public class SpaceSavingModel<T extends Serializable> implements DynamicFrequentItemModel<T> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -163,7 +164,7 @@ public class SpaceSavingModel<T> implements DynamicFrequentItemModel<T> {
      * {@inheritDoc}
      */
 	@Override
-	public long getTotalCount() {
+	public Long getTotalCount() {
 		return elementsCounted;
 	}   
 
@@ -229,5 +230,13 @@ public class SpaceSavingModel<T> implements DynamicFrequentItemModel<T> {
 		public long getMaxError(){
 			return this.maxError;
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see stream.counter.CountModel#getCount(java.io.Serializable)
+	 */
+	@Override
+	public Long getCount(T value) {
+		return predict( value );
 	}
 }

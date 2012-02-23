@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -21,7 +22,7 @@ import java.util.Collection;
  *
  * @param <T>	Generic class of the elements which should be counted
  */
-public interface StaticFrequentItemModel<T> extends CountModel<T> {
+public interface StaticFrequentItemModel<T extends Serializable> extends CountModel<T> {
 
     /**
      * <p>

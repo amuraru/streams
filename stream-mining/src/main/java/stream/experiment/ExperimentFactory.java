@@ -422,7 +422,7 @@ public class ExperimentFactory {
 		return ds;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static TestAndTrain<Data,Learner<Data,?>> findEvaluation( Document doc ) throws Exception {
 
 		ExperimentFactory.findGlobalSettings( doc.getDocumentElement() );

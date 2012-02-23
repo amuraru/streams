@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import stream.data.Data;
-import stream.mining.Counter;
 
 /**
  * @author chris
@@ -93,9 +92,9 @@ public abstract class AbstractCounter<T extends Serializable>
 
 	/* (non-Javadoc)
 	 * @see stream.mining.Counter#count(java.lang.Object)
-	 */
 	@Override
 	public void count(T value) {
 		getModel().count( value );
 	}
+	 */
 }

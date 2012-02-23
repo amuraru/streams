@@ -1,0 +1,16 @@
+<ioobjects>
+   	<ioobject
+   		name="Data"
+   		class="stream.plugin.DataObject"
+   		supertype="com.rapidminer.io.AbstractIOObject"
+   		reportable="false">
+      <renderer>stream.plugin.ui.DataObjectRenderer</renderer>
+   </ioobject>
+   	<ioobject
+   		name="DataSource"
+   		class="stream.plugin.DataSourceObject"
+   		supertype="com.rapidminer.io.AbstractIOObject"
+   		reportable="false">
+      <renderer>stream.plugin.ui.DataSourceRenderer</renderer>
+   </ioobject>
+</ioobjects>

@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,7 +22,7 @@ import stream.model.Model;
  *
  * @author Benedikt Kulmann, office@kulmann.biz
  */
-public class RealCountingModel<T> implements DynamicFrequentItemModel<T>, StaticFrequentItemModel<T>, DynamicTopKModel<T>, StaticTopKModel<T> {
+public class RealCountingModel<T extends Serializable> implements DynamicFrequentItemModel<T>, StaticFrequentItemModel<T>, DynamicTopKModel<T>, StaticTopKModel<T> {
 
     private static final long serialVersionUID = 1L;
 
@@ -99,7 +100,7 @@ public class RealCountingModel<T> implements DynamicFrequentItemModel<T>, Static
      * {@inheritDoc}
      */
     @Override
-    public long getTotalCount() {
+    public Long getTotalCount() {
         return elementsCounted;
     }
 
@@ -200,4 +201,12 @@ public class RealCountingModel<T> implements DynamicFrequentItemModel<T>, Static
         sb.append("]");
         return sb.toString();
     }
+
+	/**
+	 * @see stream.counter.CountModel#getCount(java.io.Serializable)
+	 */
+	@Override
+	public Long getCount(T value) {
+		return this.predict( value );
+	}
 }

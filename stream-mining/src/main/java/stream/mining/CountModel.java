@@ -3,6 +3,8 @@ package stream.mining;
 import java.io.Serializable;
 import java.util.Set;
 
+import stream.model.PredictionModel;
+
 /**
  * <p>Extension of the {@link PredictionModel} interface to be able to provide
  * additional information which seems to be common for count algorithms.<br />

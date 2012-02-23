@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,7 +22,7 @@ import stream.model.Model;
  *
  * @see CountMinSketch
  */
-public class CountMinSketchModel<T> extends CountSketchModel<T> {
+public class CountMinSketchModel<T extends Serializable> extends CountSketchModel<T> {
 
     private static final long serialVersionUID = 1L;
 

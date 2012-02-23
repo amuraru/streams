@@ -12,6 +12,7 @@ import org.jwall.web.audit.io.AuditEventReader;
 import org.jwall.web.audit.io.ModSecurity2AuditReader;
 
 import stream.data.Data;
+import stream.util.Description;
 
 /**
  * <p>
@@ -22,6 +23,7 @@ import stream.data.Data;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
+@Description( group = "Data Stream.Sources", text = "" )
 public class ModSecurityAuditStream
 extends AbstractDataStream {
 

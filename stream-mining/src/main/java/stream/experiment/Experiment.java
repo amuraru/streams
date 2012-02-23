@@ -116,7 +116,7 @@ public class Experiment
 
 		evaluation = ExperimentFactory.findEvaluation( doc );
 		log.info( "Found evaluation: {}", evaluation );
-		
+
 		List<Element> dataSourceElements = ExperimentFactory.findDataSourceNodes(doc);
 		DataStreamFactory dsf = DataStreamFactory.newInstance( settings );
 		if( dataSourceElements.isEmpty() )
@@ -126,7 +126,7 @@ public class Experiment
 			DataSource ds = dsf.createDataSource( dse );
 			if( dataSource == null )
 				dataSource = ds;
-			
+
 			dataSources.put( ds.getName(), ds );
 		}
 		//dataSource = dsf.createDataSource( dataSourceElements.get(0) );
@@ -149,18 +149,18 @@ public class Experiment
 			String dsDescription = null; //dataSource.retrieveDescription( ".en.xml");
 			if( dsDescription == null || dsDescription.isEmpty() ){
 				log.info( "No DataSource description found." );
-			} else {
-				try {
-					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-					dbf.setValidating( false );
-					Document xmlDesc = dbf.newDocumentBuilder().parse( dataSource.getUrl() + ".en.xml" );
-					log.info( "Imported description from XML remote source" );
-					dataSourceElements.get(0).appendChild( doc.importNode( xmlDesc.getDocumentElement(), true ) );
-				} catch (Exception e) {
-					//log.info( "DataSource description:\n{}\n", dsDescription );
-					//dataSources.get(0).setTextContent( dsDescription.replace( "<description>", "" ).replace( "</description>", "" ) );
-				}
 			}
+			try {
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				dbf.setValidating( false );
+				Document xmlDesc = dbf.newDocumentBuilder().parse( dataSource.getUrl() + ".en.xml" );
+				log.info( "Imported description from XML remote source" );
+				dataSourceElements.get(0).appendChild( doc.importNode( xmlDesc.getDocumentElement(), true ) );
+			} catch (Exception e) {
+				//log.info( "DataSource description:\n{}\n", dsDescription );
+				//dataSources.get(0).setTextContent( dsDescription.replace( "<description>", "" ).replace( "</description>", "" ) );
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -379,70 +379,70 @@ public class Experiment
 		for( String learner : evaluation.getLearnerNames() )
 			errors.add( "Error(" + learner + ")" );
 
-		StreamPlotter errorPlot = new StreamPlotter( "Events", errors, new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "model-error.png" ) );
-		errorPlot.setTitle( "Model Error" );
+				StreamPlotter errorPlot = new StreamPlotter( "Events", errors, new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "model-error.png" ) );
+				errorPlot.setTitle( "Model Error" );
 
-		if( updatePlots ){
-			plots.add( errorPlot );
-			evaluation.addPerformanceListener( errorPlot );
-		}
+				if( updatePlots ){
+					plots.add( errorPlot );
+					evaluation.addPerformanceListener( errorPlot );
+				}
 
-		File modelError = new File( getOutputDirectory().getAbsolutePath() + File.separator + "model-error.dat" );
-		log.info( "  writing model-error statistics to {}", modelError );
+				File modelError = new File( getOutputDirectory().getAbsolutePath() + File.separator + "model-error.dat" );
+				log.info( "  writing model-error statistics to {}", modelError );
 
-		int windowSize = 1000;
-		try {
-			windowSize = Integer.parseInt( this.getParameter( "windowSize" ) );
-		} catch (Exception e) {
-			if( log.isDebugEnabled() )
-				e.printStackTrace();
-			windowSize = 1000;
-		}
+				int windowSize = 1000;
+				try {
+					windowSize = Integer.parseInt( this.getParameter( "windowSize" ) );
+				} catch (Exception e) {
+					if( log.isDebugEnabled() )
+						e.printStackTrace();
+					windowSize = 1000;
+				}
 
-		evaluation.addPerformanceListener( new WindowedStatisticsListener( new StatisticsStreamWriter( modelError ), windowSize, true ) ); //new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "model-error.dat" ) ) );
-		evaluation.addPerformanceListener( new MultiStatisticsWriter( getOutputDirectory() ) );
-		
-		
-		for( String key : this.learner.keySet() ){
-			log.info( "Initializing learner {}", key );
-			Learner<?,?> learner = this.learner.get( key );
-			learner.init();
-		}
+				evaluation.addPerformanceListener( new WindowedStatisticsListener( new StatisticsStreamWriter( modelError ), windowSize, true ) ); //new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "model-error.dat" ) ) );
+				evaluation.addPerformanceListener( new MultiStatisticsWriter( getOutputDirectory() ) );
 
 
-		//
-		// Set up VM-Memory plotter
-		//
-		MemoryMonitor mem = new MemoryMonitor();
+				for( String key : this.learner.keySet() ){
+					log.info( "Initializing learner {}", key );
+					Learner<?,?> learner = this.learner.get( key );
+					learner.init();
+				}
 
-		Map<String,String> memConfig = new HashMap<String,String>();
-		for( String str : this.params.keySet() ){
-			if( str.startsWith( "memory." ) )
-				memConfig.put( str.substring( "memory.".length() ), params.get( str ) );
-		}
-		ParameterInjection.inject( mem, memConfig );
-		log.info( "Checking VM memory every {} milliseconds", mem.getTestInterval() );
 
-		StreamPlotter vmMemoryPlot = new StreamPlotter( new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "vm-memory.log" ) );
-		vmMemoryPlot.setTitle( "JVM Memory Usage" );
-		vmMemoryPlot.setRangeTitle( "Memory (bytes)" );
-		vmMemoryPlot.setDomainTitle( "Time" );
-		vmMemoryPlot.setUpdateInterval( 10 );
-		mem.addMemoryListener( vmMemoryPlot );
-		mem.start();
+				//
+				// Set up VM-Memory plotter
+				//
+				MemoryMonitor mem = new MemoryMonitor();
+
+				Map<String,String> memConfig = new HashMap<String,String>();
+				for( String str : this.params.keySet() ){
+					if( str.startsWith( "memory." ) )
+						memConfig.put( str.substring( "memory.".length() ), params.get( str ) );
+				}
+				ParameterInjection.inject( mem, memConfig );
+				log.info( "Checking VM memory every {} milliseconds", mem.getTestInterval() );
+
+				StreamPlotter vmMemoryPlot = new StreamPlotter( new File( this.getOutputDirectory().getAbsolutePath() + File.separator + "vm-memory.log" ) );
+				vmMemoryPlot.setTitle( "JVM Memory Usage" );
+				vmMemoryPlot.setRangeTitle( "Memory (bytes)" );
+				vmMemoryPlot.setDomainTitle( "Time" );
+				vmMemoryPlot.setUpdateInterval( 10 );
+				mem.addMemoryListener( vmMemoryPlot );
+				mem.start();
 	}
 
 	public void run() throws Exception {
 		//
 		// Initialize data-stream...
 		//
-		
+
 		String streamName = evaluation.getInput();
 		if( streamName != null && dataSources.containsKey( streamName ) ){
 			log.info( "Using named stream '{}'", streamName );
 			stream = dataSources.get( streamName ).createDataStream();
 		}
-		
+
 		if( processor != null ){
 			log.info( "Opening data stream {}", dataSource );
 			stream = dataSource.createDataStream();
@@ -450,7 +450,7 @@ public class Experiment
 			log.info( "Replacing data stream by processor-chain: {}" , processor );
 			stream = processor;
 		}
-		
+
 		if( stream == null ){
 			log.info( "Data stream not yet initialized, opening dataSource {}", dataSource );
 			stream = this.dataSource.createDataStream();
@@ -500,7 +500,7 @@ public class Experiment
 					if( log.isDebugEnabled() )
 						e.printStackTrace();
 				}
-				
+
 				evaluation.train( datum );
 				datum = stream.readNext( datum );
 

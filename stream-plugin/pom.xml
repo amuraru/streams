@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>stream-api</artifactId>
-			<version>1.2.3</version>
+			<version>[1.3.0,)</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>junit</artifactId>
@@ -50,14 +50,29 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.4</version>
-		</dependency>
-		<dependency>
 			<groupId>pg542</groupId>
 			<artifactId>stream-mining</artifactId>
 			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jwall</groupId>
+			<artifactId>stream-log</artifactId>
+			<version>0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.markdownj</groupId>
+			<artifactId>markdownj</artifactId>
+			<version>0.3.0-1.0.2b4</version>
 		</dependency>
 	</dependencies>
 
@@ -103,10 +118,11 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>com.rapidminer.stream.util.OperatorGenerator</mainClass>
+					<mainClass>stream.plugin.util.OperatorGenerator</mainClass>
 					<arguments>
 						<argument>src/generated-sources/java</argument>
-						<argument>src/main/resources/com/rapidminer/stream/resources/DataStreamOperators-core.xml</argument>
+						<argument>/stream/plugin/resources/DataStreamOperators-core.xml</argument>
+						<argument>src/main/resources/stream/plugin/resources/DataStreamOperators.xml</argument>
 					</arguments>
 				</configuration>
 			</plugin>
@@ -134,14 +150,14 @@
 							<Plugin-Dependencies></Plugin-Dependencies>
 							<Extension-ID>rmx_DataStream</Extension-ID>
 							<Namespace>DataStream</Namespace>
-							<Initialization-Class>com.rapidminer.PluginInit</Initialization-Class>
-							<IOObject-Descriptor>/com/rapidminer/stream/resources/DataStreamIOObjects.xml</IOObject-Descriptor>
-							<Operator-Descriptor>/com/rapidminer/stream/DataStreamOperators.xml</Operator-Descriptor>
-							<ParseRule-Descriptor>/com/rapidminer/stream/DataStreamParseRules.xml</ParseRule-Descriptor>
-							<Group-Descriptor>/com/rapidminer/stream/resources/DataStreamGroups.properties</Group-Descriptor>
-							<Error-Descriptor>/com/rapidminer/stream/resources/i18n/DataStreamErrors.properties</Error-Descriptor>
-							<UserError-Descriptor>/com/rapidminer/stream/resources/i18n/DataStreamUserErrorMessages.properties</UserError-Descriptor>
-							<GUI-Descriptor>/com/rapidminer/stream/resources/i18n/DataStreamGUI.properties</GUI-Descriptor>
+							<Initialization-Class>stream.plugin.DataStreamPlugin</Initialization-Class>
+							<IOObject-Descriptor>/stream/plugin/resources/DataStreamIOObjects.xml</IOObject-Descriptor>
+							<Operator-Descriptor>/stream/plugin/resources/DataStreamOperators.xml</Operator-Descriptor>
+							<ParseRule-Descriptor>/stream/plugin/resources/DataStreamParseRules.xml</ParseRule-Descriptor>
+							<Group-Descriptor>/stream/plugin/resources/DataStreamGroups.properties</Group-Descriptor>
+							<Error-Descriptor>/stream/plugin/resources/i18n/DataStreamErrors.properties</Error-Descriptor>
+							<UserError-Descriptor>/stream/plugin/resources/i18n/DataStreamUserErrorMessages.properties</UserError-Descriptor>
+							<GUI-Descriptor>/stream/plugin/resources/i18n/DataStreamGUI.properties</GUI-Descriptor>
 						</manifestEntries>
 					</archive>
 				</configuration>

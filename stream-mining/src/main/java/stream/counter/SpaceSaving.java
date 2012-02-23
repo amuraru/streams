@@ -1,5 +1,7 @@
 package stream.counter;
 
+import java.io.Serializable;
+
 import stream.learner.Learner;
 
 /**
@@ -14,7 +16,7 @@ import stream.learner.Learner;
  *
  * @param <T>
  */
-public class SpaceSaving<T> implements Learner<T, CountModel<T>> {
+public class SpaceSaving<T extends Serializable> implements Learner<T, CountModel<T>> {
 
 	private static final long serialVersionUID = 1L;
 

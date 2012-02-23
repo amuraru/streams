@@ -1,6 +1,6 @@
 package %{PACKAGE};
 
-import com.rapidminer.stream.DataStreamOperator;
+import stream.plugin.DataStreamOperator;
 import com.rapidminer.operator.OperatorDescription;
 
 /**

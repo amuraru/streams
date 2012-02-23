@@ -1,5 +1,7 @@
 package stream.counter;
 
+import java.io.Serializable;
+
 import stream.learner.Learner;
 
 /**
@@ -16,7 +18,7 @@ import stream.learner.Learner;
  *
  * @param <T>
  */
-public class CountMinSketch<T> extends CountSketch<T> {
+public class CountMinSketch<T extends Serializable> extends CountSketch<T> {
 
     private static final long serialVersionUID = 1L;
 

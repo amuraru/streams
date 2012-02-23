@@ -164,7 +164,7 @@ public class SimpleTopKCounting
 	 * @see stream.counter.CountModel#getTotalCount()
 	 */
 	@Override
-	public long getTotalCount() {
+	public Long getTotalCount() {
 		return cnt;
 	}
 

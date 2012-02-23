@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataImpl;
-import stream.data.mapper.KeyMapper;
+import stream.data.mapper.MapKeys;
 import stream.data.util.ZNormalization;
 import stream.io.CsvStream;
 
@@ -63,9 +63,9 @@ public class KMeansTest {
 		URL url = KMeansTest.class.getResource( name );
 		CsvStream stream = new CsvStream( url );
 
-		KeyMapper mapper = new KeyMapper();
-		mapper.setNew( "@id" );
-		mapper.setOld( "id" );
+		MapKeys mapper = new MapKeys();
+		mapper.setFrom( "@id" );
+		mapper.setTo( "id" );
 		
 		Data item = stream.readNext();
 		int i = 0;

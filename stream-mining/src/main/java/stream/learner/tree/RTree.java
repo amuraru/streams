@@ -81,7 +81,7 @@ public class RTree extends ModelTree<RegressionTreeStatistics,Double> implements
 		
 		
 		boolean requiresSplit = splitCriterion.requiresSplit( leaf.getNodeInfo() );
-		Double splitValue = getBestSplitValue( btrees.get( leaf.getName() ) );
+		//Double splitValue = getBestSplitValue( btrees.get( leaf.getName() ) );
 		
 		if( requiresSplit ){
 			//

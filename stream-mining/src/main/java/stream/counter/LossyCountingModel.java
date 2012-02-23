@@ -1,5 +1,6 @@
 package stream.counter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -23,7 +24,7 @@ import stream.model.Model;
  *
  * @param <T>
  */
-public class LossyCountingModel<T> implements DynamicFrequentItemModel<T> {
+public class LossyCountingModel<T extends Serializable> implements DynamicFrequentItemModel<T> {
 
     private transient static final Logger logger = LoggerFactory.getLogger(LossyCountingModel.class);
     
@@ -75,7 +76,7 @@ public class LossyCountingModel<T> implements DynamicFrequentItemModel<T> {
      * {@inheritDoc}
      */
     @Override
-    public long getTotalCount() {
+    public Long getTotalCount() {
         return elementsCounted;
     }
 
@@ -124,4 +125,19 @@ public class LossyCountingModel<T> implements DynamicFrequentItemModel<T> {
     public Set<T> keySet() {
         return dataStructure.keySet();
     }
+
+	/* (non-Javadoc)
+	 * @see stream.counter.CountModel#getCount(java.io.Serializable)
+	 */
+	@Override
+	public Long getCount(T value) {
+		return predict( value );
+	}
+
+	/* (non-Javadoc)
+	 * @see stream.counter.CountModel#count(java.io.Serializable)
+	@Override
+	public void count(T value) {
+	}
+	 */
 }
