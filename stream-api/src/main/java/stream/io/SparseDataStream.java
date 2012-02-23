@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import stream.data.Data;
 import stream.data.DataUtils;
 import stream.data.vector.InputVector;
+import stream.util.Description;
 
 /**
  * This class implements a simple reader to read data in the SVM light data
@@ -20,6 +21,7 @@ import stream.data.vector.InputVector;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
+@Description( group="Data Stream.Sources" )
 public class SparseDataStream 
 	extends AbstractDataStream 
 {

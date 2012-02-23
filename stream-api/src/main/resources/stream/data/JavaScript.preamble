@@ -1,0 +1,7 @@
+
+
+// Default preamble for JavaScript operator.
+//
+importPackage( java.lang );
+
+// end of preamble.

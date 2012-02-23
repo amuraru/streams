@@ -3,6 +3,7 @@
  */
 package stream.util;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -69,10 +70,22 @@ public class ParameterInjection {
 		}
 
 		
+		Object embedded = params.get( EmbeddedContent.KEY );
+		
 		// now, walk over all methods and check if one of these is a setter of a corresponding
 		// key value in the parameter map
 		//
 		for( Method m : o.getClass().getMethods() ){
+			
+			Class<?>[] t = m.getParameterTypes();
+			
+			if( embedded != null && m.getName().startsWith( "set" ) && t.length == 1 && t[0] == EmbeddedContent.class ){
+				log.info( "Setting embedded content..." );
+				m.invoke( o, new EmbeddedContent( embedded.toString() ) );
+				continue;
+			}
+			
+			
 			for( String k : params.keySet() ){
 
 				if( m.getName().startsWith( "set" ) && alreadySet.contains( k ) ){
@@ -86,7 +99,7 @@ public class ParameterInjection {
 				//
 				if( m.getName().equalsIgnoreCase( "set" + k ) && m.getParameterTypes().length == 1 ){
 
-					Class<?> t = m.getParameterTypes()[0];
+					//Class<?> t = m.getParameterTypes()[0];
 
 					if( t.equals( params.get( k ).getClass() ) ){
 						log.info( "Using setter '{}' to inject parameter '{}'", m.getName(), k );
@@ -105,24 +118,24 @@ public class ParameterInjection {
 						//
 						Object po = null;
 						
-						if( t.isPrimitive() ){
+						if( t[0].isPrimitive() ){
 							String in = params.get( k ).toString();
 							
-							if( t == Double.TYPE )
+							if( t[0] == Double.TYPE )
 								po = new Double( in );
 							
-							if( t == Integer.TYPE )
+							if( t[0] == Integer.TYPE )
 								po = new Integer( in );
 							
-							if( t == Boolean.TYPE )
+							if( t[0] == Boolean.TYPE )
 								po = new Boolean( in );
 							
-							if( t == Float.TYPE )
+							if( t[0] == Float.TYPE )
 								po = new Float( in );
 							
 						} else {
 							try {
-								Constructor<?> c = t.getConstructor( String.class );
+								Constructor<?> c = t[0].getConstructor( String.class );
 								po = c.newInstance( params.get( k ).toString().trim() );
 								log.debug( "Invoking {}({})", m.getName(), po );
 							} catch (NoSuchMethodException nsm ){
@@ -186,7 +199,10 @@ public class ParameterInjection {
 				|| clazz.equals( Long.class )
 				|| clazz.equals( Integer.class ) 
 				|| clazz.equals( Double.class ) 
-				|| clazz.equals( Boolean.class ) )
+				|| clazz.equals( Boolean.class )
+				|| clazz.equals( File.class )
+				|| clazz.equals( EmbeddedContent.class )
+				|| clazz.equals( Map.class ))
 			return true;
 		
 		if( clazz.isPrimitive() )

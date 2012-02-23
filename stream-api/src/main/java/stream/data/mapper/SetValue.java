@@ -2,7 +2,9 @@ package stream.data.mapper;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.Description;
 
+@Description( group="Data Stream.Processing.Transformations.Data" )
 public class SetValue
     implements DataProcessor
 {

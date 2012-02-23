@@ -17,7 +17,7 @@ import stream.util.ParameterUtils;
  * @author Christian Bockermann &lt;christian.bockermann@udo.edu&gt;
  *
  */
-@Description( group="stream.preprocessing.data" )
+@Description( group="Data Stream.Processing.Transformations.Attributes" )
 public class RemoveAttributes implements DataProcessor {
 
 	String[] keys = new String[0];

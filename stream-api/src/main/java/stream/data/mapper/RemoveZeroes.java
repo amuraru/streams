@@ -9,11 +9,13 @@ import java.util.List;
 import stream.data.Data;
 import stream.data.DataProcessor;
 import stream.data.DataUtils;
+import stream.util.Description;
 
 /**
  * @author chris
  *
  */
+@Description( group="Data Stream.Processing.Transformations.Data" )
 public class RemoveZeroes implements DataProcessor {
 
 	/**

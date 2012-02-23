@@ -3,6 +3,7 @@ package stream.data.mapper;
 import stream.data.Data;
 import stream.data.DataProcessor;
 import stream.util.Description;
+import stream.util.Parameter;
 
 /**
  * 
@@ -11,7 +12,7 @@ import stream.util.Description;
  */
 @Description( 
 		text="This processor tags all processed items with integer IDs.",
-		group="stream.preprocessing" 
+		group="Data Stream.Processing.Annotations" 
 )
 public class CreateID
     implements DataProcessor
@@ -47,12 +48,14 @@ public class CreateID
     /**
      * @param key the key to set
      */
+    @Parameter( defaultValue="@id" )
     public void setKey(String key)
     {
         this.key = key;
     }
     
     
+    @Parameter( defaultValue="0" )
     public void setStart( Long l ){
     	start = l;
     	nextId = start;

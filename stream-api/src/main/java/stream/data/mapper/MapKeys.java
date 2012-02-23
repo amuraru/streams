@@ -15,12 +15,15 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.Description;
 import stream.util.Parameter;
 
 /**
  * @author chris
  *
  */
+@Description( text="",
+		group="Data Stream.Processing.Transformations.Attributes" )
 public class MapKeys implements Mapper<Data, Data>, DataProcessor {
 
 	static Logger log = LoggerFactory.getLogger( MapKeys.class );
@@ -124,6 +127,22 @@ public class MapKeys implements Mapper<Data, Data>, DataProcessor {
 		}
 		
 		return input;
+	}
+	
+
+	/**
+	 * @return the mapping
+	 */
+	public Map<String, String> getMapping() {
+		return mapping;
+	}
+
+
+	/**
+	 * @param mapping the mapping to set
+	 */
+	public void setMapping(Map<String, String> mapping) {
+		this.mapping = mapping;
 	}
 
 

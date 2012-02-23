@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataImpl;
+import stream.util.Description;
 
 /**
  * <p>
@@ -20,6 +21,7 @@ import stream.data.DataImpl;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
+@Description( group="Data Stream.Sources" )
 public class ArffStream 
 	extends AbstractDataStream
 {

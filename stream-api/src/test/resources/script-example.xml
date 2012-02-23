@@ -1,0 +1,26 @@
+<experiment source="log">
+
+<!-- 
+	<Stream id="log" class="stream.io.CsvStream" limit="200"
+		url="http://kirmes.cs.uni-dortmund.de/data/random-stream.csv.gz" />
+ -->
+	<Stream id="log" class="stream.io.CsvStream" limit="2"
+		url="file:/Users/chris/t3.csv" separator="___" />
+
+
+	<Process input="log" output="logData">
+ 		
+ 		<JavaScript>
+ 			println( "Test" );
+ 			var uri = data.get( "REQUEST_URI" );
+ 			println( "uri=" + uri );
+ 			data.put( "@id", "test" );
+ 			data.put( "test", new Double( 1.0 ) );
+ 			println( data );
+ 		</JavaScript>
+ 		
+ 		<stream.data.test.PrintData />
+ 		
+	</Process>
+	
+</experiment>

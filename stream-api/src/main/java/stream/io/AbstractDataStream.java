@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import stream.data.Data;
 import stream.data.DataImpl;
 import stream.data.DataProcessor;
+import stream.util.Parameter;
 
 /**
  * @author chris
@@ -105,6 +106,7 @@ public abstract class AbstractDataStream
     /**
      * @param username the username to set
      */
+    @Parameter( name = "username", required=false )
     public void setUsername(String username) {
         this.username = username;
     }
@@ -121,6 +123,7 @@ public abstract class AbstractDataStream
     /**
      * @param password the password to set
      */
+    @Parameter( name = "password", required=false )
     public void setPassword(String password) {
         this.password = password;
     }

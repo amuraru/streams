@@ -7,13 +7,13 @@ import stream.util.Parameter;
 
 public class HideFeature implements DataProcessor {
 
-	@Parameter( name = "key" )
 	String key;
 	
 	public String getKey() {
 		return key;
 	}
 
+	@Parameter( name = "key" )
 	public void setKey(String key) {
 		this.key = key;
 	}

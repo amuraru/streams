@@ -15,11 +15,14 @@ import org.slf4j.LoggerFactory;
 
 import stream.data.Data;
 import stream.data.DataImpl;
+import stream.util.Description;
+import stream.util.Parameter;
 
 /**
  * @author chris
  *
  */
+@Description( group="Data Stream.Sources" )
 public class CsvStream
 	extends AbstractDataStream
 {
@@ -63,6 +66,7 @@ public class CsvStream
 	}
 	
 	
+    @Parameter( name = "separator", required=true, defaultValue="(;|,)" )
 	public void setSeparator( String separator ){
 		splitExpression = separator;
 	}

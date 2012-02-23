@@ -93,6 +93,18 @@ public class ObjectFactory
 			Node attr = att.item(i);
 			map.put( attr.getNodeName(), expand( attr.getNodeValue() ) );
 		}
+		
+		
+		//
+		// Special case for handling the XML content as __EMBEDDED_CONTENT__
+		// parameter (e.g. for the ScriptDataProcessor)
+		//
+		if( node.getNodeType() == Node.ELEMENT_NODE ){
+			Element element = (Element) node;
+			String text = element.getTextContent();
+			map.put( EmbeddedContent.KEY, text );
+		}
+		
 		return map;
 	}
 	
@@ -102,7 +114,7 @@ public class ObjectFactory
 	        return node.getAttribute( "class" );
 	    
 	    String[] prefixes = new String[]{
-	            "", "stream.data.", "stream.data.mapper.", "stream.data.tree.", "stream.filter.", "stream.data.filter.", "stream.data.stats.", "stream.data.vector." 
+	            "", "stream.data.", "stream.data.mapper.", "stream.data.tree.", "stream.filter.", "stream.data.filter.", "stream.data.stats.", "stream.data.vector.", "stream.data.test." 
 	    };
 	    
 	    

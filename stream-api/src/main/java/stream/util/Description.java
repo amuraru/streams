@@ -19,6 +19,13 @@ import java.lang.annotation.Target;
 public @interface Description {
 
 	/**
+	 * A name for the DataProcessor implementation.
+	 * 
+	 * @return
+	 */
+	String name() default "";
+	
+	/**
 	 * A descriptive text.
 	 * 
 	 * @return

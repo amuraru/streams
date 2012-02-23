@@ -9,7 +9,11 @@ import java.util.Properties;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.Description;
 
+
+@Description( text="",
+		group="Data Stream.Processing.Transformations.Data" )
 public class MapValues
     implements DataProcessor
 {
