@@ -35,7 +35,8 @@ public class ObjectFactory
 		"stream.data.filter.", 
 		"stream.data.stats.", 
 		"stream.data.vector.", 
-		"stream.data.test." 
+		"stream.data.test.",
+		"stream.logic"
 	};
 	
 	final List<String> searchPath = new ArrayList<String>();

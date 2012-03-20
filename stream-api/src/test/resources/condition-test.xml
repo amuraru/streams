@@ -16,6 +16,8 @@
 
 		<stream.logic.Message txt="Test: %{x1}" condition="x1 @gt 0.5"/> 		
  		
+ 		<stream.logic.Skip condition="x1 @gt 0.8" />
+ 		
 <!-- 
 		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />
  -->	

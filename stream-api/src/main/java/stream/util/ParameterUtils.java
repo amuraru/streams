@@ -10,12 +10,12 @@ package stream.util;
 public class ParameterUtils {
 
 	
-	public final static String[] splitAndTrim( String keys ){
-		return splitAndTrim( keys, "," );
+	public final static String[] split( String keys ){
+		return split( keys, "," );
 	}
 	
 	
-	public final static String[] splitAndTrim( String keys, String separator ){
+	public final static String[] split( String keys, String separator ){
 		
 		if( keys == null || keys.isEmpty() )
 			return new String[0];
@@ -33,8 +33,8 @@ public class ParameterUtils {
 		String[] out = new String[ cnt ];
 		cnt = 0;
 		for( int i = 0; i < elements.length; i++ ){
-			if( !elements[i].trim().isEmpty() ){
-				out[cnt++] = elements[i].trim();
+			if( !elements[i].isEmpty() ){
+				out[cnt++] = elements[i];
 			}
 		}
 		
@@ -42,7 +42,7 @@ public class ParameterUtils {
 	}
 	
 	
-	public final static String trimAndJoin( String[] keys ){
+	public final static String join( String[] keys ){
 		
 		if( keys == null )
 			return null;
@@ -54,7 +54,6 @@ public class ParameterUtils {
 			if( ! key.trim().isEmpty() ){
 				if( cnt > 0 )
 					s.append( "," );
-				s.append( key.trim() );
 				cnt++;
 			}
 		}

@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>org.jwall</groupId>
 			<artifactId>org.jwall.web.audit</artifactId>
-			<version>0.5.5</version>
+			<version>0.5.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jwall</groupId>

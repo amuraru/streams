@@ -19,7 +19,7 @@ public final class DataStreamPlugin {
 	
 	public final static String NAME = "DataStream-Plugin";
 	
-	public final static String VERSION = "v0.1";
+	public final static String VERSION = "v0.2";
 	
 	public final static String DATA_ITEM_PORT_NAME = "data item";
 	

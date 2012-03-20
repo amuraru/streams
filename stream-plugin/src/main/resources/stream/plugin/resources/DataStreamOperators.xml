@@ -54,6 +54,17 @@
   </group>
 
 
+<group key="Data Stream.Adapters">
+	<operator>
+		<key>Stream to ExampleSet</key>
+		<class>stream.plugin.sources.DataStream2ExampleSet</class>
+	</operator>
+	<operator>
+		<key>Extract Example Set</key>
+		<class>stream.plugin.processing.convert.Stream2ExampleSet</class>
+	</operator>
+</group>
+
 <group key="Data Stream.Processing">
 </group>
 
@@ -93,6 +104,14 @@
       <key>CreateID</key>
       <class>stream.plugin.processing.transform.CreateIDOperator</class>
     </operator>
+    <operator>
+      <key>DNS Lookup</key>
+      <class>stream.plugin.processing.transform.DNSLookupOperator</class>
+    </operator>
+    <operator>
+      <key>DNS Reverse lookup</key>
+      <class>stream.plugin.processing.transform.DNSReverseLookupOperator</class>
+    </operator>
   </group>
   <group key="Data Stream.Processing.Script">
     <operator>
@@ -112,6 +131,10 @@
   </group>
   <group key="Data Stream.Processing.Transformations.Data">
     <operator>
+      <key>MapValueToID</key>
+      <class>stream.plugin.processing.transform.MapValueToIDOperator</class>
+    </operator>
+    <operator>
       <key>MapValues</key>
       <class>stream.plugin.processing.transform.MapValuesOperator</class>
     </operator>
@@ -122,12 +145,6 @@
     <operator>
       <key>SetValue</key>
       <class>stream.plugin.processing.transform.SetValueOperator</class>
-    </operator>
-  </group>
-  <group key="stream.data.test">
-    <operator>
-      <key>PrintDataProcessor</key>
-      <class>stream.data.PrintDataProcessorOperator</class>
     </operator>
   </group>
 </operators>

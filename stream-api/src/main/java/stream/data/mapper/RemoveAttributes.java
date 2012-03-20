@@ -31,11 +31,11 @@ public class RemoveAttributes implements DataProcessor {
 	
 	
 	public void setKeys( String keyString ){
-		keys = ParameterUtils.splitAndTrim( keyString );
+		keys = ParameterUtils.split( keyString );
 	}
 	
 	public String getKeys(){
-		return ParameterUtils.trimAndJoin( keys );
+		return ParameterUtils.join( keys );
 	}
 	
 	

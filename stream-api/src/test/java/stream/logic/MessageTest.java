@@ -31,7 +31,7 @@ public class MessageTest {
 		int i = 0;
 		Message m = new Message();
 		m.setTxt( "%{x1} ist kleiner als 0.5 und größer als 0.1" );
-		m.setCondition( "x1 @lt 0.5 and x1 @ge 0.1" );
+		m.setCondition( "x1 @lt 0.5  and  x1 @ge 0.1" );
 		
 		Data item = stream.readNext();
 		while( item != null && i++ < 10 ){

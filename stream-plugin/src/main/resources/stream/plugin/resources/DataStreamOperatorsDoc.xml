@@ -6,6 +6,23 @@
     <key>Data Stream Process</key>
   </operator>
   <operator>
+    <name>Extract Example Set</name>
+    <synopsis/>
+    <help>
+
+&lt;p&gt;This operator will collect a list of data items and create
+an example-set from these. The specified &lt;code&gt;bufferSize&lt;/code&gt; parameter
+allows for specifying the maximum number of data items that
+will be collected before an example-set is emitted.&lt;/p&gt;
+</help>
+    <key>Extract Example Set</key>
+  </operator>
+  <operator>
+    <name>Stream to ExampleSet</name>
+    <synopsis/>
+    <key>Stream to ExampleSet</key>
+  </operator>
+  <operator>
     <name>Print Data</name>
     <synopsis/>
     <key>Print Data</key>
@@ -13,9 +30,7 @@
   <operator>
     <name>CreateID</name>
     <synopsis/>
-    <help>&lt;h1&gt;CreateID&lt;/h1&gt;
-
-&lt;p&gt;This processor simply adds an incremental identifier to each processed
+    <help>&lt;p&gt;This processor simply adds an incremental identifier to each processed
 data item. By default, this identifier is stored as feature &lt;code&gt;@id&lt;/code&gt;, but
 can be used with any other name as well.&lt;/p&gt;
 
@@ -28,9 +43,52 @@ can be used with any other name as well.&lt;/p&gt;
 integer values:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt; &amp;lt;CreateID key="@uid" start="10" /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</help>
+&lt;/code&gt;&lt;/pre&gt;</help>
     <key>CreateID</key>
+  </operator>
+  <operator>
+    <name>DNS Lookup</name>
+    <synopsis/>
+    <help>&lt;p&gt;This processor simply checks for the hostname of a given
+IP address. The IP address can either be IPv4 or IPv6.
+Lookup is carried out using the local naming services. The
+processor integrates a simple, limited cache to speed up
+lookups.&lt;/p&gt;
+
+&lt;p&gt;The following example will lookup the IP address of the
+hostname found in attribute &lt;code&gt;REMOTE_HOST&lt;/code&gt; and store the
+resolved address in attribute &lt;code&gt;REMOTE_ADDR&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;DNSLookup key="REMOTE_HOST" target="REMOTE_ADDR" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The cache size is set with the &lt;code&gt;cacheSize&lt;/code&gt; parameter. By
+default the size of the cache is 10000 entries.&lt;/p&gt;</help>
+    <key>DNS Lookup</key>
+  </operator>
+  <operator>
+    <name>DNS Reverse lookup</name>
+    <synopsis/>
+    <help>&lt;p&gt;This processor translates IP addresses back to their host
+names. The lookup is performed using the local naming service.&lt;/p&gt;
+
+&lt;p&gt;Two keys need to be specified: the &lt;code&gt;key&lt;/code&gt; parameter specifies
+the attribute that is used as address (IPv4 or IPv6) to be
+mapped to a hostname. The &lt;code&gt;target&lt;/code&gt; parameter specifies the
+name of the attribute into which the hostname should be stored.&lt;/p&gt;
+
+&lt;p&gt;The following example will lookup the attribute value for
+&lt;code&gt;REMOTE_ADDR&lt;/code&gt; and will write the result into the attribute
+&lt;code&gt;HOSTNAME&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;DNSReverseLookup key="REMOTE_ADDR" target="HOSTNAME" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The processor integrates a simple, limited cache to speed up
+lookups.
+The cache size is set with the &lt;code&gt;cacheSize&lt;/code&gt; parameter. By
+default the size of the cache is 10000 entries.&lt;/p&gt;</help>
+    <key>DNS Reverse lookup</key>
   </operator>
   <operator>
     <name>Array to ExampleSet</name>
@@ -50,9 +108,7 @@ integer values:&lt;/p&gt;
   <operator>
     <name>JavaScript</name>
     <synopsis/>
-    <help>&lt;h1&gt;JavaScript&lt;/h1&gt;
-
-&lt;p&gt;This processor can be used to execute simple JavaScript snippets
+    <help>&lt;p&gt;This processor can be used to execute simple JavaScript snippets
 using the Java-6 ECMA scripting engine.&lt;/p&gt;
 
 &lt;p&gt;The processor binds the data item as &lt;code&gt;data&lt;/code&gt; object to the script
@@ -70,16 +126,13 @@ key &lt;code&gt;@tag&lt;/code&gt; in the data object:&lt;/p&gt;
 external files, by simply specifying the &lt;code&gt;file&lt;/code&gt; attribute:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;JavaScript file="/path/to/script.js" /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</help>
+&lt;/code&gt;&lt;/pre&gt;</help>
     <key>JavaScript</key>
   </operator>
   <operator>
     <name>MapKeys</name>
     <synopsis/>
-    <help>&lt;h1&gt;MapKeys&lt;/h1&gt;
-
-&lt;p&gt;This processor provides a way to map keys (feature names) to other
+    <help>&lt;p&gt;This processor provides a way to map keys (feature names) to other
 values. This is sometimes required to match special processors that
 rely on specific feature names:&lt;/p&gt;
 
@@ -100,16 +153,13 @@ be specified as:&lt;/p&gt;
   ...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;which will map the keys according to the map. &lt;/p&gt;
-</help>
+&lt;p&gt;which will map the keys according to the map. &lt;/p&gt;</help>
     <key>MapKeys</key>
   </operator>
   <operator>
     <name>RemoveAttributes</name>
     <synopsis/>
-    <help>&lt;h1&gt;RemoveAttributes&lt;/h1&gt;
-
-&lt;p&gt;This processors provides the possibility to remove a set of features
+    <help>&lt;p&gt;This processors provides the possibility to remove a set of features
 from each processed data item. The list can be specified by setting
 the &lt;code&gt;keys&lt;/code&gt; parameter to the list of features to be removed:&lt;/p&gt;
 
@@ -120,16 +170,24 @@ the &lt;code&gt;keys&lt;/code&gt; parameter to the list of features to be remove
 i.e. the list above will have the same effect as the following:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;  &amp;lt;RemoveAttributes keys="attr1, attr2 , attr3" /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</help>
+&lt;/code&gt;&lt;/pre&gt;</help>
     <key>RemoveAttributes</key>
+  </operator>
+  <operator>
+    <name>MapValueToID</name>
+    <synopsis/>
+    <help>&lt;p&gt;This processor provides a way to map values of a specific feature
+to integer IDs, starting with 1 as first ID. The processor will
+maintain a map of value-to-IDs and extend that map for new values.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;MapValueToID key="data" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</help>
+    <key>MapValueToID</key>
   </operator>
   <operator>
     <name>MapValues</name>
     <synopsis/>
-    <help>&lt;h1&gt;MapValue&lt;/h1&gt;
-
-&lt;p&gt;This processor provides a way to map values of a specific feature
+    <help>&lt;p&gt;This processor provides a way to map values of a specific feature
 onto other values. For example, mapping all labels &lt;code&gt;0.0&lt;/code&gt; to the
 value &lt;code&gt;-1.0&lt;/code&gt; can be done using&lt;/p&gt;
 
@@ -152,37 +210,30 @@ be specified as:&lt;/p&gt;
   true=1.0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;which will map the string values &lt;code&gt;true&lt;/code&gt; and &lt;code&gt;false&lt;/code&gt; according to the map. &lt;/p&gt;
-</help>
+&lt;p&gt;which will map the string values &lt;code&gt;true&lt;/code&gt; and &lt;code&gt;false&lt;/code&gt; according to the map. &lt;/p&gt;</help>
     <key>MapValues</key>
   </operator>
   <operator>
     <name>RemoveZeroes</name>
     <synopsis/>
-    <help>&lt;h1&gt;RemoveZeroes&lt;/h1&gt;
-
-&lt;p&gt;This processor will remove any values which equal 0 in the numerical
+    <help>&lt;p&gt;This processor will remove any values which equal 0 in the numerical
 sense. This can be used to remove a large number of features to create
 a sparse item:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;  &amp;lt;RemoveZeroes /&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Special attributes, such as &lt;code&gt;@label&lt;/code&gt; or similar are left untouched.&lt;/p&gt;
-</help>
+&lt;p&gt;Special attributes, such as &lt;code&gt;@label&lt;/code&gt; or similar are left untouched.&lt;/p&gt;</help>
     <key>RemoveZeroes</key>
   </operator>
   <operator>
     <name>SetValue</name>
     <synopsis/>
-    <help>&lt;h1&gt;SetValue&lt;/h1&gt;
-
-&lt;p&gt;This processors allows for setting a feature to a single, constant
+    <help>&lt;p&gt;This processors allows for setting a feature to a single, constant
 value:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;  &amp;lt;SetValue key="attribute1" value="abc" /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</help>
+&lt;/code&gt;&lt;/pre&gt;</help>
     <key>SetValue</key>
   </operator>
   <operator>
@@ -234,10 +285,5 @@ value:&lt;/p&gt;
     <name>SyslogDataStream</name>
     <synopsis/>
     <key>SyslogDataStream</key>
-  </operator>
-  <operator>
-    <name>PrintDataProcessor</name>
-    <synopsis/>
-    <key>PrintDataProcessor</key>
   </operator>
 </operatorHelp>

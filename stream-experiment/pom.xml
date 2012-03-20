@@ -4,8 +4,8 @@
 	<parent>
 		<artifactId>streams</artifactId>
 		<groupId>org.jwall</groupId>
-		<version>0.1-SNAPSHOT</version>
 		<relativePath>..</relativePath>
+		<version>1.0</version>
 	</parent>
 	<artifactId>stream-experiment</artifactId>
 	<dependencies>

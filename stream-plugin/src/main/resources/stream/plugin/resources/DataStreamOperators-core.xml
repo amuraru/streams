@@ -1,53 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<operators name="DataStream" version="5.0" docbundle="stream/plugin/resources/DataStreamOperatorsDoc">
+<operators name="DataStream" version="5.0"
+	docbundle="stream/plugin/resources/DataStreamOperatorsDoc">
 
 
-<group key="Data Stream">
-    <operator>
-        <key>Data Stream Process</key>
-        <class>stream.plugin.processing.DataStreamProcess</class>
-    </operator>
-</group>
+	<group key="Data Stream">
+		<operator>
+			<key>Data Stream Process</key>
+			<class>stream.plugin.processing.DataStreamProcess</class>
+		</operator>
+	</group>
 
 
-<group key="Data Stream.Sources">
-	<operator>
-		<key>CSV Data Stream</key>
-		<class>stream.plugin.sources.CsvDataStreamReader</class>
-	</operator>
-	<operator>
-		<key>ExampleSet DataStream</key>
-		<class>stream.plugin.sources.ExampleSetDataStream</class>
-	</operator>
-</group>
+	<group key="Data Stream.Sources">
+		<operator>
+			<key>CSV Data Stream</key>
+			<class>stream.plugin.sources.CsvDataStreamReader</class>
+		</operator>
+		<operator>
+			<key>ExampleSet DataStream</key>
+			<class>stream.plugin.sources.ExampleSetDataStream</class>
+		</operator>
+		<operator>
+			<key>FACT Event Stream</key>
+			<class>fact.plugin.operators.FactEventReader</class>
+		</operator>
+	</group>
 
 
-<group key="Data Stream.Processing">
-</group>
+	<group key="Data Stream.Adapters">
+		<operator>
+			<key>Stream to ExampleSet</key>
+			<class>stream.plugin.sources.DataStream2ExampleSet</class>
+		</operator>
+		<operator>
+			<key>Extract Example Set</key>
+			<class>stream.plugin.processing.convert.Stream2ExampleSet</class>
+		</operator>
+	</group>
+
+	<group key="Data Stream.Processing">
+	</group>
 
 
-<group key="Data Stream.Processing.Convert">
-	<operator>
-		<key>Array to ExampleSet</key>
-		<class>stream.plugin.processing.convert.Array2ExampleSet</class>
-	</operator>
-	<operator>
-		<key>ExampleSet to Array</key>
-		<class>stream.plugin.processing.convert.ExampleSet2Array</class>
-	<operator>
-		<key>Merge Data Items</key>
-		<class>stream.plugin.processing.convert.MergeDataObjectOperator</class>
-	</operator>
-	</operator>
-</group>
+	<group key="Data Stream.Processing.Convert">
+		<operator>
+			<key>Array to ExampleSet</key>
+			<class>stream.plugin.processing.convert.Array2ExampleSet</class>
+		</operator>
+		<operator>
+			<key>ExampleSet to Array</key>
+			<class>stream.plugin.processing.convert.ExampleSet2Array</class>
+			<operator>
+				<key>Merge Data Items</key>
+				<class>stream.plugin.processing.convert.MergeDataObjectOperator
+				</class>
+			</operator>
+		</operator>
+	</group>
 
 
-<group key="Data Stream.Processing.Transformations">
+	<group key="Data Stream.Processing.Transformations">
 
-</group>
+	</group>
 
 
-<group key="Data Stream.Output">
-</group>
+	<group key="Data Stream.Output">
+	</group>
 
 </operators>

@@ -15,7 +15,7 @@ public class OperatorInfo implements Comparable<OperatorInfo> {
 	String group;
 	String key;
 	String className;
-	
+	String icon = null;
 	String docText = null;
 	
 	public OperatorInfo( String grp, String key, String className ){
@@ -72,6 +72,26 @@ public class OperatorInfo implements Comparable<OperatorInfo> {
 		this.className = className;
 	}
 	
+	
+	
+
+	/**
+	 * @return the icon
+	 */
+	public String getIcon() {
+		return icon;
+	}
+
+
+	/**
+	 * @param icon the icon to set
+	 */
+	public void setIcon(String icon) {
+		if( icon == null || "".equals( icon.trim() ) )
+			return;
+		this.icon = icon;
+	}
+
 
 	/**
 	 * @return the docText

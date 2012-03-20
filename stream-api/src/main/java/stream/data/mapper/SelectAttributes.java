@@ -9,6 +9,7 @@ import java.util.Set;
 
 import stream.data.Data;
 import stream.data.DataProcessor;
+import stream.util.ParameterUtils;
 
 /**
  * @author chris
@@ -20,35 +21,14 @@ public class SelectAttributes implements DataProcessor {
 	
 	Set<String> selected = new HashSet<String>();
 	
-	/**
-	 * @return the keys
-	 */
-	public String getKeys() {
-		if( keys == null || keys.length == 0 )
-			return "";
-		
-		StringBuffer s = new StringBuffer();
-		for( int i = 0; i < keys.length; i++ ){
-			s.append( keys[i] );
-			if( i+1 < keys.length )
-				s.append( "," );
-		}
-		return s.toString();
-	}
-
-
-
-
-
-	/**
-	 * @param keys the keys to set
-	 */
-	public void setKeys(String keys) {
-		this.keys = keys.split( "," );
-		
-		for( String key : this.keys ){
+	public void setKeys( String keyString ){
+		keys = ParameterUtils.split( keyString );
+		for( String key : keys )
 			selected.add( key );
-		}
+	}
+	
+	public String getKeys(){
+		return ParameterUtils.join( keys );
 	}
 
 

@@ -89,7 +89,15 @@ public class OperatorList {
 				String opKey = op.getElementsByTagName( "key" ).item(0).getTextContent();
 				String className = op.getElementsByTagName( "class" ).item(0).getTextContent();
 				
+				
+				
+				
 				OperatorInfo info = new OperatorInfo( grp, opKey, className );
+				
+				String help = OperatorHelpFinder.findOperatorHelp( className );
+				if( help != null )
+					info.setDocText( help );
+				
 				log.debug( "Adding operator-info {}", info );
 				operators.add( info );
 			}
@@ -239,6 +247,12 @@ public class OperatorList {
 		Element clazz = doc.createElement( "class" );
 		clazz.setTextContent( info.getClassName() );
 		operator.appendChild( clazz );
+		
+		if( info.getIcon() != null ){
+			Element icon = doc.createElement( "icon" );
+			icon.setTextContent(info.getIcon());
+			operator.appendChild( icon );
+		}
 		
 		group.appendChild( operator );
 	}

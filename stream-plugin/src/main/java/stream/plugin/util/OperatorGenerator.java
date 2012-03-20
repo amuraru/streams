@@ -28,11 +28,8 @@ import org.slf4j.LoggerFactory;
 import stream.data.DataProcessor;
 import stream.io.DataStream;
 import stream.io.DataStreamWriter;
-import stream.tools.URLUtilities;
 import stream.util.Description;
 import stream.util.MacroExpander;
-
-import com.petebevin.markdown.MarkdownProcessor;
 
 /**
  * @author chris
@@ -48,7 +45,7 @@ public class OperatorGenerator {
 
 	Set<String> ignoreList = new HashSet<String>();
 	Map<Class<?>,String> templates = new LinkedHashMap<Class<?>,String>();
-	
+
 	public OperatorGenerator(){
 		packageMap.put( "stream.data.mapper", "stream.plugin.processing.transform" );
 		packageMap.put( "fact.io", "fact.plugin.operators.io" );
@@ -61,13 +58,13 @@ public class OperatorGenerator {
 		groupMap.put( "stream.data.mapper", "Data Stream.Processing.Transformations" );
 		groupMap.put( "stream.data.preprocessing", "Data Stream.Processing.Transformations" );
 		groupMap.put( "stream.preprocessing.data", "Data Stream.Processing.Transformations" );
-		
+
 		templates.put( stream.io.DataStream.class, "/GenericStreamReader.template" );
 		templates.put( stream.data.DataProcessor.class, "/GenericOperator.template" );
 		templates.put( stream.io.DataStreamWriter.class, "/GenericStreamWriter.template" );
 
 		wrappers.put( "stream.data.DataProcessor", "/GenericOperator.template" );
-		
+
 		try {
 			BufferedReader reader = new BufferedReader( new InputStreamReader( OperatorGenerator.class.getResourceAsStream( "/ignore-classes.txt" ) ) );
 			String line = reader.readLine();
@@ -121,7 +118,7 @@ public class OperatorGenerator {
 		opts.put( "PACKAGE", pkg );
 		opts.put( "CLASSNAME", className );
 
-		
+
 		Description desc = clazz.getAnnotation( Description.class );
 		if( desc != null ){
 			String grp = desc.group();
@@ -130,14 +127,14 @@ public class OperatorGenerator {
 				grp = mapGroup( grp );
 				opts.put( "GROUP", grp );
 			}
-			
+
 			if( desc.name() != null && ! "".equals( desc.name().trim() ) ){
 				opts.put( "NAME", desc.name().trim() );
 			}
 		}
 
 		String template = null; // "/GenericOperator.template";
-		
+
 		for( Class<?> tmpl : templates.keySet() ){
 			if( tmpl.isAssignableFrom( clazz ) ){
 				log.info( "Using template '{}' for class '{}'", templates.get( tmpl ), clazz );
@@ -145,27 +142,24 @@ public class OperatorGenerator {
 				break;
 			}
 		}
-		
+
 		if( template == null ){
 			log.error( "No template found for class {}", clazz );
 			return null;
 		}
-		
+
 		String outDir = pkg.replaceAll( "\\.", File.separator );
 		log.debug( "Generating java class {} in package {}", className, opts.get( "PACKAGE" ) );
 		OperatorInfo info = generate( opts, new File( outputDirectory.getAbsoluteFile() + File.separator + outDir ), template );
-		
-		
-		String doc = "/" + clazz.getCanonicalName().replaceAll( "\\.", "/" ) + ".md";
-		URL url = OperatorGenerator.class.getResource( doc );
-		if( url != null ){
-			String txt = URLUtilities.readContent( url );
-			log.info( "Found documentation at {}", url );
-			
-			MarkdownProcessor markdown = new MarkdownProcessor();
-			String html = markdown.markdown( txt );
-			log.info( "Html documentation:\n{}", html );
-			info.setDocText( html );
+
+
+		String html = OperatorHelpFinder.findOperatorHelp( clazz );
+		if( html != null ){
+			info.setDocText( html.trim() );
+		}
+
+		if( desc != null ){
+			info.setIcon( desc.icon() );
 		}
 		
 		return info;
@@ -202,12 +196,13 @@ public class OperatorGenerator {
 		log.trace( "#---------------------------------------------------------------------- " );
 
 		out.close();
-		
+
 		String name = opts.get( "CLASSNAME" ).replaceAll( "Operator$", "" );
 		if( opts.get( "NAME" ) != null )
 			name = opts.get( "NAME" );
-		
-		return new OperatorInfo( opts.get( "GROUP" ), name, opts.get( "PACKAGE" ) + "." + opts.get( "CLASSNAME" ) );
+
+		OperatorInfo info =  new OperatorInfo( opts.get( "GROUP" ), name, opts.get( "PACKAGE" ) + "." + opts.get( "CLASSNAME" ) );
+		return info;
 	}
 
 
@@ -217,19 +212,19 @@ public class OperatorGenerator {
 	public static void main(String[] args) throws Exception {
 
 		OperatorGenerator gen = new OperatorGenerator();
-		
-		
+
+
 		List<OperatorInfo> operators = new ArrayList<OperatorInfo>();
 
 		File outDir = new File( "/tmp" );
 		if( args.length > 0 )
 			outDir = new File( args[0] );
 
-		
+
 		OperatorList list = new OperatorList();
 		list.setDefaultGroup( "Data Stream.Processing" );
-		
-		
+
+
 		for( int i = 1; i < args.length - 1; i++ ){
 			String inheritFrom = args[i];
 			log.info( "Adding operators from {}", args[i] );
@@ -238,13 +233,14 @@ public class OperatorGenerator {
 				InputStream in = null;
 				URL coreSource = OperatorGenerator.class.getResource( inheritFrom ); //"/stream/plugin/resources/DataStreamOperators-core.xml" );
 				log.info( "Reading inherited-operators from {}", coreSource );
-				
+
 				if( coreSource == null ){
 					log.info( "No inherited operators found in classpath for {}", inheritFrom );
 					File file = new File( args[i] );
 					if( ! file.canRead() ){
 						log.info( "{} is not a readable file...", file );
 						source = "'none'";
+						in = null;
 					} else {
 						source = file.getAbsolutePath();
 						in = new FileInputStream( file );
@@ -253,23 +249,24 @@ public class OperatorGenerator {
 					source = coreSource.toString();
 					in = coreSource.openStream();
 				}
-				
-				if( i == 1 ){
-					log.info( "Creating initial operators.xml from {}", source );
-					list = new OperatorList( in );
-					log.info( "   initial list has {} operators", list.getOperators().size() );
-				} else {
-					OperatorList inherited = new OperatorList( in );
-					log.info( "Adding {} operators from {}", inherited.getOperators().size(), source );
-					list.add( inherited.getOperators() );
+
+				if( in != null ){
+					if( i == 1 ){
+						log.info( "Creating initial operators.xml from {}", source );
+						list = new OperatorList( in );
+						log.info( "   initial list has {} operators", list.getOperators().size() );
+					} else {
+						OperatorList inherited = new OperatorList( in );
+						log.info( "Adding {} operators from {}", inherited.getOperators().size(), source );
+						list.add( inherited.getOperators() );
+					}
 				}
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
-		
+
 		try {
 			log.info( "Writing new Operators to {}", outDir );
 
@@ -281,8 +278,8 @@ public class OperatorGenerator {
 					"stream.data.test",
 					"stream.learner"
 			};
-			
-			
+
+
 			if( System.getProperty( "packages" ) != null ){
 				pkgs = System.getProperty( "packages" ).split( "," );
 			}
@@ -299,8 +296,8 @@ public class OperatorGenerator {
 						log.info( "Ignoring class {}", clazz );
 						continue;
 					}
-					
-					
+
+
 					String pkgName = clazz.getPackage().getName();
 					if( ! pkgName.startsWith( pkg ) ){
 						log.info( "Skipping class {}", clazz );
@@ -332,7 +329,7 @@ public class OperatorGenerator {
 						log.debug( "Skipping code-generator for non-DataProcessor class" );
 						continue;
 					}
-					
+
 					if( DataProcessor.class.isAssignableFrom( clazz ) && !clazz.isAnnotationPresent( Description.class ) ){
 						log.info( "Skipping DataProcessor '{}' with missing annotations...", clazz );
 						continue;
@@ -340,7 +337,7 @@ public class OperatorGenerator {
 
 					try {
 						log.trace( "Ensuring that the class {} can be instantiated...", clazz );
-						
+
 						if( DataStream.class.isAssignableFrom( clazz ) ){
 							Constructor<?> con = clazz.getConstructor( URL.class );
 							if( con == null ){
@@ -348,7 +345,7 @@ public class OperatorGenerator {
 							}
 						} else 
 							clazz.newInstance();
-						
+
 						log.info( "Running code-generation for class {}", clazz.getName() );
 						OperatorInfo info = gen.generate( clazz, outDir );
 						if( info != null ){
@@ -375,7 +372,7 @@ public class OperatorGenerator {
 			File outFile = new File( args[ args.length - 1 ] );
 			log.info( "Writing operators list to {}", outFile );
 			list.writeOperatorsXml( new FileOutputStream( outFile ) );
-			
+
 			File docXml = new File( outFile.getAbsolutePath().replaceAll( ".xml", "Doc.xml" ) );
 			log.info( "Writing operators-doc to {}", docXml );
 			list.writerOperatorsDocXml( new FileOutputStream( docXml ) );

@@ -297,5 +297,12 @@ public class ParameterTypeDiscovery {
 			log.info( "Found '{}' = {}", key, types.get( key ) );
 		}
 	
+		log.info( "------------------------------------------------------------------" );
+		
+		types = discoverParameterTypes( stream.data.mapper.MapValueToID.class );
+		for( String key : types.keySet() ){
+			log.info( "Found '{}' = {}", key, types.get( key ) );
+		}
+	
 	}
 }

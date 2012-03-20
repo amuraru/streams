@@ -20,6 +20,7 @@ import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.parameter.ParameterType;
+import com.rapidminer.parameter.ParameterTypeInt;
 
 
 /**
@@ -40,7 +41,10 @@ public class DataStreamProcess extends AbstractDataStreamProcess<DataSourceObjec
 
 	/* The global logger for this class */
 	static Logger log = LoggerFactory.getLogger( DataStreamProcess.class );
-	
+
+
+	public final static String BUFFER_SIZE_PARAMETER = "bufferSize";
+	int bufferSize = 0;
 	List<DataObject> resultBuffer = new ArrayList<DataObject>();
 	
 	
@@ -60,6 +64,8 @@ public class DataStreamProcess extends AbstractDataStreamProcess<DataSourceObjec
 		
 		resultBuffer.clear();
 
+		bufferSize = getParameterAsInt( BUFFER_SIZE_PARAMETER );
+		
 		List<Operator> nested = this.getImmediateChildren();
 		log.debug( "This StreamProcess has {} nested operators", nested.size() );
 		for( Operator op : nested ){
@@ -90,7 +96,7 @@ public class DataStreamProcess extends AbstractDataStreamProcess<DataSourceObjec
 			
 			try {
 				DataObject processed = outputStream.getData( DataObject.class );
-				if( processed != null && output.isConnected() ){
+				if( bufferSize > 0 && processed != null && output.isConnected() ){
 					log.debug( "Adding processed data item: {}", processed.getWrappedDataItem() );
 					resultBuffer.add( processed );
 				}
@@ -98,6 +104,13 @@ public class DataStreamProcess extends AbstractDataStreamProcess<DataSourceObjec
 				log.error( "Failed to retrieve processed data-item: {}", e.getMessage()  );
 			}
 			
+			
+			if( bufferSize > 0 && resultBuffer.size() >= bufferSize ){
+				log.debug( "Maximum buffer-size reached" );
+				break;
+			}
+			
+			log.debug( "resultBuffer.size is {}", resultBuffer.size() );
 			item = dataSource.readNext();
 		}
 		
@@ -125,8 +138,9 @@ public class DataStreamProcess extends AbstractDataStreamProcess<DataSourceObjec
 	@Override
 	public List<ParameterType> getParameterTypes() {
 		List<ParameterType> types = new ArrayList<ParameterType>(); // super.getParameterTypes();
+		types.add( new ParameterTypeInt( BUFFER_SIZE_PARAMETER, "The number of data items to collect", 0, Integer.MAX_VALUE, 0 ) );
 		for( ParameterType type : types ){
-			log.info( "Found parameter '{}' with description '{}'", type.getKey(), type.getDescription() );
+			log.debug( "Found parameter '{}' with description '{}'", type.getKey(), type.getDescription() );
 		}
 		return types;
 	}
