@@ -27,7 +27,7 @@ public class ExpressionReader {
 		supportedBoolOperators.add( BooleanOperator.AND );
 		supportedBoolOperators.add( BooleanOperator.OR );
 		
-		for( Operator op : Operator.values() )
+		for( Operator op : Operator.OPERATORS.values() )
 			supportedOperators.add( op );
 	}
 
@@ -72,12 +72,12 @@ public class ExpressionReader {
 		return supportedBoolOperators;
 	}
 
-	protected FilterExpression readFilterExpression() throws FilterException {
+	protected Expression readFilterExpression() throws ExpressionException {
 
 		skipWhiteSpace();
 		if( startsWith( "(") ){
 			log.debug( "Found nested expression at pos {}: {}", pos, input.substring(pos) );
-			FilterExpressionList list =  this.readNestedExpression();
+			ExpressionList list =  this.readNestedExpression();
 			//if( list.size() == 1 )
 			//	return list.getFirst();
 			log.debug( "\nnested expression: {}\n\n", list.toString() );
@@ -85,14 +85,14 @@ public class ExpressionReader {
 
 		} else {
 
-			FilterExpression first = readSimpleFilter();
+			Expression first = readSimpleFilter();
 			if( ! endOfLine() && !hasBooleanOperator() && ! startsWith( ")" ) )
-				throw new FilterException( "Boolean operator 'AND' or 'OR' expected after '" + input.substring( 0, pos ) + "'!");
+				throw new ExpressionException( "Boolean operator 'AND' or 'OR' expected after '" + input.substring( 0, pos ) + "'!");
 
 			if( endOfLine() )
 				return first;
 
-			List<FilterExpression> exps = new ArrayList<FilterExpression>();
+			List<Expression> exps = new ArrayList<Expression>();
 			List<BooleanOperator> ops = new ArrayList<BooleanOperator>();
 			exps.add(first);
 			while( !endOfLine() && hasBooleanOperator() ){
@@ -108,7 +108,7 @@ public class ExpressionReader {
 			if( exps.size() == 1 )
 				return first;
 
-			return new FilterExpressionList( ops.iterator().next(), exps );
+			return new ExpressionList( ops.iterator().next(), exps );
 		}
 	}
 
@@ -116,20 +116,20 @@ public class ExpressionReader {
 		return pos >= input.length() || input.substring(pos).trim().equals( "" );
 	}
 
-	public FilterExpressionList readNestedExpression() throws FilterException {
+	public ExpressionList readNestedExpression() throws ExpressionException {
 		if( ! startsWith( "(" ) )
-			throw new FilterException( "No start of nested expression found!" );
+			throw new ExpressionException( "No start of nested expression found!" );
 
 		skipWhiteSpace();
 		pos++;
 
-		Collection<FilterExpression> exp = new ArrayList<FilterExpression>();
+		Collection<Expression> exp = new ArrayList<Expression>();
 		exp.add( readFilterExpression() );
 		BooleanOperator op = null;
 		while( !startsWith( ")" ) ){
 
 			if( endOfLine() )
-				throw new FilterException( "Unexpected end of expression! Missing a closing bracket?" );
+				throw new ExpressionException( "Unexpected end of expression! Missing a closing bracket?" );
 
 			op = readBooleanOperator();
 
@@ -139,7 +139,7 @@ public class ExpressionReader {
 				exp.add( readFilterExpression() );
 		}
 		pos++;
-		return new FilterExpressionList( op, exp );
+		return new ExpressionList( op, exp );
 	}
 
 
@@ -155,14 +155,14 @@ public class ExpressionReader {
 	}
 
 
-	public FilterExpression readSimpleFilter() throws FilterException {
+	public Expression readSimpleFilter() throws ExpressionException {
 		try {
 			String var = readVariable();
 			Operator op = readOperator();
 			String value = readValue();
 			return new Match( var, op, value );
-		} catch (FilterException se) {
-			throw new FilterException( se.getMessage() );
+		} catch (ExpressionException se) {
+			throw new ExpressionException( se.getMessage() );
 		}
 	}
 
@@ -180,7 +180,7 @@ public class ExpressionReader {
 	}
 
 
-	protected BooleanOperator readBooleanOperator() throws FilterException {
+	protected BooleanOperator readBooleanOperator() throws ExpressionException {
 		skipWhiteSpace();
 		
 		StringBuffer var = new StringBuffer();
@@ -192,7 +192,7 @@ public class ExpressionReader {
 		BooleanOperator op = BooleanOperator.read( operatorName );
 		if ( ! supportedBoolOperators.contains( op ) ){
 			if( this.isStrictParsing() )
-				throw new FilterException( "Boolean operator '" + operatorName + "' is not supported!" );
+				throw new ExpressionException( "Boolean operator '" + operatorName + "' is not supported!" );
 			else
 				log.warn( "Boolean operator '{}' is not supported, but 'strictParsing' is disabled!", operatorName );
 		}
@@ -214,7 +214,7 @@ public class ExpressionReader {
 			pos++;
 	}
 
-	protected String readVariable() throws FilterException {
+	protected String readVariable() throws ExpressionException {
 		StringBuffer var = new StringBuffer();
 		skipWhiteSpace();
 		while( pos < input.length() && ! Character.isWhitespace( input.charAt( pos ) ) )
@@ -224,7 +224,7 @@ public class ExpressionReader {
 		
 		if( this.supportedVariables != null && ! supportedVariables.contains( variable.toUpperCase() ) ){
 			if( isStrictParsing() )
-				throw new FilterException( "Not a valid variable name '" + variable + "'!" );
+				throw new ExpressionException( "Not a valid variable name '" + variable + "'!" );
 			else
 				log.warn( "Found variable '{}' which has not been defined previously!", variable );
 		}
@@ -232,11 +232,11 @@ public class ExpressionReader {
 		return variable;
 	}
 
-	protected Operator readOperator() throws FilterException {
+	protected Operator readOperator() throws ExpressionException {
 
 		skipWhiteSpace();
 		if( pos >= input.length() )
-			throw new FilterException( "Operator expected at position " + pos + ", found: '" + input.substring( pos ) + "'!" );
+			throw new ExpressionException( "Operator expected at position " + pos + ", found: '" + input.substring( pos ) + "'!" );
 
 		StringBuffer buf = new StringBuffer();
 		while( pos < input.length() && ! Character.isWhitespace( input.charAt( pos ) ) )
@@ -249,7 +249,7 @@ public class ExpressionReader {
 		Operator op = Operator.read( buf.toString() );
 		if( !supportedOperators.contains( op ) ){
 			if( isStrictParsing() )
-				throw new FilterException( "Operator '" + op.toString() + "' not supported!" );
+				throw new ExpressionException( "Operator '" + op.toString() + "' not supported!" );
 			else
 				log.warn( "Operator '{}' is not supported, but 'strictParsing' disabled!", op );
 		}
@@ -257,12 +257,12 @@ public class ExpressionReader {
 		return op;
 	}
 
-	protected String readValue() throws FilterException {
+	protected String readValue() throws ExpressionException {
 		StringBuffer var = new StringBuffer();
 		skipWhiteSpace();
 
 		if( endOfLine() || startsWith( ")" ) || hasBooleanOperator() )
-			throw new FilterException( "Value expected at position " + pos + "!" );
+			throw new ExpressionException( "Value expected at position " + pos + "!" );
 
 		if( input.charAt( pos ) == '"' || input.charAt( pos ) == '\'' ){
 			return readQuotedString( input.charAt( pos ) );
@@ -298,7 +298,7 @@ public class ExpressionReader {
 	}
 
 
-	public final static FilterExpression parse( String str ) throws FilterException {
+	public final static Expression parse( String str ) throws ExpressionException {
 		log.debug( "Parsing expression: {}", str );
 		ExpressionReader r = new ExpressionReader( str );
 		return r.readFilterExpression();

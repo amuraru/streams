@@ -17,43 +17,36 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import stream.util.EmbeddedContent;
+import stream.util.Parameter;
 
 /**
  * @author chris
  *
  */
-public class Script implements DataProcessor {
+public abstract class Script implements DataProcessor {
 
 	static Logger log = LoggerFactory.getLogger( Script.class );
 
 	final static ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
 
-	String engine;
+	protected EmbeddedContent embedded = null;
+
+	protected ScriptEngine scriptEngine;
+
+	protected File file;
+	transient protected String theScript = null;
+
 	
-	EmbeddedContent embedded = null;
-
-	ScriptEngine scriptEngine;
-
-	File file;
-	transient String theScript = null;
-
-
-	/**
-	 * @return the engine
-	 */
-	public String getEngine() {
-		return engine;
+	public Script( ScriptEngine engine ){
+		if( engine == null )
+			throw new RuntimeException( "No ScriptEngine found!" );
+		this.scriptEngine = engine;
 	}
 
-
-	/**
-	 * @param engine the engine to set
-	 */
-	public void setEngine(String engine) {
-		this.engine = engine;
-		scriptEngine = scriptEngineManager.getEngineByName( engine );
+	
+	protected Script(){
 	}
-
+	
 
 	/**
 	 * @return the file
@@ -66,6 +59,7 @@ public class Script implements DataProcessor {
 	/**
 	 * @param file the file to set
 	 */
+	@Parameter( required = false )
 	public void setFile(File file) {
 		this.file = file;
 	}
@@ -74,7 +68,7 @@ public class Script implements DataProcessor {
 	/**
 	 * @return the embedded
 	 */
-	public EmbeddedContent getEmbedded() {
+	public EmbeddedContent getScript() {
 		return embedded;
 	}
 
@@ -82,7 +76,8 @@ public class Script implements DataProcessor {
 	/**
 	 * @param embedded the embedded to set
 	 */
-	public void setEmbedded(EmbeddedContent embedded) {
+	@Parameter( required = false )
+	public void setScript(EmbeddedContent embedded) {
 		this.embedded = embedded;
 	}
 
@@ -100,9 +95,10 @@ public class Script implements DataProcessor {
 			ScriptContext ctx = scriptEngine.getContext();
 
 			//log.info( "Binding data-item to 'data'" );
-			//ctx.setAttribute( "data", data, ScriptContext.ENGINE_SCOPE );
+			ctx.setAttribute( "data", data, ScriptContext.ENGINE_SCOPE );
 
 			scriptEngine.put( "data", data );
+			
 			
 			log.info( "Evaluating script..." );
 			scriptEngine.eval(script, ctx );

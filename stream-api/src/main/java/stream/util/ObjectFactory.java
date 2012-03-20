@@ -3,10 +3,14 @@
  */
 package stream.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -18,13 +22,47 @@ import org.w3c.dom.Node;
 public class ObjectFactory 
 	extends VariableContext
 {
+	static Logger log = LoggerFactory.getLogger( ObjectFactory.class );
 	static Map<String,Integer> globalObjectNumbers = new HashMap<String,Integer>();
 	final static Map<String,String> classNames = new HashMap<String,String>();
 	
+	final static String[] DEFAULT_PACKAGES = new String[]{
+		"", 
+		"stream.data.", 
+		"stream.data.mapper.", 
+		"stream.data.tree.", 
+		"stream.filter.", 
+		"stream.data.filter.", 
+		"stream.data.stats.", 
+		"stream.data.vector.", 
+		"stream.data.test." 
+	};
+	
+	final List<String> searchPath = new ArrayList<String>();
 	
 	
-	private ObjectFactory(){
+	protected ObjectFactory(){
 		super( new HashMap<String,String>() );
+		
+		for( String pkg : DEFAULT_PACKAGES ){
+			searchPath.add( pkg );
+		}
+	}
+
+	public void addPackage( String pkg ){
+		String name = pkg;
+		if( ! name.endsWith( "." ) )
+			name = name + ".";
+		
+		if( ! searchPath.contains( name ) )
+			searchPath.add( 0, name );
+		else
+			log.warn( "Package {} already in search-path!", pkg );
+	}
+	
+	
+	public List<String> getSearchPaths(){
+		return searchPath;
 	}
 	
 	
@@ -102,7 +140,9 @@ public class ObjectFactory
 		if( node.getNodeType() == Node.ELEMENT_NODE ){
 			Element element = (Element) node;
 			String text = element.getTextContent();
-			map.put( EmbeddedContent.KEY, text );
+			if( text != null && ! "".equals( text.trim() ) ){
+ 				map.put( EmbeddedContent.KEY, text );
+			}
 		}
 		
 		return map;

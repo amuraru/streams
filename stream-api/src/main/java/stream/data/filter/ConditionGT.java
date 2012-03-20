@@ -19,15 +19,33 @@
  */
 package stream.data.filter;
 
+import java.io.Serializable;
 
-public class FilterException
-    extends Exception
+public class ConditionGT
+    extends BinaryOperator
 {
     /** The unique class ID */
-    private static final long serialVersionUID = -8863841755957428654L;
+    private static final long serialVersionUID = -5807565784925165795L;
+
+    public ConditionGT() {
+        super( "@gt", ">" );
+    }
     
-    
-    public FilterException( String msg ){
-        super( msg );
+
+    /**
+     * @see org.jwall.web.audit.rules.Condition#matches(java.lang.String, java.lang.String)
+     */
+    public boolean eval( Serializable input, String pattern ){
+    	if( isNumeric( pattern ) ){
+    		try {
+    			Double v = new Double( pattern );
+    			Double w = new Double( input + "" );
+    			int rc = v.compareTo( w );
+    			return rc < 0;
+    		} catch (Exception e) {
+    		}
+    	}
+    	
+    	return ( "" + input ).compareTo( pattern ) >= 0;
     }
 }

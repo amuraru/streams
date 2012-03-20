@@ -13,16 +13,8 @@
 	
 		<Processor id="sqlParser" class="org.jwall.sql.audit.SQLStreamParser" key="sql:query" />
  -->	
- 		<Skip condition="X @gt 3" />
- 		
- 		<processor id="create-label" class="stream.data.mapper.RandomLabel" seed="1000"/>
- 		<processor id="rename-att1" class="stream.data.mapper.KeyMapper" old="att1" new="x" />
- 		
- 		<KeyMapper old="att1" new="x" />
- 		<HideFeature key="attributeX" />
- 		
- 		<my.package.MyAverage />
- 		
+
+		<stream.logic.Message txt="Test: %{x1}" condition="x1 @gt 0.5"/> 		
  		
 <!-- 
 		<Processor id="naiveBayes" class="stream.learner.NaiveBayes" labelAttribute="@label" />

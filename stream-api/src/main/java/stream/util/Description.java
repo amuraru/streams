@@ -46,4 +46,8 @@ public @interface Description {
 	 * @return
 	 */
 	String group() default "";
+	
+	
+	
+	String icon() default "";
 }

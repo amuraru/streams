@@ -4,13 +4,11 @@
 package stream.data;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 import org.slf4j.Logger;
@@ -18,62 +16,30 @@ import org.slf4j.LoggerFactory;
 
 import stream.tools.URLUtilities;
 import stream.util.Description;
-import stream.util.EmbeddedContent;
-import stream.util.Parameter;
 
 /**
  * @author chris
  *
  */
 @Description( group = "Data Stream.Processing.Script" )
-public class JavaScript implements DataProcessor {
-
+public class JavaScript extends Script 
+{
 	static Logger log = LoggerFactory.getLogger( JavaScript.class );
 
 	final static ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
 	final static String preamble = URLUtilities.readContentOrEmpty( JavaScript.class.getResource( "/stream/data/JavaScript.preamble" ) );
-	
-	final ScriptEngine scriptEngine = scriptEngineManager.getEngineByName( "JavaScript" );
-
-	
-	File file;
-	EmbeddedContent embedded = null;
-
 
 	transient String theScript = null;
 
+	
 
 	/**
-	 * @return the file
+	 * @param engine
 	 */
-	public File getFile() {
-		return file;
+	public JavaScript() {
+		super( scriptEngineManager.getEngineByName( "JavaScript" ) );
 	}
 
-
-	/**
-	 * @param file the file to set
-	 */
-	@Parameter( required = false )
-	public void setFile(File file) {
-		this.file = file;
-	}
-
-
-	/**
-	 * @return the embedded
-	 */
-	public EmbeddedContent getScript() {
-		return embedded;
-	}
-
-
-	/**
-	 * @param embedded the embedded to set
-	 */
-	public void setScript(EmbeddedContent embedded) {
-		this.embedded = embedded;
-	}
 
 
 	/**

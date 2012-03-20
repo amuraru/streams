@@ -13,7 +13,7 @@ import stream.data.Data;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
-public interface FilterExpression
+public interface Expression
 	extends Serializable
 {
 	

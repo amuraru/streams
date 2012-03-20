@@ -18,27 +18,27 @@ import stream.data.Data;
  * 
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  */
-public class FilterExpressionList 
-	implements FilterExpression 
+public class ExpressionList 
+	implements Expression 
 {
 	/** The unique class ID */
 	private static final long serialVersionUID = -6592861898522001021L;
 	
-	static Logger log = LoggerFactory.getLogger( FilterExpressionList.class );
+	static Logger log = LoggerFactory.getLogger( ExpressionList.class );
 	
 	BooleanOperator op;
-	Collection<FilterExpression> exps;
+	Collection<Expression> exps;
 
 	
-	public FilterExpressionList( BooleanOperator op, Collection<FilterExpression> exps ){
+	public ExpressionList( BooleanOperator op, Collection<Expression> exps ){
 		this.op = op;
 		this.exps = exps;
 	}
 	
 	
-	public FilterExpressionList(BooleanOperator op, List<Match> matches) {
+	public ExpressionList(BooleanOperator op, List<Match> matches) {
 		this.op = op;
-		exps = new LinkedList<FilterExpression>();
+		exps = new LinkedList<Expression>();
 		for( Match m : matches )
 			exps.add( m );
 	}
@@ -50,7 +50,7 @@ public class FilterExpressionList
 	
 	
 	/**
-	 * @see org.jwall.web.audit.filter.FilterExpression#matches(org.jwall.web.audit.AuditEvent)
+	 * @see org.Expression.web.audit.filter.FilterExpression#matches(org.jwall.web.audit.AuditEvent)
 	 */
 	@Override
 	public boolean matches(Data evt) {
@@ -62,7 +62,7 @@ public class FilterExpressionList
 	
 	private boolean and( Data evt ){
 		log.debug( "Asserting all matches!" );
-		for( FilterExpression exp : exps ){
+		for( Expression exp : exps ){
 			if( ! exp.matches( evt ) )
 				return false;
 		}
@@ -73,7 +73,7 @@ public class FilterExpressionList
 	private boolean or( Data evt ){
 		log.debug( "Asserting any match!" );
 
-		for( FilterExpression exp : exps ){
+		for( Expression exp : exps ){
 			if( exp.matches( evt ) )
 				return true;
 		}
@@ -85,11 +85,11 @@ public class FilterExpressionList
 		return exps.size();
 	}
 	
-	public Collection<FilterExpression> getElements(){
+	public Collection<Expression> getElements(){
 		return exps;
 	}
 	
-	public FilterExpression getFirst(){
+	public Expression getFirst(){
 		if( exps.isEmpty() )
 			return null;
 		return exps.iterator().next();
@@ -100,7 +100,7 @@ public class FilterExpressionList
 		if( exps.size() > 1 )
 			s.append( "{" );
 		
-		for( FilterExpression e : exps ){
+		for( Expression e : exps ){
 			if( s.length() > 2 )
 				s.append( "  " + op + "  " );
 			s.append( e.toString() ); //FilterCompiler.toFilterString( e ) );
